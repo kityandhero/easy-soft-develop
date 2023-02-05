@@ -1,0 +1,25 @@
+{
+  "cSpell.words": ["conventionalcommits", "packagejson", "postcz", "precz"],
+  "eslint.workingDirectories": [
+    "packages/taro-fast-framework",
+    "packages/simple-taro-fast-framework"
+  ],
+  "eslint.packageManager": "yarn",
+  "git.ignoreLimitWarning": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "explorerExclude.backup": null,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  }
+}
