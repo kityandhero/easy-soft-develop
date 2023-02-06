@@ -62,6 +62,8 @@ function adjustMainPackageJson({ scripts }) {
     .readJson(mainProjectPath)
     .then((packageJson) => {
       const globalScript = {
+        prepare: 'husky install',
+        postinstall: 'npm run z:initial:environment',
         'z:initial:environment': 'node ./develop/assists/initial.environment.js',
         'z:prettier:format:all': 'npx prettier --write .',
         'z:prettier:format:change': 'npx prettier --cache --write .',

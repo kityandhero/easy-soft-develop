@@ -1,3 +1,4 @@
+const { promptSuccess, promptInfo } = require('./meta');
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
 
@@ -14,14 +15,13 @@ function initGlobalDevDependencePackages(packageList) {
     });
   }
 
-  console.log(`${packageList.join()} will install`);
-  console.log('');
+  promptInfo(`${packageList.join()} will install`);
 
   adjustChildrenPackageJson();
 
   adjustMainPackageJson();
 
-  console.log('install success');
+  promptSuccess('install success');
 }
 
 module.exports = { initGlobalDevDependencePackages };
