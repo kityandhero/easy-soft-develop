@@ -16,12 +16,7 @@ function writeFileSync(path, content) {
 }
 
 function checkStringIsEmpty(v) {
-  v = ((v || null) == null ? '' : toString(v))
-    .trim()
-    .replace(/\t/g, ' ')
-    .replace(/\r/g, ' ')
-    .replace(/\n/g, ' ')
-    .replace(/\s*/g, '');
+  v = ((v || null) == null ? '' : toString(v)).trim().replace(/\t/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/\s*/g, '');
 
   while (v.indexOf('  ') >= 0) {
     v = v.replace(/  /g, ' ');
@@ -42,10 +37,38 @@ function promptInfo(message) {
   console.log('');
 }
 
+function assignObject(source, mergeData) {
+  let result = source;
+
+  if (!Array.isArray(mergeData)) {
+    if (!isObject(mergeData)) {
+      return result;
+    }
+
+    return Object.assign(source, mergeData);
+  }
+
+  mergeData.forEach((o) => {
+    if (!isObject(o)) {
+      return;
+    }
+
+    result = Object.assign(result, o);
+  });
+
+  return result;
+}
+
+function isObject(value) {
+  return value !== null && typeof value === 'object';
+}
+
 module.exports = {
   fileExistsSync,
   writeFileSync,
   checkStringIsEmpty,
   promptSuccess,
   promptInfo,
+  isObject,
+  assignObject,
 };

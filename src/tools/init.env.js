@@ -3,7 +3,8 @@
 
 const fsExtra = require('fs-extra');
 const { resolve } = require('path');
-const { promptSuccess, writeFileSync } = require('./meta');
+const { createDevelopScriptFiles } = require('./develop.assist');
+const { promptSuccess, writeFileSync, assignObject } = require('./meta');
 
 const { loopPackage } = require('./package.tools');
 const { prettierAllPackageJson } = require('./prettier.package.json');
@@ -60,7 +61,13 @@ function adjustMainPackageJson({ scripts }) {
   fsExtra
     .readJson(mainProjectPath)
     .then((packageJson) => {
-      packageJson.scripts = Object.assign(packageJson.scripts || {}, scripts);
+      packageJson.scripts = assignObject(packageJson.scripts || {}, scripts, {
+        'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
+        'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
+        'z:update-all-package-version': 'npx easy-soft-develop update-all-package-version',
+        'z:commit:refresh': 'npx easy-soft-develop commit-refresh',
+        'z:create:assist:scripts': 'npx easy-soft-develop create-assist-scripts',
+      });
 
       fsExtra
         .writeJson(mainProjectPath, packageJson)
@@ -90,7 +97,7 @@ function adjustChildrenPackageJson({ scripts }) {
     fsExtra
       .readJson(childPackageJsonPath)
       .then((packageJson) => {
-        packageJson.scripts = Object.assign(packageJson.scripts || {}, scripts);
+        packageJson.scripts = assignObject(packageJson.scripts || {}, scripts);
 
         fsExtra
           .writeJson(childPackageJsonPath, packageJson)
@@ -115,12 +122,9 @@ function adjustChildrenPackageJson({ scripts }) {
   });
 }
 
-function initEnv({
-  mainFileContentList = [],
-  packageFileContentList = [],
-  mainScripts = {},
-  childScripts = {},
-}) {
+function initEnv({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
+  createDevelopScriptFiles();
+
   createMainFile(mainFileContentList || []);
 
   createPackageFile(packageFileContentList || []);

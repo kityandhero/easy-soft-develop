@@ -4,13 +4,13 @@ const { resolve } = require('path');
 const { promptSuccess, promptInfo } = require('./meta');
 const { sleep } = require('./sleep');
 
-function createScriptFile(fileName, content) {
+function createScriptFile(fileName, content, flag = 'wx+') {
   const filePath = resolve('.');
 
   fs.mkdirSync(`${filePath}/develop/assists/`, { recursive: true });
 
   fs.writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
-    flag: 'w',
+    flag: flag,
   });
 
   promptSuccess(`${fileName} update success`);
@@ -24,66 +24,30 @@ const { clean } = require('easy-soft-develop');
 clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
 `;
 
-  createScriptFile('clean.js', content);
+  createScriptFile('clean.js', content, 'w+');
 }
 
-function createCommitRefreshScriptFile() {
+function createPackageCheckSpecialVersionScriptFile() {
   const content = `/* eslint-disable import/no-commonjs */
 
-const { createCleanScriptFile } = require('easy-soft-develop');
+const { updateSpecialPackageVersion } = require('easy-soft-develop');
 
-createCleanScriptFile();
+const packageList = [];
+
+updateSpecialPackageVersion(packageList);
 `;
 
-  createScriptFile('commit.refresh.js', content);
-}
-
-function createPackageUpdateAllVersionScriptFile() {
-  const content = `/* eslint-disable import/no-commonjs */
-
-const { updateAllPackageVersion } = require('easy-soft-develop');
-
-updateAllPackageVersion();
-`;
-
-  createScriptFile('package.update.version.js', content);
-}
-
-function createPackageCheckAllVersionScriptFile() {
-  const content = `/* eslint-disable import/no-commonjs */
-
-const { checkAllPackageVersion } = require('easy-soft-develop');
-
-checkAllPackageVersion();
-`;
-
-  createScriptFile('package.check.version.js', content);
-}
-
-function createSleepScriptFile() {
-  const content = `/* eslint-disable import/no-commonjs */
-
-const { sleep } = require('easy-soft-develop');
-
-sleep(2);
-`;
-
-  createScriptFile('sleep.js', content);
+  createScriptFile('package.update.special.version.js', content, 'wx+');
 }
 
 function createDevelopScriptFiles() {
-  const waitLog =
-    'develop assist script files will update, please wait a moment';
+  const waitLog = 'develop assist script files will update, please wait a moment';
 
   promptInfo(waitLog);
 
   createCleanScriptFile();
 
-  createCommitRefreshScriptFile();
-
-  createPackageUpdateAllVersionScriptFile();
-
-  createPackageCheckAllVersionScriptFile();
+  createPackageCheckSpecialVersionScriptFile();
 
   createSleepScriptFile();
 
@@ -94,9 +58,6 @@ function createDevelopScriptFiles() {
 
 module.exports = {
   createCleanScriptFile,
-  createCommitRefreshScriptFile,
-  createPackageUpdateAllVersionScriptFile,
-  createPackageCheckAllVersionScriptFile,
-  createSleepScriptFile,
+  createPackageCheckSpecialVersionScriptFile,
   createDevelopScriptFiles,
 };
