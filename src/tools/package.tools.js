@@ -15,22 +15,18 @@ function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
 
   const packagesPath = resolve(packagesDir);
 
-  fs.readdir(packagesDir, (err, files) => {
-    if (err) {
-      throw err;
+  const files = fs.readdirSync(packagesDir);
+
+  files.forEach((file) => {
+    const itemPath = `${packagesPath}/${file}`;
+
+    if (file && fs.lstatSync(itemPath).isDirectory()) {
+      callback({
+        name: file,
+        absolutePath: itemPath,
+        relativePath: `./packages/${file}`,
+      });
     }
-
-    files.forEach((file) => {
-      const itemPath = `${packagesPath}/${file}`;
-
-      if (file && fs.lstatSync(itemPath).isDirectory()) {
-        callback({
-          name: file,
-          absolutePath: itemPath,
-          relativePath: `./packages/${file}`,
-        });
-      }
-    });
   });
 }
 
