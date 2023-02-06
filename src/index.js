@@ -1,7 +1,7 @@
 const { clean } = require('./tools/clean');
 const { commitRefresh } = require('./tools/commit.refresh');
 const { createCleanScriptFile, createPackageCheckSpecialVersionScriptFile, createInstallGlobalDevDependenceScriptFile, createDevelopScriptFiles } = require('./tools/develop.assist');
-const { initialEnvironment } = require('./tools/initial.environment');
+const { initialEnvironment } = require('./tools/config.environment');
 const { prettierAllPackageJson, prettierCurrentPackageJson } = require('./tools/prettier.package.json');
 const { prettierAllFile, prettierChangeFile } = require('./tools/prettier.file');
 const { initGlobalDevDependencePackages } = require('./tools/package.init.global.dependence.dev');

@@ -136,7 +136,7 @@ function adjustChildrenPackageJson({ scripts }) {
   });
 }
 
-function initialEnvironment({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
+function configEnvironment({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
   createDevelopScriptFiles();
 
   createMainFile(mainFileContentList || []);
@@ -150,4 +150,4 @@ function initialEnvironment({ mainFileContentList = [], packageFileContentList =
   prettierAllPackageJson();
 }
 
-module.exports = { initialEnvironment };
+module.exports = { configEnvironment };

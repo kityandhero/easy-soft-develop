@@ -2,7 +2,6 @@ let fs = require('fs');
 const { resolve } = require('path');
 
 const { promptSuccess, promptInfo } = require('./meta');
-const { sleep } = require('./sleep');
 
 function createScriptFile(fileName, content, flag = 'wx+') {
   const filePath = resolve('.');
@@ -57,10 +56,10 @@ initGlobalDevDependencePackages(packageList);
   } catch (error) {}
 }
 
-function createInitialEnvironment() {
+function createConfigEnvironmentScriptFiles() {
   const content = `/* eslint-disable import/no-commonjs */
 
-const { initEnv } = require('easy-soft-develop');
+const { configEnvironment } = require('easy-soft-develop');
 
 const mainFileContentList = [];
 
@@ -70,7 +69,7 @@ const mainPackageFile = {};
 
 const childrenPackageFile = {};
 
-initialEnvironment({
+configEnvironment({
   mainFileContentList: mainFileContentList,
   packageFileContentList: packageFileContentList,
   mainScripts: mainPackageFile,
@@ -79,7 +78,7 @@ initialEnvironment({
 `;
 
   try {
-    createScriptFile('initial.environment.js', content, 'wx+');
+    createScriptFile('config.environment.js', content, 'wx+');
   } catch (error) {}
 }
 
@@ -88,7 +87,7 @@ function createDevelopScriptFiles() {
 
   promptInfo(waitLog);
 
-  createInitialEnvironment();
+  createConfigEnvironmentScriptFiles();
 
   createCleanScriptFile();
 
@@ -105,6 +104,6 @@ module.exports = {
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
   createInstallGlobalDevDependenceScriptFile,
-  createInitialEnvironment,
+  createConfigEnvironmentScriptFiles,
   createDevelopScriptFiles,
 };
