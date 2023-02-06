@@ -1,7 +1,7 @@
 const { clean } = require('./tools/clean');
 const { commitRefresh } = require('./tools/commit.refresh');
 const { createCleanScriptFile, createPackageCheckSpecialVersionScriptFile, createInstallGlobalDevDependenceScriptFile, createDevelopScriptFiles } = require('./tools/develop.assist');
-const { initEnv } = require('./tools/init.env');
+const { initialEnvironment } = require('./tools/initial.environment');
 const { prettierAllPackageJson, prettierCurrentPackageJson } = require('./tools/prettier.package.json');
 const { prettierAllFile, prettierChangeFile } = require('./tools/prettier.file');
 const { initGlobalDevDependencePackages } = require('./tools/package.init.global.dependence.dev');
@@ -13,7 +13,7 @@ const { sleep } = require('./tools/sleep');
 module.exports = {
   clean,
   commitRefresh,
-  initEnv,
+  initialEnvironment,
   initGlobalDevDependencePackages,
   loopPackage,
   checkAllPackageVersion,

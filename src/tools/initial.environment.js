@@ -62,6 +62,11 @@ function adjustMainPackageJson({ scripts }) {
     .readJson(mainProjectPath)
     .then((packageJson) => {
       const globalScript = {
+        'z:initial:environment': 'node ./develop/assists/initial.environment.js',
+        'z:prettier:format:all': 'npx prettier --write .',
+        'z:prettier:format:change': 'npx prettier --cache --write .',
+        'z:prettier:package.json:all': 'npx prettier --write ./**/package.json',
+        'z:prettier:package.json:current': 'npx prettier --write ./package.json',
         'z:change-nrm-local': 'nrm use local',
         'z:change-nrm-npm': 'nrm use npm',
         'z:install': 'echo please set install cmd with here',
@@ -131,7 +136,7 @@ function adjustChildrenPackageJson({ scripts }) {
   });
 }
 
-function initEnv({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
+function initialEnvironment({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
   createDevelopScriptFiles();
 
   createMainFile(mainFileContentList || []);
@@ -145,4 +150,4 @@ function initEnv({ mainFileContentList = [], packageFileContentList = [], mainSc
   prettierAllPackageJson();
 }
 
-module.exports = { initEnv };
+module.exports = { initialEnvironment };

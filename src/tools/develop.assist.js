@@ -70,7 +70,7 @@ const mainPackageFile = {};
 
 const childrenPackageFile = {};
 
-initEnv({
+initialEnvironment({
   mainFileContentList: mainFileContentList,
   packageFileContentList: packageFileContentList,
   mainScripts: mainPackageFile,
@@ -79,7 +79,7 @@ initEnv({
 `;
 
   try {
-    createScriptFile('install.global.dev.dependence.js', content, 'wx+');
+    createScriptFile('initial.environment.js', content, 'wx+');
   } catch (error) {}
 }
 
