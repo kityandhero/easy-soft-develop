@@ -34,6 +34,7 @@
     "publish:patch:npm": "npm publish",
     "postpublish:patch:npm": "npm run change-nrm-local",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
+    "test:bin:commit-refresh": "node ./bin/cli.js commit-refresh",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
     "test:bin:sleep": "node ./bin/cli.js sleep --second 2 --showInfo true",
     "test:bin:update-all-package-version": "node ./bin/cli.js update-all-package-version",

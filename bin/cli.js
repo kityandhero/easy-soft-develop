@@ -6,6 +6,7 @@ const createAssistScripts = require('../src/cliCollection/create-assist-scripts.
 const checkAllPackageVersion = require('../src/cliCollection/check-all-package-version');
 const updateAllPackageVersion = require('../src/cliCollection/update-all-package-version');
 const sleep = require('../src/cliCollection/sleep');
+const commitRefresh = require('../src/cliCollection/commit-refresh');
 
 const program = new Command();
 
@@ -41,6 +42,15 @@ program
   .option('--showInfo <bool>', 'show wait second info')
   .action((a, o) => {
     sleep.run(a, o);
+  });
+
+program
+  .command('commit-refresh')
+  .description('update a flag file when commit')
+  .option('--fileName <number>', 'flag file name, default is "commit.flag.json"')
+  .option('--relativeFolder <bool>', 'the folder flag file in it')
+  .action((a, o) => {
+    commitRefresh.run(a, o);
   });
 
 program.parse(process.argv);

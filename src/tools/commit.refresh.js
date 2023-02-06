@@ -5,18 +5,12 @@ const term = require('terminal-kit').terminal;
 const { checkStringIsEmpty } = require('./meta');
 
 function commitRefresh(fileName = '', relativeFolder = '') {
-  const fileNameAdjust = checkStringIsEmpty(fileName)
-    ? 'commit.flag.json'
-    : fileName;
-  const relativeFolderAdjust = checkStringIsEmpty(relativeFolder)
-    ? 'develop/flags'
-    : relativeFolder;
+  const fileNameAdjust = checkStringIsEmpty(fileName) ? 'commit.flag.json' : fileName;
+  const relativeFolderAdjust = checkStringIsEmpty(relativeFolder) ? 'develop/flags' : relativeFolder;
 
   const now = new Date();
 
-  const datetime = `${now.getFullYear()}-${
-    now.getMonth() + 1
-  }-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  const datetime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
   let content = JSON.stringify({
     datetime: datetime,
@@ -30,7 +24,7 @@ function commitRefresh(fileName = '', relativeFolder = '') {
 
   fs.writeFileSync(scriptFilePath, content, { flag: 'w' });
 
-  const log = `${fileNameAdjust} refresh success in folder "./${filePath}/${relativeFolderAdjust}/"`;
+  const log = `${fileNameAdjust} refresh success in folder "./${relativeFolderAdjust}/"`;
 
   term.green(log);
 }
