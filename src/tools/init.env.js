@@ -6,7 +6,7 @@ const { resolve } = require('path');
 const { promptSuccess, writeFileSync } = require('./meta');
 
 const { loopPackage } = require('./package.tools');
-const { exec } = require('./shell');
+const { prettierAllPackageJson } = require('./prettier.package.json');
 
 function createMainFile(fileWithContentCollection) {
   if (!Array.isArray(fileWithContentCollection)) {
@@ -129,7 +129,7 @@ function initEnv({
 
   adjustChildrenPackageJson({ scripts: childScripts || {} });
 
-  exec('npx prettier --write ./**/package.json');
+  prettierAllPackageJson();
 }
 
 module.exports = { initEnv };

@@ -10,6 +10,14 @@ const {
 } = require('./tools/develop.assist');
 const { initEnv } = require('./tools/init.env');
 const {
+  prettierAllPackageJson,
+  prettierCurrentPackageJson,
+} = require('./tools/prettier.package.json');
+const {
+  prettierAllFile,
+  prettierChangeFile,
+} = require('./tools/prettier.file');
+const {
   initGlobalDevDependencePackages,
 } = require('./tools/package.init.global.dependence.dev');
 const { loopPackage } = require('./tools/package.tools');
@@ -38,4 +46,8 @@ module.exports = {
   createPackageCheckAllVersionScriptFile,
   createSleepScriptFile,
   createDevelopScriptFiles,
+  prettierAllFile,
+  prettierChangeFile,
+  prettierAllPackageJson,
+  prettierCurrentPackageJson,
 };
