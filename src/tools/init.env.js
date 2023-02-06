@@ -65,6 +65,8 @@ function adjustMainPackageJson({ scripts }) {
         'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
         'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
         'z:update-all-package-version': 'npx easy-soft-develop update-all-package-version',
+        'z:update-special-package-version': 'node ./develop/assists/package.update.special.version.js',
+        'z:clean': 'node ./develop/assists/clean.js',
         'z:commit:refresh': 'npx easy-soft-develop commit-refresh',
         'z:create:assist:scripts': 'npx easy-soft-develop create-assist-scripts',
       };

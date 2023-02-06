@@ -42,6 +42,21 @@ updateSpecialPackageVersion(packageList);
   } catch (error) {}
 }
 
+function createInstallGlobalDevDependenceScriptFile() {
+  const content = `/* eslint-disable import/no-commonjs */
+
+const { initGlobalDevDependencePackages } = require('easy-soft-develop');
+
+const packageList = [];
+
+initGlobalDevDependencePackages(packageList);
+`;
+
+  try {
+    createScriptFile('install.global.dev.dependence.js', content, 'wx+');
+  } catch (error) {}
+}
+
 function createDevelopScriptFiles() {
   const waitLog = 'develop assist script files will update, please wait a moment';
 
@@ -51,6 +66,8 @@ function createDevelopScriptFiles() {
 
   createPackageCheckSpecialVersionScriptFile();
 
+  createInstallGlobalDevDependenceScriptFile();
+
   const successLog = 'develop assist script files update finish';
 
   promptInfo(successLog);
@@ -59,5 +76,6 @@ function createDevelopScriptFiles() {
 module.exports = {
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
+  createInstallGlobalDevDependenceScriptFile,
   createDevelopScriptFiles,
 };
