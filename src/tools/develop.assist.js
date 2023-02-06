@@ -51,8 +51,6 @@ function createDevelopScriptFiles() {
 
   createPackageCheckSpecialVersionScriptFile();
 
-  createSleepScriptFile();
-
   const successLog = 'develop assist script files update finish';
 
   promptInfo(successLog);
