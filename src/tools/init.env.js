@@ -125,11 +125,11 @@ function initEnv({
 
   createPackageFile(packageFileContentList || []);
 
-  // adjustMainPackageJson({ scripts: mainScripts || {} });
+  adjustMainPackageJson({ scripts: mainScripts || {} });
 
-  // adjustChildrenPackageJson({ scripts: childScripts || {} });
+  adjustChildrenPackageJson({ scripts: childScripts || {} });
 
-  // exec('npx prettier --write ./**/package.json');
+  exec('npx prettier --write ./**/package.json');
 }
 
 module.exports = { initEnv };
