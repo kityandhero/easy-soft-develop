@@ -1,6 +1,4 @@
-/* eslint-disable import/no-commonjs */
-
-const { exec } = require('./shell');
+const { exec } = require('../tools/shell');
 
 function clean(preCmd, ...targets) {
   try {
@@ -39,7 +37,7 @@ function clean(preCmd, ...targets) {
     adjustMainPackageJson();
 
     console.log('clean success');
-  } catch {}
+  } catch (error) {}
 }
 
 module.exports = { clean };

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-commonjs */
-
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
 

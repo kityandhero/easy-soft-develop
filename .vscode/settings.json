@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["conventionalcommits", "packagejson", "postcz", "precz"],
+  "cSpell.words": [
+    "conventionalcommits",
+    "hpagent",
+    "packagejson",
+    "postcz",
+    "postpublish",
+    "precz"
+  ],
   "eslint.workingDirectories": [
     "packages/taro-fast-framework",
     "packages/simple-taro-fast-framework"

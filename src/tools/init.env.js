@@ -1,10 +1,10 @@
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/no-promise-in-callback */
-/* eslint-disable import/no-commonjs */
 
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const { resolve } = require('path');
+const { promptSuccess } = require('./meta');
 
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
@@ -22,14 +22,14 @@ function createMainFile(fileWithContentCollection) {
     });
   });
 
-  console.log(
-    `main files [${fileWithContentCollection
-      .map((o) => {
-        const { name } = o;
-        return name;
-      })
-      .join()}] refresh success`,
-  );
+  const log = `main files [${fileWithContentCollection
+    .map((o) => {
+      const { name } = o;
+      return name;
+    })
+    .join()}] refresh success`;
+
+  promptSuccess(log);
 }
 
 function createPackageFile(fileWithContentCollection) {
@@ -49,14 +49,14 @@ function createPackageFile(fileWithContentCollection) {
     });
   });
 
-  console.log(
-    `package files [${fileWithContentCollection
-      .map((o) => {
-        const { name } = o;
-        return name;
-      })
-      .join()}] refresh success`,
-  );
+  const log = `package files [${fileWithContentCollection
+    .map((o) => {
+      const { name } = o;
+      return name;
+    })
+    .join()}] refresh success`;
+
+  promptSuccess(log);
 }
 
 function adjustMainPackageJson({ scripts }) {
@@ -65,24 +65,21 @@ function adjustMainPackageJson({ scripts }) {
   fsExtra
     .readJson(mainProjectPath)
     .then((packageJson) => {
-      packageJson.scripts = {
-        ...(packageJson.scripts || {}),
-        ...scripts,
-      };
+      packageJson.scripts = Object.assign(packageJson.scripts || {}, scripts);
 
       fsExtra
         .writeJson(mainProjectPath, packageJson)
         .then(() => {
-          console.log('adjust main package.json success');
+          promptSuccess('adjust main package.json success');
 
-          return null;
+          return;
         })
         .catch((err) => {
           console.error(err);
-          return null;
+          return;
         });
 
-      return null;
+      return;
     })
     .catch((err) => {
       console.error(err);
@@ -98,49 +95,46 @@ function adjustChildrenPackageJson({ scripts }) {
     fsExtra
       .readJson(childPackageJsonPath)
       .then((packageJson) => {
-        packageJson.scripts = {
-          ...(packageJson.scripts || {}),
-          ...scripts,
-        };
+        packageJson.scripts = Object.assign(packageJson.scripts || {}, scripts);
 
         fsExtra
           .writeJson(childPackageJsonPath, packageJson)
           .then(() => {
-            console.log('adjust child package.json success');
+            promptSuccess('adjust child package.json success');
 
-            return null;
+            return;
           })
           .catch((e) => {
             console.error(e);
 
-            return null;
+            return;
           });
 
-        return null;
+        return;
       })
       .catch((res) => {
         console.error(res);
 
-        return null;
+        return;
       });
   });
 }
 
 function initEnv({
-  mainFileContentList,
-  packageFileContentList,
-  mainScripts,
-  childScripts,
+  mainFileContentList = [],
+  packageFileContentList = [],
+  mainScripts = {},
+  childScripts = {},
 }) {
-  createMainFile(mainFileContentList);
+  createMainFile(mainFileContentList || []);
 
-  createPackageFile(packageFileContentList);
+  createPackageFile(packageFileContentList || []);
 
-  adjustMainPackageJson({ scripts: mainScripts });
+  // adjustMainPackageJson({ scripts: mainScripts || {} });
 
-  adjustChildrenPackageJson({ scripts: childScripts });
+  // adjustChildrenPackageJson({ scripts: childScripts || {} });
 
-  exec('npx prettier --write ./**/package.json');
+  // exec('npx prettier --write ./**/package.json');
 }
 
 module.exports = { initEnv };

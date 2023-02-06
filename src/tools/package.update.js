@@ -1,5 +1,4 @@
-/* eslint-disable import/no-commonjs */
-
+const { promptInfo, promptSuccess } = require('./meta');
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
 
@@ -14,44 +13,41 @@ function adjustChildrenPackageJson(cmd) {
 }
 
 function updateSpecialPackageVersion(packageList) {
-  const ncuCommand = `npx ncu -u ${packageList.join(
-    ' ',
-  )} --packageFile package.json`;
+  const packages = packageList.join(' ');
 
-  console.log(`${packageList.join()} will check update`);
-  console.log('');
+  const ncuCommand = `npx ncu -u ${packages} --packageFile package.json`;
+
+  promptInfo(`${packageList.join()} will check update`);
 
   adjustMainPackageJson(ncuCommand);
 
   adjustChildrenPackageJson(ncuCommand);
 
-  console.log('update success');
+  promptSuccess('check success');
 }
 
 function updateAllPackageVersion() {
   const ncuCommand = `npx ncu -u --packageFile package.json`;
 
-  console.log(`all packages will update`);
-  console.log('');
+  promptInfo(`all packages version will update`);
 
   adjustMainPackageJson(ncuCommand);
 
   adjustChildrenPackageJson(ncuCommand);
 
-  console.log('update success');
+  promptSuccess('update success');
 }
 
 function checkAllPackageVersion() {
-  const ncuCommand = `npx ncu -u --packageFile package.json`;
+  const ncuCommand = `npx ncu --packageFile package.json`;
 
-  console.log(`all packages will check update`);
-  console.log('');
+  promptInfo(`all packages version will check update`);
 
   adjustMainPackageJson(ncuCommand);
 
   adjustChildrenPackageJson(ncuCommand);
 
-  console.log('update success');
+  promptSuccess('update success');
 }
 
 module.exports = {

@@ -1,23 +1,17 @@
-/* eslint-disable import/no-commonjs */
-
 const fs = require('fs');
 
 const { resolve } = require('path');
+const { fileExistsSync } = require('./meta');
 
 /**
  * loop all package
  */
-function loopPackage(
-  callback = ({
-    // eslint-disable-next-line no-unused-vars
-    name,
-    // eslint-disable-next-line no-unused-vars
-    absolutePath,
-    // eslint-disable-next-line no-unused-vars
-    relativePath,
-  }) => {},
-) {
+function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
   const packagesDir = './packages/';
+
+  if (!fileExistsSync(resolve(packagesDir))) {
+    return;
+  }
 
   const packagesPath = resolve(packagesDir);
 
