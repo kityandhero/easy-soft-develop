@@ -12,7 +12,7 @@ function fileExistsSync(path) {
 }
 
 function writeFileSync(path, content) {
-  fs.writeFileSync(name, content);
+  fs.writeFileSync(path, content);
 }
 
 function checkStringIsEmpty(v) {
