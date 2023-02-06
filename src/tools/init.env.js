@@ -62,6 +62,8 @@ function adjustMainPackageJson({ scripts }) {
     .readJson(mainProjectPath)
     .then((packageJson) => {
       const globalScript = {
+        'z:change-nrm-local': 'nrm use local',
+        'z:change-nrm-npm': 'nrm use npm',
         'z:install': 'echo please set install cmd with here',
         'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
         'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
