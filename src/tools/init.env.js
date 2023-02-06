@@ -1,10 +1,9 @@
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/no-promise-in-callback */
 
-const fs = require('fs');
 const fsExtra = require('fs-extra');
 const { resolve } = require('path');
-const { promptSuccess } = require('./meta');
+const { promptSuccess, writeFileSync } = require('./meta');
 
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
@@ -17,9 +16,7 @@ function createMainFile(fileWithContentCollection) {
   fileWithContentCollection.forEach((o) => {
     const { name, content } = o;
 
-    fs.writeFile(name, content, (error) => {
-      return console.error(error);
-    });
+    writeFileSync(name, content);
   });
 
   const log = `main files [${fileWithContentCollection
@@ -43,9 +40,7 @@ function createPackageFile(fileWithContentCollection) {
     fileWithContentCollection.forEach((o) => {
       const { name, content } = o;
 
-      fs.writeFile(`${itemPath}/${name}`, content, (error) => {
-        return console.error(error);
-      });
+      writeFileSync(`${itemPath}/${name}`, content);
     });
   });
 

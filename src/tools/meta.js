@@ -11,6 +11,10 @@ function fileExistsSync(path) {
   return true;
 }
 
+function writeFileSync(path, content) {
+  fs.writeFileSync(name, content);
+}
+
 function checkStringIsEmpty(v) {
   v = ((v || null) == null ? '' : toString(v))
     .trim()
@@ -40,6 +44,7 @@ function promptInfo(message) {
 
 module.exports = {
   fileExistsSync,
+  writeFileSync,
   checkStringIsEmpty,
   promptSuccess,
   promptInfo,
