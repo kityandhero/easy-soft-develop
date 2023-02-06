@@ -37,7 +37,9 @@ const packageList = [];
 updateSpecialPackageVersion(packageList);
 `;
 
-  createScriptFile('package.update.special.version.js', content, 'wx+');
+  try {
+    createScriptFile('package.update.special.version.js', content, 'wx+');
+  } catch (error) {}
 }
 
 function createDevelopScriptFiles() {
