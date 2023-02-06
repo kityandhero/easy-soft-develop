@@ -64,6 +64,10 @@ function adjustMainPackageJson({ scripts }) {
       const globalScript = {
         prepare: 'husky install',
         postinstall: 'npm run z:initial:environment',
+        commitlint: 'npx commitlint --edit',
+        precz: 'npm run z:commit:refresh && git stage -A',
+        cz: 'cz',
+        postcz: 'git push',
         'z:initial:environment': 'node ./develop/assists/initial.environment.js',
         'z:prettier:format:all': 'npx prettier --write .',
         'z:prettier:format:change': 'npx prettier --cache --write .',
