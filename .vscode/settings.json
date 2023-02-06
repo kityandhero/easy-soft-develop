@@ -1,16 +1,6 @@
 {
-  "cSpell.words": [
-    "conventionalcommits",
-    "hpagent",
-    "packagejson",
-    "postcz",
-    "postpublish",
-    "precz"
-  ],
-  "eslint.workingDirectories": [
-    "packages/taro-fast-framework",
-    "packages/simple-taro-fast-framework"
-  ],
+  "cSpell.words": ["conventionalcommits", "hpagent", "packagejson", "postcz", "postpublish", "postz", "precz"],
+  "eslint.workingDirectories": ["packages/taro-fast-framework", "packages/simple-taro-fast-framework"],
   "eslint.packageManager": "yarn",
   "git.ignoreLimitWarning": true,
   "files.exclude": {

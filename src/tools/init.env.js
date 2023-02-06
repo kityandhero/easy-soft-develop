@@ -62,10 +62,13 @@ function adjustMainPackageJson({ scripts }) {
     .readJson(mainProjectPath)
     .then((packageJson) => {
       const globalScript = {
+        'z:install': 'echo please set install cmd with here',
         'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
         'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
         'z:update-all-package-version': 'npx easy-soft-develop update-all-package-version',
+        'postz:update-all-package-version': 'npm run z:install',
         'z:update-special-package-version': 'node ./develop/assists/package.update.special.version.js',
+        'postz:update-special-package-version': 'npm run z:install',
         'z:clean': 'node ./develop/assists/clean.js',
         'z:commit:refresh': 'npx easy-soft-develop commit-refresh',
         'z:create:assist:scripts': 'npx easy-soft-develop create-assist-scripts',
