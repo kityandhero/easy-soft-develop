@@ -61,13 +61,15 @@ function adjustMainPackageJson({ scripts }) {
   fsExtra
     .readJson(mainProjectPath)
     .then((packageJson) => {
-      packageJson.scripts = assignObject(packageJson.scripts || {}, scripts, {
+      const globalScript = {
         'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
         'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
         'z:update-all-package-version': 'npx easy-soft-develop update-all-package-version',
         'z:commit:refresh': 'npx easy-soft-develop commit-refresh',
         'z:create:assist:scripts': 'npx easy-soft-develop create-assist-scripts',
-      });
+      };
+
+      packageJson.scripts = assignObject(globalScript, packageJson.scripts || {}, scripts);
 
       fsExtra
         .writeJson(mainProjectPath, packageJson)
