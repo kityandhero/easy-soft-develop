@@ -57,7 +57,6 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'z:publish:npm-all': 'echo please supplement publish to npm commend',
   'prez:publish-npm-all': 'npm run z:change:nrm:npm',
   'z:publish-npm-all': 'npm run z:publish:npm-all',
   'postz:publish-npm-all': 'npm run z:change:nrm:local',

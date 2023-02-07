@@ -61,6 +61,7 @@ function adjustMainPackageJson({ scripts }) {
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
+      'z:publish:npm-all': 'echo please supplement publish to npm commend',
     },
     globalScript,
     packageJson.scripts || {},
