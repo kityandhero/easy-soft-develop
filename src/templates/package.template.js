@@ -32,23 +32,23 @@ module.exports = {
   ...lintScript,
   ...prettierScript,
 };
-`
+`;
 
-const mainPackage=`/* eslint-disable import/no-commonjs */
+const mainPackage = `/* eslint-disable import/no-commonjs */
 
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
 };
 
 const prepareScript = {
-  prepare: 'husky install && echo do other prepare work with here',
+  prepare: 'npm run z:husky:install && echo do other prepare work with here',
+  'z:husky:install':'npx husky install'
 };
 
 const toolsScript = {
   postinstall: 'npm run z:initial:environment && echo do other postinstall work with here',
   'z:show:info':
     'echo node version && node --version && echo npm version && npm --version && echo ------------ && npx lerna ls -a -l',
-  "z:commit:refresh": "npx easy-soft-develop commit-refresh",
   "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
   "z:create:assist:scripts": "npx easy-soft-develop create-assist-scripts",
 };
@@ -56,14 +56,16 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'prepublish-npm-all': 'npm run z:change-nrm-npm',
-  'publish-npm-all': 'nrm ls && npm run publish:npm-all',
-  'postpublish-npm-all': 'npm run z:change-nrm-local && nrm ls',
-  'prepublish:lerna': 'npm run z:change-nrm-npm',
-  'publish:lerna': 'lerna updated && npm run lerna:publish',
-  'postpublish:lerna': 'npm run z:change-nrm-local && npm run publish-npm-all',
-  'prepublish:build': 'pnpm install && npm run cz && npm run build:all',
-  'publish:build': 'npm run publish:lerna',
+  'z:build:all':'echo please supplement build all packages commend',
+  'z:publish:npm-all': 'echo please supplement publish to npm commend',
+  'prez:publish-npm-all': 'npm run z:change-nrm-npm',
+  'z:publish-npm-all': 'npm run z:publish:npm-all',
+  'postz:publish-npm-all': 'npm run z:change-nrm-local',
+  'prez:publish:lerna': 'npm run z:change-nrm-npm',
+  'z:publish:lerna': 'lerna updated && npm run z:lerna:publish',
+  'postz:publish:lerna': 'npm run z:change-nrm-local && npm run publish-npm-all',
+  'prez:publish:build': 'npm run z:install && npm run cz && npm run z:build:all',
+  'z:publish:build': 'npm run z:publish:lerna',
 };
 
 const cleanScript = {
@@ -96,10 +98,11 @@ const nrmScript = {
 
 const commitScript = {
   commitlint: 'npx commitlint --edit',
-  precz: 'npm run update:cz:flag && git stage -A',
+  precz: 'npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push',
   precommit: 'npm run z:lint:staged',
+  "z:commit:refresh": "npx easy-soft-develop commit-refresh",
 };
 
 const prettierScript = {
@@ -131,6 +134,6 @@ module.exports = {
   ...commitScript,
   ...ncuScript,
 };
-`
+`;
 
 module.exports = { childPackage, mainPackage };
