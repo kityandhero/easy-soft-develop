@@ -267,7 +267,7 @@ function createVscode() {
   mkdirRelativeSync(`./.vscode`);
 
   const settingJson = {
-    'cSpell.words': ['conventionalcommits', 'packagejson', 'pmmmwh', 'postcz', 'postz', 'precommit', 'precz'],
+    'cSpell.words': ['conventionalcommits', 'packagejson', 'pmmmwh', 'postcz', 'postz', 'precommit', 'precz', 'prez'],
     'git.ignoreLimitWarning': true,
     'editor.codeActionsOnSave': {
       'source.fixAll.eslint': true,

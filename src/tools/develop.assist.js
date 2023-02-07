@@ -1,4 +1,5 @@
-const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync, promptNewLine } = require('./meta');
+const { childPackage, mainPackage, customPackage } = require('../templates/package.template');
+const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync, promptNewLine, mkdirRelativeSync } = require('./meta');
 
 function createScriptFile(fileName, content, currentDir = '.', autoCreate = false) {
   const filePath = resolvePath(currentDir);
@@ -193,6 +194,18 @@ configEnvironment({
   } catch (error) {
     promptError(error);
   }
+
+  //#region package.json
+
+  mkdirRelativeSync(`./develop/config/package/template`);
+  writeFileSync(`./develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
+  writeFileSync(`./develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
+
+  mkdirRelativeSync(`./develop/config/package/custom`);
+  writeFileSync(`./develop/config/package/custom/children.content.js`, customPackage, { autoCreate: false });
+  writeFileSync(`./develop/config/package/custom/main.content.js`, customPackage, { autoCreate: false });
+
+  //#endregion
 }
 
 function createDevelopScriptFiles(currentDir = '.') {
