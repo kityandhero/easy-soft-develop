@@ -58,7 +58,14 @@ function adjustMainPackageJson({ scripts }) {
 
   const packageJson = readJsonFileSync(mainProjectPath);
 
-  packageJson.scripts = assignObject(globalScript, packageJson.scripts || {}, scripts);
+  packageJson.scripts = assignObject(
+    {
+      'z:build:all': 'echo please supplement build all packages commend',
+    },
+    globalScript,
+    packageJson.scripts || {},
+    scripts,
+  );
 
   writeJsonFileSync(mainProjectPath, packageJson, { autoCreate: true });
 

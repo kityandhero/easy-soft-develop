@@ -56,7 +56,6 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'z:build:all':'echo please supplement build all packages commend',
   'z:publish:npm-all': 'echo please supplement publish to npm commend',
   'prez:publish-npm-all': 'npm run z:change-nrm-npm',
   'z:publish-npm-all': 'npm run z:publish:npm-all',
@@ -80,7 +79,7 @@ const lernaScript = {
   'z:lerna:publish': 'lerna publish --yes',
   'prez:lerna:bootstrap': 'npm run z:change-nrm-local',
   'z:lerna:bootstrap':
-    'npm run z:clean && husky install && git pull && npm run z:install',
+    'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
 };
 
 const installScript = {
