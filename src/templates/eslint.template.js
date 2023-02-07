@@ -99,6 +99,7 @@ module.exports = {
 
 const rule = `/* eslint-disable no-undef */
 /* eslint-disable unicorn/prefer-module */
+/* eslint-disable no-useless-escape */
 
 module.exports = {
   generalRules: {
@@ -151,11 +152,13 @@ module.exports = {
       'error',
       {
         groups: [
-          ['^(?!taro-fast-)(?!easy-soft-)[a-zA-Z0-9]', '^@(?!/)'],
+          ['^(?!taro-fast-)(?!antd-management-fast-)(?!easy-soft-)[a-zA-Z0-9]', '^@(?!/)'],
           ['^(?!@/)(?!easy-soft-)(?!.)'],
           ['^easy-soft-'],
           ['^(?!@/)(?!taro-fast-)(?!.)'],
           ['^taro-fast-'],
+          ['^(?!@/)(?!antd-management-fast-)(?!.)'],
+          ['^antd-management-fast-'],
           ['^((@/).*|$)'],
           ['^\\u0000'],
           ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
