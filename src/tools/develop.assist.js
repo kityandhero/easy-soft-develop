@@ -220,11 +220,11 @@ configEnvironment({
   packageFileContentList: packageFileContentList,
   mainScripts: {
     ...mainCustomPackageFile,
-    ...mainNecessaryPackageFile
+    ...mainNecessaryPackageFile,
   },
   childScripts: {
     ...childrenCustomPackageFile,
-    ...childrenNecessaryPackageFile
+    ...childrenNecessaryPackageFile,
   },
 });
 `;
