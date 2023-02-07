@@ -91,7 +91,7 @@ function mkdirSync(path) {
 }
 
 function mkdirRelativeSync(path) {
-  const currentPath = resolve('./');
+  const currentPath = resolvePath('./');
 
   if (checkStringIsEmpty(path)) {
     promptError('relative path disallow empty');
@@ -107,7 +107,7 @@ function writeJsonFileSync(path, json) {
 }
 
 function writeJsonFileRelativeSync(relativePath, json) {
-  const path = resolve(relativePath);
+  const path = resolvePath(relativePath);
 
   writeJsonFileSync(path, json);
 }
@@ -117,7 +117,7 @@ function readJsonFileSync(path) {
 }
 
 function readJsonFileRelativeSync(relativePath) {
-  return readJsonFileSync(resolve(relativePath));
+  return readJsonFileSync(resolvePath(relativePath));
 }
 
 module.exports = {

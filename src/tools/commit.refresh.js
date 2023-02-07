@@ -1,7 +1,4 @@
-let fs = require('fs');
-const term = require('terminal-kit').terminal;
-
-const { checkStringIsEmpty, resolvePath } = require('./meta');
+const { checkStringIsEmpty, resolvePath, writeFileSync, mkdirSync, promptSuccess } = require('./meta');
 
 function commitRefresh(fileName = '', relativeFolder = '') {
   const fileNameAdjust = checkStringIsEmpty(fileName) ? 'commit.flag.json' : fileName;
@@ -17,15 +14,15 @@ function commitRefresh(fileName = '', relativeFolder = '') {
 
   const filePath = resolvePath('.');
 
-  fs.mkdirSync(`${filePath}/${relativeFolderAdjust}/`, { recursive: true });
+  mkdirSync(`${filePath}/${relativeFolderAdjust}/`, { recursive: true });
 
   const scriptFilePath = `${filePath}/${relativeFolderAdjust}/${fileNameAdjust}`;
 
-  fs.writeFileSync(scriptFilePath, content, { flag: 'w' });
+  writeFileSync(scriptFilePath, content, { flag: 'w' });
 
   const log = `${fileNameAdjust} refresh success in folder "./${relativeFolderAdjust}/"`;
 
-  term.green(log);
+  promptSuccess(log);
 }
 
 module.exports = { commitRefresh };
