@@ -47,7 +47,7 @@ const prepareScript = {
 
 const toolsScript = {
   postinstall: 'npm run z:initial:environment && echo do other postinstall work with here',
-  'z:show-info':
+  'z:show:info':
     'echo node version && node --version && echo npm version && npm --version && echo ------------ && npx lerna ls -a -l',
   "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
   "z:create:assist-scripts": "npx easy-soft-develop create-assist-scripts",
@@ -57,12 +57,12 @@ const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
   'z:publish:npm-all': 'echo please supplement publish to npm commend',
-  'prez:publish-npm-all': 'npm run z:change-nrm-npm',
+  'prez:publish-npm-all': 'npm run z:change:nrm:npm',
   'z:publish-npm-all': 'npm run z:publish:npm-all',
-  'postz:publish-npm-all': 'npm run z:change-nrm-local',
-  'prez:publish:lerna': 'npm run z:change-nrm-npm',
+  'postz:publish-npm-all': 'npm run z:change:nrm:local',
+  'prez:publish:lerna': 'npm run z:change:nrm:npm',
   'z:publish:lerna': 'lerna updated && npm run z:lerna:publish',
-  'postz:publish:lerna': 'npm run z:change-nrm-local && npm run publish-npm-all',
+  'postz:publish:lerna': 'npm run z:change:nrm:local && npm run publish-npm-all',
   'prez:publish:build': 'npm run z:install && npm run cz && npm run z:build:all',
   'z:publish:build': 'npm run z:publish:lerna',
 };
@@ -77,7 +77,7 @@ const environmentScript = {
 
 const lernaScript = {
   'z:lerna:publish': 'lerna publish --yes',
-  'prez:lerna:bootstrap': 'npm run z:change-nrm-local',
+  'prez:lerna:bootstrap': 'npm run z:change:nrm:local',
   'z:lerna:bootstrap':
     'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
 };
@@ -91,8 +91,8 @@ const installScript = {
 };
 
 const nrmScript = {
-  "z:change-nrm-local": "nrm use local",
-  "z:change-nrm-npm": "nrm use npm",
+  "z:change:nrm:local": "nrm use local",
+  "z:change:nrm:npm": "nrm use npm",
 };
 
 const commitScript = {
