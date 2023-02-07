@@ -1,5 +1,5 @@
 const { createDevelopScriptFiles } = require('./develop.assist');
-const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync, resolvePath } = require('./meta');
+const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync, resolvePath, promptNewLine } = require('./meta');
 const { globalScript } = require('./package.script');
 
 const { loopPackage } = require('./package.tools');
@@ -24,6 +24,7 @@ function createMainFile(fileWithContentCollection) {
     .join()}] refresh success`;
 
   promptSuccess(log);
+  promptNewLine();
 }
 
 function createPackageFile(fileWithContentCollection) {
@@ -49,6 +50,7 @@ function createPackageFile(fileWithContentCollection) {
     .join()}] refresh success`;
 
   promptSuccess(log);
+  promptNewLine();
 }
 
 function adjustMainPackageJson({ scripts }) {
@@ -61,6 +63,7 @@ function adjustMainPackageJson({ scripts }) {
   writeJsonFileSync(mainProjectPath, packageJson);
 
   promptSuccess('adjust main package.json success');
+  promptNewLine();
 }
 
 function adjustChildrenPackageJson({ scripts }) {
@@ -76,6 +79,7 @@ function adjustChildrenPackageJson({ scripts }) {
     writeJsonFileSync(childPackageJsonPath, packageJson);
 
     promptSuccess('adjust child package.json success');
+    promptNewLine();
   });
 }
 

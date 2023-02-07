@@ -1,4 +1,4 @@
-const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync } = require('./meta');
+const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync, promptNewLine } = require('./meta');
 
 function createScriptFile(fileName, content, currentDir = '.', autoCreate = false) {
   const filePath = resolvePath(currentDir);
@@ -9,7 +9,8 @@ function createScriptFile(fileName, content, currentDir = '.', autoCreate = fals
     autoCreate: !!autoCreate,
   });
 
-  promptSuccess(`${fileName} update success`);
+  promptSuccess(`${fileName} create success`);
+  promptNewLine();
 }
 
 function createCleanScriptFile(currentDir = '.') {

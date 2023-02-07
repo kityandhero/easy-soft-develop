@@ -1,6 +1,6 @@
 const { mkdirRelativeSync, checkStringIsEmpty, promptError, promptSuccess, writeJsonFileRelativeSync, writeFileSync, writeJsonFileSync, promptInfo, promptNewLine } = require('../tools/meta');
 const { createDevelopScriptFiles } = require('../tools/develop.assist');
-const { cd } = require('../tools/shell');
+const { cd, exec } = require('../tools/shell');
 const { getGlobalPackages, globalScript, packageScript } = require('../tools/package.script');
 
 const { content: commitlintConfigContent } = require('../templates/commitlint.config.template');
@@ -19,7 +19,78 @@ function createLernaProjectFolder(name) {
   promptSuccess(`step *: create folder ${name} success`);
 }
 
-function createLernaPackageJsonFile(name) {
+function createLernaPackageJsonFile(lernaName) {
+  const devDependencies = {};
+
+  getGlobalPackages().forEach((o) => {
+    if (checkStringIsEmpty(o)) {
+      return;
+    }
+
+    devDependencies[o] = '^0.0.1';
+  });
+
+  const packageJson = {
+    name: lernaName,
+    version: '1.0.0',
+    author: '',
+    workspaces: ['packages/*'],
+    scripts: globalScript,
+    dependencies: {},
+    devDependencies: devDependencies,
+  };
+
+  writeJsonFileRelativeSync(`./package.json`, packageJson);
+
+  promptSuccess(`step *: create package.json success`);
+}
+
+function createPnpmWorkspaceFile() {
+  const content = `packages:
+  - 'packages/*'`;
+
+  writeFileSync(`./pnpm-workspace.yaml`, content, { autoCreate: true });
+
+  promptSuccess(`step *: create pnpm-workspace.yaml success`);
+}
+
+function createLernaConfigFile(lernaName) {
+  const content = `{
+    "packages": ["packages/*"],
+    "version": "independent",
+    "useWorkspaces": true,
+    "npmClient": "pnpm",
+    "command": {
+      "updated": {
+        "conventionalCommits": true,
+        "changelogPreset": "conventional-changelog-conventionalcommits"
+      },
+      "version": {
+        "conventionalCommits": true,
+        "message": "chore(${lernaName}): version",
+        "changelogPreset": "conventional-changelog-conventionalcommits"
+      },
+      "publish": {
+        "conventionalCommits": true,
+        "message": "chore(${lernaName}): publish",
+        "changelogPreset": "conventional-changelog-conventionalcommits"
+      }
+    }
+  }
+  `;
+
+  writeFileSync(`./lerna.json`, content, { autoCreate: true });
+
+  promptSuccess(`step *: create lerna.json success`);
+}
+
+function createProjectFolder(name) {
+  mkdirRelativeSync(`./packages/`);
+  mkdirRelativeSync(`./packages/${name}`);
+  mkdirRelativeSync(`./packages/${name}/src`);
+}
+
+function createPackageJsonFile(name) {
   const devDependencies = {};
 
   getGlobalPackages().forEach((o) => {
@@ -34,189 +105,118 @@ function createLernaPackageJsonFile(name) {
     name: name,
     version: '1.0.0',
     author: '',
-    workspaces: ['packages/*'],
-    scripts: globalScript,
-    dependencies: {},
-    devDependencies: devDependencies,
-  };
-
-  writeJsonFileRelativeSync(`./${name}/package.json`, packageJson);
-
-  promptSuccess(`step *: create package.json success`);
-}
-
-function createPnpmWorkspaceFile(name) {
-  const content = `packages:
-  - 'packages/*'`;
-
-  writeFileSync(`./${name}/pnpm-workspace.yaml`, content, { autoCreate: true });
-
-  promptSuccess(`step *: create pnpm-workspace.yaml success`);
-}
-
-function createLernaConfigFile(name) {
-  const content = `{
-    "packages": ["packages/*"],
-    "version": "independent",
-    "useWorkspaces": true,
-    "npmClient": "pnpm",
-    "command": {
-      "updated": {
-        "conventionalCommits": true,
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      },
-      "version": {
-        "conventionalCommits": true,
-        "message": "chore(${name}): version",
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      },
-      "publish": {
-        "conventionalCommits": true,
-        "message": "chore(${name}): publish",
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      }
-    }
-  }
-  `;
-
-  writeFileSync(`./${name}/lerna.json`, content, { autoCreate: true });
-
-  promptSuccess(`step *: create lerna.json success`);
-}
-
-function createProjectFolder(name, projectName) {
-  mkdirRelativeSync(`./${name}/packages/`);
-  mkdirRelativeSync(`./${name}/packages/${projectName}`);
-  mkdirRelativeSync(`./${name}/packages/${projectName}/src`);
-}
-
-function createPackageJsonFile(name, projectName) {
-  const devDependencies = {};
-
-  getGlobalPackages().forEach((o) => {
-    if (checkStringIsEmpty(o)) {
-      return;
-    }
-
-    devDependencies[o] = '^0.0.1';
-  });
-
-  const packageJson = {
-    name: projectName,
-    version: '1.0.0',
-    author: '',
     scripts: packageScript,
     dependencies: {},
     devDependencies: devDependencies,
   };
 
-  writeJsonFileRelativeSync(`./${name}/packages/${projectName}/package.json`, packageJson);
+  writeJsonFileRelativeSync(`./packages/${name}/package.json`, packageJson);
 
   promptSuccess(`step *: create package.json success`);
 }
 
-function createCommitlintConfigFile(name) {
+function createCommitlintConfigFile() {
   const content = commitlintConfigContent;
 
-  writeFileSync(`./${name}/commitlint.config.js`, content, { autoCreate: true });
+  writeFileSync(`./commitlint.config.js`, content, { autoCreate: true });
 
   promptSuccess(`step *: create commitlint.config.js success`);
 }
 
-function createBabelConfigFile(name) {
+function createBabelConfigFile() {
   const content = babelConfigContent;
 
-  writeFileSync(`./${name}/babel.config.js`, content, { autoCreate: true });
+  writeFileSync(`./babel.config.js`, content, { autoCreate: true });
 
   promptSuccess(`step *: create babel.config.js success`);
 }
 
-function createNcuConfigFile(name) {
-  writeJsonFileSync(`./${name}/.ncurc.json`, {});
+function createNcuConfigFile() {
+  writeJsonFileSync(`./.ncurc.json`, {});
 
   promptSuccess(`step *: create .ncurc.json success`);
 }
 
-function createPackagesFolder(name) {
-  mkdirRelativeSync(`./${name}/packages`);
+function createPackagesFolder() {
+  mkdirRelativeSync(`./packages`);
 
   promptSuccess(`step *: create packages folder success`);
 }
 
-function createDevelopFolder(name) {
-  mkdirRelativeSync(`./${name}/develop`);
-  mkdirRelativeSync(`./${name}/develop/assists`);
-  mkdirRelativeSync(`./${name}/develop/config`);
+function createDevelopFolder() {
+  mkdirRelativeSync(`./develop`);
+  mkdirRelativeSync(`./develop/assists`);
+  mkdirRelativeSync(`./develop/config`);
 
-  mkdirRelativeSync(`./${name}/develop/config/editor/template`);
-  writeFileSync(`./${name}/develop/config/editor/template/content.js`, editorContent, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/editor/template`);
+  writeFileSync(`./develop/config/editor/template/content.js`, editorContent, { autoCreate: true });
 
   //#region eslint
 
-  mkdirRelativeSync(`./${name}/develop/config/eslint/template`);
-  writeFileSync(`./${name}/develop/config/eslint/template/content.js`, eslintContent, { autoCreate: true });
-  writeFileSync(`./${name}/develop/config/eslint/template/ignore.content.js`, eslintIgnore, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/eslint/template`);
+  writeFileSync(`./develop/config/eslint/template/content.js`, eslintContent, { autoCreate: true });
+  writeFileSync(`./develop/config/eslint/template/ignore.content.js`, eslintIgnore, { autoCreate: true });
 
-  mkdirRelativeSync(`./${name}/develop/config/eslint/config`);
-  writeFileSync(`./${name}/develop/config/eslint/config/index.js`, eslintConfig, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/eslint/config`);
+  writeFileSync(`./develop/config/eslint/config/index.js`, eslintConfig, { autoCreate: true });
 
-  mkdirRelativeSync(`./${name}/develop/config/eslint/rules`);
-  writeFileSync(`./${name}/develop/config/eslint/rules/index.js`, eslintRule, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/eslint/rules`);
+  writeFileSync(`./develop/config/eslint/rules/index.js`, eslintRule, { autoCreate: true });
 
   //#endregion
 
   //#region git
 
-  mkdirRelativeSync(`./${name}/develop/config/git/template`);
-  writeFileSync(`./${name}/develop/config/git/template/attributes.content.js`, gitAttribute, { autoCreate: true });
-  writeFileSync(`./${name}/develop/config/git/template/ignore.content.js`, gitIgnore, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/git/template`);
+  writeFileSync(`./develop/config/git/template/attributes.content.js`, gitAttribute, { autoCreate: true });
+  writeFileSync(`./develop/config/git/template/ignore.content.js`, gitIgnore, { autoCreate: true });
 
   //#endregion
 
   //#region lintStaged
 
-  mkdirRelativeSync(`./${name}/develop/config/lintStaged/template`);
-  writeFileSync(`./${name}/develop/config/lintStaged/template/content.js`, lintStagedContent, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/lintStaged/template`);
+  writeFileSync(`./develop/config/lintStaged/template/content.js`, lintStagedContent, { autoCreate: true });
 
   //#endregion
 
   //#region package.json
 
-  mkdirRelativeSync(`./${name}/develop/config/package/template`);
-  writeFileSync(`./${name}/develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
-  writeFileSync(`./${name}/develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/package/template`);
+  writeFileSync(`./develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
+  writeFileSync(`./develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
 
   //#endregion
 
   //#region prettier
 
-  mkdirRelativeSync(`./${name}/develop/config/prettier/template`);
-  writeFileSync(`./${name}/develop/config/prettier/template/ignore.content.js`, prettierIgnore, { autoCreate: true });
-  writeFileSync(`./${name}/develop/config/prettier/template/content.js`, prettierContent, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/prettier/template`);
+  writeFileSync(`./develop/config/prettier/template/ignore.content.js`, prettierIgnore, { autoCreate: true });
+  writeFileSync(`./develop/config/prettier/template/content.js`, prettierContent, { autoCreate: true });
 
-  mkdirRelativeSync(`./${name}/develop/config/prettier/config`);
-  writeFileSync(`./${name}/develop/config/prettier/config/index.js`, prettierConfig, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/prettier/config`);
+  writeFileSync(`./develop/config/prettier/config/index.js`, prettierConfig, { autoCreate: true });
 
   //#endregion
 
   //#region stylelint
 
-  mkdirRelativeSync(`./${name}/develop/config/stylelint/template`);
-  writeFileSync(`./${name}/develop/config/stylelint/template/ignore.content.js`, stylelintIgnore, { autoCreate: true });
-  writeFileSync(`./${name}/develop/config/stylelint/template/content.js`, stylelintContent, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/stylelint/template`);
+  writeFileSync(`./develop/config/stylelint/template/ignore.content.js`, stylelintIgnore, { autoCreate: true });
+  writeFileSync(`./develop/config/stylelint/template/content.js`, stylelintContent, { autoCreate: true });
 
-  mkdirRelativeSync(`./${name}/develop/config/stylelint/config`);
-  writeFileSync(`./${name}/develop/config/stylelint/config/index.js`, stylelintConfig, { autoCreate: true });
+  mkdirRelativeSync(`./develop/config/stylelint/config`);
+  writeFileSync(`./develop/config/stylelint/config/index.js`, stylelintConfig, { autoCreate: true });
 
   //#endregion
 
-  mkdirRelativeSync(`./${name}/develop/config/eslint/template`);
+  mkdirRelativeSync(`./develop/config/eslint/template`);
 
   promptSuccess(`step *: create develop folder success`);
 }
 
-function createHusky(name) {
-  mkdirRelativeSync(`./${name}/.husky`);
+function createHusky() {
+  mkdirRelativeSync(`./.husky`);
 
   const commitMsg = `#!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
@@ -224,7 +224,7 @@ function createHusky(name) {
 npx commitlint -e $HUSKY_GIT_PARAMS -V
 `;
 
-  writeFileSync(`./${name}/.husky/commit-msg`, commitMsg, { autoCreate: true });
+  writeFileSync(`./.husky/commit-msg`, commitMsg, { autoCreate: true });
 
   const precommit = `#!/bin/sh
   . "$(dirname "$0")/_/husky.sh"
@@ -232,13 +232,13 @@ npx commitlint -e $HUSKY_GIT_PARAMS -V
   npx lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents
   `;
 
-  writeFileSync(`./${name}/.husky/pre-commit`, precommit, { autoCreate: true });
+  writeFileSync(`./.husky/pre-commit`, precommit, { autoCreate: true });
 
   promptSuccess(`step *: create husky folder success`);
 }
 
-function createVscode(name) {
-  mkdirRelativeSync(`./${name}/.vscode`);
+function createVscode() {
+  mkdirRelativeSync(`./.vscode`);
 
   const settingJson = {
     'cSpell.words': ['conventionalcommits', 'packagejson', 'pmmmwh', 'postcz', 'postz', 'precommit', 'precz'],
@@ -249,64 +249,65 @@ function createVscode(name) {
     },
   };
 
-  writeJsonFileSync(`./${name}/.vscode/settings.json`, settingJson, { autoCreate: true });
+  writeJsonFileSync(`./.vscode/settings.json`, settingJson, { autoCreate: true });
 }
 
-function configEnvironment(name) {
-  mkdirRelativeSync(`./${name}/develop`);
+function configEnvironment() {
+  mkdirRelativeSync(`./develop`);
 
   promptSuccess(`step *: config environment`);
 
   promptNewLine();
 
-  createDevelopScriptFiles(`./${name}`);
-
-  const r = cd(`./${name}`);
+  createDevelopScriptFiles(`.`);
 
   promptNewLine();
 
   promptInfo('add global dev packages');
 
-  r.exec('npx ncu -u --packageFile ./package.json');
+  exec('npx ncu -u --packageFile ./package.json');
 
   promptInfo('install dependence packages');
 
-  r.exec('pnpm install -w');
+  exec('pnpm install -w');
 
   promptNewLine();
 
-  r.exec('npm run z:initial:environment');
+  exec('npm run z:initial:environment');
 
-  r.exec('git init -b main');
+  exec('git init -b main');
 
-  r.exec('npx husky install');
+  exec('npx husky install');
 }
 
-function createLernaProject(nameSource) {
-  if (checkStringIsEmpty(nameSource)) {
+function createLernaProject(name) {
+  if (checkStringIsEmpty(name)) {
     promptError('project name disallow empty, please use create-lerna-project --name name or get info with create-lerna-project --help');
 
     return;
   }
-  const name = `lerna-${nameSource}`;
+  const lernaName = `lerna-${name}`;
 
-  createLernaProjectFolder(name);
-  createLernaPackageJsonFile(name);
-  createLernaConfigFile(name);
-  createPnpmWorkspaceFile(name);
+  createLernaProjectFolder(lernaName);
 
-  createProjectFolder(name, nameSource);
-  createPackageJsonFile(name, nameSource);
+  cd(`./${lernaName}`);
 
-  createCommitlintConfigFile(name);
-  createBabelConfigFile(name);
-  createNcuConfigFile(name);
-  createPackagesFolder(name);
-  createDevelopFolder(name);
-  createHusky(name);
-  createVscode(name);
+  createLernaPackageJsonFile(lernaName);
+  createLernaConfigFile(lernaName);
+  createPnpmWorkspaceFile();
 
-  configEnvironment(name);
+  createProjectFolder(name);
+  createPackageJsonFile(name);
+
+  createCommitlintConfigFile();
+  createBabelConfigFile();
+  createNcuConfigFile();
+  createPackagesFolder();
+  createDevelopFolder();
+  createHusky();
+  createVscode();
+
+  configEnvironment();
 }
 
 module.exports = { createLernaProject };
