@@ -1,4 +1,4 @@
-const { mkdirRelativeSync, checkStringIsEmpty, promptError, promptSuccess, writeJsonFileRelativeSync, writeFileSync, writeJsonFileSync, promptInfo } = require('../tools/meta');
+const { mkdirRelativeSync, checkStringIsEmpty, promptError, promptSuccess, writeJsonFileRelativeSync, writeFileSync, writeJsonFileSync, promptInfo, promptNewLine } = require('../tools/meta');
 const { createDevelopScriptFiles } = require('../tools/develop.assist');
 const { cd } = require('../tools/shell');
 const { getGlobalPackages, globalScript, packageScript } = require('../tools/package.script');
@@ -12,33 +12,6 @@ const { content: lintStagedContent } = require('../templates/lintStaged.template
 const { childPackage, mainPackage } = require('../templates/package.template');
 const { ignore: prettierIgnore, content: prettierContent, config: prettierConfig } = require('../templates/prettier.template');
 const { ignore: stylelintIgnore, content: stylelintContent, config: stylelintConfig } = require('../templates/stylelint.template');
-
-function createLernaProject(nameSource) {
-  if (checkStringIsEmpty(nameSource)) {
-    promptError('project name disallow empty, please use create-lerna-project --name name or get info with create-lerna-project --help');
-
-    return;
-  }
-  const name = `lerna-${nameSource}`;
-
-  createLernaProjectFolder(name);
-  createLernaPackageJsonFile(name);
-  createLernaConfigFile(name);
-  createPnpmWorkspaceFile(name);
-
-  createProjectFolder(name, nameSource);
-  createPackageJsonFile(name, nameSource);
-
-  createCommitlintConfigFile(name);
-  createBabelConfigFile(name);
-  createNcuConfigFile(name);
-  createPackagesFolder(name);
-  createDevelopFolder(name);
-  createHusky(name);
-  createVscode(name);
-
-  configEnvironment(name);
-}
 
 function createLernaProjectFolder(name) {
   mkdirRelativeSync(name);
@@ -284,13 +257,13 @@ function configEnvironment(name) {
 
   promptSuccess(`step *: config environment`);
 
-  console.log('');
+  promptNewLine();
 
   createDevelopScriptFiles(`./${name}`);
 
   const r = cd(`./${name}`);
 
-  console.log('');
+  promptNewLine();
 
   promptInfo('add global dev packages');
 
@@ -300,13 +273,40 @@ function configEnvironment(name) {
 
   r.exec('pnpm install -w');
 
-  console.log('');
+  promptNewLine();
 
   r.exec('npm run z:initial:environment');
 
   r.exec('git init -b main');
 
   r.exec('npx husky install');
+}
+
+function createLernaProject(nameSource) {
+  if (checkStringIsEmpty(nameSource)) {
+    promptError('project name disallow empty, please use create-lerna-project --name name or get info with create-lerna-project --help');
+
+    return;
+  }
+  const name = `lerna-${nameSource}`;
+
+  createLernaProjectFolder(name);
+  createLernaPackageJsonFile(name);
+  createLernaConfigFile(name);
+  createPnpmWorkspaceFile(name);
+
+  createProjectFolder(name, nameSource);
+  createPackageJsonFile(name, nameSource);
+
+  createCommitlintConfigFile(name);
+  createBabelConfigFile(name);
+  createNcuConfigFile(name);
+  createPackagesFolder(name);
+  createDevelopFolder(name);
+  createHusky(name);
+  createVscode(name);
+
+  configEnvironment(name);
 }
 
 module.exports = { createLernaProject };

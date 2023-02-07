@@ -1,8 +1,7 @@
 let fs = require('fs');
-const { resolve } = require('path');
 const term = require('terminal-kit').terminal;
 
-const { checkStringIsEmpty } = require('./meta');
+const { checkStringIsEmpty, resolvePath } = require('./meta');
 
 function commitRefresh(fileName = '', relativeFolder = '') {
   const fileNameAdjust = checkStringIsEmpty(fileName) ? 'commit.flag.json' : fileName;
@@ -16,7 +15,7 @@ function commitRefresh(fileName = '', relativeFolder = '') {
     datetime: datetime,
   });
 
-  const filePath = resolve('.');
+  const filePath = resolvePath('.');
 
   fs.mkdirSync(`${filePath}/${relativeFolderAdjust}/`, { recursive: true });
 

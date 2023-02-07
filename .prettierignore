@@ -1,6 +1,5 @@
 # ignore dir
 **/node_modules/**
-**/templates/**
 **/lib/**
 **/dist/**
 **/es/**

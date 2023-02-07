@@ -1,8 +1,5 @@
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/no-promise-in-callback */
-
 const { createDevelopScriptFiles } = require('./develop.assist');
-const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync } = require('./meta');
+const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync, resolvePath } = require('./meta');
 const { globalScript } = require('./package.script');
 
 const { loopPackage } = require('./package.tools');
@@ -55,7 +52,7 @@ function createPackageFile(fileWithContentCollection) {
 }
 
 function adjustMainPackageJson({ scripts }) {
-  const mainProjectPath = resolve(`./package.json`);
+  const mainProjectPath = resolvePath(`./package.json`);
 
   const packageJson = readJsonFileSync(mainProjectPath);
 

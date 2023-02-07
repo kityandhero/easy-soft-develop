@@ -40,7 +40,7 @@ module.exports = {
   packageContent,
 };`;
 
-const config=`/* eslint-disable import/no-commonjs */
+const config = `/* eslint-disable import/no-commonjs */
 
 let { generalRules, sortRules } = require('../rules');
 
@@ -82,7 +82,7 @@ module.exports = {
     },
   },
 };
-`
+`;
 
 const rule = `/* eslint-disable import/no-commonjs */
 
@@ -156,25 +156,9 @@ module.exports = {
 };
 `;
 
-const ignoreContent = `**/public
-**/lib
-**/es
-**/.history
-**/.vs
-**/.swc
-
-*.d.ts
-*.log
-*.zip
-*.txt
-*.7z
-*.min.js
-rollup.config-*.cjs
-`;
-
 module.exports = {
   ignore,
   content,
   rule,
-  config
+  config,
 };

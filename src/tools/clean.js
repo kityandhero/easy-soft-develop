@@ -1,9 +1,19 @@
 const { exec } = require('../tools/shell');
+const { promptNewLine, promptInfo, promptSuccess, promptError } = require('./meta');
+const { loopPackage } = require('./package.tools');
+
+function adjustMainPackageJson(command) {
+  exec(command);
+}
+
+function adjustChildrenPackageJson(command) {
+  loopPackage(({ name }) => {
+    exec(`cd ./packages/${name} && ${command}`);
+  });
+}
 
 function clean(preCmd, ...targets) {
   try {
-    const { loopPackage } = require('./package.assist');
-
     const list = targets.push('node_modules');
 
     const command = list
@@ -15,29 +25,21 @@ function clean(preCmd, ...targets) {
       })
       .join(' && ');
 
-    function adjustMainPackageJson() {
-      exec(command);
-    }
-
-    function adjustChildrenPackageJson() {
-      loopPackage(({ name }) => {
-        exec(`cd ./packages/${name} && ${command}`);
-      });
-    }
-
-    console.log(`clean start`);
-    console.log('');
+    promptInfo(`clean start`);
+    promptNewLine();
 
     if (preCmd) {
       exec(preCmd);
     }
 
-    adjustChildrenPackageJson();
+    adjustChildrenPackageJson(command);
 
-    adjustMainPackageJson();
+    adjustMainPackageJson(command);
 
-    console.log('clean success');
-  } catch (error) {}
+    promptSuccess('clean success');
+  } catch (error) {
+    promptError(error);
+  }
 }
 
 module.exports = { clean };

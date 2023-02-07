@@ -1,19 +1,19 @@
 const fs = require('fs');
 
-const { resolve } = require('path');
-const { fileExistsSync } = require('./meta');
+const { fileExistsSync, resolvePath } = require('./meta');
 
 /**
  * loop all package
  */
+// eslint-disable-next-line no-unused-vars
 function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
   const packagesDir = './packages/';
 
-  if (!fileExistsSync(resolve(packagesDir))) {
+  if (!fileExistsSync(resolvePath(packagesDir))) {
     return;
   }
 
-  const packagesPath = resolve(packagesDir);
+  const packagesPath = resolvePath(packagesDir);
 
   const files = fs.readdirSync(packagesDir);
 

@@ -1,4 +1,4 @@
-const content=`module.exports = {
+const content = `module.exports = {
   extends: [
     '@commitlint/config-conventional',
     '@commitlint/config-lerna-scopes',
@@ -107,7 +107,6 @@ const content=`module.exports = {
     },
   },
 };
-`
-
+`;
 
 module.exports = { content };

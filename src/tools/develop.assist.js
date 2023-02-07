@@ -1,10 +1,9 @@
 let fs = require('fs');
-const { resolve } = require('path');
 
-const { promptSuccess, promptInfo, mkdirRelativeSync } = require('./meta');
+const { promptSuccess, promptInfo, promptError, resolvePath } = require('./meta');
 
 function createScriptFile(fileName, content, flag = 'wx+', currentDir = '.') {
-  const filePath = resolve(currentDir);
+  const filePath = resolvePath(currentDir);
 
   fs.mkdirSync(`${filePath}/develop/assists/`, { recursive: true });
 
@@ -38,7 +37,9 @@ updateSpecialPackageVersion(packageList);
 
   try {
     createScriptFile('package.update.special.version.js', content, 'wx+', currentDir);
-  } catch (error) {}
+  } catch (error) {
+    promptError(error);
+  }
 }
 
 function createInstallGlobalDevDependenceScriptFile(currentDir = '.') {
@@ -53,7 +54,9 @@ initGlobalDevDependencePackages(packageList);
 
   try {
     createScriptFile('install.global.dev.dependence.js', content, 'wx+', currentDir);
-  } catch (error) {}
+  } catch (error) {
+    promptError(error);
+  }
 }
 
 function createConfigEnvironmentScriptFiles(currentDir = '.') {
@@ -181,7 +184,9 @@ configEnvironment({
 
   try {
     createScriptFile('config.environment.js', content, 'wx+', currentDir);
-  } catch (error) {}
+  } catch (error) {
+    promptError(error);
+  }
 }
 
 function createDevelopScriptFiles(currentDir = '.') {

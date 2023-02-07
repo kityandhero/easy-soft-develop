@@ -4,5 +4,5 @@ const content = `module.exports = function (api) {
     babelrcRoots: ['.', 'packages/*'],
   };
 };
-`
+`;
 module.exports = { content };

@@ -1,6 +1,3 @@
-/* eslint-disable promise/no-nesting */
-/* eslint-disable promise/no-promise-in-callback */
-
 const globalScript = {
   'z:initial:environment': 'node ./develop/assists/config.environment.js',
 };

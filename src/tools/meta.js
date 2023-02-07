@@ -1,7 +1,16 @@
 const fs = require('fs');
+const console = require('console');
 const fsExtra = require('fs-extra');
 const term = require('terminal-kit').terminal;
 const { resolve } = require('path');
+
+function resolvePath(path) {
+  return resolve(path);
+}
+
+function isObject(value) {
+  return value !== null && typeof value === 'object';
+}
 
 //检测文件或者文件夹存在 nodeJS
 function fileExistsSync(path) {
@@ -21,27 +30,32 @@ function checkStringIsEmpty(v) {
   v = ((v || null) == null ? '' : toString(v)).trim().replace(/\t/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/\s*/g, '');
 
   while (v.indexOf('  ') >= 0) {
-    v = v.replace(/  /g, ' ');
+    v = v.replace(/ {2}/g, ' ');
   }
 
   return !v;
+}
+
+function promptNewLine() {
+  console.log('');
 }
 
 function promptSuccess(message) {
   term.nextLine(1);
 
   term.green(`${message}\r`);
-  console.log('');
+  promptNewLine();
 }
 
 function promptInfo(message) {
   term.white(`${message}\r`);
-  console.log('');
+  promptNewLine();
 }
 
-function promptError(message) {
-  term.red(`${message}\r`);
-  console.log('');
+function promptError(error) {
+  console.error(error);
+
+  promptNewLine();
 }
 
 function assignObject(source, mergeData) {
@@ -64,10 +78,6 @@ function assignObject(source, mergeData) {
   });
 
   return result;
-}
-
-function isObject(value) {
-  return value !== null && typeof value === 'object';
 }
 
 function mkdirSync(path) {
@@ -114,6 +124,7 @@ module.exports = {
   fileExistsSync,
   writeFileSync,
   checkStringIsEmpty,
+  promptNewLine,
   promptSuccess,
   promptInfo,
   promptError,
@@ -125,5 +136,5 @@ module.exports = {
   readJsonFileRelativeSync,
   writeJsonFileSync,
   writeJsonFileRelativeSync,
-  resolve,
+  resolvePath,
 };
