@@ -35,7 +35,9 @@ function updateAllPackageVersion() {
 
   adjustChildrenPackageJson(ncuCommand);
 
-  promptSuccess('update success, please exec install');
+  promptSuccess('update success, exec install with z:install');
+
+  exec('npm run z:install');
 }
 
 function checkAllPackageVersion() {
@@ -47,7 +49,9 @@ function checkAllPackageVersion() {
 
   adjustChildrenPackageJson(ncuCommand);
 
-  promptSuccess('update success, please exec install');
+  promptSuccess('update success, exec install with z:install');
+
+  exec('npm run z:install');
 }
 
 module.exports = {
