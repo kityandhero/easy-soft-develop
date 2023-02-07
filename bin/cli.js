@@ -11,6 +11,7 @@ const createLernaProject = require('../src/cliCollection/create-lerna-project');
 
 const program = new Command();
 
+// eslint-disable-next-line no-undef
 process.title = 'easy-soft-develop';
 
 program.version(require('../package').version).usage('<command> [options]');
@@ -62,4 +63,5 @@ program
     createLernaProject.run(a, o);
   });
 
+// eslint-disable-next-line no-undef
 program.parse(process.argv);
