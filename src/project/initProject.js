@@ -285,11 +285,16 @@ function configEnvironment() {
 
   exec('pnpm install -w');
 
-  promptNewLine();
-
   exec('npm run z:initial:environment');
 
+  promptNewLine();
+
+  promptInfo('create git branch main');
+
   exec('git init -b main');
+
+  promptInfo('husky install');
+  promptNewLine();
 
   exec('npx husky install');
 }
