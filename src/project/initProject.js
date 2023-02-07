@@ -40,18 +40,22 @@ function createLernaPackageJsonFile(lernaName) {
     devDependencies: devDependencies,
   };
 
-  writeJsonFileRelativeSync(`./package.json`, packageJson);
+  let result = writeJsonFileSync(`./package.json`, packageJson, { autoCreate: true });
 
-  promptSuccess(`step *: create package.json success`);
+  if (result) {
+    promptSuccess(`step *: create package.json success`);
+  }
 }
 
 function createPnpmWorkspaceFile() {
   const content = `packages:
   - 'packages/*'`;
 
-  writeFileSync(`./pnpm-workspace.yaml`, content, { autoCreate: true });
+  let result = writeFileSync(`./pnpm-workspace.yaml`, content, { autoCreate: true });
 
-  promptSuccess(`step *: create pnpm-workspace.yaml success`);
+  if (result) {
+    promptSuccess(`step *: create pnpm-workspace.yaml success`);
+  }
 }
 
 function createLernaConfigFile(lernaName) {
@@ -79,9 +83,11 @@ function createLernaConfigFile(lernaName) {
   }
   `;
 
-  writeFileSync(`./lerna.json`, content, { autoCreate: true });
+  let result = writeFileSync(`./lerna.json`, content, { autoCreate: true });
 
-  promptSuccess(`step *: create lerna.json success`);
+  if (result) {
+    promptSuccess(`step *: create lerna.json success`);
+  }
 }
 
 function createProjectFolder(name) {
@@ -110,31 +116,39 @@ function createPackageJsonFile(name) {
     devDependencies: devDependencies,
   };
 
-  writeJsonFileRelativeSync(`./packages/${name}/package.json`, packageJson);
+  let result = writeJsonFileRelativeSync(`./packages/${name}/package.json`, packageJson);
 
-  promptSuccess(`step *: create package.json success`);
+  if (result) {
+    promptSuccess(`step *: create package.json success`);
+  }
 }
 
 function createCommitlintConfigFile() {
   const content = commitlintConfigContent;
 
-  writeFileSync(`./commitlint.config.js`, content, { autoCreate: true });
+  let result = writeFileSync(`./commitlint.config.js`, content, { autoCreate: true });
 
-  promptSuccess(`step *: create commitlint.config.js success`);
+  if (result) {
+    promptSuccess(`step *: create commitlint.config.js success`);
+  }
 }
 
 function createBabelConfigFile() {
   const content = babelConfigContent;
 
-  writeFileSync(`./babel.config.js`, content, { autoCreate: true });
+  let result = writeFileSync(`./babel.config.js`, content, { autoCreate: true });
 
-  promptSuccess(`step *: create babel.config.js success`);
+  if (result) {
+    promptSuccess(`step *: create babel.config.js success`);
+  }
 }
 
 function createNcuConfigFile() {
-  writeJsonFileSync(`./.ncurc.json`, {});
+  let result = writeJsonFileSync(`./.ncurc.json`, {});
 
-  promptSuccess(`step *: create .ncurc.json success`);
+  if (result) {
+    promptSuccess(`step *: create .ncurc.json success`);
+  }
 }
 
 function createPackagesFolder() {

@@ -51,13 +51,15 @@ function writeFileSync(path, content, options = { autoCreate: false }) {
     if (fileExistsSync(path)) {
       promptInfo(`${path} exist, ignore create`);
 
-      return;
+      return false;
     }
 
     fs.writeFileSync(path, content, { flag: 'wx' });
+  } else {
+    fs.writeFileSync(path, content, { flag: 'w' });
   }
 
-  fs.writeFileSync(path, content, { flag: 'w' });
+  return true;
 }
 
 function checkStringIsEmpty(v) {

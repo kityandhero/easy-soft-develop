@@ -5,12 +5,14 @@ function createScriptFile(fileName, content, currentDir = '.', autoCreate = fals
 
   mkdirSync(`${filePath}/develop/assists/`);
 
-  writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
+  const result = writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
     autoCreate: !!autoCreate,
   });
 
   promptSuccess(`${fileName} create success`);
   promptNewLine();
+
+  return result;
 }
 
 function createCleanScriptFile(currentDir = '.') {
@@ -21,7 +23,7 @@ const { clean } = require('easy-soft-develop');
 clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
 `;
 
-  createScriptFile('clean.js', content, currentDir, false);
+  return createScriptFile('clean.js', content, currentDir, false);
 }
 
 function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
