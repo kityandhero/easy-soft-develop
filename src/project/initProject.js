@@ -9,7 +9,7 @@ const { content: editorContent } = require('../templates/editor.template');
 const { content: eslintContent, ignore: eslintIgnore, config: eslintConfig, rule: eslintRule } = require('../templates/eslint.template');
 const { attribute: gitAttribute, ignore: gitIgnore } = require('../templates/git.template');
 const { content: lintStagedContent } = require('../templates/lintStaged.template');
-const { childPackage, mainPackage } = require('../templates/package.template');
+const { childPackage, mainPackage, customPackage } = require('../templates/package.template');
 const { ignore: prettierIgnore, content: prettierContent, config: prettierConfig } = require('../templates/prettier.template');
 const { ignore: stylelintIgnore, content: stylelintContent, config: stylelintConfig } = require('../templates/stylelint.template');
 
@@ -207,6 +207,10 @@ function createDevelopFolder() {
   mkdirRelativeSync(`./develop/config/package/template`);
   writeFileSync(`./develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
   writeFileSync(`./develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
+
+  mkdirRelativeSync(`./develop/config/package/custom`);
+  writeFileSync(`./develop/config/package/custom/children.content.js`, customPackage, { autoCreate: false });
+  writeFileSync(`./develop/config/package/custom/main.content.js`, customPackage, { autoCreate: false });
 
   //#endregion
 

@@ -72,7 +72,7 @@ const cleanScript = {
   "z:clean": "node ./develop/assists/clean.js",
 };
 
-const envScript = {
+const environmentScript = {
   "z:initial:environment": "node ./develop/assists/config.environment.js",
 };
 
@@ -127,7 +127,7 @@ module.exports = {
   ...toolsScript,
   ...publishScript,
   ...cleanScript,
-  ...envScript,
+  ...environmentScript,
   ...lernaScript,
   ...installScript,
   ...nrmScript,
@@ -136,4 +136,13 @@ module.exports = {
 };
 `;
 
-module.exports = { childPackage, mainPackage };
+const customPackage = `/* eslint-disable import/no-commonjs */
+
+const scripts = {};
+
+module.exports = {
+  ...scripts,
+};
+`;
+
+module.exports = { childPackage, mainPackage, customPackage };
