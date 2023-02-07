@@ -51,9 +51,9 @@ const rules = {
 
 module.exports = {
   generalConfig: {
-    extends: ['taro/react', 'prettier', 'plugin:promise/recommended'],
+    extends: ['prettier', 'plugin:unicorn/recommended', 'plugin:promise/recommended'],
     env: { es6: true },
-    plugins: ['simple-import-sort', 'import', 'prettier'],
+    plugins: ['unicorn', 'simple-import-sort', 'import', 'prettier'],
     parser: '@babel/eslint-parser',
     parserOptions: {
       requireConfigFile: false,

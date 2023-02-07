@@ -44,7 +44,8 @@
     "test:createCommitRefreshScriptFile": "node ./test/createCommitRefreshScriptFile.test.js",
     "test:createPackageCheckAllVersionScriptFile": "node ./test/createPackageCheckAllVersionScriptFile.test.js",
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
-    "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js"
+    "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
+    "test:inner:assignObject": "node ./test/assignObject.test.js"
   },
   "dependencies": {},
   "devDependencies": {

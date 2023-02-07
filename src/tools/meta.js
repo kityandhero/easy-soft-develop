@@ -72,7 +72,7 @@ function checkStringIsEmpty(v) {
   return !v;
 }
 
-function assignObject(source, mergeData) {
+function assignObject(source, ...mergeData) {
   let result = source;
 
   if (!Array.isArray(mergeData)) {
@@ -116,14 +116,22 @@ function mkdirRelativeSync(path) {
   fs.mkdirSync(`${currentPath}/${path}`, { recursive: true });
 }
 
-function writeJsonFileSync(path, json) {
-  fsExtra.writeJsonSync(path, json);
-}
+function writeJsonFileSync(path, json, options = { autoCreate: false }) {
+  const { autoCreate } = options;
 
-function writeJsonFileRelativeSync(relativePath, json) {
-  const path = resolvePath(relativePath);
+  if (!autoCreate) {
+    if (fileExistsSync(path)) {
+      promptInfo(`${path} exist, ignore create`);
 
-  writeJsonFileSync(path, json);
+      return false;
+    }
+
+    fsExtra.writeJsonSync(path, json, { flag: 'wx' });
+  } else {
+    fsExtra.writeJsonSync(path, json, { flag: 'w' });
+  }
+
+  return true;
 }
 
 function readJsonFileSync(path) {
@@ -149,6 +157,5 @@ module.exports = {
   readJsonFileSync,
   readJsonFileRelativeSync,
   writeJsonFileSync,
-  writeJsonFileRelativeSync,
   resolvePath,
 };

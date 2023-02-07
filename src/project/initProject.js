@@ -1,4 +1,4 @@
-const { mkdirRelativeSync, checkStringIsEmpty, promptError, promptSuccess, writeJsonFileRelativeSync, writeFileSync, writeJsonFileSync, promptInfo, promptNewLine } = require('../tools/meta');
+const { mkdirRelativeSync, checkStringIsEmpty, promptError, promptSuccess, writeFileSync, writeJsonFileSync, promptInfo, promptNewLine } = require('../tools/meta');
 const { createDevelopScriptFiles } = require('../tools/develop.assist');
 const { cd, exec } = require('../tools/shell');
 const { getGlobalPackages, globalScript, packageScript } = require('../tools/package.script');
@@ -94,6 +94,8 @@ function createProjectFolder(name) {
   mkdirRelativeSync(`./packages/`);
   mkdirRelativeSync(`./packages/${name}`);
   mkdirRelativeSync(`./packages/${name}/src`);
+
+  promptSuccess(`step *: create packages folder success`);
 }
 
 function createPackageJsonFile(name) {
@@ -116,7 +118,7 @@ function createPackageJsonFile(name) {
     devDependencies: devDependencies,
   };
 
-  let result = writeJsonFileRelativeSync(`./packages/${name}/package.json`, packageJson);
+  let result = writeJsonFileSync(`./packages/${name}/package.json`, packageJson, { autoCreate: true });
 
   if (result) {
     promptSuccess(`step *: create package.json success`);
@@ -151,10 +153,16 @@ function createNcuConfigFile() {
   }
 }
 
-function createPackagesFolder() {
-  mkdirRelativeSync(`./packages`);
+function createNpmConfigFile() {
+  let result = writeFileSync(
+    `./.npmrc.json`,
+    `# npm config
+auto-install-peers=true`,
+  );
 
-  promptSuccess(`step *: create packages folder success`);
+  if (result) {
+    promptSuccess(`step *: create .npmrc.json success`);
+  }
 }
 
 function createDevelopFolder() {
@@ -277,7 +285,7 @@ function configEnvironment() {
 
   promptInfo('add global dev packages');
 
-  exec('npx ncu -u --packageFile ./package.json');
+  exec('npx ncu -u --packageFile ./**/package.json');
 
   promptInfo('install dependence packages');
 
@@ -320,7 +328,7 @@ function createLernaProject(name) {
   createCommitlintConfigFile();
   createBabelConfigFile();
   createNcuConfigFile();
-  createPackagesFolder();
+  createNpmConfigFile();
   createDevelopFolder();
   createHusky();
   createVscode();
