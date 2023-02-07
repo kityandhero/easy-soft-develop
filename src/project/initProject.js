@@ -206,13 +206,13 @@ function createNcuConfigFile() {
 
 function createNpmConfigFile() {
   let result = writeFileSync(
-    `./.npmrc.json`,
+    `./.npmrc`,
     `# npm config
 auto-install-peers=true`,
   );
 
   if (result) {
-    promptSuccess(`step *: create .npmrc.json success`);
+    promptSuccess(`step *: create .npmrc success`);
   }
 }
 
