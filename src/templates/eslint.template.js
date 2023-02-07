@@ -51,7 +51,13 @@ const rules = {
 
 module.exports = {
   generalConfig: {
-    extends: ['prettier', 'plugin:unicorn/recommended', 'plugin:promise/recommended'],
+    extends: [
+      'eslint:recommended',
+      'plugin:react/recommended',
+      'plugin:unicorn/recommended',
+      'plugin:promise/recommended',
+      'prettier',
+    ],
     env: { es6: true },
     plugins: ['unicorn', 'simple-import-sort', 'import', 'prettier'],
     parser: '@babel/eslint-parser',
