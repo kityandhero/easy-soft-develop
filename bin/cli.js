@@ -49,7 +49,10 @@ program
 program
   .command('commit-refresh')
   .description('update a flag file when commit')
-  .option('--fileName <number>', 'flag file name, default is "commit.flag.json"')
+  .option(
+    '--fileName <number>',
+    'flag file name, default is "commit.flag.json"',
+  )
   .option('--relativeFolder <bool>', 'the folder flag file in it')
   .action((a, o) => {
     commitRefresh.run(a, o);

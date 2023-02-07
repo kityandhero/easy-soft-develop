@@ -1,5 +1,10 @@
 const { exec } = require('../tools/shell');
-const { promptNewLine, promptInfo, promptSuccess, promptError } = require('./meta');
+const {
+  promptNewLine,
+  promptInfo,
+  promptSuccess,
+  promptError,
+} = require('./meta');
 const { loopPackage } = require('./package.tools');
 
 function adjustMainPackageJson(command) {

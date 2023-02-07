@@ -45,7 +45,8 @@
     "test:createPackageCheckAllVersionScriptFile": "node ./test/createPackageCheckAllVersionScriptFile.test.js",
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
     "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
-    "test:inner:assignObject": "node ./test/assignObject.test.js"
+    "test:inner:assignObject": "node ./test/assignObject.test.js",
+    "z:prettier:format:all": "npx prettier --write ."
   },
   "dependencies": {},
   "devDependencies": {

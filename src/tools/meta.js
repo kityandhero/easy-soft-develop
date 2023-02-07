@@ -63,7 +63,12 @@ function writeFileSync(path, content, options = { autoCreate: false }) {
 }
 
 function checkStringIsEmpty(v) {
-  v = ((v || null) == null ? '' : toString(v)).trim().replace(/\t/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/\s*/g, '');
+  v = ((v || null) == null ? '' : toString(v))
+    .trim()
+    .replace(/\t/g, ' ')
+    .replace(/\r/g, ' ')
+    .replace(/\n/g, ' ')
+    .replace(/\s*/g, '');
 
   while (v.indexOf('  ') >= 0) {
     v = v.replace(/ {2}/g, ' ');

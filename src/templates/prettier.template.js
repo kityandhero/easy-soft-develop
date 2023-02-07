@@ -22,9 +22,9 @@ module.exports = {
     ],
   },
 };
-`
+`;
 
-const content=`/* eslint-disable import/no-commonjs */
+const content = `/* eslint-disable import/no-commonjs */
 
 const mainContent = \`/* eslint-disable import/no-commonjs */
 let { generalConfig } = require('./develop/config/prettier/config');
@@ -42,7 +42,7 @@ module.exports = {
   mainContent,
   packageContent,
 };
-`
+`;
 
 const ignore = `/* eslint-disable import/no-commonjs */
 
@@ -102,6 +102,6 @@ LICENSE
 module.exports = {
   content,
 };
-`
+`;
 
 module.exports = { ignore, content, config };

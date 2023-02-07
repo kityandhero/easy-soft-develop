@@ -1,5 +1,13 @@
 const { createDevelopScriptFiles } = require('./develop.assist');
-const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync, resolvePath, promptNewLine } = require('./meta');
+const {
+  promptSuccess,
+  writeFileSync,
+  assignObject,
+  readJsonFileSync,
+  writeJsonFileSync,
+  resolvePath,
+  promptNewLine,
+} = require('./meta');
 const { globalScript } = require('./package.script');
 
 const { loopPackage } = require('./package.tools');
@@ -91,7 +99,12 @@ function adjustChildrenPackageJson({ scripts }) {
   });
 }
 
-function configEnvironment({ mainFileContentList = [], packageFileContentList = [], mainScripts = {}, childScripts = {} }) {
+function configEnvironment({
+  mainFileContentList = [],
+  packageFileContentList = [],
+  mainScripts = {},
+  childScripts = {},
+}) {
   createDevelopScriptFiles();
 
   createMainFile(mainFileContentList || []);

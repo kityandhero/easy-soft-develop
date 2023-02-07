@@ -1,14 +1,36 @@
-const { childPackage, mainPackage, customPackage } = require('../templates/package.template');
-const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync, promptNewLine, mkdirRelativeSync } = require('./meta');
+const {
+  childPackage,
+  mainPackage,
+  customPackage,
+} = require('../templates/package.template');
+const {
+  promptSuccess,
+  promptInfo,
+  promptError,
+  resolvePath,
+  mkdirSync,
+  writeFileSync,
+  promptNewLine,
+  mkdirRelativeSync,
+} = require('./meta');
 
-function createScriptFile(fileName, content, currentDir = '.', autoCreate = false) {
+function createScriptFile(
+  fileName,
+  content,
+  currentDir = '.',
+  autoCreate = false,
+) {
   const filePath = resolvePath(currentDir);
 
   mkdirSync(`${filePath}/develop/assists/`);
 
-  const result = writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
-    autoCreate: !!autoCreate,
-  });
+  const result = writeFileSync(
+    `${filePath}/develop/assists/${fileName}`,
+    content,
+    {
+      autoCreate: !!autoCreate,
+    },
+  );
 
   if (result) {
     promptSuccess(`${fileName} create success`);
@@ -43,7 +65,12 @@ updateSpecialPackageVersion(packageList);
 `;
 
   try {
-    createScriptFile('package.update.special.version.js', content, currentDir, false);
+    createScriptFile(
+      'package.update.special.version.js',
+      content,
+      currentDir,
+      false,
+    );
   } catch (error) {
     promptError(error);
   }
@@ -60,7 +87,12 @@ installGlobalDevDependencePackages(packageList);
 `;
 
   try {
-    createScriptFile('install.global.dev.dependence.js', content, currentDir, false);
+    createScriptFile(
+      'install.global.dev.dependence.js',
+      content,
+      currentDir,
+      false,
+    );
   } catch (error) {
     promptError(error);
   }
@@ -198,18 +230,35 @@ configEnvironment({
   //#region package.json
 
   mkdirRelativeSync(`./develop/config/package/template`);
-  writeFileSync(`./develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
-  writeFileSync(`./develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
+  writeFileSync(
+    `./develop/config/package/template/children.content.js`,
+    childPackage,
+    { autoCreate: true },
+  );
+  writeFileSync(
+    `./develop/config/package/template/main.content.js`,
+    mainPackage,
+    { autoCreate: true },
+  );
 
   mkdirRelativeSync(`./develop/config/package/custom`);
-  writeFileSync(`./develop/config/package/custom/children.content.js`, customPackage, { autoCreate: false });
-  writeFileSync(`./develop/config/package/custom/main.content.js`, customPackage, { autoCreate: false });
+  writeFileSync(
+    `./develop/config/package/custom/children.content.js`,
+    customPackage,
+    { autoCreate: false },
+  );
+  writeFileSync(
+    `./develop/config/package/custom/main.content.js`,
+    customPackage,
+    { autoCreate: false },
+  );
 
   //#endregion
 }
 
 function createDevelopScriptFiles(currentDir = '.') {
-  const waitLog = 'develop assist script files will update, please wait a moment';
+  const waitLog =
+    'develop assist script files will update, please wait a moment';
 
   promptInfo(waitLog);
 

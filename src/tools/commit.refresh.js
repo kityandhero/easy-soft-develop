@@ -1,12 +1,24 @@
-const { checkStringIsEmpty, resolvePath, writeFileSync, mkdirSync, promptSuccess } = require('./meta');
+const {
+  checkStringIsEmpty,
+  resolvePath,
+  writeFileSync,
+  mkdirSync,
+  promptSuccess,
+} = require('./meta');
 
 function commitRefresh(fileName = '', relativeFolder = '') {
-  const fileNameAdjust = checkStringIsEmpty(fileName) ? 'commit.flag.json' : fileName;
-  const relativeFolderAdjust = checkStringIsEmpty(relativeFolder) ? 'develop/flags' : relativeFolder;
+  const fileNameAdjust = checkStringIsEmpty(fileName)
+    ? 'commit.flag.json'
+    : fileName;
+  const relativeFolderAdjust = checkStringIsEmpty(relativeFolder)
+    ? 'develop/flags'
+    : relativeFolder;
 
   const now = new Date();
 
-  const datetime = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+  const datetime = `${now.getFullYear()}-${
+    now.getMonth() + 1
+  }-${now.getDate()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
   let content = JSON.stringify({
     datetime: datetime,

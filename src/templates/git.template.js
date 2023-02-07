@@ -11,7 +11,7 @@ const content = \`*.js eol=lf
 module.exports = {
   content,
 };
-`
+`;
 
 const ignore = `/* eslint-disable import/no-commonjs */
 
@@ -46,6 +46,6 @@ pnpm-lock.yaml
 module.exports = {
   content,
 };
-`
+`;
 
 module.exports = { attribute, ignore };

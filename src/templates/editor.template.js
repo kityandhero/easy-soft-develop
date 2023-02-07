@@ -19,6 +19,6 @@ indent_style = tab
 module.exports = {
   content,
 };
-`
+`;
 
 module.exports = { content };

@@ -47,11 +47,25 @@ function getGlobalPackages() {
     'eslint-plugin-unicorn',
   ]);
 
-  packages = packages.concat(['prettier', 'prettier-plugin-organize-imports', 'prettier-plugin-packagejson']);
+  packages = packages.concat([
+    'prettier',
+    'prettier-plugin-organize-imports',
+    'prettier-plugin-packagejson',
+  ]);
 
-  packages = packages.concat(['stylelint', 'stylelint-config-prettier', 'stylelint-config-standard']);
+  packages = packages.concat([
+    'stylelint',
+    'stylelint-config-prettier',
+    'stylelint-config-standard',
+  ]);
 
-  packages = packages.concat('rimraf', 'lint-staged', 'husky', 'shelljs', 'terminal-kit');
+  packages = packages.concat(
+    'rimraf',
+    'lint-staged',
+    'husky',
+    'shelljs',
+    'terminal-kit',
+  );
 
   packages = packages.concat('easy-soft-develop');
 
