@@ -1,27 +1,87 @@
-const { promptSuccess, promptInfo } = require('./meta');
+const {
+  promptSuccess,
+  promptInfo,
+  readJsonFileSync,
+  assignObject,
+  isArray,
+  checkStringIsEmpty,
+  writeJsonFileSync,
+} = require('./meta');
 const { loopPackage } = require('./package.tools');
+const { updateAllPackageVersion } = require('./package.update');
+const { prettierAllPackageJson } = require('./prettier.package.json');
 const { exec } = require('./shell');
 
-function adjustMainPackageJson(command) {
-  exec(command);
+function buildPackageObject(packageList) {
+  if (!isArray(packageList) || packageList.length <= 0) {
+    return {};
+  }
+
+  const o = {};
+
+  packageList.forEach((one) => {
+    if (checkStringIsEmpty(one)) {
+      return;
+    }
+
+    o[one] = '^0.0.1';
+  });
+
+  return o;
 }
 
-function adjustChildrenPackageJson(command) {
-  loopPackage(({ name }) => {
-    exec(`cd ./packages/${name} && ${command}`);
+function adjustMainPackageJson(packageList) {
+  if (!isArray(packageList) || packageList.length <= 0) {
+    return;
+  }
+
+  const o = buildPackageObject(packageList);
+
+  const packageJson = readJsonFileSync('./package.json');
+
+  packageJson.devDependencies = assignObject(
+    o,
+    packageJson.devDependencies || {},
+  );
+
+  writeJsonFileSync('./package.json', packageJson, { autoCreate: true });
+}
+
+function adjustChildrenPackageJson(packageList) {
+  if (!isArray(packageList) || packageList.length <= 0) {
+    return;
+  }
+
+  const o = buildPackageObject(packageList);
+
+  loopPackage(({ relativePath }) => {
+    const packageJson = readJsonFileSync(`${relativePath}/package.json`);
+
+    packageJson.devDependencies = assignObject(
+      o,
+      packageJson.devDependencies || {},
+    );
+
+    writeJsonFileSync(`${relativePath}/package.json`, packageJson, {
+      autoCreate: true,
+    });
   });
 }
 
 function installGlobalDevDependencePackages(packageList) {
   const packages = [].concat(packageList);
 
-  const command = `pnpm install -save-dev ${packages.join(' ')}`;
-
   promptInfo(`${packages.join()} will install`);
 
-  adjustChildrenPackageJson(command);
+  adjustChildrenPackageJson(packageList);
 
-  adjustMainPackageJson(command);
+  adjustMainPackageJson(packageList);
+
+  updateAllPackageVersion();
+
+  prettierAllPackageJson();
+
+  exec('npm run z:install');
 
   promptSuccess('install success');
 }

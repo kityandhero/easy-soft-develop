@@ -12,6 +12,10 @@ function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
+function isArray(value) {
+  return Array.isArray(value);
+}
+
 function promptNewLine() {
   console.log('');
 }
@@ -156,6 +160,7 @@ module.exports = {
   promptInfo,
   promptError,
   isObject,
+  isArray,
   assignObject,
   mkdirSync,
   mkdirRelativeSync,
