@@ -1,4 +1,5 @@
-const attribute = `/* eslint-disable import/no-commonjs */
+const attribute = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = \`*.js eol=lf
 *.jsx eol=lf
@@ -13,7 +14,8 @@ module.exports = {
 };
 `;
 
-const ignore = `/* eslint-disable import/no-commonjs */
+const ignore = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 

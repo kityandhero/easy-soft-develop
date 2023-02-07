@@ -1,4 +1,5 @@
-const config = `/* eslint-disable import/no-commonjs */
+const config = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 module.exports = {
   generalConfig: {
@@ -24,15 +25,20 @@ module.exports = {
 };
 `;
 
-const content = `/* eslint-disable import/no-commonjs */
+const content = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
-const mainContent = \`/* eslint-disable import/no-commonjs */
+const mainContent = \`/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+
 let { generalConfig } = require('./develop/config/prettier/config');
 
 module.exports = generalConfig;
 \`;
 
-const packageContent = \`/* eslint-disable import/no-commonjs */
+const packageContent = \`/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+
 var { generalConfig } = require("../../develop/config/prettier/config");
 
 module.exports = generalConfig;
@@ -44,7 +50,8 @@ module.exports = {
 };
 `;
 
-const ignore = `/* eslint-disable import/no-commonjs */
+const ignore = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = \`# ignore dir
 **/node_modules/**

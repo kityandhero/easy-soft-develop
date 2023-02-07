@@ -1,4 +1,5 @@
-const ignore = `/* eslint-disable import/no-commonjs */
+const ignore = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = \`**/public
 **/lib
@@ -21,15 +22,20 @@ module.exports = {
 };
 `;
 
-const content = `/* eslint-disable import/no-commonjs */
+const content = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
-const mainContent = \`/* eslint-disable import/no-commonjs */
+const mainContent = \`/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+
 let { generalConfig } = require('./develop/config/eslint/config');
 
 module.exports = generalConfig;
 \`;
 
-const packageContent = \`/* eslint-disable import/no-commonjs */
+const packageContent = \`/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
+
 let { generalConfig } = require('../../develop/config/eslint/config');
 
 module.exports = generalConfig;
@@ -40,7 +46,8 @@ module.exports = {
   packageContent,
 };`;
 
-const config = `/* eslint-disable import/no-commonjs */
+const config = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 let { generalRules, sortRules } = require('../rules');
 
@@ -90,7 +97,8 @@ module.exports = {
 };
 `;
 
-const rule = `/* eslint-disable import/no-commonjs */
+const rule = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 module.exports = {
   generalRules: {

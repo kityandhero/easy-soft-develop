@@ -1,4 +1,5 @@
-const childPackage = `/* eslint-disable import/no-commonjs */
+const childPackage = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const lintScript = {
   precommit: 'npm run z:lint:staged',
@@ -34,7 +35,8 @@ module.exports = {
 };
 `;
 
-const mainPackage = `/* eslint-disable import/no-commonjs */
+const mainPackage = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
@@ -135,7 +137,8 @@ module.exports = {
 };
 `;
 
-const customPackage = `/* eslint-disable import/no-commonjs */
+const customPackage = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const scripts = {};
 

@@ -1,4 +1,5 @@
-const content = `/* eslint-disable import/no-commonjs */
+const content = `/* eslint-disable no-undef */
+/* eslint-disable unicorn/prefer-module */
 
 const content = \`{
   "*.{md,json}": ["npx prettier --cache --write"],
