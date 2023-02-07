@@ -7,8 +7,9 @@ const {
   checkStringIsEmpty,
   writeJsonFileSync,
 } = require('./meta');
+const { getGlobalPackages } = require('./package.script');
 const { loopPackage } = require('./package.tools');
-const { updateAllPackageVersion } = require('./package.update');
+const { updateSpecialPackageVersion } = require('./package.update');
 const { prettierAllPackageJson } = require('./prettier.package.json');
 const { exec } = require('./shell');
 
@@ -69,17 +70,17 @@ function adjustChildrenPackageJson(packageList) {
 }
 
 function installGlobalDevDependencePackages(packageList) {
-  const packages = [].concat(packageList);
+  const packages = getGlobalPackages().concat(packageList);
 
   promptInfo(`${packages.join()} will install`);
 
-  adjustChildrenPackageJson(packageList);
+  adjustChildrenPackageJson(packages);
 
-  adjustMainPackageJson(packageList);
-
-  updateAllPackageVersion();
+  adjustMainPackageJson(packages);
 
   prettierAllPackageJson();
+
+  updateSpecialPackageVersion(packages);
 
   exec('npm run z:install');
 
