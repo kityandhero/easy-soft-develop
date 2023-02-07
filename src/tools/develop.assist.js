@@ -46,11 +46,11 @@ updateSpecialPackageVersion(packageList);
 function createInstallGlobalDevDependenceScriptFile(currentDir = '.') {
   const content = `/* eslint-disable import/no-commonjs */
 
-const { initGlobalDevDependencePackages } = require('easy-soft-develop');
+const { installGlobalDevDependencePackages } = require('easy-soft-develop');
 
 const packageList = [];
 
-initGlobalDevDependencePackages(packageList);
+installGlobalDevDependencePackages(packageList);
 `;
 
   try {

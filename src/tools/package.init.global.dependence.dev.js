@@ -2,7 +2,7 @@ const { promptSuccess, promptInfo } = require('./meta');
 const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
 
-function initGlobalDevDependencePackages(packageList) {
+function installGlobalDevDependencePackages(packageList) {
   const packages = [].concat(packageList);
 
   const command = `pnpm install -save-dev ${packages.join(' ')}`;
@@ -26,4 +26,4 @@ function initGlobalDevDependencePackages(packageList) {
   promptSuccess('install success');
 }
 
-module.exports = { initGlobalDevDependencePackages };
+module.exports = { installGlobalDevDependencePackages };

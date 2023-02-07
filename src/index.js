@@ -4,7 +4,7 @@ const { createCleanScriptFile, createPackageCheckSpecialVersionScriptFile, creat
 const { configEnvironment } = require('./tools/config.environment');
 const { prettierAllPackageJson, prettierCurrentPackageJson } = require('./tools/prettier.package.json');
 const { prettierAllFile, prettierChangeFile } = require('./tools/prettier.file');
-const { initGlobalDevDependencePackages } = require('./tools/package.init.global.dependence.dev');
+const { installGlobalDevDependencePackages } = require('./tools/package.init.global.dependence.dev');
 const { loopPackage } = require('./tools/package.tools');
 const { checkAllPackageVersion, updateSpecialPackageVersion, updateAllPackageVersion } = require('./tools/package.update');
 const { exec } = require('./tools/shell');
@@ -14,7 +14,7 @@ module.exports = {
   clean,
   commitRefresh,
   configEnvironment,
-  initGlobalDevDependencePackages,
+  installGlobalDevDependencePackages,
   loopPackage,
   checkAllPackageVersion,
   updateSpecialPackageVersion,
