@@ -275,8 +275,6 @@ function configEnvironment() {
 
   createDevelopScriptFiles(`.`);
 
-  promptNewLine();
-
   promptInfo('add global dev packages');
 
   exec('npx ncu -u --packageFile ./package.json');
@@ -293,8 +291,9 @@ function configEnvironment() {
 
   exec('git init -b main');
 
-  promptInfo('husky install');
   promptNewLine();
+
+  promptInfo('husky install');
 
   exec('npx husky install');
 }
