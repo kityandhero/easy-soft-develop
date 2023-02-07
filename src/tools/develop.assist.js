@@ -112,8 +112,10 @@ const editorFile = require('../config/editor/template/content');
 const editorAttributesFile = require('../config/git/template/attributes.content');
 const editorIgnoreFile = require('../config/git/template/ignore.content');
 const lintStagedFile = require('../config/lintStaged/template/content');
-const mainPackageFile = require('../config/package/template/main.content');
-const childrenPackageFile = require('../config/package/template/children.content');
+const mainNecessaryPackageFile = require('../config/package/template/main.content');
+const childrenNecessaryPackageFile = require('../config/package/template/children.content');
+const mainCustomPackageFile = require('../config/package/custom/main.content');
+const childrenCustomPackageFile = require('../config/package/custom/children.content');
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;
@@ -216,8 +218,14 @@ const packageFileContentList = [
 configEnvironment({
   mainFileContentList: mainFileContentList,
   packageFileContentList: packageFileContentList,
-  mainScripts: mainPackageFile,
-  childScripts: childrenPackageFile,
+  mainScripts: {
+    ...mainCustomPackageFile,
+    ...mainNecessaryPackageFile
+  },
+  childScripts: {
+    ...childrenCustomPackageFile,
+    ...childrenNecessaryPackageFile
+  },
 });
 `;
 
