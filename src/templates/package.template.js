@@ -49,6 +49,7 @@ const toolsScript = {
   postinstall: 'npm run z:initial:environment && echo do other postinstall work with here',
   'z:show:info':
     'echo node version && node --version && echo npm version && npm --version && echo ------------ && npx lerna ls -a -l',
+  "z:show:package": "npx lerna ls -a -l",
   "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
   "z:create:assist-scripts": "npx easy-soft-develop create-assist-scripts",
 };
