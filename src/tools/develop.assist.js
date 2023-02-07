@@ -204,6 +204,7 @@ function createDevelopScriptFiles(currentDir = '.') {
   const successLog = 'develop assist script files update finish';
 
   promptInfo(successLog);
+  promptNewLine();
 }
 
 module.exports = {

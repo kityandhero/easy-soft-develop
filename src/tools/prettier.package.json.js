@@ -1,18 +1,16 @@
-const { promptInfo } = require('./meta');
+const { promptInfo, promptNewLine } = require('./meta');
 const { exec } = require('./shell');
 
 function prettierAllPackageJson() {
-  console.log('');
   promptInfo('will format all package.json');
-  console.log('');
+  promptNewLine();
 
   exec('npx prettier --write ./**/package.json');
 }
 
 function prettierCurrentPackageJson() {
-  console.log('');
   promptInfo('will format current package.json');
-  console.log('');
+  promptNewLine();
 
   exec('npx prettier --write ./package.json');
 }
