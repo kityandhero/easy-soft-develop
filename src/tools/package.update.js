@@ -35,7 +35,7 @@ function updateAllPackageVersion() {
 
   adjustChildrenPackageJson(ncuCommand);
 
-  promptSuccess('update success');
+  promptSuccess('update success, please exec install');
 }
 
 function checkAllPackageVersion() {
@@ -47,7 +47,7 @@ function checkAllPackageVersion() {
 
   adjustChildrenPackageJson(ncuCommand);
 
-  promptSuccess('update success');
+  promptSuccess('update success, please exec install');
 }
 
 module.exports = {
