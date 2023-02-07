@@ -7,6 +7,7 @@ const checkAllPackageVersion = require('../src/cliCollection/check-all-package-v
 const updateAllPackageVersion = require('../src/cliCollection/update-all-package-version');
 const sleep = require('../src/cliCollection/sleep');
 const commitRefresh = require('../src/cliCollection/commit-refresh');
+const createLernaProject = require('../src/cliCollection/create-lerna-project');
 
 const program = new Command();
 
@@ -51,6 +52,14 @@ program
   .option('--relativeFolder <bool>', 'the folder flag file in it')
   .action((a, o) => {
     commitRefresh.run(a, o);
+  });
+
+program
+  .command('create-lerna-project')
+  .description('create a lerna project')
+  .option('--name <string>', 'project name')
+  .action((a, o) => {
+    createLernaProject.run(a, o);
   });
 
 program.parse(process.argv);

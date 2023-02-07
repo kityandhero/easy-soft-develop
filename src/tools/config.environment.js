@@ -1,10 +1,9 @@
 /* eslint-disable promise/no-nesting */
 /* eslint-disable promise/no-promise-in-callback */
 
-const fsExtra = require('fs-extra');
-const { resolve } = require('path');
 const { createDevelopScriptFiles } = require('./develop.assist');
-const { promptSuccess, writeFileSync, assignObject } = require('./meta');
+const { promptSuccess, writeFileSync, assignObject, readJsonFileSync, writeJsonFileSync } = require('./meta');
+const { globalScript } = require('./package.script');
 
 const { loopPackage } = require('./package.tools');
 const { prettierAllPackageJson } = require('./prettier.package.json');
@@ -58,37 +57,11 @@ function createPackageFile(fileWithContentCollection) {
 function adjustMainPackageJson({ scripts }) {
   const mainProjectPath = resolve(`./package.json`);
 
-  const packageJson = fsExtra.readJsonSync(mainProjectPath);
-
-  const globalScript = {
-    prepare: 'husky install',
-    postinstall: 'npm run z:initial:environment',
-    commitlint: 'npx commitlint --edit',
-    precz: 'npm run z:commit:refresh && git stage -A',
-    cz: 'cz',
-    postcz: 'git push',
-    'z:initial:environment': 'node ./develop/assists/config.environment.js',
-    'z:prettier:format:all': 'npx prettier --write .',
-    'z:prettier:format:change': 'npx prettier --cache --write .',
-    'z:prettier:package.json:all': 'npx prettier --write ./**/package.json',
-    'z:prettier:package.json:current': 'npx prettier --write ./package.json',
-    'z:change-nrm-local': 'nrm use local',
-    'z:change-nrm-npm': 'nrm use npm',
-    'z:install': 'echo please set install cmd with here',
-    'z:sleep': 'npx easy-soft-develop sleep --second 2 --showInfo false',
-    'z:check-all-package-version': 'npx easy-soft-develop check-all-package-version',
-    'z:update-all-package-version': 'npx easy-soft-develop update-all-package-version',
-    'postz:update-all-package-version': 'npm run z:install',
-    'z:update-special-package-version': 'node ./develop/assists/package.update.special.version.js',
-    'postz:update-special-package-version': 'npm run z:install',
-    'z:clean': 'node ./develop/assists/clean.js',
-    'z:commit:refresh': 'npx easy-soft-develop commit-refresh',
-    'z:create:assist:scripts': 'npx easy-soft-develop create-assist-scripts',
-  };
+  const packageJson = readJsonFileSync(mainProjectPath);
 
   packageJson.scripts = assignObject(globalScript, packageJson.scripts || {}, scripts);
 
-  fsExtra.writeJsonSync(mainProjectPath, packageJson);
+  writeJsonFileSync(mainProjectPath, packageJson);
 
   promptSuccess('adjust main package.json success');
 }
@@ -99,11 +72,11 @@ function adjustChildrenPackageJson({ scripts }) {
 
     const childPackageJsonPath = `${itemPath}/package.json`;
 
-    const packageJson = fsExtra.readJsonSync(childPackageJsonPath);
+    const packageJson = readJsonFileSync(childPackageJsonPath);
 
     packageJson.scripts = assignObject(packageJson.scripts || {}, scripts);
 
-    fsExtra.writeJsonSync(childPackageJsonPath, packageJson);
+    writeJsonFileSync(childPackageJsonPath, packageJson);
 
     promptSuccess('adjust child package.json success');
   });

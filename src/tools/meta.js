@@ -1,5 +1,7 @@
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const term = require('terminal-kit').terminal;
+const { resolve } = require('path');
 
 //检测文件或者文件夹存在 nodeJS
 function fileExistsSync(path) {
@@ -37,6 +39,11 @@ function promptInfo(message) {
   console.log('');
 }
 
+function promptError(message) {
+  term.red(`${message}\r`);
+  console.log('');
+}
+
 function assignObject(source, mergeData) {
   let result = source;
 
@@ -63,12 +70,60 @@ function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
+function mkdirSync(path) {
+  if (checkStringIsEmpty(path)) {
+    promptError('path disallow empty');
+
+    return;
+  }
+
+  fs.mkdirSync(path, { recursive: true });
+}
+
+function mkdirRelativeSync(path) {
+  const currentPath = resolve('./');
+
+  if (checkStringIsEmpty(path)) {
+    promptError('relative path disallow empty');
+
+    return;
+  }
+
+  fs.mkdirSync(`${currentPath}/${path}`, { recursive: true });
+}
+
+function writeJsonFileSync(path, json) {
+  fsExtra.writeJsonSync(path, json);
+}
+
+function writeJsonFileRelativeSync(relativePath, json) {
+  const path = resolve(relativePath);
+
+  writeJsonFileSync(path, json);
+}
+
+function readJsonFileSync(path) {
+  return fsExtra.readJsonSync(path);
+}
+
+function readJsonFileRelativeSync(relativePath) {
+  return readJsonFileSync(resolve(relativePath));
+}
+
 module.exports = {
   fileExistsSync,
   writeFileSync,
   checkStringIsEmpty,
   promptSuccess,
   promptInfo,
+  promptError,
   isObject,
   assignObject,
+  mkdirSync,
+  mkdirRelativeSync,
+  readJsonFileSync,
+  readJsonFileRelativeSync,
+  writeJsonFileSync,
+  writeJsonFileRelativeSync,
+  resolve,
 };

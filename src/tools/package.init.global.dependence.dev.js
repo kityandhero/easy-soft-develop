@@ -3,7 +3,9 @@ const { loopPackage } = require('./package.tools');
 const { exec } = require('./shell');
 
 function initGlobalDevDependencePackages(packageList) {
-  const command = `pnpm install -save-dev ${packageList.join(' ')}`;
+  const packages = [].concat(packageList);
+
+  const command = `pnpm install -save-dev ${packages.join(' ')}`;
 
   function adjustMainPackageJson() {
     exec(command);
@@ -15,7 +17,7 @@ function initGlobalDevDependencePackages(packageList) {
     });
   }
 
-  promptInfo(`${packageList.join()} will install`);
+  promptInfo(`${packages.join()} will install`);
 
   adjustChildrenPackageJson();
 

@@ -4,6 +4,7 @@ const { exec } = require('./shell');
 function prettierAllPackageJson() {
   console.log('');
   promptInfo('will format all package.json');
+  console.log('');
 
   exec('npx prettier --write ./**/package.json');
 }
@@ -11,6 +12,7 @@ function prettierAllPackageJson() {
 function prettierCurrentPackageJson() {
   console.log('');
   promptInfo('will format current package.json');
+  console.log('');
 
   exec('npx prettier --write ./package.json');
 }
