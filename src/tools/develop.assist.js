@@ -37,7 +37,7 @@ updateSpecialPackageVersion(packageList);
 `;
 
   try {
-    createScriptFile('package.update.special.version.js', content, currentDir, true);
+    createScriptFile('package.update.special.version.js', content, currentDir, false);
   } catch (error) {
     promptError(error);
   }
@@ -54,7 +54,7 @@ installGlobalDevDependencePackages(packageList);
 `;
 
   try {
-    createScriptFile('install.global.dev.dependence.js', content, currentDir, true);
+    createScriptFile('install.global.dev.dependence.js', content, currentDir, false);
   } catch (error) {
     promptError(error);
   }
