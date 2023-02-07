@@ -9,7 +9,12 @@ function createScriptFile(fileName, content, currentDir = '.', autoCreate = fals
     autoCreate: !!autoCreate,
   });
 
-  promptSuccess(`${fileName} create success`);
+  if (result) {
+    promptSuccess(`${fileName} create success`);
+  } else {
+    promptInfo(`${fileName} already exist, ignore create`);
+  }
+
   promptNewLine();
 
   return result;
