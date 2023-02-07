@@ -1,14 +1,12 @@
-let fs = require('fs');
+const { promptSuccess, promptInfo, promptError, resolvePath, mkdirSync, writeFileSync } = require('./meta');
 
-const { promptSuccess, promptInfo, promptError, resolvePath } = require('./meta');
-
-function createScriptFile(fileName, content, flag = 'wx+', currentDir = '.') {
+function createScriptFile(fileName, content, currentDir = '.', autoCreate = false) {
   const filePath = resolvePath(currentDir);
 
-  fs.mkdirSync(`${filePath}/develop/assists/`, { recursive: true });
+  mkdirSync(`${filePath}/develop/assists/`);
 
-  fs.writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
-    flag: flag,
+  writeFileSync(`${filePath}/develop/assists/${fileName}`, content, {
+    autoCreate: !!autoCreate,
   });
 
   promptSuccess(`${fileName} update success`);
@@ -22,7 +20,7 @@ const { clean } = require('easy-soft-develop');
 clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
 `;
 
-  createScriptFile('clean.js', content, 'w+', currentDir);
+  createScriptFile('clean.js', content, currentDir, false);
 }
 
 function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
@@ -36,7 +34,7 @@ updateSpecialPackageVersion(packageList);
 `;
 
   try {
-    createScriptFile('package.update.special.version.js', content, 'wx+', currentDir);
+    createScriptFile('package.update.special.version.js', content, currentDir, true);
   } catch (error) {
     promptError(error);
   }
@@ -53,7 +51,7 @@ initGlobalDevDependencePackages(packageList);
 `;
 
   try {
-    createScriptFile('install.global.dev.dependence.js', content, 'wx+', currentDir);
+    createScriptFile('install.global.dev.dependence.js', content, currentDir, true);
   } catch (error) {
     promptError(error);
   }
@@ -183,7 +181,7 @@ configEnvironment({
 `;
 
   try {
-    createScriptFile('config.environment.js', content, 'wx+', currentDir);
+    createScriptFile('config.environment.js', content, currentDir, true);
   } catch (error) {
     promptError(error);
   }

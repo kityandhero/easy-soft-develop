@@ -12,30 +12,6 @@ function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
-//检测文件或者文件夹存在 nodeJS
-function fileExistsSync(path) {
-  try {
-    fs.accessSync(path, fs.F_OK);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
-
-function writeFileSync(path, content) {
-  fs.writeFileSync(path, content);
-}
-
-function checkStringIsEmpty(v) {
-  v = ((v || null) == null ? '' : toString(v)).trim().replace(/\t/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/\s*/g, '');
-
-  while (v.indexOf('  ') >= 0) {
-    v = v.replace(/ {2}/g, ' ');
-  }
-
-  return !v;
-}
-
 function promptNewLine() {
   console.log('');
 }
@@ -56,6 +32,42 @@ function promptError(error) {
   console.error(error);
 
   promptNewLine();
+}
+
+//检测文件或者文件夹存在 nodeJS
+function fileExistsSync(path) {
+  try {
+    fs.accessSync(path, fs.F_OK);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+function writeFileSync(path, content, options = { autoCreate: false }) {
+  const { autoCreate } = options;
+
+  if (!autoCreate) {
+    if (fileExistsSync(path)) {
+      promptInfo(`${path} exist, ignore create`);
+
+      return;
+    }
+
+    fs.writeFileSync(path, content, { flag: 'wx' });
+  }
+
+  fs.writeFileSync(path, content, { flag: 'w' });
+}
+
+function checkStringIsEmpty(v) {
+  v = ((v || null) == null ? '' : toString(v)).trim().replace(/\t/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ').replace(/\s*/g, '');
+
+  while (v.indexOf('  ') >= 0) {
+    v = v.replace(/ {2}/g, ' ');
+  }
+
+  return !v;
 }
 
 function assignObject(source, mergeData) {

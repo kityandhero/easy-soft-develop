@@ -18,7 +18,7 @@ function commitRefresh(fileName = '', relativeFolder = '') {
 
   const scriptFilePath = `${filePath}/${relativeFolderAdjust}/${fileNameAdjust}`;
 
-  writeFileSync(scriptFilePath, content, { flag: 'w' });
+  writeFileSync(scriptFilePath, content);
 
   const log = `${fileNameAdjust} refresh success in folder "./${relativeFolderAdjust}/"`;
 

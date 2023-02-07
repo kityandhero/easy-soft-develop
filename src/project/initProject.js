@@ -49,7 +49,7 @@ function createPnpmWorkspaceFile(name) {
   const content = `packages:
   - 'packages/*'`;
 
-  writeFileSync(`./${name}/pnpm-workspace.yaml`, content);
+  writeFileSync(`./${name}/pnpm-workspace.yaml`, content, { autoCreate: true });
 
   promptSuccess(`step *: create pnpm-workspace.yaml success`);
 }
@@ -79,7 +79,7 @@ function createLernaConfigFile(name) {
   }
   `;
 
-  writeFileSync(`./${name}/lerna.json`, content);
+  writeFileSync(`./${name}/lerna.json`, content, { autoCreate: true });
 
   promptSuccess(`step *: create lerna.json success`);
 }
@@ -118,7 +118,7 @@ function createPackageJsonFile(name, projectName) {
 function createCommitlintConfigFile(name) {
   const content = commitlintConfigContent;
 
-  writeFileSync(`./${name}/commitlint.config.js`, content);
+  writeFileSync(`./${name}/commitlint.config.js`, content, { autoCreate: true });
 
   promptSuccess(`step *: create commitlint.config.js success`);
 }
@@ -126,7 +126,7 @@ function createCommitlintConfigFile(name) {
 function createBabelConfigFile(name) {
   const content = babelConfigContent;
 
-  writeFileSync(`./${name}/babel.config.js`, content);
+  writeFileSync(`./${name}/babel.config.js`, content, { autoCreate: true });
 
   promptSuccess(`step *: create babel.config.js success`);
 }
@@ -149,64 +149,64 @@ function createDevelopFolder(name) {
   mkdirRelativeSync(`./${name}/develop/config`);
 
   mkdirRelativeSync(`./${name}/develop/config/editor/template`);
-  writeFileSync(`./${name}/develop/config/editor/template/content.js`, editorContent);
+  writeFileSync(`./${name}/develop/config/editor/template/content.js`, editorContent, { autoCreate: true });
 
   //#region eslint
 
   mkdirRelativeSync(`./${name}/develop/config/eslint/template`);
-  writeFileSync(`./${name}/develop/config/eslint/template/content.js`, eslintContent);
-  writeFileSync(`./${name}/develop/config/eslint/template/ignore.content.js`, eslintIgnore);
+  writeFileSync(`./${name}/develop/config/eslint/template/content.js`, eslintContent, { autoCreate: true });
+  writeFileSync(`./${name}/develop/config/eslint/template/ignore.content.js`, eslintIgnore, { autoCreate: true });
 
   mkdirRelativeSync(`./${name}/develop/config/eslint/config`);
-  writeFileSync(`./${name}/develop/config/eslint/config/index.js`, eslintConfig);
+  writeFileSync(`./${name}/develop/config/eslint/config/index.js`, eslintConfig, { autoCreate: true });
 
   mkdirRelativeSync(`./${name}/develop/config/eslint/rules`);
-  writeFileSync(`./${name}/develop/config/eslint/rules/index.js`, eslintRule);
+  writeFileSync(`./${name}/develop/config/eslint/rules/index.js`, eslintRule, { autoCreate: true });
 
   //#endregion
 
   //#region git
 
   mkdirRelativeSync(`./${name}/develop/config/git/template`);
-  writeFileSync(`./${name}/develop/config/git/template/attributes.content.js`, gitAttribute);
-  writeFileSync(`./${name}/develop/config/git/template/ignore.content.js`, gitIgnore);
+  writeFileSync(`./${name}/develop/config/git/template/attributes.content.js`, gitAttribute, { autoCreate: true });
+  writeFileSync(`./${name}/develop/config/git/template/ignore.content.js`, gitIgnore, { autoCreate: true });
 
   //#endregion
 
   //#region lintStaged
 
   mkdirRelativeSync(`./${name}/develop/config/lintStaged/template`);
-  writeFileSync(`./${name}/develop/config/lintStaged/template/content.js`, lintStagedContent);
+  writeFileSync(`./${name}/develop/config/lintStaged/template/content.js`, lintStagedContent, { autoCreate: true });
 
   //#endregion
 
   //#region package.json
 
   mkdirRelativeSync(`./${name}/develop/config/package/template`);
-  writeFileSync(`./${name}/develop/config/package/template/children.content.js`, childPackage);
-  writeFileSync(`./${name}/develop/config/package/template/main.content.js`, mainPackage);
+  writeFileSync(`./${name}/develop/config/package/template/children.content.js`, childPackage, { autoCreate: true });
+  writeFileSync(`./${name}/develop/config/package/template/main.content.js`, mainPackage, { autoCreate: true });
 
   //#endregion
 
   //#region prettier
 
   mkdirRelativeSync(`./${name}/develop/config/prettier/template`);
-  writeFileSync(`./${name}/develop/config/prettier/template/ignore.content.js`, prettierIgnore);
-  writeFileSync(`./${name}/develop/config/prettier/template/content.js`, prettierContent);
+  writeFileSync(`./${name}/develop/config/prettier/template/ignore.content.js`, prettierIgnore, { autoCreate: true });
+  writeFileSync(`./${name}/develop/config/prettier/template/content.js`, prettierContent, { autoCreate: true });
 
   mkdirRelativeSync(`./${name}/develop/config/prettier/config`);
-  writeFileSync(`./${name}/develop/config/prettier/config/index.js`, prettierConfig);
+  writeFileSync(`./${name}/develop/config/prettier/config/index.js`, prettierConfig, { autoCreate: true });
 
   //#endregion
 
   //#region stylelint
 
   mkdirRelativeSync(`./${name}/develop/config/stylelint/template`);
-  writeFileSync(`./${name}/develop/config/stylelint/template/ignore.content.js`, stylelintIgnore);
-  writeFileSync(`./${name}/develop/config/stylelint/template/content.js`, stylelintContent);
+  writeFileSync(`./${name}/develop/config/stylelint/template/ignore.content.js`, stylelintIgnore, { autoCreate: true });
+  writeFileSync(`./${name}/develop/config/stylelint/template/content.js`, stylelintContent, { autoCreate: true });
 
   mkdirRelativeSync(`./${name}/develop/config/stylelint/config`);
-  writeFileSync(`./${name}/develop/config/stylelint/config/index.js`, stylelintConfig);
+  writeFileSync(`./${name}/develop/config/stylelint/config/index.js`, stylelintConfig, { autoCreate: true });
 
   //#endregion
 
@@ -224,7 +224,7 @@ function createHusky(name) {
 npx commitlint -e $HUSKY_GIT_PARAMS -V
 `;
 
-  writeFileSync(`./${name}/.husky/commit-msg`, commitMsg);
+  writeFileSync(`./${name}/.husky/commit-msg`, commitMsg, { autoCreate: true });
 
   const precommit = `#!/bin/sh
   . "$(dirname "$0")/_/husky.sh"
@@ -232,7 +232,7 @@ npx commitlint -e $HUSKY_GIT_PARAMS -V
   npx lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents
   `;
 
-  writeFileSync(`./${name}/.husky/pre-commit`, precommit);
+  writeFileSync(`./${name}/.husky/pre-commit`, precommit, { autoCreate: true });
 
   promptSuccess(`step *: create husky folder success`);
 }
@@ -249,7 +249,7 @@ function createVscode(name) {
     },
   };
 
-  writeJsonFileSync(`./${name}/.vscode/settings.json`, settingJson);
+  writeJsonFileSync(`./${name}/.vscode/settings.json`, settingJson, { autoCreate: true });
 }
 
 function configEnvironment(name) {
