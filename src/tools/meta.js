@@ -144,6 +144,8 @@ function writeFileWithOptionsSync({
   fileContent,
   coverFile = false,
 }) {
+
+
   return writeFileWithFolderAndNameSync(
     folderPath,
     fileName,

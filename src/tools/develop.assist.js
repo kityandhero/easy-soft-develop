@@ -1,7 +1,8 @@
 const {
-  childPackage,
-  mainPackage,
-  customPackage,
+  globalChildPackageFile,
+  globalMainPackageFile,
+  customChildPackageFile,
+  customMainPackageFile,
 } = require('../templates/package.template');
 const {
   promptSuccess,
@@ -11,7 +12,7 @@ const {
   mkdirSync,
   writeFileSync,
   promptNewLine,
-  mkdirRelativeSync,
+  writeFileWithOptionsSync,
 } = require('./meta');
 
 function createScriptFile(
@@ -111,7 +112,7 @@ const stylelintFile = require('../config/stylelint/template/content');
 const editorFile = require('../config/editor/template/content');
 const editorAttributesFile = require('../config/git/template/attributes.content');
 const editorIgnoreFile = require('../config/git/template/ignore.content');
-const lintStagedFile = require('../config/lintStaged/template/content');
+const lintStagedFile = require('../config/lint-staged/template/content');
 const mainNecessaryPackageFile = require('../config/package/template/main.content');
 const childrenNecessaryPackageFile = require('../config/package/template/children.content');
 const mainCustomPackageFile = require('../config/package/custom/main.content');
@@ -237,29 +238,13 @@ configEnvironment({
 
   //#region package.json
 
-  mkdirRelativeSync(`./develop/config/package/template`);
-  writeFileSync(
-    `./develop/config/package/template/children.content.js`,
-    childPackage,
-    { coverFile: true },
-  );
-  writeFileSync(
-    `./develop/config/package/template/main.content.js`,
-    mainPackage,
-    { coverFile: true },
-  );
+  writeFileWithOptionsSync(globalChildPackageFile);
 
-  mkdirRelativeSync(`./develop/config/package/custom`);
-  writeFileSync(
-    `./develop/config/package/custom/children.content.js`,
-    customPackage,
-    { coverFile: false },
-  );
-  writeFileSync(
-    `./develop/config/package/custom/main.content.js`,
-    customPackage,
-    { coverFile: false },
-  );
+  writeFileWithOptionsSync(globalMainPackageFile);
+
+  writeFileWithOptionsSync(customChildPackageFile);
+
+  writeFileWithOptionsSync(customMainPackageFile);
 
   //#endregion
 }
