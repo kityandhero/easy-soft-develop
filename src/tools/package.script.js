@@ -1,5 +1,5 @@
 const globalScript = {
-  'z:initial:environment': 'node ./develop/assists/config.environment.js',
+  'z:initial:environment': 'node ./develop/assists/initial.environment.js',
 };
 
 const packageScript = {};

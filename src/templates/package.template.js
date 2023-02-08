@@ -81,7 +81,7 @@ const cleanScript = {
 };
 
 const environmentScript = {
-  "z:initial:environment": "node ./develop/assists/config.environment.js",
+  "z:initial:environment": "node ./develop/assists/initial.environment.js",
 };
 
 const lernaScript = {
