@@ -115,7 +115,7 @@ module.exports = {
 `;
 
 const contentFile = {
-  folderPath: `${folderPath}/template`,
+  folderPath: `${folderPath}`,
   fileName: 'commitlint.config.js',
   coverFile: true,
   fileContent: contentFileContent,

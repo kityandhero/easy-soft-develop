@@ -12,7 +12,7 @@ module.exports = function (api) {
 `;
 
 const contentFile = {
-  folderPath: `${folderPath}/template`,
+  folderPath: `${folderPath}`,
   fileName: 'babel.config.js',
   coverFile: true,
   fileContent: contentFileContent,

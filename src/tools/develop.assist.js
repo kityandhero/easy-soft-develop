@@ -33,7 +33,7 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
   return result;
 }
 
-function createAssistConfigScriptFile(currentDir = '.') {
+function createAssistConfigScriptFile() {
   const content = `${fileGlobalHeader}
 const cleanCommand = '';
 
@@ -51,10 +51,15 @@ module.exports = {
 };
 `;
 
-  return createScriptFile(`${currentDir}/config`, 'index.js', content, false);
+  return createScriptFile(
+    `./develop/assists/config`,
+    'index.js',
+    content,
+    false,
+  );
 }
 
-function createCleanScriptFile(currentDir = '.') {
+function createCleanScriptFile() {
   const content = `${fileGlobalHeader}
 const { clean } = require('easy-soft-develop');
 
@@ -63,10 +68,10 @@ const { cleanCommand, cleanCollection } = require('./config');
 clean(cleanCommand, cleanCollection);
 `;
 
-  return createScriptFile(currentDir, 'clean.js', content, currentDir, true);
+  return createScriptFile('./develop/assists', 'clean.js', content, true);
 }
 
-function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
+function createPackageCheckSpecialVersionScriptFile() {
   const content = `${fileGlobalHeader}
 const { updateSpecialPackageVersion } = require('easy-soft-develop');
 
@@ -77,7 +82,7 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
 
   try {
     createScriptFile(
-      currentDir,
+      './develop/assists',
       'package.update.special.version.js',
       content,
       true,
@@ -87,7 +92,7 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
   }
 }
 
-function createInstallGlobalDevDependenceScriptFile(currentDir = '.') {
+function createInstallGlobalDevDependenceScriptFile() {
   const content = `${fileGlobalHeader}
 const { installGlobalDevDependencePackages } = require('easy-soft-develop');
 
@@ -98,7 +103,7 @@ installGlobalDevDependencePackages(developDependencePackageCollection);
 
   try {
     createScriptFile(
-      currentDir,
+      './develop/assists',
       'install.global.develop.dependence.js',
       content,
       true,
@@ -108,7 +113,7 @@ installGlobalDevDependencePackages(developDependencePackageCollection);
   }
 }
 
-function createConfigEnvironmentScriptFiles(currentDir = '.') {
+function createConfigEnvironmentScriptFiles() {
   const content = `${fileGlobalHeader}
 const { configEnvironment } = require('easy-soft-develop');
 
@@ -239,7 +244,12 @@ configEnvironment({
 `;
 
   try {
-    createScriptFile(currentDir, 'config.environment.js', content, true);
+    createScriptFile(
+      './develop/assists',
+      'config.environment.js',
+      content,
+      true,
+    );
   } catch (error) {
     promptError(error);
   }
@@ -257,21 +267,21 @@ configEnvironment({
   //#endregion
 }
 
-function createDevelopScriptFiles(currentDir = '.') {
+function createDevelopScriptFiles() {
   const waitLog =
     'develop assist script files will update, please wait a moment';
 
   promptInfo(waitLog);
 
-  createConfigEnvironmentScriptFiles(currentDir);
+  createConfigEnvironmentScriptFiles();
 
-  createAssistConfigScriptFile(currentDir);
+  createAssistConfigScriptFile();
 
-  createCleanScriptFile(currentDir);
+  createCleanScriptFile();
 
-  createPackageCheckSpecialVersionScriptFile(currentDir);
+  createPackageCheckSpecialVersionScriptFile();
 
-  createInstallGlobalDevDependenceScriptFile(currentDir);
+  createInstallGlobalDevDependenceScriptFile();
 
   const successLog = 'develop assist script files update finish';
 

@@ -335,7 +335,7 @@ function configEnvironment() {
 
   promptNewLine();
 
-  createDevelopScriptFiles(`.`);
+  createDevelopScriptFiles();
 
   promptInfo('add global dev packages');
 
