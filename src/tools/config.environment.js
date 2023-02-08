@@ -76,7 +76,7 @@ function adjustMainPackageJson({ scripts }) {
     scripts,
   );
 
-  writeJsonFileSync(mainProjectPath, packageJson, { autoCreate: true });
+  writeJsonFileSync(mainProjectPath, packageJson, { coverFile: true });
 
   promptSuccess('adjust main package.json success');
   promptNewLine();
@@ -92,7 +92,7 @@ function adjustChildrenPackageJson({ scripts }) {
 
     packageJson.scripts = assignObject(packageJson.scripts || {}, scripts);
 
-    writeJsonFileSync(childPackageJsonPath, packageJson, { autoCreate: true });
+    writeJsonFileSync(childPackageJsonPath, packageJson, { coverFile: true });
 
     promptSuccess('adjust child package.json success');
     promptNewLine();

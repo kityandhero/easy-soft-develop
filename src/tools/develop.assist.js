@@ -18,7 +18,7 @@ function createScriptFile(
   fileName,
   content,
   currentDir = '.',
-  autoCreate = false,
+  coverFile = false,
 ) {
   const filePath = resolvePath(currentDir);
 
@@ -28,7 +28,7 @@ function createScriptFile(
     `${filePath}/develop/assists/${fileName}`,
     content,
     {
-      autoCreate: !!autoCreate,
+      coverFile: !!coverFile,
     },
   );
 
@@ -241,24 +241,24 @@ configEnvironment({
   writeFileSync(
     `./develop/config/package/template/children.content.js`,
     childPackage,
-    { autoCreate: true },
+    { coverFile: true },
   );
   writeFileSync(
     `./develop/config/package/template/main.content.js`,
     mainPackage,
-    { autoCreate: true },
+    { coverFile: true },
   );
 
   mkdirRelativeSync(`./develop/config/package/custom`);
   writeFileSync(
     `./develop/config/package/custom/children.content.js`,
     customPackage,
-    { autoCreate: false },
+    { coverFile: false },
   );
   writeFileSync(
     `./develop/config/package/custom/main.content.js`,
     customPackage,
-    { autoCreate: false },
+    { coverFile: false },
   );
 
   //#endregion

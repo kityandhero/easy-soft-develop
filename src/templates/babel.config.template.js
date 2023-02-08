@@ -1,6 +1,6 @@
-const content = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const { fileGlobalHeader } = require('./template.config');
 
+const content = `${fileGlobalHeader}
 module.exports = function (api) {
   api.cache(true);
   return {

@@ -1,64 +1,75 @@
-const config = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const { fileGlobalHeader } = require('./template.config');
 
-module.exports = {
-  generalConfig: {
-    extends: [
-      'stylelint-config-standard',
-      'stylelint-config-css-modules',
-      'stylelint-config-prettier',
-    ],
-    plugins: ['stylelint-declaration-block-no-ignored-properties'],
-    ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
-    customSyntax: 'postcss-less',
-    rules: {
-      'function-url-quotes': 'always',
-      'selector-attribute-quotes': 'always',
-      'font-family-no-missing-generic-family-keyword': null,
-      'plugin/declaration-block-no-ignored-properties': true,
-      'selector-type-no-unknown': null,
-      'value-keyword-case': ['lower', { ignoreProperties: ['composes'] }],
-      'unicode-bom': 'never',
-      'no-descending-specificity': null,
-      'selector-class-pattern': null,
-      'value-no-vendor-prefix': null,
-      'color-function-notation': null,
+const folderPath = './develop/config/stylelint';
+
+const configFile = {
+  folderPath: `${folderPath}/config`,
+  fileName: 'index.js',
+  coverFile: true,
+  fileContent: `${fileGlobalHeader}
+  module.exports = {
+    generalConfig: {
+      extends: [
+        'stylelint-config-standard',
+        'stylelint-config-css-modules',
+        'stylelint-config-prettier',
+      ],
+      plugins: ['stylelint-declaration-block-no-ignored-properties'],
+      ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
+      customSyntax: 'postcss-less',
+      rules: {
+        'function-url-quotes': 'always',
+        'selector-attribute-quotes': 'always',
+        'font-family-no-missing-generic-family-keyword': null,
+        'plugin/declaration-block-no-ignored-properties': true,
+        'selector-type-no-unknown': null,
+        'value-keyword-case': ['lower', { ignoreProperties: ['composes'] }],
+        'unicode-bom': 'never',
+        'no-descending-specificity': null,
+        'selector-class-pattern': null,
+        'value-no-vendor-prefix': null,
+        'color-function-notation': null,
+      },
     },
-  },
+  };
+  `,
 };
-`;
 
-const content = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const contentFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'content.js',
+  coverFile: true,
+  fileContent: `${fileGlobalHeader}
+  const mainContent = \`${fileGlobalHeader}
+  const { generalConfig } = require('./develop/config/stylelint/config');
 
-const mainContent = \`/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+  module.exports = generalConfig;
+  \`;
 
-let { generalConfig } = require('./develop/config/stylelint/config');
+  const packageContent = \`/* eslint-disable import/no-commonjs */
+  const { generalConfig } = require('../../develop/config/stylelint/config');
 
-module.exports = generalConfig;
-\`;
+  module.exports = generalConfig;
+  \`;
 
-const packageContent = \`/* eslint-disable import/no-commonjs */
-let { generalConfig } = require('../../develop/config/stylelint/config');
-
-module.exports = generalConfig;
-\`;
-
-module.exports = {
-  mainContent,
-  packageContent,
+  module.exports = {
+    mainContent,
+    packageContent,
+  };
+  `,
 };
-`;
 
-const ignore = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const ignoreFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'ignore.content.js',
+  coverFile: false,
+  fileContent: `${fileGlobalHeader}
+  const content = \`\`;
 
-const content = \`\`;
-
-module.exports = {
-  content,
+  module.exports = {
+    content,
+  };
+  `,
 };
-`;
 
-module.exports = { ignore, content, config };
+module.exports = { ignoreFile, contentFile, configFile };

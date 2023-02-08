@@ -1,24 +1,31 @@
-const content = `const content = \`# http://editorconfig.org
-root = true
+const folderPath = './develop/config/editor';
 
-[*]
-indent_style = space
-indent_size = 2
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
+const contentFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'content.js',
+  coverFile: true,
+  fileContent: `const content = \`# http://editorconfig.org
+  root = true
 
-[*.md]
-trim_trailing_whitespace = false
+  [*]
+  indent_style = space
+  indent_size = 2
+  end_of_line = lf
+  charset = utf-8
+  trim_trailing_whitespace = true
+  insert_final_newline = true
 
-[Makefile]
-indent_style = tab
-\`;
+  [*.md]
+  trim_trailing_whitespace = false
 
-module.exports = {
-  content,
+  [Makefile]
+  indent_style = tab
+  \`;
+
+  module.exports = {
+    content,
+  };
+  `,
 };
-`;
 
-module.exports = { content };
+module.exports = { contentFile };

@@ -16,56 +16,6 @@ function isArray(value) {
   return Array.isArray(value);
 }
 
-function promptNewLine() {
-  console.log('');
-}
-
-function promptSuccess(message) {
-  term.nextLine(1);
-
-  term.green(`${message}\r`);
-  promptNewLine();
-}
-
-function promptInfo(message) {
-  term.white(`${message}\r`);
-  promptNewLine();
-}
-
-function promptError(error) {
-  console.error(error);
-
-  promptNewLine();
-}
-
-//检测文件或者文件夹存在 nodeJS
-function fileExistsSync(path) {
-  try {
-    fs.accessSync(path, fs.F_OK);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
-
-function writeFileSync(path, content, options = { autoCreate: false }) {
-  const { autoCreate } = options;
-
-  if (!autoCreate) {
-    if (fileExistsSync(path)) {
-      promptInfo(`${path} exist, ignore create`);
-
-      return false;
-    }
-
-    fs.writeFileSync(path, content, { flag: 'wx' });
-  } else {
-    fs.writeFileSync(path, content, { flag: 'w' });
-  }
-
-  return true;
-}
-
 function checkStringIsEmpty(v) {
   v = ((v || null) == null ? '' : toString(v))
     .trim()
@@ -103,6 +53,38 @@ function assignObject(source, ...mergeData) {
   return result;
 }
 
+function promptNewLine() {
+  console.log('');
+}
+
+function promptSuccess(message) {
+  term.nextLine(1);
+
+  term.green(`${message}\r`);
+  promptNewLine();
+}
+
+function promptInfo(message) {
+  term.white(`${message}\r`);
+  promptNewLine();
+}
+
+function promptError(error) {
+  console.error(error);
+
+  promptNewLine();
+}
+
+//检测文件或者文件夹存在 nodeJS
+function fileExistsSync(path) {
+  try {
+    fs.accessSync(path, fs.F_OK);
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 function mkdirSync(path) {
   if (checkStringIsEmpty(path)) {
     promptError('path disallow empty');
@@ -125,10 +107,55 @@ function mkdirRelativeSync(path) {
   fs.mkdirSync(`${currentPath}/${path}`, { recursive: true });
 }
 
-function writeJsonFileSync(path, json, options = { autoCreate: false }) {
-  const { autoCreate } = options;
+function writeFileSync(path, content, options = { coverFile: false }) {
+  const { coverFile } = options;
 
-  if (!autoCreate) {
+  if (!coverFile) {
+    if (fileExistsSync(path)) {
+      promptInfo(`${path} exist, ignore create`);
+
+      return false;
+    }
+
+    fs.writeFileSync(path, content, { flag: 'wx' });
+  } else {
+    fs.writeFileSync(path, content, { flag: 'w' });
+  }
+
+  return true;
+}
+
+function writeFileWithFolderAndNameSync(
+  folderPath,
+  fileName,
+  fileContent,
+  coverFile = false,
+) {
+  mkdirRelativeSync(folderPath);
+
+  return writeFileSync(`${folderPath}/${fileName}`, fileContent, {
+    coverFile: coverFile,
+  });
+}
+
+function writeFileWithOptionsSync({
+  folderPath,
+  fileName,
+  fileContent,
+  coverFile = false,
+}) {
+  return writeFileWithFolderAndNameSync({
+    folderPath,
+    fileName,
+    fileContent,
+    coverFile,
+  });
+}
+
+function writeJsonFileSync(path, json, options = { coverFile: false }) {
+  const { coverFile } = options;
+
+  if (!coverFile) {
     if (fileExistsSync(path)) {
       promptInfo(`${path} exist, ignore create`);
 
@@ -167,5 +194,7 @@ module.exports = {
   readJsonFileSync,
   readJsonFileRelativeSync,
   writeJsonFileSync,
+  writeFileWithFolderAndNameSync,
+  writeFileWithOptionsSync,
   resolvePath,
 };

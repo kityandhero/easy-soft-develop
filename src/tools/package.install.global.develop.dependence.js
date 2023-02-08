@@ -45,7 +45,7 @@ function adjustMainPackageJson(packageList) {
     packageJson.devDependencies || {},
   );
 
-  writeJsonFileSync('./package.json', packageJson, { autoCreate: true });
+  writeJsonFileSync('./package.json', packageJson, { coverFile: true });
 }
 
 function adjustChildrenPackageJson(packageList) {
@@ -64,7 +64,7 @@ function adjustChildrenPackageJson(packageList) {
     );
 
     writeJsonFileSync(`${relativePath}/package.json`, packageJson, {
-      autoCreate: true,
+      coverFile: true,
     });
   });
 }

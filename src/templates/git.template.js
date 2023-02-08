@@ -1,53 +1,63 @@
-const attribute = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const { fileGlobalHeader } = require('./template.config');
 
-const content = \`*.js eol=lf
-*.jsx eol=lf
-*.json eol=lf
-*.css eol=lf
-*.less eol=lf
-*.scss eol=lf
-\`;
+const folderPath = './develop/config/git';
 
-module.exports = {
-  content,
+const attributeFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'attributes.content.js',
+  coverFile: false,
+  fileContent: `${fileGlobalHeader}
+  const content = \`*.js eol=lf
+  *.jsx eol=lf
+  *.json eol=lf
+  *.css eol=lf
+  *.less eol=lf
+  *.scss eol=lf
+  \`;
+
+  module.exports = {
+    content,
+  };
+  `,
 };
-`;
 
-const ignore = `/* eslint-disable no-undef */
-/* eslint-disable unicorn/prefer-module */
+const ignoreFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'ignore.content.js',
+  coverFile: false,
+  fileContent: `${fileGlobalHeader}
+  const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+  # dependencies
+  **/node_modules
 
-# dependencies
-**/node_modules
+  # ignore dir
+  **/dist
+  **/es
+  **/.umi
+  **/.umi-production
+  **/.idea
+  **/.history
+  **/.vs
 
-# ignore dir
-**/dist
-**/es
-**/.umi
-**/.umi-production
-**/.idea
-**/.history
-**/.vs
+  # ignore file
+  *.log
+  *.d.ts
+  *.bak
 
-# ignore file
-*.log
-*.d.ts
-*.bak
+  # ignore special
+  rollup.config-*.cjs
+  yarn.lock
+  package-lock.json
+  pnpm-lock.yaml
+  .firebase
+  .eslintcache
+  \`;
 
-# ignore special
-rollup.config-*.cjs
-yarn.lock
-package-lock.json
-pnpm-lock.yaml
-.firebase
-.eslintcache
-\`;
-
-module.exports = {
-  content,
+  module.exports = {
+    content,
+  };
+  `,
 };
-`;
 
-module.exports = { attribute, ignore };
+module.exports = { attributeFile, ignoreFile };
