@@ -6,7 +6,7 @@ const {
   createInstallGlobalDevDependenceScriptFile,
   createDevelopFiles,
 } = require('./tools/develop.file');
-const { initialEnvironment } = require('./tools/config.environment');
+const { initialEnvironment } = require('./tools/initial.environment');
 const {
   prettierAllPackageJson,
   prettierCurrentPackageJson,
