@@ -1,6 +1,9 @@
+const { fileGlobalHeader } = require('./template.config');
+
 const folderPath = './develop/config/editor';
 
-const contentFileContent = `const content = \`# http://editorconfig.org
+const contentFileContent = `${fileGlobalHeader}
+const content = \`# http://editorconfig.org
 root = true
 
 [*]
