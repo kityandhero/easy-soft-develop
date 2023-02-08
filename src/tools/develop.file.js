@@ -60,9 +60,7 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
   });
 
   if (result) {
-    promptSuccess(`${fileName} create success`);
-  } else {
-    promptInfo(`${fileName} already exist, ignore create`);
+    promptSuccess(`${folderPath}/${fileName} create success`);
   }
 
   promptNewLine();

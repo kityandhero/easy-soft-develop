@@ -100,7 +100,7 @@ function writeFileSync(path, content, options = { coverFile: false }) {
 
   if (!coverFile) {
     if (fileExistsSync(path)) {
-      promptInfo(`${path} exist, ignore create`);
+      promptInfo(`${path} already exist, ignore create`);
 
       return false;
     }
