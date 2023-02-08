@@ -81,6 +81,7 @@ const cleanScript = {
 };
 
 const environmentScript = {
+  "prez:initial:environment": "npm run z:create:assist-scripts",
   "z:initial:environment": "node ./develop/assists/initial.environment.js",
 };
 

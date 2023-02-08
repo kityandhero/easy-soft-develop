@@ -1,11 +1,4 @@
 const {
-  createDevelopFiles,
-  createCommitlintConfigFile,
-  createBabelConfigFile,
-  createNcuConfigFile,
-  createNpmConfigFile,
-} = require('./develop.file');
-const {
   promptSuccess,
   writeFileSync,
   assignObject,
@@ -111,16 +104,6 @@ function initialEnvironment({
   mainScripts = {},
   childScripts = {},
 }) {
-  createDevelopFiles(
-    'develop files will update, please wait a moment',
-    'develop files update finish',
-  );
-
-  createCommitlintConfigFile();
-  createBabelConfigFile();
-  createNcuConfigFile();
-  createNpmConfigFile();
-
   createMainFile(mainFileContentList || []);
 
   createPackageFile(packageFileContentList || []);
