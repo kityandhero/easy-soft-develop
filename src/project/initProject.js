@@ -57,7 +57,7 @@ const {
 } = require('../templates/stylelint.template');
 
 function createLernaProjectFolder(name) {
-  name;
+  mkdirSync(`./${name}`);
 
   promptSuccess(`step *: create folder ${name} success`);
 }
@@ -370,7 +370,7 @@ function createLernaProject(name) {
   }
   const lernaName = `lerna-${name}`;
 
-  createLernaProjectFolder(`./${lernaName}`);
+  createLernaProjectFolder(lernaName);
 
   cd(`./${lernaName}`);
 
