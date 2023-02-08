@@ -111,15 +111,15 @@ function initialEnvironment({
   mainScripts = {},
   childScripts = {},
 }) {
-  createCommitlintConfigFile();
-  createBabelConfigFile();
-  createNcuConfigFile();
-  createNpmConfigFile();
-
   createDevelopFiles(
     'develop files will update, please wait a moment',
     'develop files update finish',
   );
+
+  createCommitlintConfigFile();
+  createBabelConfigFile();
+  createNcuConfigFile();
+  createNpmConfigFile();
 
   createMainFile(mainFileContentList || []);
 
