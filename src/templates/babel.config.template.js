@@ -1,11 +1,18 @@
 const { fileGlobalHeader } = require('./template.config');
 
-const content = `${fileGlobalHeader}
-module.exports = function (api) {
-  api.cache(true);
-  return {
-    babelrcRoots: ['.', 'packages/*'],
+const folderPath = '.';
+
+const contentFile = {
+  folderPath: `${folderPath}/template`,
+  fileName: 'babel.config.js',
+  coverFile: true,
+  fileContent: `${fileGlobalHeader}
+  module.exports = function (api) {
+    api.cache(true);
+    return {
+      babelrcRoots: ['.', 'packages/*'],
+    };
   };
+  `,
 };
-`;
-module.exports = { content };
+module.exports = { contentFile };

@@ -18,10 +18,10 @@ const {
 } = require('../tools/package.script');
 
 const {
-  content: commitlintConfigContent,
+  contentFile: commitlintConfigContentFile,
 } = require('../templates/commitlint.config.template');
 const {
-  content: babelConfigContent,
+  contentFile: babelConfigContentFile,
 } = require('../templates/babel.config.template');
 const {
   contentFile: editorContentFile,
@@ -177,11 +177,7 @@ function createPackageJsonFile(name) {
 }
 
 function createCommitlintConfigFile() {
-  const content = commitlintConfigContent;
-
-  let result = writeFileSync(`./commitlint.config.js`, content, {
-    coverFile: true,
-  });
+  let result = writeFileWithOptionsSync(commitlintConfigContentFile);
 
   if (result) {
     promptSuccess(`step *: create commitlint.config.js success`);
@@ -189,11 +185,7 @@ function createCommitlintConfigFile() {
 }
 
 function createBabelConfigFile() {
-  const content = babelConfigContent;
-
-  let result = writeFileSync(`./babel.config.js`, content, {
-    coverFile: true,
-  });
+  let result = writeFileWithOptionsSync(babelConfigContentFile);
 
   if (result) {
     promptSuccess(`step *: create babel.config.js success`);
