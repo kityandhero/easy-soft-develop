@@ -144,12 +144,12 @@ function writeFileWithOptionsSync({
   fileContent,
   coverFile = false,
 }) {
-  return writeFileWithFolderAndNameSync({
+  return writeFileWithFolderAndNameSync(
     folderPath,
     fileName,
     fileContent,
     coverFile,
-  });
+  );
 }
 
 function writeJsonFileSync(path, json, options = { coverFile: false }) {
