@@ -1,4 +1,4 @@
-const { exec } = require('./shell');
+const { exec } = require('./meta');
 
 function prettierAllFile() {
   exec('npx prettier --cache --write .');

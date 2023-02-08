@@ -5,8 +5,10 @@ const {
   writeFileSync,
   writeJsonFileSync,
   promptInfo,
-  promptNewLine,
+  promptEmptyLine,
   mkdirSync,
+  exec,
+  cd,
 } = require('../tools/meta');
 const {
   createDevelopFiles,
@@ -15,7 +17,6 @@ const {
   createNcuConfigFile,
   createNpmConfigFile,
 } = require('../tools/develop.file');
-const { cd, exec } = require('../tools/shell');
 const {
   getGlobalPackages,
   globalScript,
@@ -195,7 +196,7 @@ function initialEnvironment() {
 
   promptSuccess(`step *: config environment`);
 
-  promptNewLine();
+  promptEmptyLine();
 
   createDevelopFiles();
 
@@ -209,13 +210,13 @@ function initialEnvironment() {
 
   exec('npm run z:initial:environment');
 
-  promptNewLine();
+  promptEmptyLine();
 
   promptInfo('create git branch main');
 
   exec('git init -b main');
 
-  promptNewLine();
+  promptEmptyLine();
 
   promptInfo('husky install');
 

@@ -3,6 +3,16 @@ const console = require('console');
 const fsExtra = require('fs-extra');
 const term = require('terminal-kit').terminal;
 const { resolve } = require('path');
+const shell = require('shelljs');
+
+function exec(cmd) {
+  shell.exec(cmd);
+}
+
+function cd(path) {
+  // eslint-disable-next-line no-undef
+  process.chdir(path);
+}
 
 function resolvePath(path) {
   return resolve(path);
@@ -14,6 +24,16 @@ function isObject(value) {
 
 function isArray(value) {
   return Array.isArray(value);
+}
+
+function exit() {
+  // eslint-disable-next-line no-undef
+  return process.exit();
+}
+
+function getArgCollection() {
+  // eslint-disable-next-line no-undef
+  return process.argv;
 }
 
 function checkStringIsEmpty(v) {
@@ -53,36 +73,69 @@ function assignObject(source, ...mergeData) {
   return result;
 }
 
-function promptNewLine() {
+function promptLine() {
+  term.gray('----------------------------------------\r\n');
+}
+
+function promptEmptyLine() {
   console.log('');
 }
 
 function promptSuccess(message) {
-  term.nextLine(1);
+  term.green(`${message}\r\n`);
+  promptEmptyLine();
+}
 
-  term.green(`${message}\r`);
-  promptNewLine();
+function promptWarn(message) {
+  term.magenta(`${message}\r\n`);
+  promptEmptyLine();
 }
 
 function promptInfo(message) {
-  term.white(`${message}\r`);
-  promptNewLine();
+  term.white(`${message}\r\n`);
+  promptEmptyLine();
 }
 
 function promptError(error) {
   console.error(error);
 
-  promptNewLine();
+  promptEmptyLine();
 }
 
-//检测文件或者文件夹存在 nodeJS
-function fileExistsSync(path) {
+function existFileSync(path) {
   try {
     fs.accessSync(path, fs.F_OK);
-  } catch (e) {
+  } catch (error) {
     return false;
   }
-  return true;
+
+  if (!path || typeof path !== 'string') {
+    throw new TypeError('file path not allow empty');
+  }
+
+  const p = resolvePath(path);
+
+  const state = fs.statSync(p);
+
+  return state.isFile();
+}
+
+function existDirectorySync(path) {
+  if (!path || typeof path !== 'string') {
+    throw new TypeError('directory path not allow empty');
+  }
+
+  try {
+    fs.accessSync(path, fs.F_OK);
+  } catch (error) {
+    return false;
+  }
+
+  const p = resolvePath(path);
+
+  const state = fs.statSync(p);
+
+  return state.isDirectory();
 }
 
 function mkdirSync(path) {
@@ -99,7 +152,7 @@ function writeFileSync(path, content, options = { coverFile: false }) {
   const { coverFile } = options;
 
   if (!coverFile) {
-    if (fileExistsSync(path)) {
+    if (existFileSync(path)) {
       promptInfo(`${path} already exist, ignore create`);
 
       return false;
@@ -144,7 +197,7 @@ function writeJsonFileSync(path, json, options = { coverFile: false }) {
   const { coverFile } = options;
 
   if (!coverFile) {
-    if (fileExistsSync(path)) {
+    if (existFileSync(path)) {
       promptInfo(`${path} exist, ignore create`);
 
       return false;
@@ -162,26 +215,28 @@ function readJsonFileSync(path) {
   return fsExtra.readJsonSync(path);
 }
 
-function readJsonFileRelativeSync(relativePath) {
-  return readJsonFileSync(resolvePath(relativePath));
-}
-
 module.exports = {
-  fileExistsSync,
+  exec,
+  cd,
+  getArgCollection,
+  existFileSync,
+  existDirectorySync,
   writeFileSync,
   checkStringIsEmpty,
-  promptNewLine,
+  promptLine,
+  promptEmptyLine,
   promptSuccess,
   promptInfo,
+  promptWarn,
   promptError,
   isObject,
   isArray,
   assignObject,
   mkdirSync,
   readJsonFileSync,
-  readJsonFileRelativeSync,
   writeJsonFileSync,
   writeFileWithFolderAndNameSync,
   writeFileWithOptionsSync,
   resolvePath,
+  exit,
 };

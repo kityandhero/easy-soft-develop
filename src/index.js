@@ -24,7 +24,7 @@ const {
   updateSpecialPackageVersion,
   updateAllPackageVersion,
 } = require('./tools/package.update');
-const { exec } = require('./tools/shell');
+const { exec } = require('./tools/meta');
 const { sleep } = require('./tools/sleep');
 
 module.exports = {

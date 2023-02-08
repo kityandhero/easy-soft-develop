@@ -1,9 +1,9 @@
-const { exec } = require('../tools/shell');
 const {
-  promptNewLine,
+  promptEmptyLine,
   promptInfo,
   promptSuccess,
   promptError,
+  exec,
 } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
@@ -31,7 +31,7 @@ function clean(preCmd, ...targets) {
       .join(' && ');
 
     promptInfo(`clean start`);
-    promptNewLine();
+    promptEmptyLine();
 
     if (preCmd) {
       exec(preCmd);

@@ -2,12 +2,16 @@
 
 const { Command } = require('commander');
 
+const { getArgCollection } = require('../src/tools/meta');
 const createAssistScripts = require('../src/cliCollection/create-assist-scripts.cli');
 const checkAllPackageVersion = require('../src/cliCollection/check-all-package-version');
 const updateAllPackageVersion = require('../src/cliCollection/update-all-package-version');
 const sleep = require('../src/cliCollection/sleep');
 const commitRefresh = require('../src/cliCollection/commit-refresh');
 const createLernaProject = require('../src/cliCollection/create-lerna-project');
+const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
+const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
+const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
 
 const program = new Command();
 
@@ -66,5 +70,43 @@ program
     createLernaProject.run(a, o);
   });
 
-// eslint-disable-next-line no-undef
-program.parse(process.argv);
+program
+  .command('clear-package-all-dependence')
+  .description('clear package all dependence in package.json file')
+  .option('--path <string>', 'package.json file path')
+  .action((a, o) => {
+    clearAllDependence.run(a, o);
+  });
+
+program
+  .command('update-from-package')
+  .description('update package from local or remote package.json file')
+  .option('--primaryRemoteUrl <string>', 'remote primary package.json file url')
+  .option('--spareRemoteUrl <string>', 'remote spare package.json file url')
+  .option(
+    '--localFile <string>',
+    'local package.json file source path, priority use if localFile has value',
+  )
+  .option(
+    '--agent <char>',
+    'web agent for remote , if it has value, will use the agent to access remote url',
+  )
+  .option('--path <char>', 'the package.json file path will update')
+  .action((a, o) => {
+    updatePackageFromPackage.run(a, o);
+  });
+
+program
+  .command('create-project-with-template')
+  .description('update package from local or remote package.json file')
+  .option('--templateUrl <string>', 'template url with download')
+  .option('--folder <string>', 'folder name create project in it')
+  .option(
+    '--exampleUrl <string>',
+    'example url, if it has value, will prompt info after create',
+  )
+  .action((a, o) => {
+    createProjectWithTemplate.run(a, o);
+  });
+
+program.parse(getArgCollection());

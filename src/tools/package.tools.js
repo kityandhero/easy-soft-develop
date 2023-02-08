@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const { fileExistsSync, resolvePath } = require('./meta');
+const { resolvePath, existDirectorySync } = require('./meta');
 
 /**
  * loop all package
@@ -9,7 +9,7 @@ const { fileExistsSync, resolvePath } = require('./meta');
 function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
   const packagesDir = './packages/';
 
-  if (!fileExistsSync(resolvePath(packagesDir))) {
+  if (!existDirectorySync(resolvePath(packagesDir))) {
     return;
   }
 

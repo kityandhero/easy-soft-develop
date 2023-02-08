@@ -4,7 +4,7 @@ const {
   promptError,
   mkdirSync,
   writeFileSync,
-  promptNewLine,
+  promptEmptyLine,
   writeFileWithOptionsSync,
   checkStringIsEmpty,
   writeJsonFileSync,
@@ -63,7 +63,7 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
     promptSuccess(`${folderPath}/${fileName} create success`);
   }
 
-  promptNewLine();
+  promptEmptyLine();
 
   return result;
 }
@@ -426,7 +426,7 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 
   if (!checkStringIsEmpty(successMessage)) {
     promptInfo(successMessage);
-    promptNewLine();
+    promptEmptyLine();
   }
 }
 

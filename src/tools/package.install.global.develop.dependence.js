@@ -6,12 +6,12 @@ const {
   isArray,
   checkStringIsEmpty,
   writeJsonFileSync,
+  exec,
 } = require('./meta');
 const { getGlobalPackages } = require('./package.script');
 const { loopPackage } = require('./package.tools');
 const { updateSpecialPackageVersion } = require('./package.update');
 const { prettierAllPackageJson } = require('./prettier.package.json');
-const { exec } = require('./shell');
 
 function buildPackageObject(packageList) {
   if (!isArray(packageList) || packageList.length <= 0) {
