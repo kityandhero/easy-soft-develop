@@ -45,23 +45,46 @@ function createScriptFile(
   return result;
 }
 
+function createAssistConfigScriptFile(currentDir = '.') {
+  const content = `${fileGlobalHeader}
+const cleanCommand = '';
+
+const cleanCollection = [];
+
+const developDependencePackageCollection = [];
+
+const updateSpecialPackageCollection = [];
+
+module.exports = {
+  cleanCommand,
+  cleanCollection,
+  developDependencePackageCollection,
+  updateSpecialPackageCollection,
+};
+`;
+
+  return createScriptFile('config/index.js', content, currentDir, false);
+}
+
 function createCleanScriptFile(currentDir = '.') {
   const content = `${fileGlobalHeader}
 const { clean } = require('easy-soft-develop');
 
-clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
+const { cleanCommand, cleanCollection } = require('./config');
+
+clean(cleanCommand, cleanCollection);
 `;
 
-  return createScriptFile('clean.js', content, currentDir, false);
+  return createScriptFile('clean.js', content, currentDir, true);
 }
 
 function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
   const content = `${fileGlobalHeader}
 const { updateSpecialPackageVersion } = require('easy-soft-develop');
 
-const packageList = [];
+const { updateSpecialPackageCollection } = require('./config');
 
-updateSpecialPackageVersion(packageList);
+updateSpecialPackageVersion(updateSpecialPackageCollection);
 `;
 
   try {
@@ -69,7 +92,7 @@ updateSpecialPackageVersion(packageList);
       'package.update.special.version.js',
       content,
       currentDir,
-      false,
+      true,
     );
   } catch (error) {
     promptError(error);
@@ -80,17 +103,17 @@ function createInstallGlobalDevDependenceScriptFile(currentDir = '.') {
   const content = `${fileGlobalHeader}
 const { installGlobalDevDependencePackages } = require('easy-soft-develop');
 
-const packageList = [];
+const { developDependencePackageCollection } = require('./config');
 
-installGlobalDevDependencePackages(packageList);
+installGlobalDevDependencePackages(developDependencePackageCollection);
 `;
 
   try {
     createScriptFile(
-      'install.global.dev.dependence.js',
+      'install.global.develop.dependence.js',
       content,
       currentDir,
-      false,
+      true,
     );
   } catch (error) {
     promptError(error);
@@ -253,6 +276,8 @@ function createDevelopScriptFiles(currentDir = '.') {
   promptInfo(waitLog);
 
   createConfigEnvironmentScriptFiles(currentDir);
+
+  createAssistConfigScriptFile(currentDir);
 
   createCleanScriptFile(currentDir);
 

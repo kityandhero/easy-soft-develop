@@ -94,8 +94,8 @@ const lernaScript = {
 const installScript = {
   "z:reinstall": 'npm run z:lerna:bootstrap',
   "postinstall": "npm run z:initial:environment",
-  "z:install.global.dev.dependence": "node ./develop/assists/install.global.dev.dependence",
-  "postz:install.global.dev.dependence": "npm run z:install",
+  "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
+  "postz:install.global.develop.dependence": "npm run z:install",
   "z:install": "pnpm install",
 };
 

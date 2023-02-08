@@ -69,7 +69,7 @@ function adjustChildrenPackageJson(packageList) {
   });
 }
 
-function installGlobalDevDependencePackages(packageList) {
+function installGlobalDevelopDependencePackages(packageList) {
   const packages = getGlobalPackages().concat(packageList);
 
   promptInfo(`${packages.join()} will install`);
@@ -87,4 +87,6 @@ function installGlobalDevDependencePackages(packageList) {
   promptSuccess('install success');
 }
 
-module.exports = { installGlobalDevDependencePackages };
+module.exports = {
+  installGlobalDevelopDependencePackages,
+};
