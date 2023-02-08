@@ -1,4 +1,10 @@
-const { createDevelopScriptFiles } = require('./develop.assist');
+const {
+  createDevelopFiles,
+  createCommitlintConfigFile,
+  createBabelConfigFile,
+  createNcuConfigFile,
+  createNpmConfigFile,
+} = require('./develop.file');
 const {
   promptSuccess,
   writeFileSync,
@@ -105,7 +111,15 @@ function configEnvironment({
   mainScripts = {},
   childScripts = {},
 }) {
-  createDevelopScriptFiles();
+  createCommitlintConfigFile();
+  createBabelConfigFile();
+  createNcuConfigFile();
+  createNpmConfigFile();
+
+  createDevelopFiles(
+    'develop files will update, please wait a moment',
+    'develop files update finish',
+  );
 
   createMainFile(mainFileContentList || []);
 

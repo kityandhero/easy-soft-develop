@@ -6,55 +6,21 @@ const {
   writeJsonFileSync,
   promptInfo,
   promptNewLine,
-  writeFileWithOptionsSync,
   mkdirSync,
 } = require('../tools/meta');
-const { createDevelopScriptFiles } = require('../tools/develop.assist');
+const {
+  createDevelopFiles,
+  createCommitlintConfigFile,
+  createBabelConfigFile,
+  createNcuConfigFile,
+  createNpmConfigFile,
+} = require('../tools/develop.file');
 const { cd, exec } = require('../tools/shell');
 const {
   getGlobalPackages,
   globalScript,
   packageScript,
 } = require('../tools/package.script');
-
-const {
-  contentFile: commitlintConfigContentFile,
-} = require('../templates/commitlint.config.template');
-const {
-  contentFile: babelConfigContentFile,
-} = require('../templates/babel.config.template');
-const {
-  contentFile: editorContentFile,
-} = require('../templates/editor.template');
-const {
-  contentFile: eslintContentFile,
-  ignoreFile: eslintIgnoreFile,
-  configFile: eslintConfigFile,
-  ruleFile: eslintRuleFile,
-} = require('../templates/eslint.template');
-const {
-  attributeFile: gitAttributeFile,
-  ignoreFile: gitIgnoreFile,
-} = require('../templates/git.template');
-const {
-  contentFile: lintStagedContentFile,
-} = require('../templates/lint-staged.template');
-const {
-  globalChildPackageFile,
-  globalMainPackageFile,
-  customChildPackageFile,
-  customMainPackageFile,
-} = require('../templates/package.template');
-const {
-  ignoreFile: prettierIgnoreFile,
-  contentFile: prettierContentFile,
-  configFile: prettierConfigFile,
-} = require('../templates/prettier.template');
-const {
-  ignoreFile: stylelintIgnoreFile,
-  contentFile: stylelintContentFile,
-  configFile: stylelintConfigFile,
-} = require('../templates/stylelint.template');
 
 function createLernaProjectFolder(name) {
   mkdirSync(`./${name}`);
@@ -176,110 +142,6 @@ function createPackageJsonFile(name) {
   }
 }
 
-function createCommitlintConfigFile() {
-  let result = writeFileWithOptionsSync(commitlintConfigContentFile);
-
-  if (result) {
-    promptSuccess(`step *: create commitlint.config.js success`);
-  }
-}
-
-function createBabelConfigFile() {
-  let result = writeFileWithOptionsSync(babelConfigContentFile);
-
-  if (result) {
-    promptSuccess(`step *: create babel.config.js success`);
-  }
-}
-
-function createNcuConfigFile() {
-  let result = writeJsonFileSync(`./.ncurc.json`, {});
-
-  if (result) {
-    promptSuccess(`step *: create .ncurc.json success`);
-  }
-}
-
-function createNpmConfigFile() {
-  let result = writeFileSync(
-    `./.npmrc`,
-    `# npm config
-auto-install-peers=true`,
-  );
-
-  if (result) {
-    promptSuccess(`step *: create .npmrc success`);
-  }
-}
-
-function createDevelopFolder() {
-  mkdirSync(`./develop`);
-  mkdirSync(`./develop/assists`);
-  mkdirSync(`./develop/config`);
-
-  writeFileWithOptionsSync(editorContentFile);
-
-  //#region eslint
-
-  writeFileWithOptionsSync(eslintContentFile);
-
-  writeFileWithOptionsSync(eslintIgnoreFile);
-
-  writeFileWithOptionsSync(eslintConfigFile);
-
-  writeFileWithOptionsSync(eslintRuleFile);
-
-  //#endregion
-
-  //#region git
-
-  writeFileWithOptionsSync(gitAttributeFile);
-
-  writeFileWithOptionsSync(gitIgnoreFile);
-
-  //#endregion
-
-  //#region lintStaged
-
-  writeFileWithOptionsSync(lintStagedContentFile);
-
-  //#endregion
-
-  //#region package.json
-
-  writeFileWithOptionsSync(globalChildPackageFile);
-
-  writeFileWithOptionsSync(globalMainPackageFile);
-
-  writeFileWithOptionsSync(customChildPackageFile);
-
-  writeFileWithOptionsSync(customMainPackageFile);
-
-  //#endregion
-
-  //#region prettier
-
-  writeFileWithOptionsSync(prettierIgnoreFile);
-
-  writeFileWithOptionsSync(prettierContentFile);
-
-  writeFileWithOptionsSync(prettierConfigFile);
-
-  //#endregion
-
-  //#region stylelint
-
-  writeFileWithOptionsSync(stylelintIgnoreFile);
-
-  writeFileWithOptionsSync(stylelintContentFile);
-
-  writeFileWithOptionsSync(stylelintConfigFile);
-
-  //#endregion
-
-  promptSuccess(`step *: create develop folder success`);
-}
-
 function createHusky() {
   mkdirSync(`./.husky`);
 
@@ -335,7 +197,7 @@ function configEnvironment() {
 
   promptNewLine();
 
-  createDevelopScriptFiles();
+  createDevelopFiles();
 
   promptInfo('add global dev packages');
 
@@ -381,11 +243,11 @@ function createLernaProject(name) {
   createProjectFolder(name);
   createPackageJsonFile(name);
 
-  createCommitlintConfigFile();
-  createBabelConfigFile();
-  createNcuConfigFile();
-  createNpmConfigFile();
-  createDevelopFolder();
+  createCommitlintConfigFile(`step *: create commitlint.config.js success`);
+  createBabelConfigFile(`step *: create babel.config.js success`);
+  createNcuConfigFile(`step *: create .ncurc.json success`);
+  createNpmConfigFile(`step *: create .npmrc success`);
+  createDevelopFiles('', `step *: create develop folder success`);
   createHusky();
   createVscode();
 

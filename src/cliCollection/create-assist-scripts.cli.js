@@ -1,5 +1,5 @@
-const { createDevelopScriptFiles } = require('../tools/develop.assist');
+const { createDevelopFiles } = require('../tools/develop.file');
 
 exports.run = function () {
-  createDevelopScriptFiles();
+  createDevelopFiles();
 };

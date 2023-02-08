@@ -4,8 +4,8 @@ const {
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
   createInstallGlobalDevDependenceScriptFile,
-  createDevelopScriptFiles,
-} = require('./tools/develop.assist');
+  createDevelopFiles,
+} = require('./tools/develop.file');
 const { configEnvironment } = require('./tools/config.environment');
 const {
   prettierAllPackageJson,
@@ -41,7 +41,7 @@ module.exports = {
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
   createInstallGlobalDevDependenceScriptFile,
-  createDevelopScriptFiles,
+  createDevelopFiles,
   prettierAllFile,
   prettierChangeFile,
   prettierAllPackageJson,

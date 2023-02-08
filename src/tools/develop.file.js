@@ -1,11 +1,4 @@
 const {
-  globalChildPackageFile,
-  globalMainPackageFile,
-  customChildPackageFile,
-  customMainPackageFile,
-} = require('../templates/package.template');
-const { fileGlobalHeader } = require('../templates/template.config');
-const {
   promptSuccess,
   promptInfo,
   promptError,
@@ -13,7 +6,48 @@ const {
   writeFileSync,
   promptNewLine,
   writeFileWithOptionsSync,
+  checkStringIsEmpty,
+  writeJsonFileSync,
 } = require('./meta');
+const { fileGlobalHeader } = require('../templates/template.config');
+const {
+  contentFile: commitlintConfigContentFile,
+} = require('../templates/commitlint.config.template');
+const {
+  contentFile: babelConfigContentFile,
+} = require('../templates/babel.config.template');
+const {
+  contentFile: editorContentFile,
+} = require('../templates/editor.template');
+const {
+  contentFile: eslintContentFile,
+  ignoreFile: eslintIgnoreFile,
+  configFile: eslintConfigFile,
+  ruleFile: eslintRuleFile,
+} = require('../templates/eslint.template');
+const {
+  attributeFile: gitAttributeFile,
+  ignoreFile: gitIgnoreFile,
+} = require('../templates/git.template');
+const {
+  contentFile: lintStagedContentFile,
+} = require('../templates/lint-staged.template');
+const {
+  globalChildPackageFile,
+  globalMainPackageFile,
+  customChildPackageFile,
+  customMainPackageFile,
+} = require('../templates/package.template');
+const {
+  ignoreFile: prettierIgnoreFile,
+  contentFile: prettierContentFile,
+  configFile: prettierConfigFile,
+} = require('../templates/prettier.template');
+const {
+  ignoreFile: stylelintIgnoreFile,
+  contentFile: stylelintContentFile,
+  configFile: stylelintConfigFile,
+} = require('../templates/stylelint.template');
 
 function createScriptFile(folderPath, fileName, content, coverFile = false) {
   mkdirSync(folderPath);
@@ -31,6 +65,51 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
   promptNewLine();
 
   return result;
+}
+
+function createCommitlintConfigFile(successMessage = '') {
+  let result = writeFileWithOptionsSync(commitlintConfigContentFile);
+
+  if (result) {
+    if (!checkStringIsEmpty(successMessage)) {
+      promptInfo(successMessage);
+    }
+  }
+}
+
+function createBabelConfigFile(successMessage = '') {
+  let result = writeFileWithOptionsSync(babelConfigContentFile);
+
+  if (result) {
+    if (!checkStringIsEmpty(successMessage)) {
+      promptInfo(successMessage);
+    }
+  }
+}
+
+function createNcuConfigFile(successMessage = '') {
+  let result = writeJsonFileSync(`./.ncurc.json`, {}, { coverFile: false });
+
+  if (result) {
+    if (!checkStringIsEmpty(successMessage)) {
+      promptInfo(successMessage);
+    }
+  }
+}
+
+function createNpmConfigFile(successMessage = '') {
+  let result = writeFileSync(
+    `./.npmrc`,
+    `# npm config
+auto-install-peers=true`,
+    { coverFile: false },
+  );
+
+  if (result) {
+    if (!checkStringIsEmpty(successMessage)) {
+      promptInfo(successMessage);
+    }
+  }
 }
 
 function createAssistConfigScriptFile() {
@@ -267,11 +346,14 @@ configEnvironment({
   //#endregion
 }
 
-function createDevelopScriptFiles() {
-  const waitLog =
-    'develop assist script files will update, please wait a moment';
+function createDevelopFiles(waitMessage = '', successMessage = '') {
+  if (!checkStringIsEmpty(waitMessage)) {
+    promptInfo(waitMessage);
+  }
 
-  promptInfo(waitLog);
+  mkdirSync(`./develop`);
+  mkdirSync(`./develop/assists`);
+  mkdirSync(`./develop/config`);
 
   createConfigEnvironmentScriptFiles();
 
@@ -283,16 +365,80 @@ function createDevelopScriptFiles() {
 
   createInstallGlobalDevDependenceScriptFile();
 
-  const successLog = 'develop assist script files update finish';
+  writeFileWithOptionsSync(editorContentFile);
 
-  promptInfo(successLog);
-  promptNewLine();
+  //#region eslint
+
+  writeFileWithOptionsSync(eslintContentFile);
+
+  writeFileWithOptionsSync(eslintIgnoreFile);
+
+  writeFileWithOptionsSync(eslintConfigFile);
+
+  writeFileWithOptionsSync(eslintRuleFile);
+
+  //#endregion
+
+  //#region git
+
+  writeFileWithOptionsSync(gitAttributeFile);
+
+  writeFileWithOptionsSync(gitIgnoreFile);
+
+  //#endregion
+
+  //#region lintStaged
+
+  writeFileWithOptionsSync(lintStagedContentFile);
+
+  //#endregion
+
+  //#region package.json
+
+  writeFileWithOptionsSync(globalChildPackageFile);
+
+  writeFileWithOptionsSync(globalMainPackageFile);
+
+  writeFileWithOptionsSync(customChildPackageFile);
+
+  writeFileWithOptionsSync(customMainPackageFile);
+
+  //#endregion
+
+  //#region prettier
+
+  writeFileWithOptionsSync(prettierIgnoreFile);
+
+  writeFileWithOptionsSync(prettierContentFile);
+
+  writeFileWithOptionsSync(prettierConfigFile);
+
+  //#endregion
+
+  //#region stylelint
+
+  writeFileWithOptionsSync(stylelintIgnoreFile);
+
+  writeFileWithOptionsSync(stylelintContentFile);
+
+  writeFileWithOptionsSync(stylelintConfigFile);
+
+  //#endregion
+
+  if (!checkStringIsEmpty(successMessage)) {
+    promptInfo(successMessage);
+    promptNewLine();
+  }
 }
 
 module.exports = {
+  createCommitlintConfigFile,
+  createBabelConfigFile,
+  createNcuConfigFile,
+  createNpmConfigFile,
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
   createInstallGlobalDevDependenceScriptFile,
   createConfigEnvironmentScriptFiles,
-  createDevelopScriptFiles,
+  createDevelopFiles,
 };
