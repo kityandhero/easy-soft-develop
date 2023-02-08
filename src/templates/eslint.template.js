@@ -85,7 +85,7 @@ module.exports = {
       ...pluginCollection,
     ],
     parser: '@babel/eslint-parser',
-    parserOptions: parserOptions,,
+    parserOptions: parserOptions,
     rules: rules,
     settings: {
       'import/parsers': {
