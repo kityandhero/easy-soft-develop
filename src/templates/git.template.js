@@ -19,7 +19,7 @@ module.exports = {
 const attributeFile = {
   folderPath: `${folderPath}/template`,
   fileName: 'attributes.content.js',
-  coverFile: false,
+  coverFile: true,
   fileContent: attributeFileContent,
 };
 
