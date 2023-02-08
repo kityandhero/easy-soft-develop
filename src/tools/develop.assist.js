@@ -9,30 +9,18 @@ const {
   promptSuccess,
   promptInfo,
   promptError,
-  resolvePath,
   mkdirSync,
   writeFileSync,
   promptNewLine,
   writeFileWithOptionsSync,
 } = require('./meta');
 
-function createScriptFile(
-  fileName,
-  content,
-  currentDir = '.',
-  coverFile = false,
-) {
-  const filePath = resolvePath(currentDir);
+function createScriptFile(folderPath, fileName, content, coverFile = false) {
+  mkdirSync(folderPath);
 
-  mkdirSync(`${filePath}/develop/assists/`);
-
-  const result = writeFileSync(
-    `${filePath}/develop/assists/${fileName}`,
-    content,
-    {
-      coverFile: !!coverFile,
-    },
-  );
+  const result = writeFileSync(`${folderPath}/${fileName}`, content, {
+    coverFile: !!coverFile,
+  });
 
   if (result) {
     promptSuccess(`${fileName} create success`);
@@ -63,7 +51,7 @@ module.exports = {
 };
 `;
 
-  return createScriptFile('config/index.js', content, currentDir, false);
+  return createScriptFile(`${currentDir}/config`, 'index.js', content, false);
 }
 
 function createCleanScriptFile(currentDir = '.') {
@@ -75,7 +63,7 @@ const { cleanCommand, cleanCollection } = require('./config');
 clean(cleanCommand, cleanCollection);
 `;
 
-  return createScriptFile('clean.js', content, currentDir, true);
+  return createScriptFile(currentDir, 'clean.js', content, currentDir, true);
 }
 
 function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
@@ -89,9 +77,9 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
 
   try {
     createScriptFile(
+      currentDir,
       'package.update.special.version.js',
       content,
-      currentDir,
       true,
     );
   } catch (error) {
@@ -110,9 +98,9 @@ installGlobalDevDependencePackages(developDependencePackageCollection);
 
   try {
     createScriptFile(
+      currentDir,
       'install.global.develop.dependence.js',
       content,
-      currentDir,
       true,
     );
   } catch (error) {
@@ -251,7 +239,7 @@ configEnvironment({
 `;
 
   try {
-    createScriptFile('config.environment.js', content, currentDir, true);
+    createScriptFile(currentDir, 'config.environment.js', content, true);
   } catch (error) {
     promptError(error);
   }
