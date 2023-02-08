@@ -13,6 +13,8 @@ function adjustChildrenPackageJson(cmd) {
 }
 
 function updateSpecialPackageVersion(packageList) {
+  exec('npm run z:initial:environment');
+
   const packages = packageList.join(' ');
 
   const ncuCommand = `npx ncu -u ${packages} --packageFile package.json`;
@@ -27,6 +29,8 @@ function updateSpecialPackageVersion(packageList) {
 }
 
 function updateAllPackageVersion() {
+  exec('npm run z:initial:environment');
+
   const ncuCommand = `npx ncu -u --packageFile package.json`;
 
   promptInfo(`all packages version will update`);

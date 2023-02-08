@@ -24,6 +24,9 @@ const {
   ignoreFile: eslintIgnoreFile,
   configFile: eslintConfigFile,
   ruleFile: eslintRuleFile,
+  extendFile: eslintExtendFile,
+  parserFile: eslintParserFile,
+  pluginFile: eslintPluginFile,
 } = require('../templates/eslint.template');
 const {
   attributeFile: gitAttributeFile,
@@ -376,6 +379,12 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   writeFileWithOptionsSync(eslintConfigFile);
 
   writeFileWithOptionsSync(eslintRuleFile);
+
+  writeFileWithOptionsSync(eslintExtendFile);
+
+  writeFileWithOptionsSync(eslintParserFile);
+
+  writeFileWithOptionsSync(eslintPluginFile);
 
   //#endregion
 
