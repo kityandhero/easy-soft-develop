@@ -4,6 +4,7 @@ const {
   customChildPackageFile,
   customMainPackageFile,
 } = require('../templates/package.template');
+const { fileGlobalHeader } = require('../templates/template.config');
 const {
   promptSuccess,
   promptInfo,
@@ -45,8 +46,7 @@ function createScriptFile(
 }
 
 function createCleanScriptFile(currentDir = '.') {
-  const content = `/* eslint-disable import/no-commonjs */
-
+  const content = `${fileGlobalHeader}
 const { clean } = require('easy-soft-develop');
 
 clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
@@ -56,8 +56,7 @@ clean('',['yarn-error.log','yarn.lock','package-lock.json','src/.umi']);
 }
 
 function createPackageCheckSpecialVersionScriptFile(currentDir = '.') {
-  const content = `/* eslint-disable import/no-commonjs */
-
+  const content = `${fileGlobalHeader}
 const { updateSpecialPackageVersion } = require('easy-soft-develop');
 
 const packageList = [];
@@ -78,8 +77,7 @@ updateSpecialPackageVersion(packageList);
 }
 
 function createInstallGlobalDevDependenceScriptFile(currentDir = '.') {
-  const content = `/* eslint-disable import/no-commonjs */
-
+  const content = `${fileGlobalHeader}
 const { installGlobalDevDependencePackages } = require('easy-soft-develop');
 
 const packageList = [];
@@ -100,8 +98,7 @@ installGlobalDevDependencePackages(packageList);
 }
 
 function createConfigEnvironmentScriptFiles(currentDir = '.') {
-  const content = `/* eslint-disable import/no-commonjs */
-
+  const content = `${fileGlobalHeader}
 const { configEnvironment } = require('easy-soft-develop');
 
 const eslintFile = require('../config/eslint/template/content');

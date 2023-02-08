@@ -44,7 +44,7 @@ const { generalConfig } = require('./develop/config/stylelint/config');
 module.exports = generalConfig;
 \`;
 
-const packageContent = \`/* eslint-disable import/no-commonjs */
+const packageContent = \`${fileGlobalHeader}
 const { generalConfig } = require('../../develop/config/stylelint/config');
 
 module.exports = generalConfig;
