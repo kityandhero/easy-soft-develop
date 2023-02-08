@@ -1,5 +1,4 @@
 const {
-  mkdirRelativeSync,
   checkStringIsEmpty,
   promptError,
   promptSuccess,
@@ -8,6 +7,7 @@ const {
   promptInfo,
   promptNewLine,
   writeFileWithOptionsSync,
+  mkdirSync,
 } = require('../tools/meta');
 const { createDevelopScriptFiles } = require('../tools/develop.assist');
 const { cd, exec } = require('../tools/shell');
@@ -57,7 +57,7 @@ const {
 } = require('../templates/stylelint.template');
 
 function createLernaProjectFolder(name) {
-  mkdirRelativeSync(name);
+  name;
 
   promptSuccess(`step *: create folder ${name} success`);
 }
@@ -138,9 +138,9 @@ function createLernaConfigFile(lernaName) {
 }
 
 function createProjectFolder(name) {
-  mkdirRelativeSync(`./packages/`);
-  mkdirRelativeSync(`./packages/${name}`);
-  mkdirRelativeSync(`./packages/${name}/src`);
+  mkdirSync(`./packages/`);
+  mkdirSync(`./packages/${name}`);
+  mkdirSync(`./packages/${name}/src`);
 
   promptSuccess(`step *: create packages folder success`);
 }
@@ -213,9 +213,9 @@ auto-install-peers=true`,
 }
 
 function createDevelopFolder() {
-  mkdirRelativeSync(`./develop`);
-  mkdirRelativeSync(`./develop/assists`);
-  mkdirRelativeSync(`./develop/config`);
+  mkdirSync(`./develop`);
+  mkdirSync(`./develop/assists`);
+  mkdirSync(`./develop/config`);
 
   writeFileWithOptionsSync(editorContentFile);
 
@@ -281,7 +281,7 @@ function createDevelopFolder() {
 }
 
 function createHusky() {
-  mkdirRelativeSync(`./.husky`);
+  mkdirSync(`./.husky`);
 
   const commitMsg = `#!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
@@ -303,7 +303,7 @@ npx commitlint -e $HUSKY_GIT_PARAMS -V
 }
 
 function createVscode() {
-  mkdirRelativeSync(`./.vscode`);
+  mkdirSync(`./.vscode`);
 
   const settingJson = {
     'cSpell.words': [
@@ -329,7 +329,7 @@ function createVscode() {
 }
 
 function configEnvironment() {
-  mkdirRelativeSync(`./develop`);
+  mkdirSync(`./develop`);
 
   promptSuccess(`step *: config environment`);
 
@@ -370,7 +370,7 @@ function createLernaProject(name) {
   }
   const lernaName = `lerna-${name}`;
 
-  createLernaProjectFolder(lernaName);
+  createLernaProjectFolder(`./${lernaName}`);
 
   cd(`./${lernaName}`);
 

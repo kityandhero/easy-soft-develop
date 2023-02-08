@@ -95,18 +95,6 @@ function mkdirSync(path) {
   fs.mkdirSync(path, { recursive: true });
 }
 
-function mkdirRelativeSync(path) {
-  const currentPath = resolvePath('./');
-
-  if (checkStringIsEmpty(path)) {
-    promptError('relative path disallow empty');
-
-    return;
-  }
-
-  fs.mkdirSync(`${currentPath}/${path}`, { recursive: true });
-}
-
 function writeFileSync(path, content, options = { coverFile: false }) {
   const { coverFile } = options;
 
@@ -131,7 +119,7 @@ function writeFileWithFolderAndNameSync(
   fileContent,
   coverFile = false,
 ) {
-  mkdirRelativeSync(folderPath);
+  mkdirSync(folderPath);
 
   return writeFileSync(`${folderPath}/${fileName}`, fileContent, {
     coverFile: coverFile,
@@ -144,8 +132,6 @@ function writeFileWithOptionsSync({
   fileContent,
   coverFile = false,
 }) {
-
-
   return writeFileWithFolderAndNameSync(
     folderPath,
     fileName,
@@ -192,7 +178,6 @@ module.exports = {
   isArray,
   assignObject,
   mkdirSync,
-  mkdirRelativeSync,
   readJsonFileSync,
   readJsonFileRelativeSync,
   writeJsonFileSync,
