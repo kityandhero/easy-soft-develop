@@ -190,7 +190,7 @@ function createVscode() {
   });
 }
 
-function configEnvironment() {
+function initialEnvironment() {
   mkdirSync(`./develop`);
 
   promptSuccess(`step *: config environment`);
@@ -251,7 +251,7 @@ function createLernaProject(name) {
   createHusky();
   createVscode();
 
-  configEnvironment();
+  initialEnvironment();
 }
 
 module.exports = { createLernaProject };

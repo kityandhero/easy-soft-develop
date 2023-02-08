@@ -105,7 +105,7 @@ function adjustChildrenPackageJson({ scripts }) {
   });
 }
 
-function configEnvironment({
+function initialEnvironment({
   mainFileContentList = [],
   packageFileContentList = [],
   mainScripts = {},
@@ -132,4 +132,4 @@ function configEnvironment({
   prettierAllPackageJson();
 }
 
-module.exports = { configEnvironment };
+module.exports = { initialEnvironment };

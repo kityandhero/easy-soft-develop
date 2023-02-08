@@ -6,7 +6,7 @@ const {
   createInstallGlobalDevDependenceScriptFile,
   createDevelopFiles,
 } = require('./tools/develop.file');
-const { configEnvironment } = require('./tools/config.environment');
+const { initialEnvironment } = require('./tools/config.environment');
 const {
   prettierAllPackageJson,
   prettierCurrentPackageJson,
@@ -30,7 +30,7 @@ const { sleep } = require('./tools/sleep');
 module.exports = {
   clean,
   commitRefresh,
-  configEnvironment,
+  initialEnvironment,
   installGlobalDevelopDependencePackages,
   loopPackage,
   checkAllPackageVersion,

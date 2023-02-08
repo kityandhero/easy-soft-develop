@@ -195,7 +195,7 @@ installGlobalDevDependencePackages(developDependencePackageCollection);
 
 function createInitialEnvironmentScriptFiles() {
   const content = `${fileGlobalHeader}
-const { configEnvironment } = require('easy-soft-develop');
+const { initialEnvironment } = require('easy-soft-develop');
 
 const eslintFile = require('../config/eslint/template/content');
 const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
@@ -309,7 +309,7 @@ const packageFileContentList = [
   },
 ];
 
-configEnvironment({
+initialEnvironment({
   mainFileContentList: mainFileContentList,
   packageFileContentList: packageFileContentList,
   mainScripts: {
