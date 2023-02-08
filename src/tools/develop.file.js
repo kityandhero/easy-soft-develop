@@ -333,18 +333,6 @@ configEnvironment({
   } catch (error) {
     promptError(error);
   }
-
-  //#region package.json
-
-  writeFileWithOptionsSync(globalChildPackageFile);
-
-  writeFileWithOptionsSync(globalMainPackageFile);
-
-  writeFileWithOptionsSync(customChildPackageFile);
-
-  writeFileWithOptionsSync(customMainPackageFile);
-
-  //#endregion
 }
 
 function createDevelopFiles(waitMessage = '', successMessage = '') {
