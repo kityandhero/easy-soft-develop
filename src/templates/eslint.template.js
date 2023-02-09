@@ -146,7 +146,6 @@ const typescriptRules = {
 };
 
 const unicornRules = {
-  'unicorn/no-null': 0,
   'unicorn/filename-case': [
     'error',
     {
@@ -158,6 +157,8 @@ const unicornRules = {
       },
     },
   ],
+  'unicorn/no-null': 0,
+  'unicorn/no-this-assignment': 0,
 };
 
 const compatRules = {
