@@ -3,12 +3,14 @@ const { fileGlobalHeader } = require('./template.config');
 const folderPath = './develop/config/eslint';
 
 const ignoreFileContent = `${fileGlobalHeader}
-const content = \`**/public
+const content = \`#
+**/public
 **/lib
 **/es
 **/.history
 **/.vs
 **/.swc
+
 *.d.ts
 *.log
 *.zip
@@ -16,6 +18,10 @@ const content = \`**/public
 *.7z
 *.min.js
 rollup.config-*.cjs
+
+.eslintrc.js
+.prettierrc.js
+.stylelintrc.js
 \`;
 
 module.exports = {
