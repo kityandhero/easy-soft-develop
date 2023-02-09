@@ -71,7 +71,15 @@ module.exports = {
       'prettier',
       ...extendCollection,
     ],
-    env: { es6: true },
+    env: {
+      es6: true,
+      browser: true,
+      commonjs: true,
+      jest: true,
+      worker: true,
+      shelljs: true,
+      node: true,
+    },
     plugins: [
       'unicorn',
       'simple-import-sort',
@@ -154,6 +162,7 @@ const typescriptRules = {
 };
 
 const unicornRules = {
+  'unicorn/no-null': 0,
   'unicorn/filename-case': [
     'error',
     {
