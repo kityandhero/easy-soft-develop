@@ -348,10 +348,12 @@ const extendFile = {
 
 const pluginEmbedFileContent = `${fileGlobalHeader}
 const plugins = [
-  '@babel/plugin-proposal-decorators',
-  {
-    legacy: true,
-  },
+  [
+    '@babel/plugin-proposal-decorators',
+    {
+      legacy: true,
+    },
+  ],
 ];
 
 module.exports = {
