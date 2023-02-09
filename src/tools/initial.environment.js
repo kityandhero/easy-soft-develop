@@ -82,7 +82,7 @@ function adjustMainPackageJson({ scripts }) {
 }
 
 function adjustChildrenPackageJson({ scripts }) {
-  loopPackage(({ absolutePath }) => {
+  loopPackage(({ name, absolutePath }) => {
     const itemPath = absolutePath;
 
     const childPackageJsonPath = `${itemPath}/package.json`;
@@ -93,7 +93,7 @@ function adjustChildrenPackageJson({ scripts }) {
 
     writeJsonFileSync(childPackageJsonPath, packageJson, { coverFile: true });
 
-    promptSuccess('adjust child package.json success');
+    promptSuccess(`adjust ${name} package.json success`);
     promptEmptyLine();
   });
 }
