@@ -28,6 +28,8 @@ const {
   ruleEmbedFile: eslintEmbedRuleFile,
   extendFile: eslintExtendFile,
   parserFile: eslintParserFile,
+  pluginEmbedFile: eslintPluginEmbedFile,
+  pluginCustomFile: eslintPluginCustomFile,
   pluginFile: eslintPluginFile,
   settingsCustomFile: eslintSettingsCustomFile,
   settingsEmbedFile: eslintSettingsEmbedFile,
@@ -399,6 +401,10 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   writeFileWithOptionsSync(eslintExtendFile);
 
   writeFileWithOptionsSync(eslintParserFile);
+
+  writeFileWithOptionsSync(eslintPluginEmbedFile);
+
+  writeFileWithOptionsSync(eslintPluginCustomFile);
 
   writeFileWithOptionsSync(eslintPluginFile);
 

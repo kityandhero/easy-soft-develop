@@ -346,10 +346,53 @@ const extendFile = {
   fileContent: extendFileContent,
 };
 
-const pluginFileContent = `${fileGlobalHeader}
+const pluginEmbedFileContent = `${fileGlobalHeader}
+const plugins = [
+  '@babel/plugin-proposal-decorators',
+  {
+    legacy: true,
+  },
+];
+
 module.exports = {
-  pluginCollection: [],
-}`;
+  pluginCollection: {
+    ...plugins,
+  },
+};
+`;
+
+const pluginEmbedFile = {
+  folderPath: `${folderPath}/config/items/plugins`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: pluginEmbedFileContent,
+};
+
+const pluginCustomFileContent = `${fileGlobalHeader}
+const plugins = [];
+
+module.exports = {
+  pluginCollection: {
+    ...plugins,
+  },
+};
+`;
+
+const pluginCustomFile = {
+  folderPath: `${folderPath}/config/items/plugins`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: pluginCustomFileContent,
+};
+
+const pluginFileContent = `${fileGlobalHeader}
+const { pluginCollection: embedPlugins } = require('./embed');
+const { pluginCollection: customPlugins } = require('./custom');
+
+module.exports = {
+  pluginCollection: [...embedPlugins, ...customPlugins],
+};
+`;
 
 const pluginFile = {
   folderPath: `${folderPath}/config/items/plugins`,
@@ -367,7 +410,6 @@ module.exports = {
     },
   },
 }`;
-
 const parserFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'index.js',
@@ -383,6 +425,8 @@ module.exports = {
   ruleFile,
   configFile,
   extendFile,
+  pluginEmbedFile,
+  pluginCustomFile,
   pluginFile,
   parserFile,
   settingsEmbedFile,
