@@ -16,6 +16,7 @@ function getGlobalPackages() {
     '@babel/plugin-transform-runtime',
     '@babel/preset-env',
     '@babel/preset-react',
+    '@babel/runtime',
   ]);
 
   packages = packages.concat([
@@ -59,13 +60,7 @@ function getGlobalPackages() {
     'stylelint-config-standard',
   ]);
 
-  packages = packages.concat(
-    'rimraf',
-    'lint-staged',
-    'husky',
-    'shelljs',
-    'terminal-kit',
-  );
+  packages = packages.concat('rimraf', 'lint-staged', 'husky');
 
   packages = packages.concat('easy-soft-develop');
 
