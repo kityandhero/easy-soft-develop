@@ -355,9 +355,7 @@ const plugins = [
 ];
 
 module.exports = {
-  pluginCollection: {
-    ...plugins,
-  },
+  pluginCollection: [...plugins],
 };
 `;
 
@@ -372,9 +370,7 @@ const pluginCustomFileContent = `${fileGlobalHeader}
 const plugins = [];
 
 module.exports = {
-  pluginCollection: {
-    ...plugins,
-  },
+  pluginCollection: [...plugins],
 };
 `;
 
