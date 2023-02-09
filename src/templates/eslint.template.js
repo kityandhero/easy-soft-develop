@@ -119,7 +119,7 @@ const configFile = {
   fileContent: configFileContent,
 };
 
-const ruleFileContent = `${fileGlobalHeader}
+const ruleEmbedFileContent = `${fileGlobalHeader}
 const coreRules = {
   camelias: 0,
   'no-bitwise': 0,
@@ -236,10 +236,46 @@ module.exports = {
 };
 `;
 
+const ruleEmbedFile = {
+  folderPath: `${folderPath}/config/items/rules`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: ruleEmbedFileContent,
+};
+
+const ruleCustomFileContent = `${fileGlobalHeader}
+const customRules = {};
+
+module.exports = {
+  rules: {
+    ...customRules,
+  },
+};
+`;
+
+const ruleCustomFile = {
+  folderPath: `${folderPath}/config/items/rules`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: ruleCustomFileContent,
+};
+
+const ruleFileContent = `${fileGlobalHeader}
+const { rules as embedRules } = require('./embed');
+const { rules as customRules } = require('./custom');
+
+module.exports = {
+  rules: {
+    ...embedRules,
+    ...customRules,
+  },
+};
+`;
+
 const ruleFile = {
   folderPath: `${folderPath}/config/items/rules`,
   fileName: 'index.js',
-  coverFile: false,
+  coverFile: true,
   fileContent: ruleFileContent,
 };
 
@@ -287,6 +323,8 @@ const parserFile = {
 module.exports = {
   ignoreFile,
   contentFile,
+  ruleEmbedFile,
+  ruleCustomFile,
   ruleFile,
   configFile,
   extendFile,

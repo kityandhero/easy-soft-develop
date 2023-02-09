@@ -24,6 +24,8 @@ const {
   ignoreFile: eslintIgnoreFile,
   configFile: eslintConfigFile,
   ruleFile: eslintRuleFile,
+  ruleCustomFile: eslintCustomRuleFile,
+  ruleEmbedFile: eslintEmbedRuleFile,
   extendFile: eslintExtendFile,
   parserFile: eslintParserFile,
   pluginFile: eslintPluginFile,
@@ -378,6 +380,10 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   writeFileWithOptionsSync(eslintIgnoreFile);
 
   writeFileWithOptionsSync(eslintConfigFile);
+
+  writeFileWithOptionsSync(eslintCustomRuleFile);
+
+  writeFileWithOptionsSync(eslintEmbedRuleFile);
 
   writeFileWithOptionsSync(eslintRuleFile);
 
