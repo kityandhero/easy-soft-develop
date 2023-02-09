@@ -383,13 +383,6 @@ const plugins = [
   'simple-import-sort',
   'import',
   'prettier',
-  [
-    '@babel/plugin-proposal-decorators',
-    {
-      legacy: true,
-    },
-  ],
-  "@babel/plugin-proposal-class-properties",
 ];
 
 module.exports = {
