@@ -1,3 +1,5 @@
+const { exec } = require('./tools/meta');
+const { sleep } = require('./tools/sleep');
 const { clean } = require('./tools/clean');
 const { commitRefresh } = require('./tools/commit.refresh');
 const {
@@ -24,8 +26,9 @@ const {
   updateSpecialPackageVersion,
   updateAllPackageVersion,
 } = require('./tools/package.update');
-const { exec } = require('./tools/meta');
-const { sleep } = require('./tools/sleep');
+const {
+  updatePackageFromPackage,
+} = require('./tools/update.package.from.package');
 
 module.exports = {
   clean,
@@ -46,4 +49,5 @@ module.exports = {
   prettierChangeFile,
   prettierAllPackageJson,
   prettierCurrentPackageJson,
+  updatePackageFromPackage,
 };

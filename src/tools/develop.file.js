@@ -123,11 +123,19 @@ const developDependencePackageCollection = [];
 
 const updateSpecialPackageCollection = [];
 
+const updatePackageFromPackageOptions={
+  agent: '',
+  localFile: '',
+  packageUrl: '',
+  repo: ''
+}
+
 module.exports = {
   cleanCommand,
   cleanCollection,
   developDependencePackageCollection,
   updateSpecialPackageCollection,
+  updatePackageFromPackageOptions,
 };
 `;
 
@@ -146,6 +154,18 @@ const { clean } = require('easy-soft-develop');
 const { cleanCommand, cleanCollection } = require('./config');
 
 clean(cleanCommand, cleanCollection);
+`;
+
+  return createScriptFile('./develop/assists', 'clean.js', content, true);
+}
+
+function createUpdatePackageFromPackageScriptFile() {
+  const content = `${fileGlobalHeader}
+const { updatePackageFromPackageOptions } = require('easy-soft-develop');
+
+const { updatePackageFromPackage } = require('./config');
+
+updatePackageFromPackage(updatePackageFromPackageOptions);
 `;
 
   return createScriptFile('./develop/assists', 'clean.js', content, true);
@@ -416,6 +436,8 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 
   createCleanScriptFile();
 
+  createUpdatePackageFromPackageScriptFile();
+
   createPackageCheckSpecialVersionScriptFile();
 
   createInstallGlobalDevDependenceScriptFile();
@@ -440,4 +462,5 @@ module.exports = {
   createInstallGlobalDevDependenceScriptFile,
   createInitialEnvironmentScriptFiles,
   createDevelopFiles,
+  createUpdatePackageFromPackageScriptFile,
 };
