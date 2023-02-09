@@ -18,9 +18,9 @@ function createMainFile(fileWithContentCollection) {
   }
 
   fileWithContentCollection.forEach((o) => {
-    const { name, content } = o;
+    const { name, content, coverFile } = o;
 
-    writeFileSync(name, content);
+    writeFileSync(name, content, { coverFile });
   });
 
   const log = `main files [${fileWithContentCollection
@@ -43,9 +43,9 @@ function createPackageFile(fileWithContentCollection) {
     }
 
     fileWithContentCollection.forEach((o) => {
-      const { name, content } = o;
+      const { name, content, coverFile } = o;
 
-      writeFileSync(`${itemPath}/${name}`, content);
+      writeFileSync(`${itemPath}/${name}`, content, { coverFile });
     });
   });
 
