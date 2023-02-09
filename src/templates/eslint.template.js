@@ -264,7 +264,7 @@ const ruleFile = {
   fileContent: ruleFileContent,
 };
 
-const settingsEmbedFileContent = `${fileGlobalHeader}
+const settingEmbedFileContent = `${fileGlobalHeader}
 const items = {
   'import/parsers': {
     '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -291,14 +291,14 @@ module.exports = {
 };
 `;
 
-const settingsEmbedFile = {
+const settingEmbedFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'embed.js',
   coverFile: true,
-  fileContent: settingsEmbedFileContent,
+  fileContent: settingEmbedFileContent,
 };
 
-const settingsCustomFileContent = `${fileGlobalHeader}
+const settingCustomFileContent = `${fileGlobalHeader}
 const items = {};
 
 module.exports = {
@@ -308,14 +308,14 @@ module.exports = {
 };
 `;
 
-const settingsCustomFile = {
+const settingCustomFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'custom.js',
   coverFile: false,
-  fileContent: settingsCustomFileContent,
+  fileContent: settingCustomFileContent,
 };
 
-const settingsFileContent = `${fileGlobalHeader}
+const settingFileContent = `${fileGlobalHeader}
 const { settings: embedSettings } = require('./embed');
 const { settings: customSettings } = require('./custom');
 
@@ -327,22 +327,62 @@ module.exports = {
 };
 `;
 
-const settingsFile = {
+const settingFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'index.js',
   coverFile: true,
-  fileContent: settingsFileContent,
+  fileContent: settingFileContent,
+};
+
+const extendEmbedFileContent = `${fileGlobalHeader}
+const extendCollection = [
+  'eslint:recommended',
+  'plugin:react/recommended',
+  'plugin:unicorn/recommended',
+  'plugin:promise/recommended',
+  'prettier',
+];
+
+module.exports = {
+  extendCollection: [...extendCollection],
+};
+`;
+
+const extendEmbedFile = {
+  folderPath: `${folderPath}/config/items/extends`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: extendEmbedFileContent,
+};
+
+const extendCustomFileContent = `${fileGlobalHeader}
+const extendCollection = [];
+
+module.exports = {
+  extendCollection: [...extendCollection],
+};
+`;
+
+const extendCustomFile = {
+  folderPath: `${folderPath}/config/items/extends`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: extendCustomFileContent,
 };
 
 const extendFileContent = `${fileGlobalHeader}
+const { extendCollection: extendEmbedPlugins } = require('./embed');
+const { extendCollection: extendCustomPlugins } = require('./custom');
+
 module.exports = {
-  extendCollection: [],
-}`;
+  extendCollection: [...extendEmbedPlugins, ...extendCustomPlugins],
+};
+`;
 
 const extendFile = {
   folderPath: `${folderPath}/config/items/extends`,
   fileName: 'index.js',
-  coverFile: false,
+  coverFile: true,
   fileContent: extendFileContent,
 };
 
@@ -395,19 +435,54 @@ module.exports = {
 const pluginFile = {
   folderPath: `${folderPath}/config/items/plugins`,
   fileName: 'index.js',
-  coverFile: false,
+  coverFile: true,
   fileContent: pluginFileContent,
 };
 
-const parserFileContent = `${fileGlobalHeader}
-module.exports = {
-  parserOptions: {
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ['@babel/preset-react'],
-    },
+const parserEmbedFileContent = `${fileGlobalHeader}
+const parserOptions = {
+  requireConfigFile: false,
+  babelOptions: {
+    presets: ['@babel/preset-react'],
   },
-}`;
+};
+
+module.exports = {
+  parserOptions: { ...parserOptions },
+};
+`;
+
+const parserEmbedFile = {
+  folderPath: `${folderPath}/config/items/parser`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: parserEmbedFileContent,
+};
+
+const parserCustomFileContent = `${fileGlobalHeader}
+const parserOptions = {};
+
+module.exports = {
+  parserOptions: { ...parserOptions },
+};
+`;
+
+const parserCustomFile = {
+  folderPath: `${folderPath}/config/items/parser`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: parserCustomFileContent,
+};
+
+const parserFileContent = `${fileGlobalHeader}
+const { parserOptions: embedParserOptions } = require('./embed');
+const { parserOptions: customParserOptions } = require('./custom');
+
+module.exports = {
+  parserOptions: { ...embedParserOptions, ...customParserOptions },
+};
+`;
+
 const parserFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'index.js',
@@ -422,12 +497,16 @@ module.exports = {
   ruleCustomFile,
   ruleFile,
   configFile,
+  extendEmbedFile,
+  extendCustomFile,
   extendFile,
   pluginEmbedFile,
   pluginCustomFile,
   pluginFile,
+  parserEmbedFile,
+  parserCustomFile,
   parserFile,
-  settingsEmbedFile,
-  settingsCustomFile,
-  settingsFile,
+  settingEmbedFile,
+  settingCustomFile,
+  settingFile,
 };

@@ -23,17 +23,21 @@ const {
   contentFile: eslintContentFile,
   ignoreFile: eslintIgnoreFile,
   configFile: eslintConfigFile,
-  ruleFile: eslintRuleFile,
   ruleCustomFile: eslintCustomRuleFile,
   ruleEmbedFile: eslintEmbedRuleFile,
+  ruleFile: eslintRuleFile,
+  extendEmbedFile: eslintExtendCustomFile,
+  extendCustomFile: eslintExtendEmbedFile,
   extendFile: eslintExtendFile,
+  parserCustomFile: eslintParserCustomFile,
+  parserEmbedFile: eslintParserEmbedFile,
   parserFile: eslintParserFile,
   pluginEmbedFile: eslintPluginEmbedFile,
   pluginCustomFile: eslintPluginCustomFile,
   pluginFile: eslintPluginFile,
-  settingsCustomFile: eslintSettingsCustomFile,
-  settingsEmbedFile: eslintSettingsEmbedFile,
-  settingsFile: eslintSettingsFile,
+  settingCustomFile: eslintSettingCustomFile,
+  settingEmbedFile: eslintSettingEmbedFile,
+  settingFile: eslintSettingFile,
 } = require('../templates/eslint.template');
 const {
   attributeFile: gitAttributeFile,
@@ -392,19 +396,27 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 
   writeFileWithOptionsSync(eslintRuleFile);
 
-  writeFileWithOptionsSync(eslintSettingsCustomFile);
+  writeFileWithOptionsSync(eslintSettingCustomFile);
 
-  writeFileWithOptionsSync(eslintSettingsEmbedFile);
+  writeFileWithOptionsSync(eslintSettingEmbedFile);
 
-  writeFileWithOptionsSync(eslintSettingsFile);
+  writeFileWithOptionsSync(eslintSettingFile);
+
+  writeFileWithOptionsSync(eslintExtendCustomFile);
+
+  writeFileWithOptionsSync(eslintExtendEmbedFile);
 
   writeFileWithOptionsSync(eslintExtendFile);
 
+  writeFileWithOptionsSync(eslintParserCustomFile);
+
+  writeFileWithOptionsSync(eslintParserEmbedFile);
+
   writeFileWithOptionsSync(eslintParserFile);
 
-  writeFileWithOptionsSync(eslintPluginEmbedFile);
-
   writeFileWithOptionsSync(eslintPluginCustomFile);
+
+  writeFileWithOptionsSync(eslintPluginEmbedFile);
 
   writeFileWithOptionsSync(eslintPluginFile);
 
