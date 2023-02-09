@@ -279,6 +279,76 @@ const ruleFile = {
   fileContent: ruleFileContent,
 };
 
+const settingsEmbedFileContent = `${fileGlobalHeader}
+const items = {
+  'import/parsers': {
+    '@typescript-eslint/parser': ['.ts', '.tsx'],
+  },
+  'import/resolver': {
+    node: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      moduleDirectory: ['src', 'node_modules'],
+    },
+    typescript: {
+      // always try to resolve types under \`<root>@types\` directory even it doesn't contain any source code, like \`@types/unIst\`
+      alwaysTryTypes: true,
+
+      // use an array of glob patterns
+      directory: ['./tsconfig.json', './packages/*/tsconfig.json'],
+    },
+  },
+};
+
+module.exports = {
+  settings: {
+    ...items,
+  },
+};
+`;
+
+const settingsEmbedFile = {
+  folderPath: `${folderPath}/config/items/settings`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: settingsEmbedFileContent,
+};
+
+const settingsCustomFileContent = `${fileGlobalHeader}
+const items = {};
+
+module.exports = {
+  settings: {
+    ...items,
+  },
+};
+`;
+
+const settingsCustomFile = {
+  folderPath: `${folderPath}/config/items/settings`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: settingsCustomFileContent,
+};
+
+const settingsFileContent = `${fileGlobalHeader}
+const { settings: embedSettings } = require('./embed');
+const { settings: customSettings } = require('./custom');
+
+module.exports = {
+  settings: {
+    ...embedSettings,
+    ...customSettings,
+  },
+};
+`;
+
+const settingsFile = {
+  folderPath: `${folderPath}/config/items/settings`,
+  fileName: 'index.js',
+  coverFile: true,
+  fileContent: settingsFileContent,
+};
+
 const extendFileContent = `${fileGlobalHeader}
 module.exports = {
   extendCollection: [],
@@ -330,4 +400,7 @@ module.exports = {
   extendFile,
   pluginFile,
   parserFile,
+  settingsEmbedFile,
+  settingsCustomFile,
+  settingsFile,
 };

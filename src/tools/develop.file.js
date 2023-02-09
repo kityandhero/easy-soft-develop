@@ -29,6 +29,9 @@ const {
   extendFile: eslintExtendFile,
   parserFile: eslintParserFile,
   pluginFile: eslintPluginFile,
+  settingsCustomFile: eslintSettingsCustomFile,
+  settingsEmbedFile: eslintSettingsEmbedFile,
+  settingsFile: eslintSettingsFile,
 } = require('../templates/eslint.template');
 const {
   attributeFile: gitAttributeFile,
@@ -386,6 +389,12 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   writeFileWithOptionsSync(eslintEmbedRuleFile);
 
   writeFileWithOptionsSync(eslintRuleFile);
+
+  writeFileWithOptionsSync(eslintSettingsCustomFile);
+
+  writeFileWithOptionsSync(eslintSettingsEmbedFile);
+
+  writeFileWithOptionsSync(eslintSettingsFile);
 
   writeFileWithOptionsSync(eslintExtendFile);
 
