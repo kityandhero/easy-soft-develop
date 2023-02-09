@@ -261,8 +261,8 @@ const ruleCustomFile = {
 };
 
 const ruleFileContent = `${fileGlobalHeader}
-const { rules as embedRules } = require('./embed');
-const { rules as customRules } = require('./custom');
+const { rules: embedRules } = require('./embed');
+const { rules: customRules } = require('./custom');
 
 module.exports = {
   rules: {
