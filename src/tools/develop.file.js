@@ -174,11 +174,11 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
 
 function createInstallGlobalDevDependenceScriptFile() {
   const content = `${fileGlobalHeader}
-const { installGlobalDevDependencePackages } = require('easy-soft-develop');
+const { installGlobalDevelopDependencePackages } = require('easy-soft-develop');
 
 const { developDependencePackageCollection } = require('./config');
 
-installGlobalDevDependencePackages(developDependencePackageCollection);
+installGlobalDevelopDependencePackages(developDependencePackageCollection);
 `;
 
   try {
