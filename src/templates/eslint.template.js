@@ -394,6 +394,7 @@ const plugins = [
       legacy: true,
     },
   ],
+  "@babel/plugin-proposal-class-properties",
 ];
 
 module.exports = {
