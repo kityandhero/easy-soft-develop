@@ -65,11 +65,6 @@ const { settings } = require('./items/settings');
 module.exports = {
   generalConfig: {
     extends: [
-      'eslint:recommended',
-      'plugin:react/recommended',
-      'plugin:unicorn/recommended',
-      'plugin:promise/recommended',
-      'prettier',
       ...extendCollection,
     ],
     env: {
@@ -82,10 +77,6 @@ module.exports = {
       node: true,
     },
     plugins: [
-      'unicorn',
-      'simple-import-sort',
-      'import',
-      'prettier',
       ...pluginCollection,
     ],
     parser: '@babel/eslint-parser',
@@ -388,6 +379,10 @@ const extendFile = {
 
 const pluginEmbedFileContent = `${fileGlobalHeader}
 const plugins = [
+  'unicorn',
+  'simple-import-sort',
+  'import',
+  'prettier',
   [
     '@babel/plugin-proposal-decorators',
     {
