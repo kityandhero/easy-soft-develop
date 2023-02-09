@@ -5,7 +5,7 @@ const { commitRefresh } = require('./tools/commit.refresh');
 const {
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
-  createInstallGlobalDevDependenceScriptFile,
+  createInstallGlobalDevelopDependenceScriptFile,
   createDevelopFiles,
 } = require('./tools/develop.file');
 const { initialEnvironment } = require('./tools/initial.environment');
@@ -43,7 +43,7 @@ module.exports = {
   sleep,
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
-  createInstallGlobalDevDependenceScriptFile,
+  createInstallGlobalDevelopDependenceScriptFile,
   createDevelopFiles,
   prettierAllFile,
   prettierChangeFile,

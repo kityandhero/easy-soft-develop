@@ -208,7 +208,7 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
   }
 }
 
-function createInstallGlobalDevDependenceScriptFile() {
+function createInstallGlobalDevelopDependenceScriptFile() {
   const content = `${fileGlobalHeader}
 const { installGlobalDevelopDependencePackages } = require('easy-soft-develop');
 
@@ -478,7 +478,7 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 
   createPackageCheckSpecialVersionScriptFile();
 
-  createInstallGlobalDevDependenceScriptFile();
+  createInstallGlobalDevelopDependenceScriptFile();
 
   createInitialEnvironmentScriptFiles();
 
@@ -497,7 +497,7 @@ module.exports = {
   createNpmConfigFile,
   createCleanScriptFile,
   createPackageCheckSpecialVersionScriptFile,
-  createInstallGlobalDevDependenceScriptFile,
+  createInstallGlobalDevelopDependenceScriptFile,
   createInitialEnvironmentScriptFiles,
   createDevelopFiles,
   createUpdatePackageFromPackageScriptFile,
