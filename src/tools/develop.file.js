@@ -123,12 +123,12 @@ const developDependencePackageCollection = [];
 
 const updateSpecialPackageCollection = [];
 
-const updatePackageFromPackageOptions={
+const updatePackageFromPackageOptions = {
   agent: '',
   localFile: '',
   packageUrl: '',
-  repo: ''
-}
+  repo: '',
+};
 
 module.exports = {
   cleanCommand,
@@ -161,14 +161,19 @@ clean(cleanCommand, cleanCollection);
 
 function createUpdatePackageFromPackageScriptFile() {
   const content = `${fileGlobalHeader}
-const { updatePackageFromPackageOptions } = require('easy-soft-develop');
+const { updatePackageFromPackage } = require('easy-soft-develop');
 
-const { updatePackageFromPackage } = require('./config');
+const { updatePackageFromPackageOptions } = require('./config');
 
 updatePackageFromPackage(updatePackageFromPackageOptions);
 `;
 
-  return createScriptFile('./develop/assists', 'clean.js', content, true);
+  return createScriptFile(
+    './develop/assists',
+    'update.package.from.package.js',
+    content,
+    true,
+  );
 }
 
 function createPackageCheckSpecialVersionScriptFile() {
