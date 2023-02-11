@@ -248,6 +248,7 @@ const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
 const prettierFile = require('../config/prettier/template/content');
 const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
 const stylelintFile = require('../config/stylelint/template/content');
+const stylelintIgnoreFile = require('../config/stylelint/template/ignore.content');
 const editorFile = require('../config/editor/template/content');
 const editorAttributesFile = require('../config/git/template/attributes.content');
 const editorIgnoreFile = require('../config/git/template/ignore.content');
@@ -289,9 +290,19 @@ const mainFileContentList = [
     coverFile: true,
   },
   {
+    name: '.prettierignore',
+    content: prettierIgnoreContent,
+    coverFile: false,
+  },
+  {
     name: '.stylelintrc.js',
     content: mainStylelintContent,
     coverFile: true,
+  },
+  {
+    name: '.stylelintignore',
+    content: stylelintIgnoreFile,
+    coverFile: false,
   },
   {
     name: '.editorconfig',
@@ -301,11 +312,6 @@ const mainFileContentList = [
   {
     name: '.eslintignore',
     content: eslintIgnoreContent,
-    coverFile: false,
-  },
-  {
-    name: '.prettierignore',
-    content: prettierIgnoreContent,
     coverFile: false,
   },
   {
@@ -337,9 +343,19 @@ const packageFileContentList = [
     coverFile: true,
   },
   {
+    name: '.prettierignore',
+    content: prettierIgnoreContent,
+    coverFile: false,
+  },
+  {
     name: '.stylelintrc.js',
     content: packageStylelintContent,
     coverFile: true,
+  },
+  {
+    name: '.stylelintignore',
+    content: stylelintIgnoreFile,
+    coverFile: false,
   },
   {
     name: '.editorconfig',
@@ -349,11 +365,6 @@ const packageFileContentList = [
   {
     name: '.eslintignore',
     content: eslintIgnoreContent,
-    coverFile: false,
-  },
-  {
-    name: '.prettierignore',
-    content: prettierIgnoreContent,
     coverFile: false,
   },
   {
