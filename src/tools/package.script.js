@@ -48,6 +48,8 @@ function getGlobalPackages() {
     'eslint-plugin-unicorn',
   ]);
 
+  packages = packages.concat(['documentation']);
+
   packages = packages.concat([
     'prettier',
     'prettier-plugin-organize-imports',
