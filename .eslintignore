@@ -4,6 +4,7 @@
 **/.history
 **/.vs
 **/.swc
+**/docs
 **/develop
 
 *.d.ts

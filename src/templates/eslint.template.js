@@ -10,6 +10,7 @@ const content = \`#
 **/.history
 **/.vs
 **/.swc
+**/docs
 
 *.d.ts
 *.log
