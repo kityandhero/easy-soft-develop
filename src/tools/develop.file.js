@@ -269,6 +269,9 @@ const packagePrettierContent = prettierFile.packageContent;
 const prettierIgnoreContent = prettierIgnoreFile.content;
 
 const mainStylelintContent = stylelintFile.mainContent;
+
+const stylelintIgnoreContent = stylelintIgnoreFile.content;
+
 const packageStylelintContent = stylelintFile.packageContent;
 
 const editorConfigContent = editorFile.content;
@@ -301,7 +304,7 @@ const mainFileContentList = [
   },
   {
     name: '.stylelintignore',
-    content: stylelintIgnoreFile,
+    content: stylelintIgnoreContent,
     coverFile: false,
   },
   {
@@ -354,7 +357,7 @@ const packageFileContentList = [
   },
   {
     name: '.stylelintignore',
-    content: stylelintIgnoreFile,
+    content: stylelintIgnoreContent,
     coverFile: false,
   },
   {
