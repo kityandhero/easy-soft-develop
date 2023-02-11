@@ -3,6 +3,10 @@ module.exports = {
   env: {
     commonjs: true,
     es2021: true,
+    node: true,
+    shelljs: true,
+    worker: true,
+    jest: true,
   },
   plugins: ['prettier'],
   rules: {

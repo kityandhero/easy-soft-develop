@@ -20,7 +20,17 @@ function createMainFile(fileWithContentCollection) {
   fileWithContentCollection.forEach((o) => {
     const { name, content, coverFile } = o;
 
-    writeFileSync(name, content, { coverFile });
+    try {
+      writeFileSync(name, content, { coverFile });
+    } catch (error) {
+      console.log({
+        name,
+        content,
+        options: { coverFile },
+      });
+
+      throw new Error(error);
+    }
   });
 
   const log = `main files [${fileWithContentCollection
