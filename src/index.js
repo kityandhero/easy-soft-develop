@@ -18,7 +18,7 @@ const {
   prettierChangeFile,
 } = require('./tools/prettier.file');
 const {
-  installGlobalDevelopDependencePackages,
+  installDevelopDependencePackages,
 } = require('./tools/package.install.global.develop.dependence');
 const { loopPackage } = require('./tools/package.tools');
 const {
@@ -34,7 +34,7 @@ module.exports = {
   clean,
   commitRefresh,
   initialEnvironment,
-  installGlobalDevelopDependencePackages,
+  installDevelopDependencePackages,
   loopPackage,
   checkAllPackageVersion,
   updateSpecialPackageVersion,

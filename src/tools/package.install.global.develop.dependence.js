@@ -48,18 +48,32 @@ function adjustMainPackageJson(packageList) {
   writeJsonFileSync('./package.json', packageJson, { coverFile: true });
 }
 
-function adjustChildrenPackageJson(packageList) {
-  if (!isArray(packageList) || packageList.length <= 0) {
+function adjustChildrenPackageJson(packageList, specialPackageList) {
+  if (
+    !(
+      (isArray(packageList) && packageList.length > 0) ||
+      (isArray(specialPackageList) && specialPackageList.length > 0)
+    )
+  ) {
     return;
   }
 
   const o = buildPackageObject(packageList);
 
-  loopPackage(({ relativePath }) => {
+  loopPackage(({ name, relativePath }) => {
     const packageJson = readJsonFileSync(`${relativePath}/package.json`);
+
+    let specials = {};
+
+    if (specialPackageList[name]) {
+      if (isArray(specialPackageList[name])) {
+        specials = buildPackageObject(specialPackageList[name]);
+      }
+    }
 
     packageJson.devDependencies = assignObject(
       o,
+      specials,
       packageJson.devDependencies || {},
     );
 
@@ -69,14 +83,30 @@ function adjustChildrenPackageJson(packageList) {
   });
 }
 
-function installGlobalDevelopDependencePackages(packageList) {
-  const packages = getGlobalPackages().concat(packageList);
+function installDevelopDependencePackages({
+  globalDevelopPackageList,
+  mainDevelopPackageList = [],
+  childrenDevelopPackageList = [],
+  childrenSpecialDevelopPackageList = [],
+}) {
+  const packages = getGlobalPackages().concat(globalDevelopPackageList);
 
   promptInfo(`${packages.join()} will install`);
 
-  adjustChildrenPackageJson(packages);
+  adjustChildrenPackageJson(
+    packages.concat(
+      isArray(childrenDevelopPackageList) ? childrenDevelopPackageList : [],
+    ),
+    isArray(childrenSpecialDevelopPackageList)
+      ? childrenSpecialDevelopPackageList
+      : [],
+  );
 
-  adjustMainPackageJson(packages);
+  adjustMainPackageJson(
+    packages.concat(
+      isArray(mainDevelopPackageList) ? mainDevelopPackageList : [],
+    ),
+  );
 
   prettierAllPackageJson();
 
@@ -88,5 +118,5 @@ function installGlobalDevelopDependencePackages(packageList) {
 }
 
 module.exports = {
-  installGlobalDevelopDependencePackages,
+  installDevelopDependencePackages,
 };
