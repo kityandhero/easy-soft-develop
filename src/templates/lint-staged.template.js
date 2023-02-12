@@ -10,7 +10,7 @@ const content = \`{
     "npx prettier --cache --write"
   ],
   "*.{css,less,scss}": [
-    "stylelint",
+    "stylelint --allow-empty-input",
     "npx prettier --cache --write"
   ],
   "*.{ts,tsx}": [
