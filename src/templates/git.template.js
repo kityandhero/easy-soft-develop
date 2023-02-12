@@ -7,7 +7,7 @@ const content = \`*.js eol=lf
 *.jsx eol=lf
 *.json eol=lf
 *.css eol=lf
-*.{css,scss,less} eol=lf
+*.less eol=lf
 *.scss eol=lf
 \`;
 
