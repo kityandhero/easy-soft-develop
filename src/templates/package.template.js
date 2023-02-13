@@ -103,7 +103,6 @@ const environmentScript = {
 
 const lernaScript = {
   'z:lerna:publish': 'lerna publish --yes',
-  'prez:lerna:bootstrap': 'npm run z:change:nrm:local',
   'z:lerna:bootstrap':
     'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
 };
@@ -111,8 +110,10 @@ const lernaScript = {
 const installScript = {
   "z:reinstall": 'npm run z:lerna:bootstrap',
   "postinstall": "npm run z:initial:environment",
+  "prez:install.global.develop.dependence": "npm run z:change:nrm:local",
   "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
   "postz:install.global.develop.dependence": "npm run z:install",
+  "prez:install": "npm run z:change:nrm:local",
   "z:install": "pnpm install",
 };
 
