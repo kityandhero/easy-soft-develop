@@ -65,13 +65,21 @@ function adjustMainPackageJson({ scripts }) {
 
   const packageJson = readJsonFileSync(mainProjectPath);
 
+  const originalScript = packageJson.scripts;
+
+  Object.keys(originalScript).forEach((o) => {
+    if (o.startsWith('z:') || o.startsWith('prez:') || o.startsWith('postz:')) {
+      delete originalScript[o];
+    }
+  });
+
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
       'z:publish:npm-all': 'echo please supplement publish to npm commend',
     },
     globalScript,
-    packageJson.scripts || {},
+    originalScript || {},
     scripts,
   );
 
@@ -89,7 +97,19 @@ function adjustChildrenPackageJson({ scripts }) {
 
     const packageJson = readJsonFileSync(childPackageJsonPath);
 
-    packageJson.scripts = assignObject(packageJson.scripts || {}, scripts);
+    const originalScript = packageJson.scripts;
+
+    Object.keys(originalScript).forEach((o) => {
+      if (
+        o.startsWith('z:') ||
+        o.startsWith('prez:') ||
+        o.startsWith('postz:')
+      ) {
+        delete originalScript[o];
+      }
+    });
+
+    packageJson.scripts = assignObject(originalScript || {}, scripts);
 
     writeJsonFileSync(childPackageJsonPath, packageJson, { coverFile: true });
 
