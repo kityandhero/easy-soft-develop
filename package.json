@@ -46,7 +46,8 @@
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
     "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
     "test:inner:assignObject": "node ./test/assignObject.test.js",
-    "z:prettier:format:all": "npx prettier --write ."
+    "z:prettier:format:all": "npx prettier --write .",
+    "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete"
   },
   "dependencies": {
     "commander": "^10.0.0",
