@@ -63,6 +63,80 @@ const {
   configFile: stylelintConfigFile,
 } = require('../templates/stylelint.template');
 
+const childrenDevelopPackageConfigContent = `${fileGlobalHeader}
+const childrenDevelopPackageList = [];
+
+module.exports = {
+  childrenDevelopPackageList,
+};
+`;
+
+const childrenSpecialDevelopPackageConfigContent = `${fileGlobalHeader}
+const childrenSpecialDevelopPackageList = {};
+
+module.exports = {
+  childrenSpecialDevelopPackageList,
+};
+`;
+
+const cleanConfigContent = `${fileGlobalHeader}
+const cleanCommand = 'lerna clean -y';
+
+const cleanCollection = [];
+
+module.exports = {
+  cleanCommand,
+  cleanCollection,
+};
+`;
+
+const globalDevelopPackageConfigContent = `${fileGlobalHeader}
+const globalDevelopPackageList = [];
+
+module.exports = {
+  globalDevelopPackageList,
+};
+`;
+
+const mainDevelopPackageConfigContent = `${fileGlobalHeader}
+const mainDevelopPackageList = [];
+
+module.exports = {
+  mainDevelopPackageList,
+};
+`;
+
+const updatePackageFromPackageConfigContent = `${fileGlobalHeader}
+const updatePackageFromPackageOptions = {
+  agent: '',
+  localFile: '',
+  packageUrl: '',
+  repo: '',
+};
+
+module.exports = {
+  updatePackageFromPackageOptions,
+};
+`;
+
+const updateSpecialPackageConfigContent = `${fileGlobalHeader}
+const updateSpecialPackageCollection = [];
+
+module.exports = {
+  updateSpecialPackageCollection,
+};
+`;
+
+const assistConfigIndexContent = `${fileGlobalHeader}
+export { childrenDevelopPackageList } from './childrenDevelopPackage.config';
+export { childrenSpecialDevelopPackageList } from './childrenSpecialDevelopPackage.config';
+export { cleanCollection, cleanCommand } from './clean.config';
+export { globalDevelopPackageList } from './globalDevelopPackage.config';
+export { mainDevelopPackageList } from './mainDevelopPackage.config';
+export { updatePackageFromPackageOptions } from './updatePackageFromPackage.config';
+export { updateSpecialPackageCollection } from './updateSpecialPackage.config';
+`;
+
 function createScriptFile(folderPath, fileName, content, coverFile = false) {
   mkdirSync(folderPath);
 
@@ -125,36 +199,60 @@ auto-install-peers=true`,
 }
 
 function createAssistConfigScriptFile() {
-  const content = `${fileGlobalHeader}
-const cleanCommand = '';
+  createScriptFile(
+    `./develop/assists/config`,
+    'childrenDevelopPackage.config.js',
+    childrenDevelopPackageConfigContent,
+    false,
+  );
 
-const cleanCollection = [];
+  createScriptFile(
+    `./develop/assists/config`,
+    'childrenSpecialDevelopPackage.config.js',
+    childrenSpecialDevelopPackageConfigContent,
+    false,
+  );
 
-const developDependencePackageCollection = [];
+  createScriptFile(
+    `./develop/assists/config`,
+    'clean.config.js',
+    cleanConfigContent,
+    false,
+  );
 
-const updateSpecialPackageCollection = [];
+  createScriptFile(
+    `./develop/assists/config`,
+    'globalDevelopPackage.config.js',
+    globalDevelopPackageConfigContent,
+    false,
+  );
 
-const updatePackageFromPackageOptions = {
-  agent: '',
-  localFile: '',
-  packageUrl: '',
-  repo: '',
-};
+  createScriptFile(
+    `./develop/assists/config`,
+    'mainDevelopPackage.config.js',
+    mainDevelopPackageConfigContent,
+    false,
+  );
 
-module.exports = {
-  cleanCommand,
-  cleanCollection,
-  developDependencePackageCollection,
-  updateSpecialPackageCollection,
-  updatePackageFromPackageOptions,
-};
-`;
+  createScriptFile(
+    `./develop/assists/config`,
+    'updatePackageFromPackage.config.js',
+    updatePackageFromPackageConfigContent,
+    false,
+  );
 
-  return createScriptFile(
+  createScriptFile(
+    `./develop/assists/config`,
+    'updateSpecialPackage.config.js',
+    updateSpecialPackageConfigContent,
+    false,
+  );
+
+  createScriptFile(
     `./develop/assists/config`,
     'index.js',
-    content,
-    false,
+    assistConfigIndexContent,
+    true,
   );
 }
 
