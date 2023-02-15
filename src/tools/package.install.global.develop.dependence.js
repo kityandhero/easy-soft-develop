@@ -41,6 +41,7 @@ function adjustMainPackageJson(packageList) {
   const packageJson = readJsonFileSync('./package.json');
 
   packageJson.devDependencies = assignObject(
+    {},
     o,
     packageJson.devDependencies || {},
   );
@@ -75,6 +76,7 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
     });
 
     packageJson.devDependencies = assignObject(
+      {},
       o,
       specials,
       packageJson.devDependencies || {},
