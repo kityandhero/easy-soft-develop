@@ -65,11 +65,14 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
 
     let specials = {};
 
-    if (specialPackageList[name]) {
-      if (isArray(specialPackageList[name])) {
-        specials = buildPackageObject(specialPackageList[name]);
+    specialPackageList.forEach((o) => {
+      if (o.name === name) {
+        specials = {
+          ...specials,
+          ...buildPackageObject(o.packages),
+        };
       }
-    }
+    });
 
     packageJson.devDependencies = assignObject(
       o,
@@ -110,7 +113,21 @@ function installDevelopDependencePackages({
 
   prettierAllPackageJson();
 
-  updateSpecialPackageVersion(packages);
+  let packageListAll = [
+    ...packages,
+    ...mainDevelopPackageList,
+    ...childrenDevelopPackageList,
+  ];
+
+  childrenSpecialDevelopPackageList.forEach((o) => {
+    if (isArray(o.packages)) {
+      packageListAll = [...packageListAll, ...o.packages];
+    }
+  });
+
+  packageListAll = [...new Set(packageListAll)];
+
+  updateSpecialPackageVersion(packageListAll);
 
   exec('npm run z:install');
 
