@@ -486,7 +486,7 @@ module.exports = {
 const parserFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'index.js',
-  coverFile: false,
+  coverFile: true,
   fileContent: parserFileContent,
 };
 
