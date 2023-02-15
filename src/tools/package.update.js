@@ -1,11 +1,11 @@
 const { promptInfo, promptSuccess, exec } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
-function adjustMainPackageJson(cmd) {
+function adjustMainPackageJsonByCommand(cmd) {
   exec(cmd);
 }
 
-function adjustChildrenPackageJson(cmd) {
+function adjustChildrenPackageJsonByCommand(cmd) {
   loopPackage(({ name }) => {
     exec(`cd ./packages/${name} && ${cmd}`);
   });
@@ -20,9 +20,9 @@ function updateSpecialPackageVersion(packageList) {
 
   promptInfo(`${packageList.join()} will check update`);
 
-  adjustMainPackageJson(ncuCommand);
+  adjustMainPackageJsonByCommand(ncuCommand);
 
-  adjustChildrenPackageJson(ncuCommand);
+  adjustChildrenPackageJsonByCommand(ncuCommand);
 
   promptSuccess('check success');
 }
@@ -34,9 +34,9 @@ function updateAllPackageVersion() {
 
   promptInfo(`all packages version will update`);
 
-  adjustMainPackageJson(ncuCommand);
+  adjustMainPackageJsonByCommand(ncuCommand);
 
-  adjustChildrenPackageJson(ncuCommand);
+  adjustChildrenPackageJsonByCommand(ncuCommand);
 
   promptSuccess('update success, exec install with z:install');
 
@@ -48,9 +48,9 @@ function checkAllPackageVersion() {
 
   promptInfo(`all packages version will check update`);
 
-  adjustMainPackageJson(ncuCommand);
+  adjustMainPackageJsonByCommand(ncuCommand);
 
-  adjustChildrenPackageJson(ncuCommand);
+  adjustChildrenPackageJsonByCommand(ncuCommand);
 
   promptSuccess('update success, exec install with z:install');
 

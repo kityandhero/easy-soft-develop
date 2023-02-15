@@ -80,6 +80,12 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
       packageJson.devDependencies || {},
     );
 
+    console.log({
+      o,
+      specials,
+      all: packageJson.devDependencies,
+    });
+
     writeJsonFileSync(`${relativePath}/package.json`, packageJson, {
       coverFile: true,
     });
