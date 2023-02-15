@@ -92,13 +92,6 @@ function installDevelopDependencePackages({
   childrenDevelopPackageList = [],
   childrenSpecialDevelopPackageList = [],
 }) {
-  console.log({
-    globalDevelopPackageList,
-    mainDevelopPackageList,
-    childrenDevelopPackageList,
-    childrenSpecialDevelopPackageList,
-  });
-
   const packages = getGlobalPackages().concat(globalDevelopPackageList);
 
   promptInfo(`${packages.join()} will install`);
