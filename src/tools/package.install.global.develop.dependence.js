@@ -81,6 +81,7 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
     );
 
     console.log({
+      name: name,
       o,
       specials,
       all: packageJson.devDependencies,
