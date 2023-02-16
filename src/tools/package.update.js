@@ -1,12 +1,18 @@
-const { promptInfo, promptSuccess, exec } = require('./meta');
+const { promptInfo, promptSuccess, exec, promptEmptyLine } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
 function adjustMainPackageJsonByCommand(cmd) {
+  promptInfo(`update main command: ${cmd}`);
+
   exec(cmd);
 }
 
 function adjustChildrenPackageJsonByCommand(cmd) {
   loopPackage(({ name }) => {
+    const commandString = `cd ./packages/${name} && ${cmd}`;
+
+    promptInfo(`update child command: ${commandString}`);
+
     exec(`cd ./packages/${name} && ${cmd}`);
   });
 }
@@ -45,6 +51,8 @@ function updateAllPackageVersion() {
 
 function checkAllPackageVersion() {
   const ncuCommand = `npx ncu --packageFile package.json`;
+
+  promptEmptyLine();
 
   promptInfo(`all packages version will check update`);
 
