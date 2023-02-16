@@ -42,7 +42,7 @@ module.exports = generalConfig;
 \`;
 
 const packageContent = \`${fileGlobalHeader}
-var { generalConfig } = require("../../develop/config/prettier/config");
+const { generalConfig } = require("../../develop/config/prettier/config");
 
 module.exports = generalConfig;
 \`;
