@@ -36,6 +36,31 @@ function getArgCollection() {
   return process.argv;
 }
 
+/**
+ * Check value in the collection.
+ * @param {Array} collection value collection
+ * @param {*} target the target value will be checked
+ */
+function checkInCollection(collection, target) {
+  let result = false;
+
+  if (!isArray(collection)) {
+    return result;
+  }
+
+  collection.some((o) => {
+    if (o === target) {
+      result = true;
+
+      return true;
+    }
+
+    return false;
+  });
+
+  return result;
+}
+
 function checkStringIsEmpty(v) {
   v = ((v || null) == null ? '' : toString(v))
     .trim()
@@ -219,6 +244,7 @@ module.exports = {
   exec,
   cd,
   getArgCollection,
+  checkInCollection,
   existFileSync,
   existDirectorySync,
   writeFileSync,

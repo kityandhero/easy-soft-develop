@@ -1,3 +1,4 @@
+const { checkInCollection } = require('./meta');
 const {
   promptSuccess,
   writeFileSync,
@@ -60,16 +61,24 @@ function createPackageFile(fileWithContentCollection) {
   promptEmptyLine();
 }
 
-function adjustMainPackageJson({ scripts }) {
+function adjustMainPackageJsonScript({ scripts }) {
   const mainProjectPath = resolvePath(`./package.json`);
 
   const packageJson = readJsonFileSync(mainProjectPath);
 
   const originalScript = packageJson.scripts;
 
+  const ignoreDeleteScript = ['z:build:all', 'z:publish:npm-all'];
+
   Object.keys(originalScript).forEach((o) => {
-    if (o.startsWith('z:') || o.startsWith('prez:') || o.startsWith('postz:')) {
-      delete originalScript[o];
+    if (!checkInCollection(ignoreDeleteScript, o)) {
+      if (
+        o.startsWith('z:') ||
+        o.startsWith('prez:') ||
+        o.startsWith('postz:')
+      ) {
+        delete originalScript[o];
+      }
     }
   });
 
@@ -89,7 +98,7 @@ function adjustMainPackageJson({ scripts }) {
   promptEmptyLine();
 }
 
-function adjustChildrenPackageJson({ scripts }) {
+function adjustChildrenPackageJsonScript({ scripts }) {
   loopPackage(({ name, absolutePath }) => {
     const itemPath = absolutePath;
 
@@ -128,9 +137,9 @@ function initialEnvironment({
 
   createPackageFile(packageFileContentList || []);
 
-  adjustMainPackageJson({ scripts: mainScripts || {} });
+  adjustMainPackageJsonScript({ scripts: mainScripts || {} });
 
-  adjustChildrenPackageJson({ scripts: childScripts || {} });
+  adjustChildrenPackageJsonScript({ scripts: childScripts || {} });
 
   prettierAllPackageJson();
 }
