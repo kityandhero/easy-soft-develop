@@ -281,7 +281,7 @@ const { clean } = require('easy-soft-develop');
 
 const { cleanCommand, cleanCollection } = require('./config');
 
-clean(cleanCommand, cleanCollection);
+clean(cleanCommand, ...cleanCollection);
 `;
 
   return createScriptFile('./develop/assists', 'clean.js', content, true);
