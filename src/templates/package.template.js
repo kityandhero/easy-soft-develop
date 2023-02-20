@@ -4,7 +4,7 @@ const folderPath = './develop/config/package';
 
 const globalChildPackageFileContent = `${fileGlobalHeader}
 const commitScript = {
-  precommit: 'npm run z:lint:staged',
+  precommit: 'npm run z:lint:staged:quiet',
 };
 
 const documentationScript = {
@@ -24,7 +24,8 @@ const lintScript = {
   'z:lint:script:change': 'npx eslint --cache --ext .js,.jsx,.ts,.tsx ./src',
   'z:lint:script:change:fix': 'npx eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src',
   'postz:lint:script:change:fix': 'npm run z:prettier:format:change',
-  'z:lint:staged': 'npx lint-staged --quiet',
+  'z:lint:staged': 'npx lint-staged',
+  'z:lint:staged:quiet': 'npx lint-staged --quiet',
   'z:lint:style:all': 'npx stylelint --allow-empty-input "./src/**/*.{css,scss,less}"',
   'z:lint:style:all:fix': 'npx stylelint --allow-empty-input --fix "./src/**/*.{css,scss,less}"',
   'postz:lint:style:all:fix': 'npm run z:prettier:format:all',
@@ -61,7 +62,8 @@ const globalChildPackageFile = {
 
 const globalMainPackageFileContent = `${fileGlobalHeader}
 const lintScript = {
-  'z:lint:staged': 'npx lint-staged --quiet',
+  'z:lint:staged': 'npx lint-staged',
+  'z:lint:staged:quiet': 'npx lint-staged --quiet',
 };
 
 const prepareScript = {
@@ -124,7 +126,7 @@ const commitScript = {
   precz: 'npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push',
-  precommit: 'npm run z:lint:staged',
+  precommit: 'npm run z:lint:staged:quiet',
   "z:commit:refresh": "npx easy-soft-develop commit-refresh",
 };
 
