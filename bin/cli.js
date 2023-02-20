@@ -7,7 +7,7 @@ const createAssistScripts = require('../src/cliCollection/create-assist-scripts.
 const checkAllPackageVersion = require('../src/cliCollection/check-all-package-version');
 const updateAllPackageVersion = require('../src/cliCollection/update-all-package-version');
 const sleep = require('../src/cliCollection/sleep');
-const publish = require('../src/cliCollection/publish');
+const publishToNpm = require('../src/cliCollection/publish-to-npm');
 const commitRefresh = require('../src/cliCollection/commit-refresh');
 const createLernaProject = require('../src/cliCollection/create-lerna-project');
 const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
@@ -53,9 +53,9 @@ program
 
 program
   .command('publish')
-  .description('publish to npm by script "z:publish:npm-all"')
+  .description('publish public packages to npm')
   .action(() => {
-    publish.run();
+    publishToNpm.run();
   });
 
 program
