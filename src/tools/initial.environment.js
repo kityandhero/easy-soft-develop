@@ -68,7 +68,7 @@ function adjustMainPackageJsonScript({ scripts }) {
 
   const originalScript = packageJson.scripts;
 
-  const ignoreDeleteScript = ['z:build:all', 'z:publish:npm-all'];
+  const ignoreDeleteScript = ['z:build:all'];
 
   Object.keys(originalScript).forEach((o) => {
     if (!checkInCollection(ignoreDeleteScript, o)) {
@@ -85,7 +85,6 @@ function adjustMainPackageJsonScript({ scripts }) {
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
-      'z:publish:npm-all': 'echo please supplement publish to npm commend',
     },
     globalScript,
     originalScript || {},
