@@ -68,7 +68,7 @@ function adjustMainPackageJsonScript({ scripts }) {
 
   const originalScript = packageJson.scripts;
 
-  const ignoreDeleteScript = ['z:build:all'];
+  const ignoreDeleteScript = ['z:build:all', 'z:publish:npm-all'];
 
   Object.keys(originalScript).forEach((o) => {
     if (!checkInCollection(ignoreDeleteScript, o)) {
@@ -82,9 +82,18 @@ function adjustMainPackageJsonScript({ scripts }) {
     }
   });
 
+  const publishPackageNameList = [];
+
+  loopPackage(({ name }) => {
+    publishPackageNameList.push(name);
+  });
+
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
+      'z:publish:npm-all': `npx easy-soft-develop publish --package ${publishPackageNameList.join(
+        ',',
+      )}`,
     },
     globalScript,
     originalScript || {},

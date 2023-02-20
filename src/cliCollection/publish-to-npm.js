@@ -6,18 +6,32 @@ const {
   promptSuccess,
   promptError,
   cd,
+  checkStringIsEmpty,
+  checkInCollection,
 } = require('../tools/meta');
 
-exports.run = function () {
-  promptInfo('publish public package to npm');
+exports.run = function (s, o) {
+  const {
+    _optionValues: { packages },
+  } = o;
 
-  loopPackage(({ absolutePath }) => {
-    cd(absolutePath);
+  if (checkStringIsEmpty(packages)) {
+    exit();
+  }
 
-    try {
-      exec(`npm publish --registry https://registry.npmjs.org/`);
-    } catch (error) {
-      promptError(error);
+  const packageList = packages.split(',');
+
+  promptInfo('publish public packages to npm');
+
+  loopPackage(({ name, absolutePath }) => {
+    if (checkInCollection(packageList, name)) {
+      cd(absolutePath);
+
+      try {
+        exec(`npm publish --registry https://registry.npmjs.org/`);
+      } catch (error) {
+        promptError(error);
+      }
     }
   });
 

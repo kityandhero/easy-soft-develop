@@ -1,1 +1,1 @@
-export function run(): void;
+export function run(s: any, o: any): void;

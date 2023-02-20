@@ -54,8 +54,9 @@ program
 program
   .command('publish')
   .description('publish public packages to npm')
-  .action(() => {
-    publishToNpm.run();
+  .option('--packages <string>', 'the packages will publish')
+  .action((a, o) => {
+    publishToNpm.run(a, o);
   });
 
 program
