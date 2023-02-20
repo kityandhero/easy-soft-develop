@@ -8,6 +8,7 @@ const {
   cd,
   checkStringIsEmpty,
   checkInCollection,
+  promptEmptyLine,
 } = require('../tools/meta');
 
 exports.run = function (s, o) {
@@ -33,6 +34,8 @@ exports.run = function (s, o) {
         );
 
         exec(`npm publish --registry https://registry.npmjs.org/`);
+
+        promptEmptyLine();
       } catch (error) {
         promptError(error);
       }
