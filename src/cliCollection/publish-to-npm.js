@@ -28,6 +28,10 @@ exports.run = function (s, o) {
       cd(absolutePath);
 
       try {
+        promptInfo(
+          `package ${name}: npm publish --registry https://registry.npmjs.org/`,
+        );
+
         exec(`npm publish --registry https://registry.npmjs.org/`);
       } catch (error) {
         promptError(error);
