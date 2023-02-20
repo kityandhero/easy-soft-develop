@@ -82,9 +82,7 @@ const toolsScript = {
 const publishScript = {
   changelog:
     'lerna version --conventional-commits --no-push --no-git-tag-version',
-  'prez:publish-npm-all': 'npm run z:change:npm:registry:npm',
-  'z:publish-npm-all': 'npm run z:publish:npm-all',
-  'postz:publish-npm-all': 'npm run z:change:npm:registry:local',
+  'z:publish-npm-all': 'npx easy-soft-develop publish',
   'prez:publish:lerna': 'npm run z:change:npm:registry:npm',
   'z:publish:lerna': 'lerna updated && npm run z:lerna:publish',
   'postz:publish:lerna': 'npm run z:change:npm:registry:local && npm run z:publish-npm-all',
