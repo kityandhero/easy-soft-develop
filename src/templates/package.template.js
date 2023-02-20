@@ -61,7 +61,7 @@ const globalChildPackageFile = {
 
 const globalMainPackageFileContent = `${fileGlobalHeader}
 const lintScript = {
-  'z:lint:staged': 'npx lint-staged',
+  'z:lint:staged': 'npx lint-staged --quiet',
 };
 
 const prepareScript = {
