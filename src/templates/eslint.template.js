@@ -23,6 +23,7 @@ rollup.config-*.cjs
 .eslintrc.js
 .prettierrc.js
 .stylelintrc.js
+.lintstagedrc
 \`;
 
 module.exports = {
