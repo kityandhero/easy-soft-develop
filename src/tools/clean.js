@@ -67,10 +67,9 @@ function clean(preCmd, ...targets) {
       .join(' && ');
 
     promptInfo(`clean start`);
-    promptEmptyLine();
 
     if (preCmd) {
-      promptInfo(`clean by command: ${preCmd}`);
+      promptInfo(`clean with prepare command: ${preCmd}`);
 
       exec(preCmd);
     }
@@ -79,6 +78,7 @@ function clean(preCmd, ...targets) {
 
     adjustMainPackageJson(command);
 
+    promptEmptyLine();
     promptSuccess('clean success');
   } catch (error) {
     promptError(error);
