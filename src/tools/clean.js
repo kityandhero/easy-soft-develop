@@ -7,15 +7,9 @@ const {
 } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
-function adjustMainPackageJson(command) {
-  promptInfo(`clean main: ${command}`);
-
-  exec(command);
-}
-
-function tryCleanChildrenPackage(cmd, tryTimes) {
+function tryClean(cmd, tryTimes) {
   if (tryTimes > 5) {
-    promptInfo(`clean package fail, ignore`);
+    promptInfo(`clean fail, ignore`);
 
     return;
   }
@@ -29,8 +23,16 @@ function tryCleanChildrenPackage(cmd, tryTimes) {
   } catch (error) {
     tryTimes = tryTimes + 1;
 
-    tryCleanChildrenPackage(cmd, tryTimes);
+    tryClean(cmd, tryTimes);
   }
+}
+
+function adjustMainPackageJson(command) {
+  promptInfo(`clean main: ${command}`);
+
+  let tryTimes = 1;
+
+  tryClean(command, tryTimes);
 }
 
 function adjustChildrenPackageJson(command) {
@@ -41,7 +43,7 @@ function adjustChildrenPackageJson(command) {
 
     let tryTimes = 1;
 
-    tryCleanChildrenPackage(cmd, tryTimes);
+    tryClean(cmd, tryTimes);
   });
 }
 
