@@ -17,6 +17,12 @@ function adjustChildrenPackageJsonByCommand(cmd) {
   });
 }
 
+function checkEasySoftDevelopVersion() {
+  promptInfo('check easy-soft-develop version');
+
+  exec('ncu -g easy-soft-develop');
+}
+
 function updateSpecialPackageVersion(packageList) {
   exec('npm run z:initial:environment');
 
@@ -29,6 +35,8 @@ function updateSpecialPackageVersion(packageList) {
   adjustMainPackageJsonByCommand(ncuCommand);
 
   adjustChildrenPackageJsonByCommand(ncuCommand);
+
+  checkEasySoftDevelopVersion();
 
   promptSuccess('check success');
 }
@@ -47,6 +55,8 @@ function updateAllPackageVersion() {
   promptSuccess('update success, exec install with z:install');
 
   exec('npm run z:install');
+
+  checkEasySoftDevelopVersion();
 }
 
 function checkAllPackageVersion() {
@@ -63,6 +73,8 @@ function checkAllPackageVersion() {
   promptSuccess('update success, exec install with z:install');
 
   exec('npm run z:install');
+
+  checkEasySoftDevelopVersion();
 }
 
 module.exports = {
