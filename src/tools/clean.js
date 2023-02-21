@@ -72,6 +72,8 @@ function clean(preCmd, ...targets) {
       promptInfo(`clean with prepare command: ${preCmd}`);
 
       exec(preCmd);
+
+      promptEmptyLine();
     }
 
     adjustChildrenPackageJson(command);
