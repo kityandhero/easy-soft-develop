@@ -19,7 +19,9 @@ function adjustChildrenPackageJson(command) {
 
 function clean(preCmd, ...targets) {
   try {
-    const list = targets.push('node_modules');
+    const list = [...targets];
+
+    list.push('node_modules');
 
     const command = list
       .map((o) => {
