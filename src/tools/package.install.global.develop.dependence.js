@@ -93,6 +93,7 @@ function installDevelopDependencePackages({
   mainDevelopPackageList = [],
   childrenDevelopPackageList = [],
   childrenSpecialDevelopPackageList = [],
+  execInstall = true,
 }) {
   const packages = getGlobalPackages().concat(globalDevelopPackageList);
 
@@ -131,9 +132,13 @@ function installDevelopDependencePackages({
 
   updateSpecialPackageVersion(packageListAll);
 
-  exec('npm run z:install');
+  promptSuccess('append to dependence collection success');
 
-  promptSuccess('install success');
+  if (execInstall) {
+    exec('npm run z:install');
+
+    promptSuccess('install success');
+  }
 }
 
 module.exports = {

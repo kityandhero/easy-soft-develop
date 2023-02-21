@@ -76,8 +76,8 @@ const toolsScript = {
   'z:show:info':
     'echo node version && node --version && echo npm version && npm --version && echo ------------ && npx lerna ls -a -l',
   "z:show:package": "npx lerna ls -a -l",
-  "z:sleep": "easy-soft-develop sleep --second 2 --showInfo false",
-  "z:create:assist-scripts": "easy-soft-develop create-assist-scripts",
+  "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
+  "z:create:assist-scripts": "npx easy-soft-develop create-assist-scripts",
   "z:update:package-from-package": "node ./develop/assists/update-package-from-package.js",
 };
 
@@ -127,7 +127,7 @@ const commitScript = {
   cz: 'cz',
   postcz: 'git push',
   precommit: 'npm run z:lint:staged:quiet',
-  "z:commit:refresh": "easy-soft-develop commit-refresh",
+  "z:commit:refresh": "npx easy-soft-develop commit-refresh",
 };
 
 const prettierScript = {
