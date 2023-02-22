@@ -62,6 +62,8 @@ function getGlobalPackages() {
     'stylelint-config-standard',
   ]);
 
+  packages = packages.concat(['@typescript-eslint/parser']);
+
   packages = packages.concat('rimraf', 'lint-staged', 'husky');
 
   packages = packages.concat('easy-soft-develop');
