@@ -87,7 +87,7 @@ module.exports = {
     plugins: [
       ...pluginCollection,
     ],
-    parser: '@babel/eslint-parser',
+    parser: '@typescript-eslint/parser',
     parserOptions: parserOptions,
     rules: rules,
     settings: settings,
@@ -437,16 +437,7 @@ const pluginFile = {
 };
 
 const parserEmbedFileContent = `${fileGlobalHeader}
-const parserOptions = {
-  requireConfigFile: false,
-  babelOptions: {
-    presets: ['@babel/preset-react'],
-    plugins: [
-      ['@babel/plugin-proposal-decorators', { legacy: true }],
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
-    ],
-  },
-};
+const parserOptions = {};
 
 module.exports = {
   parserOptions: { ...parserOptions },

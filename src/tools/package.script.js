@@ -64,6 +64,8 @@ function getGlobalPackages() {
 
   packages = packages.concat(['@typescript-eslint/parser']);
 
+  packages = packages.concat(['@types/node']);
+
   packages = packages.concat('rimraf', 'lint-staged', 'husky');
 
   packages = packages.concat('easy-soft-develop');
