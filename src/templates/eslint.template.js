@@ -65,7 +65,7 @@ const contentFile = {
 
 const configFileContent = `${fileGlobalHeader}
 const { rules } = require('./items/rules');
-const { parserOptions } = require('./items/parser');
+const { parserJsOptions, parserTsOptions } = require('./items/parser');
 const { pluginCollection } = require('./items/plugins');
 const { extendCollection } = require('./items/extends');
 const { settings } = require('./items/settings');
@@ -84,11 +84,16 @@ module.exports = {
       shelljs: true,
       node: true,
     },
-    plugins: [
-      ...pluginCollection,
+    plugins: [...pluginCollection],
+    parser: '@babel/eslint-parser',
+    parserOptions: parserJsOptions,
+    overrides: [
+      {
+        files: ['*.ts', '*.tsx'],
+        parser: '@typescript-eslint/parser',
+        parserOptions: parserTsOptions,
+      },
     ],
-    parser: '@typescript-eslint/parser',
-    parserOptions: parserOptions,
     rules: rules,
     settings: settings,
   },
@@ -437,10 +442,26 @@ const pluginFile = {
 };
 
 const parserEmbedFileContent = `${fileGlobalHeader}
-const parserOptions = {};
+const parserJsOptions = {
+  requireConfigFile: false,
+  babelOptions: {
+    presets: ['@babel/preset-react'],
+    plugins: [
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+    ],
+  },
+};
+
+const parserTsOptions = {
+  ecmaFeatures: {
+    jsx: true,
+  },
+};
 
 module.exports = {
-  parserOptions: { ...parserOptions },
+  parserJsOptions: { ...parserJsOptions },
+  parserTsOptions: { ...parserTsOptions },
 };
 `;
 
@@ -452,10 +473,13 @@ const parserEmbedFile = {
 };
 
 const parserCustomFileContent = `${fileGlobalHeader}
-const parserOptions = {};
+const parserJsOptions = {};
+
+const parserTsOptions = {};
 
 module.exports = {
-  parserOptions: { ...parserOptions },
+  parserJsOptions: { ...parserJsOptions },
+  parserTsOptions: { ...parserTsOptions },
 };
 `;
 
@@ -467,11 +491,18 @@ const parserCustomFile = {
 };
 
 const parserFileContent = `${fileGlobalHeader}
-const { parserOptions: embedParserOptions } = require('./embed');
-const { parserOptions: customParserOptions } = require('./custom');
+const {
+  parserJsOptions: embedParserJsOptions,
+  parserTsOptions: embedParserTsOptions,
+} = require('./embed');
+const {
+  parserJsOptions: customParserJsOptions,
+  parserTsOptions: customParserTsOptions,
+} = require('./custom');
 
 module.exports = {
-  parserOptions: { ...embedParserOptions, ...customParserOptions },
+  parserJsOptions: { ...embedParserJsOptions, ...customParserJsOptions },
+  parserTsOptions: { ...embedParserTsOptions, ...customParserTsOptions },
 };
 `;
 
