@@ -40,6 +40,7 @@ const content = \`# See https://help.github.com/articles/ignoring-files/ for mor
 # ignore config dir
 **/.idea
 **/.history
+**/.swc
 **/.vs
 
 # ignore jest dir
