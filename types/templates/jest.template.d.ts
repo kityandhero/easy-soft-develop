@@ -13,5 +13,5 @@ export namespace simpleTestFile {
     export { fileName_1 as fileName };
     const coverFile_1: boolean;
     export { coverFile_1 as coverFile };
-    export { configFileContent as fileContent };
+    export { simpleTestFileContent as fileContent };
 }

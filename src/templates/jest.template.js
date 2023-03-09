@@ -37,7 +37,7 @@ const simpleTestFile = {
   folderPath: `${folderPath}/template`,
   fileName: 'simple.test.content.js',
   coverFile: true,
-  fileContent: configFileContent,
+  fileContent: simpleTestFileContent,
 };
 
 module.exports = {
