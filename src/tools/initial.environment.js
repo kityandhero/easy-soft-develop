@@ -103,7 +103,7 @@ function adjustMainPackageJsonScript({ scripts }) {
 
     testScript[`test:${name}`] = `cd packages/${name} && npm run test`;
 
-    testAllProjects.push(`test:${name}`);
+    testAllProjects.push(`npm run test:${name}`);
   });
 
   packageJson.scripts = assignObject(

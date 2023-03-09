@@ -70,7 +70,7 @@ function getGlobalDevelopPackages() {
 function getProjectDevelopPackages() {
   let packages = [];
 
-  packages = packages.concat(['jest']);
+  packages = packages.concat(['cross-env', 'jest']);
 
   return packages;
 }
