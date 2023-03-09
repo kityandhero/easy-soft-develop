@@ -101,7 +101,7 @@ function adjustMainPackageJsonScript({ scripts }) {
   loopPackage(({ name }) => {
     publishPackageNameList.push(name);
 
-    testScript[`test:${name}`] = `cd packages/${name} && npm run test`;
+    testScript[`test:${name}`] = `cd packages/${name} && npm run z:test`;
 
     testAllProjects.push(`npm run test:${name}`);
   });
