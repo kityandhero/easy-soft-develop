@@ -62,7 +62,10 @@ const {
   contentFile: stylelintContentFile,
   configFile: stylelintConfigFile,
 } = require('../templates/stylelint.template');
-const { configFile: jestConfigFile } = require('../templates/jest.template');
+const {
+  configFile: jestConfigFile,
+  simpleTestFile: jestSimpleTestFile,
+} = require('../templates/jest.template');
 
 const childrenDevelopPackageConfigContent = `${fileGlobalHeader}
 const childrenDevelopPackageList = [];
@@ -645,6 +648,8 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   //#region jest
 
   writeFileWithOptionsSync(jestConfigFile);
+
+  writeFileWithOptionsSync(jestSimpleTestFile);
 
   //#endregion
 
