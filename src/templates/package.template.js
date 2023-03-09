@@ -150,10 +150,6 @@ const ncuScript = {
   'postz:update:special-package-version': 'npm run z:install',
 };
 
-const jestScript = {
-  'z:test': '',
-};
-
 module.exports = {
   ...lintScript,
   ...prettierScript,
