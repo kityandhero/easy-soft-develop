@@ -517,6 +517,7 @@ const packageFileContentList = [
   },
   {
     name: 'simple.test.js',
+    relativePath: 'test',
     content: jestSimpleTestContent,
     coverFile: true,
   },

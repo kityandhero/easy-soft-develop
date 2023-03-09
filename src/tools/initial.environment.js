@@ -1,4 +1,4 @@
-const { checkInCollection, checkStringIsEmpty } = require('./meta');
+const { checkInCollection, checkStringIsEmpty, mkdirSync } = require('./meta');
 const {
   promptSuccess,
   writeFileSync,
@@ -45,6 +45,10 @@ function createPackageFile(fileWithContentCollection) {
 
     fileWithContentCollection.forEach((o) => {
       const { name, relativePath = '', content, coverFile } = o;
+
+      if (!checkStringIsEmpty(relativePath)) {
+        mkdirSync(`${itemPath}/${relativePath}`);
+      }
 
       writeFileSync(
         `${itemPath}${
@@ -112,6 +116,7 @@ function adjustMainPackageJsonScript({ scripts }) {
     globalScript,
     originalScript || {},
     scripts,
+    testScript,
     {
       'z:test': testAllProjects.join(' && '),
     },

@@ -63,14 +63,14 @@
     "terminal-kit": "^3.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.2",
-    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
     "@commitlint/config-lerna-scopes": "^17.4.2",
-    "@commitlint/cz-commitlint": "^17.4.2",
+    "@commitlint/cz-commitlint": "^17.4.4",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
-    "eslint": "^8.33.0",
-    "eslint-config-prettier": "^8.6.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.7.0",
     "eslint-formatter-pretty": "^4.1.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -78,7 +78,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.1",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
     "prettier-plugin-packagejson": "^2"
   }

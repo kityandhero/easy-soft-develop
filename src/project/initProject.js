@@ -113,6 +113,7 @@ function createProjectFolder(name) {
   mkdirSync(`./packages/`);
   mkdirSync(`./packages/${name}`);
   mkdirSync(`./packages/${name}/src`);
+  mkdirSync(`./packages/${name}/test`);
 
   promptSuccess(`step *: create packages folder success`);
 }
@@ -187,11 +188,20 @@ function createVscode() {
       'precommit',
       'precz',
       'prez',
+      'lintstagedrc',
     ],
+    'eslint.packageManager': 'pnpm',
     'git.ignoreLimitWarning': true,
     'editor.codeActionsOnSave': {
       'source.fixAll.eslint': true,
       'source.fixAll.stylelint': true,
+    },
+    'search.exclude': {
+      '**/node_modules': true,
+      '**/bower_components': true,
+      '**/*.code-search': true,
+      '**/dist': true,
+      '**/es': true,
     },
   };
 
