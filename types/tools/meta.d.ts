@@ -27,9 +27,10 @@ export function readJsonFileSync(path: any): any;
 export function writeJsonFileSync(path: any, json: any, options?: {
     coverFile: boolean;
 }): boolean;
-export function writeFileWithFolderAndNameSync(folderPath: any, fileName: any, fileContent: any, coverFile?: boolean): boolean;
-export function writeFileWithOptionsSync({ folderPath, fileName, fileContent, coverFile, }: {
+export function writeFileWithFolderAndNameSync(folderPath: any, relativePath: any, fileName: any, fileContent: any, coverFile?: boolean): boolean;
+export function writeFileWithOptionsSync({ folderPath, relativePath, fileName, fileContent, coverFile, }: {
     folderPath: any;
+    relativePath?: string | undefined;
     fileName: any;
     fileContent: any;
     coverFile?: boolean | undefined;

@@ -44,12 +44,17 @@ const tscScript = {
   'z:tsc:build': 'echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete',
 };
 
+const jestScript = {
+  'z:test': 'cross-env NODE_ENV=test jest',
+};
+
 module.exports = {
   ...commitScript,
   ...documentationScript,
   ...lintScript,
   ...prettierScript,
   ...tscScript,
+  ...jestScript,
 };
 `;
 
@@ -123,7 +128,7 @@ const nrmScript = {
 
 const commitScript = {
   commitlint: 'npx commitlint --edit',
-  precz: 'npm run z:commit:refresh && git stage -A',
+  precz: 'npm run z:test && npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push',
   precommit: 'npm run z:lint:staged:quiet',
@@ -143,6 +148,10 @@ const ncuScript = {
   'postz:update:all-package-version': 'npm run z:install',
   'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.js',
   'postz:update:special-package-version': 'npm run z:install',
+};
+
+const jestScript = {
+  'z:test': '',
 };
 
 module.exports = {

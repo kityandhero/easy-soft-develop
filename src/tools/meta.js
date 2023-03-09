@@ -193,25 +193,38 @@ function writeFileSync(path, content, options = { coverFile: false }) {
 
 function writeFileWithFolderAndNameSync(
   folderPath,
+  relativePath,
   fileName,
   fileContent,
   coverFile = false,
 ) {
   mkdirSync(folderPath);
 
-  return writeFileSync(`${folderPath}/${fileName}`, fileContent, {
-    coverFile: coverFile,
-  });
+  if (!checkStringIsEmpty(relativePath)) {
+    mkdirSync(`${folderPath}/${relativePath}`);
+  }
+
+  return writeFileSync(
+    `${folderPath}${
+      checkStringIsEmpty(relativePath) ? '' : `/${relativePath}`
+    }/${fileName}`,
+    fileContent,
+    {
+      coverFile: coverFile,
+    },
+  );
 }
 
 function writeFileWithOptionsSync({
   folderPath,
+  relativePath = '',
   fileName,
   fileContent,
   coverFile = false,
 }) {
   return writeFileWithFolderAndNameSync(
     folderPath,
+    relativePath,
     fileName,
     fileContent,
     coverFile,

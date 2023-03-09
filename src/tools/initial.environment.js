@@ -1,4 +1,4 @@
-const { checkInCollection } = require('./meta');
+const { checkInCollection, checkStringIsEmpty } = require('./meta');
 const {
   promptSuccess,
   writeFileSync,
@@ -44,9 +44,17 @@ function createPackageFile(fileWithContentCollection) {
     }
 
     fileWithContentCollection.forEach((o) => {
-      const { name, content, coverFile } = o;
+      const { name, relativePath = '', content, coverFile } = o;
 
-      writeFileSync(`${itemPath}/${name}`, content, { coverFile });
+      writeFileSync(
+        `${itemPath}${
+          checkStringIsEmpty(relativePath) ? '' : `/${relativePath}`
+        }/${name}`,
+        content,
+        {
+          coverFile,
+        },
+      );
     });
   });
 
@@ -83,9 +91,15 @@ function adjustMainPackageJsonScript({ scripts }) {
   });
 
   const publishPackageNameList = [];
+  const testScript = {};
+  const testAllProjects = [];
 
   loopPackage(({ name }) => {
     publishPackageNameList.push(name);
+
+    testScript[`test:${name}`] = `cd packages/${name} && npm run test`;
+
+    testAllProjects.push(`test:${name}`);
   });
 
   packageJson.scripts = assignObject(
@@ -98,6 +112,9 @@ function adjustMainPackageJsonScript({ scripts }) {
     globalScript,
     originalScript || {},
     scripts,
+    {
+      'z:test': testAllProjects.join(' && '),
+    },
   );
 
   writeJsonFileSync(mainProjectPath, packageJson, { coverFile: true });

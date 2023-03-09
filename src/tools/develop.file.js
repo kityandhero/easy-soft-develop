@@ -62,6 +62,7 @@ const {
   contentFile: stylelintContentFile,
   configFile: stylelintConfigFile,
 } = require('../templates/stylelint.template');
+const { configFile: jestConfigFile } = require('../templates/jest.template');
 
 const childrenDevelopPackageConfigContent = `${fileGlobalHeader}
 const childrenDevelopPackageList = [];
@@ -370,6 +371,8 @@ const editorFile = require('../config/editor/template/content');
 const editorAttributesFile = require('../config/git/template/attributes.content');
 const editorIgnoreFile = require('../config/git/template/ignore.content');
 const lintStagedFile = require('../config/lint-staged/template/content');
+const jestFile = require('../config/jest/template/content');
+const jestSimpleTestFile = require('../config/jest/template/simple.test.content');
 const mainNecessaryPackageFile = require('../config/package/template/main.content');
 const childrenNecessaryPackageFile = require('../config/package/template/children.content');
 const mainCustomPackageFile = require('../config/package/custom/main.content');
@@ -397,6 +400,8 @@ const gitAttributesContent = editorAttributesFile.content;
 
 const gitIgnoreContent = editorIgnoreFile.content;
 const lintStagedRcContent = lintStagedFile.content;
+const jestContent = jestFile.content;
+const jestSimpleTestContent = jestSimpleTestFile.content;
 
 const mainFileContentList = [
   {
@@ -501,6 +506,16 @@ const packageFileContentList = [
     name: '.lintstagedrc',
     content: lintStagedRcContent,
     coverFile: false,
+  },
+  {
+    name: 'jest.config.js',
+    content: jestContent,
+    coverFile: false,
+  },
+  {
+    name: 'simple.test.js',
+    content: jestSimpleTestContent,
+    coverFile: true,
   },
 ];
 
@@ -624,6 +639,12 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   writeFileWithOptionsSync(stylelintContentFile);
 
   writeFileWithOptionsSync(stylelintConfigFile);
+
+  //#endregion
+
+  //#region jest
+
+  writeFileWithOptionsSync(jestConfigFile);
 
   //#endregion
 

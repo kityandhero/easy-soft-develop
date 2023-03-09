@@ -17,11 +17,12 @@ const {
   createNcuConfigFile,
   createNpmConfigFile,
 } = require('../tools/develop.file');
+const { globalScript, packageScript } = require('../tools/package.script');
 const {
-  getGlobalPackages,
-  globalScript,
-  packageScript,
-} = require('../tools/package.script');
+  getGlobalDevelopPackages,
+  getMainDevelopPackages,
+  getProjectDevelopPackages,
+} = require('../tools/package.dependence');
 
 function createLernaProjectFolder(name) {
   mkdirSync(`./${name}`);
@@ -32,7 +33,11 @@ function createLernaProjectFolder(name) {
 function createLernaPackageJsonFile(lernaName) {
   const devDependencies = {};
 
-  getGlobalPackages().forEach((o) => {
+  let packages = getGlobalDevelopPackages();
+
+  packages = packages.concat(getMainDevelopPackages());
+
+  packages.forEach((o) => {
     if (checkStringIsEmpty(o)) {
       return;
     }
@@ -115,7 +120,11 @@ function createProjectFolder(name) {
 function createPackageJsonFile(name) {
   const devDependencies = {};
 
-  getGlobalPackages().forEach((o) => {
+  let packages = getGlobalDevelopPackages();
+
+  packages = packages.concat(getProjectDevelopPackages());
+
+  packages.forEach((o) => {
     if (checkStringIsEmpty(o)) {
       return;
     }

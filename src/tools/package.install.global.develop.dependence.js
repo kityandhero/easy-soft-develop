@@ -8,7 +8,7 @@ const {
   writeJsonFileSync,
   exec,
 } = require('./meta');
-const { getGlobalPackages } = require('./package.script');
+const { getGlobalDevelopPackages } = require('./package.dependence');
 const { loopPackage } = require('./package.tools');
 const { updateSpecialPackageVersion } = require('./package.update');
 const { prettierAllPackageJson } = require('./prettier.package.json');
@@ -95,7 +95,7 @@ function installDevelopDependencePackages({
   childrenSpecialDevelopPackageList = [],
   execInstall = true,
 }) {
-  const packages = getGlobalPackages().concat(globalDevelopPackageList);
+  const packages = getGlobalDevelopPackages().concat(globalDevelopPackageList);
 
   promptInfo(`${packages.join()} will install`);
 
