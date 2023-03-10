@@ -201,7 +201,10 @@ function createVscode() {
       '**/bower_components': true,
       '**/*.code-search': true,
       '**/dist': true,
+      '**/coverage': true,
+      '**/docs': true,
       '**/es': true,
+      '**/pnpm-lock.yaml': true,
     },
   };
 
