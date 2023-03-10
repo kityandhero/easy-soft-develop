@@ -23,8 +23,10 @@ const configFile = {
 };
 
 const simpleTestFileContent = `${fileGlobalHeader}
-const content = \`test('jest simple', () => {
-  expect(true).toBe(true);
+const content = \`describe('group test description', () => {
+  test('simple test will be true', () => {
+    expect(true).toBe(true);
+  });
 });
 \`;
 
