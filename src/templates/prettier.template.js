@@ -90,7 +90,6 @@ const content = \`# ignore dir
 *.log
 *.txt
 *.text
-*.ejs
 *.svg
 *.min.js
 

@@ -33,7 +33,7 @@
     "cz": "cz",
     "postcz": "git push",
     "publish:npm": "npm run publish:patch:npm",
-    "prepublish:patch:npm": "npm run cz&& npm version patch",
+    "prepublish:patch:npm": "npm run cz && npm version patch",
     "publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
     "postpublish:patch:npm": "npm run change:npm:registry:local",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
