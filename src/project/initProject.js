@@ -256,6 +256,8 @@ function createLernaProject(name) {
   cd(`./${lernaName}`);
 
   if (!existDirectorySync(`./.git`)) {
+    createCommitlintConfigFile(`step *: init git success`);
+
     exec('git init -b main');
 
     writeFileSync('./README.md', '', { coverFile: false });
@@ -263,6 +265,8 @@ function createLernaProject(name) {
     exec('git add -A');
 
     exec('git commit -m "first commit"');
+
+    promptEmptyLine();
   }
 
   createLernaPackageJsonFile(lernaName);
