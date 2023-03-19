@@ -234,12 +234,6 @@ function initialEnvironment() {
 
   promptEmptyLine();
 
-  promptInfo('create git branch main');
-
-  exec('git init -b main');
-
-  promptEmptyLine();
-
   promptInfo('husky install');
 
   exec('npx husky install');
