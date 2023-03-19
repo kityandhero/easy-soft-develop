@@ -564,7 +564,7 @@ initialEnvironment({
 
 function createDevelopFiles(waitMessage = '', successMessage = '') {
   if (!checkStringIsEmpty(waitMessage)) {
-    promptSuccess(waitMessage);
+    promptInfo(waitMessage);
   }
 
   mkdirSync(`./develop`);
@@ -684,7 +684,7 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
   //#endregion
 
   if (!checkStringIsEmpty(successMessage)) {
-    promptInfo(successMessage);
+    promptSuccess(successMessage);
     promptEmptyLine();
   }
 }
