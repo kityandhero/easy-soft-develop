@@ -256,7 +256,7 @@ function createLernaProject(name) {
   cd(`./${lernaName}`);
 
   if (!existDirectorySync(`./.git`)) {
-    promptInfo(`step *: init git success`);
+    promptSuccess(`step *: init git(branch main) success`);
 
     exec('git init -b main');
 

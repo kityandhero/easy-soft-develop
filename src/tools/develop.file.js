@@ -184,7 +184,7 @@ function createCzConfigFile(successMessage = '') {
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
-      promptInfo(successMessage);
+      promptSuccess(successMessage);
     }
   }
 }
@@ -194,7 +194,7 @@ function createCommitlintConfigFile(successMessage = '') {
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
-      promptInfo(successMessage);
+      promptSuccess(successMessage);
     }
   }
 }
@@ -204,7 +204,7 @@ function createBabelConfigFile(successMessage = '') {
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
-      promptInfo(successMessage);
+      promptSuccess(successMessage);
     }
   }
 }
@@ -214,7 +214,7 @@ function createNcuConfigFile(successMessage = '') {
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
-      promptInfo(successMessage);
+      promptSuccess(successMessage);
     }
   }
 }
@@ -229,7 +229,7 @@ auto-install-peers=true`,
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
-      promptInfo(successMessage);
+      promptSuccess(successMessage);
     }
   }
 }
@@ -564,7 +564,7 @@ initialEnvironment({
 
 function createDevelopFiles(waitMessage = '', successMessage = '') {
   if (!checkStringIsEmpty(waitMessage)) {
-    promptInfo(waitMessage);
+    promptSuccess(waitMessage);
   }
 
   mkdirSync(`./develop`);
