@@ -224,6 +224,8 @@ function initialEnvironment() {
 
   createDevelopFiles();
 
+  promptEmptyLine();
+
   promptInfo('add global dev packages');
 
   exec('npx ncu -u --packageFile ./**/package.json');

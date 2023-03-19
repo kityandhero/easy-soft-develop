@@ -562,7 +562,10 @@ initialEnvironment({
   }
 }
 
-function createDevelopFiles(waitMessage = '', successMessage = '') {
+function createDevelopFiles(
+  waitMessage = 'will create develop assist file, please wait a moment',
+  successMessage = '',
+) {
   if (!checkStringIsEmpty(waitMessage)) {
     promptInfo(waitMessage);
   }
@@ -685,7 +688,6 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 
   if (!checkStringIsEmpty(successMessage)) {
     promptSuccess(successMessage);
-    promptEmptyLine();
   }
 }
 
