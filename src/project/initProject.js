@@ -256,7 +256,9 @@ function createLernaProject(name) {
   cd(`./${lernaName}`);
 
   if (!existDirectorySync(`./${lernaName}/.git`)) {
-    exec('git init');
+    exec('git init -b main');
+
+    exec(`touch ./${lernaName}/README.md`);
 
     exec('git add .');
 
