@@ -16,6 +16,7 @@ const {
   createBabelConfigFile,
   createNcuConfigFile,
   createNpmConfigFile,
+  createCzConfigFile,
 } = require('../tools/develop.file');
 const { globalScript, packageScript } = require('../tools/package.script');
 const {
@@ -261,6 +262,7 @@ function createLernaProject(name) {
   createPackageJsonFile(name);
 
   createCommitlintConfigFile(`step *: create commitlint.config.js success`);
+  createCzConfigFile(`step *: create .czrc success`);
   createBabelConfigFile(`step *: create babel.config.js success`);
   createNcuConfigFile(`step *: create .ncurc.json success`);
   createNpmConfigFile(`step *: create .npmrc success`);

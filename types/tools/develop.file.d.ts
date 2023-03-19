@@ -1,3 +1,4 @@
+export function createCzConfigFile(successMessage?: string): void;
 export function createCommitlintConfigFile(successMessage?: string): void;
 export function createBabelConfigFile(successMessage?: string): void;
 export function createNcuConfigFile(successMessage?: string): void;

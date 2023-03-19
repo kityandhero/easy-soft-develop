@@ -14,6 +14,9 @@ const {
   contentFile: commitlintConfigContentFile,
 } = require('../templates/commitlint.config.template');
 const {
+  contentFile: czConfigContentFile,
+} = require('../templates/cz.config.template');
+const {
   contentFile: babelConfigContentFile,
 } = require('../templates/babel.config.template');
 const {
@@ -174,6 +177,16 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
   promptEmptyLine();
 
   return result;
+}
+
+function createCzConfigFile(successMessage = '') {
+  let result = writeFileWithOptionsSync(czConfigContentFile);
+
+  if (result) {
+    if (!checkStringIsEmpty(successMessage)) {
+      promptInfo(successMessage);
+    }
+  }
 }
 
 function createCommitlintConfigFile(successMessage = '') {
@@ -677,6 +690,7 @@ function createDevelopFiles(waitMessage = '', successMessage = '') {
 }
 
 module.exports = {
+  createCzConfigFile,
   createCommitlintConfigFile,
   createBabelConfigFile,
   createNcuConfigFile,
