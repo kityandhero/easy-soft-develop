@@ -262,7 +262,7 @@ function createLernaProject(name) {
 
     exec('git add -A');
 
-    exec("git commit -m 'Initial commit'");
+    exec('git commit -m "first commit"');
   }
 
   createLernaPackageJsonFile(lernaName);
