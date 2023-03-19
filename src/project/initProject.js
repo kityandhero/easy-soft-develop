@@ -255,12 +255,12 @@ function createLernaProject(name) {
 
   cd(`./${lernaName}`);
 
-  if (!existDirectorySync(`./${lernaName}/.git`)) {
+  if (!existDirectorySync(`./.git`)) {
     exec('git init -b main');
 
-    exec(`touch ./${lernaName}/README.md`);
+    writeFileSync('./README.md', '', { coverFile: false });
 
-    exec('git add .');
+    exec('git add -A');
 
     exec("git commit -m 'Initial commit'");
   }
