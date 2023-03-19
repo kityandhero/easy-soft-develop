@@ -9,6 +9,7 @@ const {
   mkdirSync,
   exec,
   cd,
+  existDirectorySync,
 } = require('../tools/meta');
 const {
   createDevelopFiles,
@@ -253,6 +254,14 @@ function createLernaProject(name) {
   createLernaProjectFolder(lernaName);
 
   cd(`./${lernaName}`);
+
+  if (!existDirectorySync(`./${lernaName}/.git`)) {
+    exec('git init');
+
+    exec('git add .');
+
+    exec("git commit -m 'Initial commit'");
+  }
 
   createLernaPackageJsonFile(lernaName);
   createLernaConfigFile(lernaName);
