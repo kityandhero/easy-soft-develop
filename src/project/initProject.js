@@ -260,12 +260,16 @@ function createLernaProject(name) {
   if (!existDirectorySync(`./.git`)) {
     promptSuccess(`step *: init git(branch main) success`);
 
+    promptInfo('git init -b main');
     exec('git init -b main');
 
+    promptInfo('create README.md');
     writeFileSync('./README.md', '', { coverFile: false });
 
+    promptInfo('git add -A');
     exec('git add -A');
 
+    promptInfo('git commit -m "first commit"');
     exec('git commit -m "first commit"');
 
     promptEmptyLine();
