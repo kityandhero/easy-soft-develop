@@ -137,7 +137,7 @@ const commitScript = {
 
 const prettierScript = {
   "z:prettier:format:all": "npx prettier --write .",
-  "z:prettier:format:change": "npx prettier --cache --write . && npx easy-soft-develop --message \\"format changed files complete\\" --type success --blankLine",
+  "z:prettier:format:change": "npx prettier --cache --write . && npx easy-soft-develop prompt --message \\"format changed files complete\\" --type success --blankLine",
   "z:prettier:package.json:all": "npx prettier --write ./**/package.json",
   "z:prettier:package.json:current": "npx prettier --write ./package.json",
 };
