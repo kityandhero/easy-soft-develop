@@ -49,6 +49,7 @@
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
     "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
     "test:inner:assignObject": "node ./test/assignObject.test.js",
+    "z:ncu:u:all": "ncu -u",
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write . && node ./bin/cli.js prompt --message \"format changed files complete\" --type success --blankLine",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete"
@@ -57,9 +58,9 @@
     "commander": "^10.0.0",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
-    "fs-extra": "^11.1.0",
+    "fs-extra": "^11.1.1",
     "hpagent": "^1.2.0",
-    "ping": "^0.4.2",
+    "ping": "^0.4.4",
     "shelljs": "^0.8.5",
     "terminal-kit": "^3.0.0"
   },
@@ -70,17 +71,17 @@
     "@commitlint/cz-commitlint": "^17.4.4",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
-    "eslint": "^8.35.0",
-    "eslint-config-prettier": "^8.7.0",
-    "eslint-formatter-pretty": "^4.1.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-formatter-pretty": "^5.0.0",
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.1.2",
-    "prettier": "^2.8.4",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.6",
     "prettier-plugin-packagejson": "^2"
   }
 }
