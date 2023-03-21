@@ -13,6 +13,7 @@ const createLernaProject = require('../src/cliCollection/create-lerna-project');
 const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
 const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
 const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
+const prompt = require('../src/cliCollection/prompt');
 
 const program = new Command();
 
@@ -77,6 +78,16 @@ program
   .option('--name <string>', 'project name')
   .action((a, o) => {
     createLernaProject.run(a, o);
+  });
+
+program
+  .command('prompt')
+  .description('prompt message')
+  .option('--message <string>', 'the message will show')
+  .option('--type <string>', 'prompt type')
+  .option('--blankLine [boolean]', 'echo blank line before message', false)
+  .action((a, o) => {
+    prompt.run(a, o);
   });
 
 program

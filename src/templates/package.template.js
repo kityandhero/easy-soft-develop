@@ -128,7 +128,7 @@ const nrmScript = {
 
 const commitScript = {
   commitlint: 'npx commitlint --edit',
-  precz: 'npm run z:commit:refresh && git stage -A',
+  precz: 'npm run z:prettier:format:change && npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push && npm run z:test',
   precommit: 'npm run z:lint:staged:quiet',
@@ -137,14 +137,14 @@ const commitScript = {
 
 const prettierScript = {
   "z:prettier:format:all": "npx prettier --write .",
-  "z:prettier:format:change": "npx prettier --cache --write .",
+  "z:prettier:format:change": "npx prettier --cache --write . && npx easy-soft-develop --message \\"format changed files complete\\" --type success --blankLine",
   "z:prettier:package.json:all": "npx prettier --write ./**/package.json",
   "z:prettier:package.json:current": "npx prettier --write ./package.json",
 };
 
 const ncuScript = {
-  'z:check:all-package-version': 'easy-soft-develop check-all-package-version',
-  'z:update:all-package-version': 'easy-soft-develop update-all-package-version',
+  'z:check:all-package-version': 'npx easy-soft-develop check-all-package-version',
+  'z:update:all-package-version': 'npx easy-soft-develop update-all-package-version',
   'postz:update:all-package-version': 'npm run z:install',
   'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.js',
   'postz:update:special-package-version': 'npm run z:install',
