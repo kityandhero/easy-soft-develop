@@ -4,7 +4,7 @@ const folderPath = './develop/config/package';
 
 const globalChildPackageFileContent = `${fileGlobalHeader}
 const commitScript = {
-  'z:adjust:file': 'exec some file adjust command',
+  'z:auto:adjust:file': 'exec some file adjust command',
   precommit: 'npm run z:lint:staged:quiet',
 };
 
@@ -129,7 +129,7 @@ const nrmScript = {
 
 const commitScript = {
   commitlint: 'npx commitlint --edit',
-  precz: 'npm run z:prettier:format:change && npm run z:commit:refresh && git stage -A',
+  precz: 'npm run z:auto:adjust:file:all && npm run z:prettier:format:change && npm run z:commit:refresh && git stage -A',
   cz: 'cz',
   postcz: 'git push && npm run z:test',
   precommit: 'npm run z:lint:staged:quiet',

@@ -104,10 +104,10 @@ function adjustMainPackageJsonScript({ scripts }) {
     publishPackageNameList.push(name);
 
     autoAdjustFileScript[
-      `z:adjust:file:${name}`
-    ] = `cd packages/${name} && npm run z:adjust:file`;
+      `z:auto:adjust:file:${name}`
+    ] = `cd packages/${name} && npm run z:auto:adjust:file`;
 
-    autoAdjustFileAllProjects.push(`npm run z:adjust:file:${name}`);
+    autoAdjustFileAllProjects.push(`npm run z:auto:adjust:file:${name}`);
 
     testScript[`test:${name}`] = `cd packages/${name} && npm run z:test`;
 
@@ -127,7 +127,7 @@ function adjustMainPackageJsonScript({ scripts }) {
     testScript,
     autoAdjustFileScript,
     {
-      'z:adjust:file:all': autoAdjustFileAllProjects.join(' && '),
+      'z:auto:adjust:file:all': autoAdjustFileAllProjects.join(' && '),
       'z:test': testAllProjects.join(' && '),
     },
   );
@@ -148,7 +148,7 @@ function adjustChildrenPackageJsonScript({ scripts }) {
 
     const originalScript = packageJson.scripts;
 
-    const ignoreDeleteScript = ['z:adjust:file'];
+    const ignoreDeleteScript = ['z:auto:adjust:file'];
 
     Object.keys(originalScript).forEach((o) => {
       if (checkInCollection(ignoreDeleteScript, o)) {
