@@ -69,7 +69,9 @@ const ignoreFile = {
   coverFile: false,
   fileContent: `${fileGlobalHeader}
   const content = \`# ignore dir
-**/docs/**\`;
+**/coverage/**
+**/docs/**
+\`;
 
   module.exports = {
     content,

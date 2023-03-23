@@ -7,6 +7,8 @@ const content = \`#
 **/public
 **/lib
 **/es
+**/docs
+**/coverage
 **/.history
 **/.vs
 **/.swc

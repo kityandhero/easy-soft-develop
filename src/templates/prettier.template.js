@@ -67,6 +67,8 @@ const content = \`# ignore dir
 **/lib/**
 **/dist/**
 **/es/**
+**/docs/**
+**/coverage/**
 **/.umi/**
 **/.umi-production/**
 **/.idea/**
