@@ -83,23 +83,31 @@ function adjustMainPackageJsonScript({ scripts }) {
   const ignoreDeleteScript = ['z:build:all', 'z:publish:npm-all'];
 
   Object.keys(originalScript).forEach((o) => {
-    if (!checkInCollection(ignoreDeleteScript, o)) {
-      if (
-        o.startsWith('z:') ||
-        o.startsWith('prez:') ||
-        o.startsWith('postz:')
-      ) {
-        delete originalScript[o];
-      }
+    if (checkInCollection(ignoreDeleteScript, o)) {
+      return;
+    }
+
+    if (o.startsWith('z:') || o.startsWith('prez:') || o.startsWith('postz:')) {
+      delete originalScript[o];
     }
   });
 
   const publishPackageNameList = [];
+
+  const autoAdjustFileScript = {};
+  const autoAdjustFileAllProjects = [];
+
   const testScript = {};
   const testAllProjects = [];
 
   loopPackage(({ name }) => {
     publishPackageNameList.push(name);
+
+    autoAdjustFileScript[
+      `z:adjust:file:${name}`
+    ] = `cd packages/${name} && npm run z:adjust:file`;
+
+    autoAdjustFileAllProjects.push(`npm run z:adjust:file:${name}`);
 
     testScript[`test:${name}`] = `cd packages/${name} && npm run z:test`;
 
@@ -117,7 +125,9 @@ function adjustMainPackageJsonScript({ scripts }) {
     originalScript || {},
     scripts,
     testScript,
+    autoAdjustFileScript,
     {
+      'z:adjust:file:all': autoAdjustFileAllProjects.join(' && '),
       'z:test': testAllProjects.join(' && '),
     },
   );
@@ -138,7 +148,13 @@ function adjustChildrenPackageJsonScript({ scripts }) {
 
     const originalScript = packageJson.scripts;
 
+    const ignoreDeleteScript = ['z:adjust:file'];
+
     Object.keys(originalScript).forEach((o) => {
+      if (checkInCollection(ignoreDeleteScript, o)) {
+        return;
+      }
+
       if (
         o.startsWith('z:') ||
         o.startsWith('prez:') ||
