@@ -373,6 +373,9 @@ installDevelopDependencePackages({
   }
 }
 
+/**
+ * Create initial environment script files
+ */
 function createInitialEnvironmentScriptFiles() {
   const content = `${fileGlobalHeader}
 const { initialEnvironment } = require('easy-soft-develop');
