@@ -4,7 +4,6 @@ const folderPath = './develop/config/package';
 
 const globalChildPackageFileContent = `${fileGlobalHeader}
 const commitScript = {
-  'z:auto:adjust:file': 'echo can exec some file adjust command with here',
   precommit: 'npm run z:lint:staged:quiet',
 };
 

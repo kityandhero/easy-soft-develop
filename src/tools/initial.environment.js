@@ -164,7 +164,14 @@ function adjustChildrenPackageJsonScript({ scripts }) {
       }
     });
 
-    packageJson.scripts = assignObject(originalScript || {}, scripts);
+    packageJson.scripts = assignObject(
+      {
+        'z:auto:adjust:file':
+          'echo can exec some file adjust command with here',
+      },
+      originalScript || {},
+      scripts,
+    );
 
     writeJsonFileSync(childPackageJsonPath, packageJson, { coverFile: true });
 
