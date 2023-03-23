@@ -98,6 +98,9 @@ function assignObject(source, ...mergeData) {
   return result;
 }
 
+/**
+ * Prompt line
+ */
 function promptLine() {
   term.gray('----------------------------------------\r\n');
 }

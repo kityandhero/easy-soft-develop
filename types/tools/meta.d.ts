@@ -13,6 +13,9 @@ export function writeFileSync(path: any, content: any, options?: {
     coverFile: boolean;
 }): boolean;
 export function checkStringIsEmpty(v: any): boolean;
+/**
+ * Prompt line
+ */
 export function promptLine(): void;
 export function promptEmptyLine(): void;
 export function promptSuccess(message: any): void;
