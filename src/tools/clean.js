@@ -7,6 +7,12 @@ const {
 } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
+/**
+ * try clean
+ * @param {*} cmd cmd
+ * @param {*} tryTimes tryTimes
+ * @returns
+ */
 function tryClean(cmd, tryTimes) {
   if (tryTimes > 5) {
     promptInfo(`clean fail, ignore`);
