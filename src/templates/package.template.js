@@ -129,9 +129,9 @@ const nrmScript = {
 const commitScript = {
   commitlint: 'npx commitlint --edit',
   precommit: 'npm run z:lint:staged:quiet',
-  prez:cz: 'npm run z:auto:adjust:file:all && npm run z:prettier:format:change && npm run z:commit:refresh && git stage -A',
-  z:cz: 'cz',
-  postz:cz: 'git push && npm run z:test',
+  "prez:cz": 'npm run z:auto:adjust:file:all && npm run z:prettier:format:change && npm run z:commit:refresh && git stage -A',
+  "z:cz": 'cz',
+  "postz:cz": 'git push && npm run z:test',
   "z:commit:refresh": "npx easy-soft-develop commit-refresh",
 };
 
