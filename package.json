@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.0.198",
+  "version": "2.1.1",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -26,16 +26,7 @@
     "types/"
   ],
   "scripts": {
-    "change:npm:registry:local": "nrm use local",
-    "change:npm:registry:npm": "nrm use npm",
     "commitlint": "npx commitlint --edit",
-    "precz": "npm run z:prettier:format:change && node ./bin/cli.js commit-refresh && npm run z:tsc:build && git stage -A",
-    "cz": "cz",
-    "postcz": "git push",
-    "publish:npm": "npm run publish:patch:npm",
-    "prepublish:patch:npm": "npm run cz && npm version patch",
-    "publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
-    "postpublish:patch:npm": "npm run change:npm:registry:local",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:commit-refresh": "node ./bin/cli.js commit-refresh",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
@@ -49,10 +40,21 @@
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
     "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
     "test:inner:assignObject": "node ./test/assignObject.test.js",
-    "z:ncu:u:all": "ncu -u",
+    "z:change:npm:registry:local": "nrm use local",
+    "z:change:npm:registry:npm": "nrm use npm",
+    "z:check:all-package-version": "npx ncu",
+    "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
+    "z:cz": "cz",
+    "postz:cz": "git push",
+    "z:install": "pnpm install",
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write . && node ./bin/cli.js prompt --message \"format changed files complete\" --type success --blankLine",
-    "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete"
+    "z:publish:build": "npm run z:publish:patch:npm",
+    "prez:publish:patch:npm": "npm run z:cz && npm version patch",
+    "z:publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
+    "postz:publish:patch:npm": "npm run z:change:npm:registry:local",
+    "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
+    "z:update:package-from-package": "npx ncu -u"
   },
   "dependencies": {
     "commander": "^10.0.0",
@@ -81,6 +83,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
+    "npm-check-updates": "^16.10.12",
     "prettier": "^2.8.6",
     "prettier-plugin-packagejson": "^2.4.3"
   }
