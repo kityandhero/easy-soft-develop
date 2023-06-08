@@ -23,3 +23,6 @@ package-lock.json
 pnpm-lock.yaml
 .firebase
 .eslintcache
+
+# other
+/other/generatorCodeSimple/codeSource.js

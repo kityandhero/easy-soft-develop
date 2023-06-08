@@ -1,0 +1,8 @@
+{
+  "list": [
+    {
+      "sourceFilePath": "./other/generatorCodeSimple/index.js",
+      "codeFilePath": "./other/generatorCodeSimple/codeSource.js"
+    }
+  ]
+}

@@ -14,6 +14,7 @@ const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
 const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
 const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
 const prompt = require('../src/cliCollection/prompt');
+const code = require('../src/cliCollection/createCode');
 
 const program = new Command();
 
@@ -127,6 +128,14 @@ program
   )
   .action((a, o) => {
     createProjectWithTemplate.run(a, o);
+  });
+
+program
+  .command('code')
+  .description('generate code source with code.json')
+  .option('--dataPath <string>', 'data json source file path')
+  .action((a, o) => {
+    code.run(a, o);
   });
 
 program.parse(getArgCollection());
