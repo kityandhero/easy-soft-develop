@@ -13,7 +13,7 @@ const {
   promptEmptyLine,
 } = require('../tools/meta');
 
-function publishToNpm(packages, o, useOpt, opt) {
+function publishToNpm(packages, o, useOtp, otp) {
   if (checkStringIsEmpty(packages)) {
     exit();
   }
@@ -29,13 +29,13 @@ function publishToNpm(packages, o, useOpt, opt) {
       try {
         promptInfo(
           `package ${name}: npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ` --otp ${opt}` : ''
+            useOtp ? ` --otp ${otp}` : ''
           }`,
         );
 
         exec(
           `npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ` --otp ${opt}` : ''
+            useOtp ? ` --otp ${otp}` : ''
           }`,
         );
 
@@ -52,21 +52,21 @@ function publishToNpm(packages, o, useOpt, opt) {
 }
 
 exports.run = async function (s, o) {
-  const { packages, opt: useOpt } = s;
+  const { packages, otp: useOtp } = s;
 
-  const useOptAdjust = !!useOpt;
+  const useOtpAdjust = !!useOtp;
 
-  if (!useOptAdjust) {
-    publishToNpm(packages, o, useOptAdjust, '');
+  if (!useOtpAdjust) {
+    publishToNpm(packages, o, useOtpAdjust, '');
 
     return;
   }
 
-  const { opt } = await promptAssist({
+  const { otp } = await promptAssist({
     type: 'input',
-    name: 'opt',
+    name: 'otp',
     message: 'input npm one-time password',
   });
 
-  publishToNpm(packages, o, useOptAdjust, opt);
+  publishToNpm(packages, o, useOtpAdjust, otp);
 };
