@@ -11,7 +11,7 @@ export namespace globalMainPackageFile {
     export { fileName_1 as fileName };
     const coverFile_1: boolean;
     export { coverFile_1 as coverFile };
-    export { globalMainPackageFileContent as fileContent };
+    export const fileContent: string;
 }
 export namespace customMainPackageFile {
     const folderPath_2: string;
@@ -32,7 +32,6 @@ export namespace customChildPackageFile {
     export { customChildPackageFileContent as fileContent };
 }
 declare const globalChildPackageFileContent: string;
-declare const globalMainPackageFileContent: string;
 declare const customMainPackageFileContent: string;
 declare const customChildPackageFileContent: string;
 export {};

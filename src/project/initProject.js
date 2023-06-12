@@ -25,6 +25,9 @@ const {
   getMainDevelopPackages,
   getProjectDevelopPackages,
 } = require('../tools/package.dependence');
+const {
+  createDevelopInitialEnvironmentConfigFile,
+} = require('../config/develop.initial.environment');
 
 function createLernaProjectFolder(name) {
   mkdirSync(`./${name}`);
@@ -79,7 +82,7 @@ function createPnpmWorkspaceFile() {
   }
 }
 
-function createLernaConfigFile(lernaName) {
+function createLernaConfigFile(packageName) {
   const content = `{
     "packages": ["packages/*"],
     "version": "independent",
@@ -92,12 +95,12 @@ function createLernaConfigFile(lernaName) {
       },
       "version": {
         "conventionalCommits": true,
-        "message": "chore(${lernaName}): version",
+        "message": "chore(${packageName}): version",
         "changelogPreset": "conventional-changelog-conventionalcommits"
       },
       "publish": {
         "conventionalCommits": true,
-        "message": "chore(${lernaName}): publish",
+        "message": "chore(${packageName}): publish",
         "changelogPreset": "conventional-changelog-conventionalcommits"
       }
     }
@@ -218,6 +221,10 @@ function createVscode() {
 function initialEnvironment() {
   mkdirSync(`./develop`);
 
+  mkdirSync(`./develop/config`);
+
+  createDevelopInitialEnvironmentConfigFile();
+
   promptSuccess(`step *: config environment`);
 
   promptEmptyLine();
@@ -278,7 +285,7 @@ function createLernaProject(name) {
   }
 
   createLernaPackageJsonFile(lernaName);
-  createLernaConfigFile(lernaName);
+  createLernaConfigFile(name);
   createPnpmWorkspaceFile();
 
   createProjectFolder(name);

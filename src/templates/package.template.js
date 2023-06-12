@@ -1,3 +1,6 @@
+const {
+  getDevelopInitialEnvironmentConfig,
+} = require('../config/develop.initial.environment');
 const { fileGlobalHeader } = require('./template.config');
 
 const folderPath = './develop/config/package';
@@ -65,7 +68,13 @@ const globalChildPackageFile = {
   fileContent: globalChildPackageFileContent,
 };
 
-const globalMainPackageFileContent = `${fileGlobalHeader}
+function getGlobalMainPackageFileContent() {
+  const developInitialEnvironmentConfig = getDevelopInitialEnvironmentConfig();
+
+  const publishWithOpt =
+    developInitialEnvironmentConfig.publishWithOpt || false;
+
+  return `${fileGlobalHeader}
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
   'z:lint:staged:quiet': 'npx lint-staged --quiet',
@@ -106,7 +115,7 @@ const environmentScript = {
 };
 
 const lernaScript = {
-  'z:lerna:publish': 'lerna publish --yes',
+  'z:lerna:publish': 'lerna publish --yes${publishWithOpt ? ' --otp' : ''}',
   'z:lerna:bootstrap':
     'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
 };
@@ -165,12 +174,13 @@ module.exports = {
   ...ncuScript,
 };
 `;
+}
 
 const globalMainPackageFile = {
   folderPath: `${folderPath}/template`,
   fileName: 'main.content.js',
   coverFile: true,
-  fileContent: globalMainPackageFileContent,
+  fileContent: getGlobalMainPackageFileContent(),
 };
 
 const customMainPackageFileContent = `${fileGlobalHeader}
