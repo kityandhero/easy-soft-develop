@@ -119,15 +119,15 @@ function adjustMainPackageJsonScript({ scripts }) {
 
   const developInitialEnvironmentConfig = getDevelopInitialEnvironmentConfig();
 
-  const publishWithOpt =
-    developInitialEnvironmentConfig.publishWithOpt || false;
+  const publishWithOtp =
+    developInitialEnvironmentConfig.publishWithOtp || false;
 
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
       'z:publish:npm-all': `easy-soft-develop publish --packages ${publishPackageNameList.join(
         ',',
-      )}${publishWithOpt ? ' --otp true' : ''}`,
+      )}${publishWithOtp ? ' --otp true' : ''}`,
     },
     globalScript,
     originalScript || {},

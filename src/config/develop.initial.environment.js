@@ -6,7 +6,7 @@ const {
 } = require('../tools/meta');
 
 const developInitialEnvironment = {
-  publishWithOpt: false,
+  publishWithOtp: false,
 };
 
 const developInitialEnvironmentConfigFilePath =
