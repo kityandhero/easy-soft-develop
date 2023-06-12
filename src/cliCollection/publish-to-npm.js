@@ -1,3 +1,5 @@
+const { prompt: promptAssist } = require('enquirer');
+
 const { loopPackage } = require('../tools/package.tools');
 const {
   exit,
@@ -11,16 +13,10 @@ const {
   promptEmptyLine,
 } = require('../tools/meta');
 
-exports.run = function (s, o) {
-  const {
-    _optionValues: { packages, opt },
-  } = o;
-
+function publishToNpm(packages, o, useOpt, opt) {
   if (checkStringIsEmpty(packages)) {
     exit();
   }
-
-  const useOpt = !!opt;
 
   const packageList = packages.split(',');
 
@@ -33,13 +29,13 @@ exports.run = function (s, o) {
       try {
         promptInfo(
           `package ${name}: npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ' --opt' : ''
+            useOpt ? ` --opt ${opt}` : ''
           }`,
         );
 
         exec(
           `npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ' --opt' : ''
+            useOpt ? ` --opt ${opt}` : ''
           }`,
         );
 
@@ -53,4 +49,24 @@ exports.run = function (s, o) {
   promptSuccess('publish complete');
 
   exit();
+}
+
+exports.run = async function (s, o) {
+  const { packages, opt: useOpt } = s;
+
+  const useOptAdjust = !!useOpt;
+
+  if (!useOptAdjust) {
+    publishToNpm(packages, o, useOptAdjust, '');
+
+    return;
+  }
+
+  const { opt } = await promptAssist({
+    type: 'input',
+    name: 'opt',
+    message: 'input npm one-time password',
+  });
+
+  publishToNpm(packages, o, useOptAdjust, opt);
 };

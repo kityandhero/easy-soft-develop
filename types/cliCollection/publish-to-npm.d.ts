@@ -1,1 +1,1 @@
-export function run(s: any, o: any): void;
+export function run(s: any, o: any): Promise<void>;
