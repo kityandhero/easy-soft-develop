@@ -127,7 +127,7 @@ function adjustMainPackageJsonScript({ scripts }) {
       'z:build:all': 'echo please supplement build all packages commend',
       'z:publish:npm-all': `easy-soft-develop publish --packages ${publishPackageNameList.join(
         ',',
-      )}${publishWithOpt ? ' --opt' : ''}`,
+      )}${publishWithOpt ? ' --opt true' : ''}`,
     },
     globalScript,
     originalScript || {},
