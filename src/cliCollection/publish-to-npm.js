@@ -29,13 +29,13 @@ function publishToNpm(packages, o, useOpt, opt) {
       try {
         promptInfo(
           `package ${name}: npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ` --opt ${opt}` : ''
+            useOpt ? ` --otp ${opt}` : ''
           }`,
         );
 
         exec(
           `npm publish --registry https://registry.npmjs.org/${
-            useOpt ? ` --opt ${opt}` : ''
+            useOpt ? ` --otp ${opt}` : ''
           }`,
         );
 

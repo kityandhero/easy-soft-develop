@@ -31,7 +31,7 @@
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
     "test:bin:create-lerna-project": "node ./bin/cli.js create-lerna-project",
-    "test:bin:publish": "node ./bin/cli.js publish --packages ss --opt true",
+    "test:bin:publish": "node ./bin/cli.js publish --packages ss --otp true",
     "test:bin:sleep": "node ./bin/cli.js sleep --second 2 --showInfo true",
     "test:bin:update-all-package-version": "node ./bin/cli.js update-all-package-version",
     "test:commitRefresh": "node ./test/commitRefresh.test.js",
