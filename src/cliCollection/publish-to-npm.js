@@ -13,12 +13,14 @@ const {
 
 exports.run = function (s, o) {
   const {
-    _optionValues: { packages },
+    _optionValues: { packages, opt },
   } = o;
 
   if (checkStringIsEmpty(packages)) {
     exit();
   }
+
+  const useOpt = !!opt;
 
   const packageList = packages.split(',');
 
@@ -30,10 +32,16 @@ exports.run = function (s, o) {
 
       try {
         promptInfo(
-          `package ${name}: npm publish --registry https://registry.npmjs.org/`,
+          `package ${name}: npm publish --registry https://registry.npmjs.org/${
+            useOpt ? ' --opt' : ''
+          }`,
         );
 
-        exec(`npm publish --registry https://registry.npmjs.org/`);
+        exec(
+          `npm publish --registry https://registry.npmjs.org/${
+            useOpt ? ' --opt' : ''
+          }`,
+        );
 
         promptEmptyLine();
       } catch (error) {

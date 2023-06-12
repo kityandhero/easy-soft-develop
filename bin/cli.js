@@ -57,6 +57,7 @@ program
   .command('publish')
   .description('publish public packages to npm')
   .option('--packages <string>', 'the packages will publish')
+  .requiredOption('--opt <string>', 'use npm one-time password', false)
   .action((a, o) => {
     publishToNpm.run(a, o);
   });

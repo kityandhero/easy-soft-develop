@@ -1,3 +1,6 @@
+const {
+  getDevelopInitialEnvironmentConfig,
+} = require('../config/develop.initial.environment');
 const { checkInCollection, checkStringIsEmpty, mkdirSync } = require('./meta');
 const {
   promptSuccess,
@@ -114,12 +117,17 @@ function adjustMainPackageJsonScript({ scripts }) {
     testAllProjects.push(`npm run test:${name}`);
   });
 
+  const developInitialEnvironmentConfig = getDevelopInitialEnvironmentConfig();
+
+  const publishWithOpt =
+    developInitialEnvironmentConfig.publishWithOpt || false;
+
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
       'z:publish:npm-all': `easy-soft-develop publish --packages ${publishPackageNameList.join(
         ',',
-      )}`,
+      )}${publishWithOpt ? ' --opt' : ''}`,
     },
     globalScript,
     originalScript || {},

@@ -1,6 +1,3 @@
-const {
-  getDevelopInitialEnvironmentConfig,
-} = require('../config/develop.initial.environment');
 const { fileGlobalHeader } = require('./template.config');
 
 const folderPath = './develop/config/package';
@@ -69,11 +66,6 @@ const globalChildPackageFile = {
 };
 
 function getGlobalMainPackageFileContent() {
-  const developInitialEnvironmentConfig = getDevelopInitialEnvironmentConfig();
-
-  const publishWithOpt =
-    developInitialEnvironmentConfig.publishWithOpt || false;
-
   return `${fileGlobalHeader}
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
@@ -115,7 +107,7 @@ const environmentScript = {
 };
 
 const lernaScript = {
-  'z:lerna:publish': 'lerna publish --yes${publishWithOpt ? ' --otp' : ''}',
+  'z:lerna:publish': 'lerna publish --yes',
   'z:lerna:bootstrap':
     'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
 };
