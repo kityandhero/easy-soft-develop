@@ -86,7 +86,6 @@ function createLernaConfigFile(packageName) {
   const content = `{
     "packages": ["packages/*"],
     "version": "independent",
-    "useWorkspaces": true,
     "npmClient": "pnpm",
     "command": {
       "updated": {
