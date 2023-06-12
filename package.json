@@ -51,6 +51,7 @@
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write . && node ./bin/cli.js prompt --message \"format changed files complete\" --type success --blankLine",
     "z:publish:build": "npm run z:publish:patch:npm",
+    "postz:publish:build": "git push",
     "prez:publish:patch:npm": "npm run z:cz && npm version patch",
     "z:publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local",
