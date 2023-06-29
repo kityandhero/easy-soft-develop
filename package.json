@@ -56,10 +56,11 @@
     "z:publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
+    "z:update:all-package-version": "npx ncu -u",
     "z:update:package-from-package": "npx ncu -u"
   },
   "dependencies": {
-    "commander": "^10.0.0",
+    "commander": "^11.0.0",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
     "enquirer": "^2.3.6",
@@ -70,24 +71,24 @@
     "terminal-kit": "^3.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
-    "@commitlint/config-conventional": "^17.4.4",
-    "@commitlint/config-lerna-scopes": "^17.4.2",
-    "@commitlint/cz-commitlint": "^17.4.4",
+    "@commitlint/cli": "^17.6.6",
+    "@commitlint/config-conventional": "^17.6.6",
+    "@commitlint/config-lerna-scopes": "^17.6.6",
+    "@commitlint/cz-commitlint": "^17.5.0",
     "commitizen": "^4.3.0",
-    "conventional-changelog-conventionalcommits": "^5.0.0",
-    "eslint": "^8.36.0",
+    "conventional-changelog-conventionalcommits": "^6.1.0",
+    "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-formatter-pretty": "^5.0.0",
-    "eslint-import-resolver-typescript": "^3.5.3",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
-    "npm-check-updates": "^16.10.12",
-    "prettier": "^2.8.6",
+    "lint-staged": "^13.2.3",
+    "npm-check-updates": "^16.10.13",
+    "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.4.3"
   }
 }

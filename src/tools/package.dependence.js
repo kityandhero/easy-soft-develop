@@ -5,7 +5,7 @@ function getGlobalDevelopPackages() {
     '@babel/core',
     '@babel/eslint-parser',
     '@babel/plugin-external-helpers',
-    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-transform-class-properties',
     '@babel/plugin-proposal-decorators',
     '@babel/plugin-transform-runtime',
     '@babel/preset-env',
