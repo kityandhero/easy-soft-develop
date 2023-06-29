@@ -60,7 +60,7 @@ function getGlobalDevelopPackages() {
 
   packages = packages.concat(['@types/node']);
 
-  packages = packages.concat('cross-env', '@types/jest', 'jest');
+  packages = packages.concat('cross-env', '@types/jest', 'jest', 'babel-jest');
 
   packages = packages.concat('rimraf', 'lint-staged', 'husky');
 
