@@ -53,7 +53,7 @@
     "z:publish:build": "npm run z:publish:patch:npm",
     "postz:publish:build": "git push",
     "prez:publish:patch:npm": "npm run z:cz && npm version patch",
-    "z:publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
+    "z:publish:patch:npm": "npm publish && npm publish --registry https://registry.npmjs.org/",
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
     "z:update:all-package-version": "npx ncu -u",
