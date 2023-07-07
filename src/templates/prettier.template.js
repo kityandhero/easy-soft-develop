@@ -5,7 +5,6 @@ const folderPath = './develop/config/prettier';
 const configFileContent = `${fileGlobalHeader}
 module.exports = {
   generalConfig: {
-    pluginSearchDirs: false,
     printWidth: 80,
     singleQuote: true,
     trailingComma: 'all',
