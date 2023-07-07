@@ -23,6 +23,10 @@ function checkEasySoftDevelopVersion() {
   exec('ncu -g easy-soft-develop');
 }
 
+/**
+ * update special package version
+ * @param {Array} packageList
+ */
 function updateSpecialPackageVersion(packageList) {
   exec('npm run z:initial:environment');
 
