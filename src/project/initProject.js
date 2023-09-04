@@ -29,13 +29,13 @@ const {
   createDevelopInitialEnvironmentConfigFile,
 } = require('../config/develop.initial.environment');
 
-function createLernaProjectFolder(name) {
+function createRepositoryProjectFolder(name) {
   mkdirSync(`./${name}`);
 
   promptSuccess(`step *: create folder ${name} success`);
 }
 
-function createLernaPackageJsonFile(lernaName) {
+function createRepositoryPackageJsonFile(repositoryName) {
   const devDependencies = {};
 
   let packages = getGlobalDevelopPackages();
@@ -51,7 +51,7 @@ function createLernaPackageJsonFile(lernaName) {
   });
 
   const packageJson = {
-    name: lernaName,
+    name: repositoryName,
     version: '1.0.0',
     author: '',
     workspaces: ['packages/*'],
@@ -82,36 +82,8 @@ function createPnpmWorkspaceFile() {
   }
 }
 
-function createLernaConfigFile(packageName) {
-  const content = `{
-    "packages": ["packages/*"],
-    "version": "independent",
-    "npmClient": "pnpm",
-    "command": {
-      "updated": {
-        "conventionalCommits": true,
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      },
-      "version": {
-        "conventionalCommits": true,
-        "message": "chore(${packageName}): version",
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      },
-      "publish": {
-        "conventionalCommits": true,
-        "message": "chore(${packageName}): publish",
-        "changelogPreset": "conventional-changelog-conventionalcommits"
-      }
-    }
-  }
-  `;
-
-  let result = writeFileSync(`./lerna.json`, content, { coverFile: true });
-
-  if (result) {
-    promptSuccess(`step *: create lerna.json success`);
-  }
-}
+// eslint-disable-next-line no-unused-vars
+function createRepositoryConfigFile(packageName) {}
 
 function createProjectFolder(name) {
   mkdirSync(`./packages/`);
@@ -163,6 +135,9 @@ function createHusky() {
   const commitMsg = `#!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo ---------------------
+echo exec husky commit-msg
+
 npx commitlint -e $HUSKY_GIT_PARAMS -V
 `;
 
@@ -171,7 +146,8 @@ npx commitlint -e $HUSKY_GIT_PARAMS -V
   const precommit = `#!/bin/sh
   . "$(dirname "$0")/_/husky.sh"
 
-  npx lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents
+echo ---------------------
+echo exec husky pre-commit
   `;
 
   writeFileSync(`./.husky/pre-commit`, precommit, { coverFile: true });
@@ -249,19 +225,19 @@ function initialEnvironment() {
   exec('npx husky install');
 }
 
-function createLernaProject(name) {
+function createRepositoryProject(name) {
   if (checkStringIsEmpty(name)) {
     promptError(
-      'project name disallow empty, please use create-lerna-project --name name or get info with create-lerna-project --help',
+      'project name disallow empty, please use create-repository-project --name name or get info with create-repository-project --help',
     );
 
     return;
   }
-  const lernaName = `lerna-${name}`;
+  const repositoryName = `mono-${name}`;
 
-  createLernaProjectFolder(lernaName);
+  createRepositoryProjectFolder(repositoryName);
 
-  cd(`./${lernaName}`);
+  cd(`./${repositoryName}`);
 
   if (!existDirectorySync(`./.git`)) {
     promptSuccess(`step *: init git(branch main) success`);
@@ -283,8 +259,8 @@ function createLernaProject(name) {
     promptEmptyLine();
   }
 
-  createLernaPackageJsonFile(lernaName);
-  createLernaConfigFile(name);
+  createRepositoryPackageJsonFile(repositoryName);
+  createRepositoryConfigFile(name);
   createPnpmWorkspaceFile();
 
   createProjectFolder(name);
@@ -302,4 +278,4 @@ function createLernaProject(name) {
   initialEnvironment();
 }
 
-module.exports = { createLernaProject };
+module.exports = { createRepositoryProject };

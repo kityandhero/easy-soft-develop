@@ -19,7 +19,6 @@
     "postz",
     "precommit",
     "precz",
-    "prelerna",
     "prez",
     "stylelintignore"
   ],
@@ -27,7 +26,6 @@
     "packages/taro-fast-framework",
     "packages/simple-taro-fast-framework"
   ],
-  "eslint.packageManager": "yarn",
   "git.ignoreLimitWarning": true,
   "search.exclude": {
     "**/node_modules": true,

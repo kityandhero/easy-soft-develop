@@ -30,7 +30,7 @@
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
-    "test:bin:create-lerna-project": "node ./bin/cli.js create-lerna-project",
+    "test:bin:create-repository-project": "node ./bin/cli.js create-repository-project",
     "test:bin:publish": "node ./bin/cli.js publish --packages ss --otp true",
     "test:bin:sleep": "node ./bin/cli.js sleep --second 2 --showInfo true",
     "test:bin:update-all-package-version": "node ./bin/cli.js update-all-package-version",
@@ -73,7 +73,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
-    "@commitlint/config-lerna-scopes": "^17.6.6",
+    "@commitlint/config-pnpm-scopes": "^17.6.6",
     "@commitlint/cz-commitlint": "^17.5.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^6.1.0",

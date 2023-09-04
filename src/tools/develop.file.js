@@ -87,7 +87,7 @@ module.exports = {
 `;
 
 const cleanConfigContent = `${fileGlobalHeader}
-const cleanCommand = 'lerna clean -y';
+const cleanCommand = '';
 
 const cleanCollection = [];
 

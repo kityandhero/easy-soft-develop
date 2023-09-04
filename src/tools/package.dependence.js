@@ -16,7 +16,7 @@ function getGlobalDevelopPackages() {
   packages = packages.concat([
     '@commitlint/cli',
     '@commitlint/config-conventional',
-    '@commitlint/config-lerna-scopes',
+    '@commitlint/config-pnpm-scopes',
     '@commitlint/cz-commitlint',
     '@pmmmwh/react-refresh-webpack-plugin',
     'commitizen',

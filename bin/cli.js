@@ -9,7 +9,7 @@ const updateAllPackageVersion = require('../src/cliCollection/update-all-package
 const sleep = require('../src/cliCollection/sleep');
 const publishToNpm = require('../src/cliCollection/publish-to-npm');
 const commitRefresh = require('../src/cliCollection/commit-refresh');
-const createLernaProject = require('../src/cliCollection/create-lerna-project');
+const createRepositoryProject = require('../src/cliCollection/create-repository-project');
 const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
 const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
 const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
@@ -75,11 +75,11 @@ program
   });
 
 program
-  .command('create-lerna-project')
-  .description('create a lerna project')
+  .command('create-repository-project')
+  .description('create a repository project')
   .option('--name <string>', 'project name')
   .action((a, o) => {
-    createLernaProject.run(a, o);
+    createRepositoryProject.run(a, o);
   });
 
 program
