@@ -75,7 +75,7 @@ program
   });
 
 program
-  .command('create-repository-project')
+  .command('create-project')
   .description('create a repository project')
   .option('--name <string>', 'project name')
   .action((a, o) => {
