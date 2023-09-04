@@ -66,6 +66,8 @@ function getGlobalDevelopPackages() {
 
   packages = packages.concat('easy-soft-develop');
 
+  packages = packages.concat('@changesets/cli');
+
   return packages;
 }
 
