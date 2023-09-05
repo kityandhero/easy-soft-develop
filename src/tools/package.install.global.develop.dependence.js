@@ -99,30 +99,36 @@ function installDevelopDependencePackages({
 
   promptInfo(`${packages.join()} will install`);
 
+  const adjustMainDevelopPackageList = isArray(mainDevelopPackageList)
+    ? mainDevelopPackageList
+    : [];
+
+  const adjustChildrenDevelopPackageList = isArray(childrenDevelopPackageList)
+    ? childrenDevelopPackageList
+    : [];
+
+  const adjustChildrenSpecialDevelopPackageList = isArray(
+    childrenSpecialDevelopPackageList,
+  )
+    ? childrenSpecialDevelopPackageList
+    : [];
+
   adjustChildrenPackageJson(
-    packages.concat(
-      isArray(childrenDevelopPackageList) ? childrenDevelopPackageList : [],
-    ),
-    isArray(childrenSpecialDevelopPackageList)
-      ? childrenSpecialDevelopPackageList
-      : [],
+    packages.concat(adjustChildrenDevelopPackageList),
+    adjustChildrenSpecialDevelopPackageList,
   );
 
-  adjustMainPackageJson(
-    packages.concat(
-      isArray(mainDevelopPackageList) ? mainDevelopPackageList : [],
-    ),
-  );
+  adjustMainPackageJson(packages.concat(adjustMainDevelopPackageList));
 
   prettierAllPackageJson();
 
   let packageListAll = [
     ...packages,
-    ...mainDevelopPackageList,
-    ...childrenDevelopPackageList,
+    ...adjustMainDevelopPackageList,
+    ...adjustChildrenDevelopPackageList,
   ];
 
-  childrenSpecialDevelopPackageList.forEach((o) => {
+  adjustChildrenSpecialDevelopPackageList.forEach((o) => {
     if (isArray(o.packages)) {
       packageListAll = [...packageListAll, ...o.packages];
     }
