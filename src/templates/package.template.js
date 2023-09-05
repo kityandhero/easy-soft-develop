@@ -142,8 +142,9 @@ const prettierScript = {
 
 const ncuScript = {
   'z:check:all-package-version': 'npx easy-soft-develop check-all-package-version',
+  'prez:update:all-package-version': 'node ./develop/assists/install.global.develop.dependence',
   'z:update:all-package-version': 'npx easy-soft-develop update-all-package-version',
-  'postz:update:all-package-version': 'npm run z:install.global.develop.dependence',
+  'postz:update:all-package-version': 'npm run z:install',
   'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.js',
   'postz:update:special-package-version': 'npm run z:install',
 };
