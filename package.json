@@ -60,7 +60,7 @@
     "z:update:package-from-package": "npx ncu -u"
   },
   "dependencies": {
-    "commander": "^11.0.0",
+    "commander": "^11.1.0",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
     "enquirer": "^2.4.1",
@@ -71,23 +71,23 @@
     "terminal-kit": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.7.2",
-    "@commitlint/config-conventional": "^17.7.0",
-    "@commitlint/config-pnpm-scopes": "^17.7.0",
-    "@commitlint/cz-commitlint": "^17.7.2",
+    "@commitlint/cli": "^18.0.0",
+    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/config-pnpm-scopes": "^18.0.0",
+    "@commitlint/cz-commitlint": "^18.0.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-formatter-pretty": "^5.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "npm-check-updates": "^16.14.5",
+    "lint-staged": "^15.0.2",
+    "npm-check-updates": "^16.14.6",
     "prettier": "^3.0.3",
     "prettier-plugin-packagejson": "^2.4.6"
   }
