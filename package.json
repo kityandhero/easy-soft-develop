@@ -71,10 +71,10 @@
     "terminal-kit": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.2.0",
-    "@commitlint/config-conventional": "^18.1.0",
-    "@commitlint/config-pnpm-scopes": "^18.1.0",
-    "@commitlint/cz-commitlint": "^18.2.0",
+    "@commitlint/cli": "^18.4.1",
+    "@commitlint/config-conventional": "^18.4.0",
+    "@commitlint/config-pnpm-scopes": "^18.4.0",
+    "@commitlint/cz-commitlint": "^18.4.1",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "eslint": "^8.53.0",
@@ -86,9 +86,9 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^15.0.2",
+    "lint-staged": "^15.1.0",
     "npm-check-updates": "^16.14.6",
-    "prettier": "^3.0.3",
+    "prettier": "^3.1.0",
     "prettier-plugin-packagejson": "^2.4.6"
   }
 }
