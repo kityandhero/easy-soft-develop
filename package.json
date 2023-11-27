@@ -55,6 +55,7 @@
     "prez:publish:patch:npm": "npm run z:cz && npm version patch",
     "z:publish:patch:npm": "npm publish --registry https://registry.npmjs.org/",
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local && npm publish",
+    "z:reinstall": "rimraf ./node_modules && npm run z:install",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
     "z:update:all-package-version": "npx ncu -u",
     "z:update:package-from-package": "npx ncu -u"
@@ -71,13 +72,13 @@
     "terminal-kit": "^3.0.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.1",
-    "@commitlint/config-conventional": "^18.4.0",
-    "@commitlint/config-pnpm-scopes": "^18.4.0",
-    "@commitlint/cz-commitlint": "^18.4.1",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@commitlint/config-pnpm-scopes": "^18.4.3",
+    "@commitlint/cz-commitlint": "^18.4.3",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-formatter-pretty": "^6.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -87,7 +88,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
-    "npm-check-updates": "^16.14.6",
+    "npm-check-updates": "^16.14.11",
     "prettier": "^3.1.0",
     "prettier-plugin-packagejson": "^2.4.6"
   }

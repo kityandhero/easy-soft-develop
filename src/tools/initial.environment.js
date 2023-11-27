@@ -106,9 +106,8 @@ function adjustMainPackageJsonScript({ scripts }) {
   loopPackage(({ name }) => {
     publishPackageNameList.push(name);
 
-    autoAdjustFileScript[
-      `z:auto:adjust:file:${name}`
-    ] = `cd packages/${name} && npm run z:auto:adjust:file`;
+    autoAdjustFileScript[`z:auto:adjust:file:${name}`] =
+      `cd packages/${name} && npm run z:auto:adjust:file`;
 
     autoAdjustFileAllProjects.push(`npm run z:auto:adjust:file:${name}`);
 
