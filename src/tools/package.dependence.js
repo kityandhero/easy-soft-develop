@@ -62,7 +62,12 @@ function getGlobalDevelopPackages() {
 
   packages = packages.concat('cross-env', '@types/jest', 'jest', 'babel-jest');
 
-  packages = packages.concat('rimraf', 'lint-staged', 'husky');
+  packages = packages.concat(
+    'rimraf',
+    'lint-staged',
+    'husky',
+    'npm-check-updates',
+  );
 
   packages = packages.concat('easy-soft-develop');
 
