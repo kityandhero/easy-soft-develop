@@ -52,8 +52,10 @@ function getGlobalDevelopPackages() {
 
   packages = packages.concat([
     'stylelint',
-    'stylelint-config-prettier',
+    'stylelint-config-css-modules',
     'stylelint-config-standard',
+    'stylelint-declaration-block-no-ignored-properties',
+    'stylelint-order',
   ]);
 
   packages = packages.concat(['@typescript-eslint/parser']);
