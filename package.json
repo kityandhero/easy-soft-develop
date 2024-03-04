@@ -28,6 +28,7 @@
   "scripts": {
     "commitlint": "npx commitlint --edit",
     "precommit": "npm run z:lint:staged:quiet",
+    "prepare": "pnpm changeset init && npm run z:husky:install && echo do other prepare work with here before run z:husky:install",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
@@ -48,6 +49,7 @@
     "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
     "z:cz": "git-cz",
     "postz:cz": "git push",
+    "z:husky:install": "npx husky install",
     "z:install": "pnpm install",
     "z:lint:staged": "npx lint-staged",
     "z:lint:staged:quiet": "npx lint-staged --quiet",
@@ -75,6 +77,7 @@
     "terminal-kit": "^3.0.2"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.1",
     "@commitlint/cli": "^19.0.3",
     "@commitlint/config-conventional": "^19.0.3",
     "@commitlint/config-pnpm-scopes": "^19.0.0",
