@@ -4,4 +4,5 @@
 echo ---------------------
 echo exec husky commit-msg
 
-npx commitlint -e $HUSKY_GIT_PARAMS -V
+# npx commitlint -e $HUSKY_GIT_PARAMS -V
+npx --no -- commitlint --edit $1
