@@ -71,7 +71,6 @@ module.exports = {
       },
     ],
     issuePrefixes: [
-      // 如果使用 gitee 作为开发管理
       { value: 'link', name: 'link:     链接 ISSUES 进行中' },
       { value: 'closed', name: 'closed:   标记 ISSUES 已完成' },
     ],

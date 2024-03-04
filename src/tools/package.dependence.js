@@ -17,10 +17,10 @@ function getGlobalDevelopPackages() {
     '@commitlint/cli',
     '@commitlint/config-conventional',
     '@commitlint/config-pnpm-scopes',
-    '@commitlint/cz-commitlint',
     '@pmmmwh/react-refresh-webpack-plugin',
     'commitizen',
     'conventional-changelog-conventionalcommits',
+    'cz-git',
   ]);
 
   packages = packages.concat([

@@ -1,7 +1,7 @@
 const folderPath = '.';
 
 const contentFileContent = `{
-  "path": "@commitlint/cz-commitlint"
+  "path": "node_modules/cz-git"
 }
 `;
 
