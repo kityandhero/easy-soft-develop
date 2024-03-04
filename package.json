@@ -48,6 +48,8 @@
     "z:cz": "git-cz",
     "postz:cz": "git push",
     "z:install": "pnpm install",
+    "z:lint:staged": "npx lint-staged",
+    "z:lint:staged:quiet": "npx lint-staged --quiet",
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write . && node ./bin/cli.js prompt --message \"format changed files complete\" --type success --blankLine",
     "z:publish:build": "npm run z:publish:patch:npm",
