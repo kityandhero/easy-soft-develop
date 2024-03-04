@@ -138,7 +138,7 @@ function createHusky() {
 echo ---------------------
 echo exec husky commit-msg
 
-npx commitlint -e $HUSKY_GIT_PARAMS -V
+npx commitlint -E $HUSKY_GIT_PARAMS -V
 `;
 
   writeFileSync(`./.husky/commit-msg`, commitMsg, { coverFile: true });

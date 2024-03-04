@@ -45,7 +45,7 @@
     "z:change:npm:registry:npm": "nrm use npm",
     "z:check:all-package-version": "npx ncu",
     "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
-    "z:cz": "cz",
+    "z:cz": "git-cz",
     "postz:cz": "git push",
     "z:install": "pnpm install",
     "z:prettier:format:all": "npx prettier --write .",
@@ -61,7 +61,7 @@
     "z:update:package-from-package": "npx ncu -u"
   },
   "dependencies": {
-    "commander": "^11.1.0",
+    "commander": "^12.0.0",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
     "enquirer": "^2.4.1",
@@ -69,16 +69,16 @@
     "hpagent": "^1.2.0",
     "ping": "^0.4.4",
     "shelljs": "^0.8.5",
-    "terminal-kit": "^3.0.1"
+    "terminal-kit": "^3.0.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.4.4",
-    "@commitlint/config-conventional": "^18.4.4",
-    "@commitlint/config-pnpm-scopes": "^18.4.4",
-    "@commitlint/cz-commitlint": "^18.4.4",
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/config-conventional": "^19.0.3",
+    "@commitlint/config-pnpm-scopes": "^19.0.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
-    "eslint": "^8.56.0",
+    "cz-git": "^1.9.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-formatter-pretty": "^6.0.1",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -86,10 +86,10 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.1.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "npm-check-updates": "^16.14.12",
-    "prettier": "^3.2.4",
-    "prettier-plugin-packagejson": "^2.4.9"
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "npm-check-updates": "^16.14.15",
+    "prettier": "^3.2.5",
+    "prettier-plugin-packagejson": "^2.4.12"
   }
 }
