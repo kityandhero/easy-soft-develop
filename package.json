@@ -27,6 +27,7 @@
   ],
   "scripts": {
     "commitlint": "npx commitlint --edit",
+    "precommit": "npm run z:lint:staged:quiet",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
