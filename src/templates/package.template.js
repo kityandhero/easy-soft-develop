@@ -73,12 +73,10 @@ const lintScript = {
 };
 
 const prepareScript = {
-  prepare: 'pnpm changeset init && npm run z:husky:install && echo do other prepare work with here before run z:husky:install',
-  'z:husky:install':'npx husky install'
+  prepare: 'echo do other prepare work with here before install package'
 };
 
 const toolsScript = {
-  postinstall: 'npm run z:initial:environment && echo do other postinstall work with here',
   'z:show:info':
     'echo node version && node --version && echo npm version && npm --version',
   "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
@@ -104,19 +102,20 @@ const environmentScript = {
 };
 
 const repositoryScript = {
-  'z:repository:publish': 'pnpm -r publish',
-  'z:bootstrap':
-    'npm run z:clean && git pull && npm run z:install && npm run z:husky:install',
+  "z:repository:publish": "pnpm -r publish",
+  "z:bootstrap": "npm run z:clean && git pull && npm run z:install && npm run z:husky:install",
 };
 
 const installScript = {
   "z:reinstall": 'npm run z:bootstrap',
-  "postinstall": "npm run z:initial:environment",
+  "postinstall": "pnpm changeset init && npm run z:husky:install && npm run z:initial:environment && npm run z:post:extra:install",
   "prez:install.global.develop.dependence": "npm run z:change:npm:registry:local",
   "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
   "postz:install.global.develop.dependence": "npm run z:install",
   "prez:install": "npm run z:change:npm:registry:local",
   "z:install": "pnpm install",
+  "z:post:extra:install": "echo do other postinstall work with here",
+  "z:husky:install": "npx husky install"
 };
 
 const nrmScript = {
