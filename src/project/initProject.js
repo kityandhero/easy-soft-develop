@@ -220,9 +220,9 @@ function initialEnvironment() {
 
   promptEmptyLine();
 
-  promptInfo('husky install');
+  promptInfo('exec husky');
 
-  exec('npx husky install');
+  exec('npx husky');
 }
 
 function createRepositoryProject(name) {

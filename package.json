@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
   "name": "easy-soft-develop",
   "version": "2.1.67",
   "description": "",
@@ -28,8 +27,9 @@
   ],
   "scripts": {
     "commitlint": "npx commitlint --edit",
+    "postinstall": "pnpm changeset init && npm run z:husky",
     "precommit": "npm run z:lint:staged:quiet",
-    "prepare": "pnpm changeset init && npm run z:husky:install && echo do other prepare work with here before run z:husky:install",
+    "prepare": "echo do other prepare work with here before install package",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
@@ -50,7 +50,7 @@
     "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
     "z:cz": "git-cz",
     "postz:cz": "git push",
-    "z:husky:install": "npx husky install",
+    "z:husky": "npx husky",
     "z:install": "pnpm install",
     "z:lint:staged": "npx lint-staged",
     "z:lint:staged:quiet": "npx lint-staged --quiet",

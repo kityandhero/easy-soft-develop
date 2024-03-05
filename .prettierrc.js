@@ -4,14 +4,6 @@ module.exports = {
   trailingComma: 'all',
   proseWrap: 'never',
   semi: true,
-  overrides: [
-    {
-      files: '.prettierrc',
-      options: {
-        parser: 'json',
-      },
-    },
-  ],
   plugins: [
     'prettier-plugin-packagejson',
   ],

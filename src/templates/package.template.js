@@ -108,14 +108,14 @@ const repositoryScript = {
 
 const installScript = {
   "z:reinstall": 'npm run z:bootstrap',
-  "postinstall": "pnpm changeset init && npm run z:husky:install && npm run z:initial:environment && npm run z:post:extra:install",
+  "postinstall": "pnpm changeset init && npm run z:husky && npm run z:initial:environment && npm run z:post:extra:install",
   "prez:install.global.develop.dependence": "npm run z:change:npm:registry:local",
   "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
   "postz:install.global.develop.dependence": "npm run z:install",
   "prez:install": "npm run z:change:npm:registry:local",
   "z:install": "pnpm install",
   "z:post:extra:install": "echo do other postinstall work with here",
-  "z:husky:install": "npx husky install"
+  "z:husky": "npx husky"
 };
 
 const nrmScript = {
