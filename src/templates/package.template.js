@@ -106,7 +106,7 @@ const environmentScript = {
 const repositoryScript = {
   'z:repository:publish': 'pnpm -r publish',
   'z:bootstrap':
-    'npm run z:clean && npm run z:husky:install && git pull && npm run z:install',
+    'npm run z:clean && git pull && npm run z:install && npm run z:husky:install',
 };
 
 const installScript = {
