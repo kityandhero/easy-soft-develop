@@ -13,6 +13,7 @@ const createRepositoryProject = require('../src/cliCollection/create-repository-
 const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
 const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
 const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
+const createProjectWithMasterTemplate = require('../src/cliCollection/create-project-with-master-template');
 const prompt = require('../src/cliCollection/prompt');
 const code = require('../src/cliCollection/createCode');
 
@@ -129,6 +130,19 @@ program
   )
   .action((a, o) => {
     createProjectWithTemplate.run(a, o);
+  });
+
+program
+  .command('create-project-with-master-template')
+  .description('update package from local or remote package.json file')
+  .option('--templateUrl <string>', 'template url with download')
+  .option('--folder <string>', 'folder name create project in it')
+  .option(
+    '--exampleUrl <string>',
+    'example url, if it has value, will prompt info after create',
+  )
+  .action((a, o) => {
+    createProjectWithMasterTemplate.run(a, o);
   });
 
 program

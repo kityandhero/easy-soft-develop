@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.73",
+  "version": "2.1.76",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -57,6 +57,7 @@
     "z:post:extra:install": "echo do other postinstall work with here",
     "z:prettier:format:all": "npx prettier --write .",
     "z:prettier:format:change": "npx prettier --cache --write . && node ./bin/cli.js prompt --message \"format changed files complete\" --type success --blankLine",
+    "prez:publish:build": "npm run z:install && pnpm changeset && pnpm changeset version && npm run z:cz",
     "z:publish:build": "npm run z:publish:patch:npm",
     "postz:publish:build": "git push",
     "prez:publish:patch:npm": "npm run z:cz && npm version patch",
@@ -84,7 +85,7 @@
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/config-pnpm-scopes": "^19.1.0",
     "commitizen": "^4.3.0",
-    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "cz-git": "^1.9.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
