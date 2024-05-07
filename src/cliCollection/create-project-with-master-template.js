@@ -29,7 +29,7 @@ exports.run = function (s, o) {
     exit();
   } else {
     const templateUrlAdjust = checkStringIsEmpty(templateUrl)
-      ? 'https://gitee.com/lzt/mono-antd-management-fast-master-template.git' // 'https://gitee.com/lzt/mono-antd-management-fast-master-template/repository/archive/main.zip'
+      ? 'kityandhero/mono-antd-management-fast-master-template'
       : templateUrl;
 
     const folderPath = resolvePath(`./${folder}`);
