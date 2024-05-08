@@ -21,7 +21,8 @@
     "precommit",
     "precz",
     "prez",
-    "stylelintignore"
+    "stylelintignore",
+    "unzipper"
   ],
   "eslint.workingDirectories": [
     "packages/taro-fast-framework",
