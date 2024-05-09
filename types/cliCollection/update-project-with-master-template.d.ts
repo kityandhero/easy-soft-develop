@@ -1,5 +1,1 @@
-export function updatePackageFromRepository({
-  agent,
-}: {
-  agent: any;
-}): Promise<void>;
+export function run(s: any, o: any): Promise<void>;

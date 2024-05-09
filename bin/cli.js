@@ -14,6 +14,7 @@ const clearAllDependence = require('../src/cliCollection/clear-all-dependence');
 const updatePackageFromPackage = require('../src/cliCollection/update-package-from-package');
 const createProjectWithTemplate = require('../src/cliCollection/create-project-with-template');
 const createProjectWithMasterTemplate = require('../src/cliCollection/create-project-with-master-template');
+const updateProjectWithMasterTemplate = require('../src/cliCollection/update-project-with-master-template');
 const prompt = require('../src/cliCollection/prompt');
 const code = require('../src/cliCollection/createCode');
 
@@ -143,6 +144,18 @@ program
   )
   .action((a, o) => {
     createProjectWithMasterTemplate.run(a, o);
+  });
+
+program
+  .command('update-project-with-master-template')
+  .description('update from master template repository')
+  .option('--projectPath <string>', 'target project path that will be updated')
+  .option(
+    '--agent <string>',
+    'web agent for remote , if it has value, will use the agent to access remote url',
+  )
+  .action((a, o) => {
+    updateProjectWithMasterTemplate.run(a, o);
   });
 
 program
