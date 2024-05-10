@@ -124,7 +124,7 @@ function adjustMainPackageJsonScript({ scripts }) {
   packageJson.scripts = assignObject(
     {
       'z:build:all': 'echo please supplement build all packages commend',
-      'z:publish:npm-all': `easy-soft-develop publish --packages ${publishPackageNameList.join(
+      'z:publish:npm-all': `npx easy-soft-develop publish --packages ${publishPackageNameList.join(
         ',',
       )}${publishWithOtp ? ' --otp true' : ''}`,
     },
