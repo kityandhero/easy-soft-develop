@@ -107,92 +107,101 @@ function handlePackage(projectPath, zipPath) {
     copyFile({
       sourceMainPath,
       targetMainPath,
-      filepath: 'generatorConfig/function.data.extra.json',
+      filepath: 'config/router.master.template.config.js',
       callback: () => {
         copyFile({
           sourceMainPath,
           targetMainPath,
-          filepath: 'src/commonAssist/Action/actionGeneral.js',
+          filepath: 'generatorConfig/function.data.extra.json',
           callback: () => {
-            copyFolder({
+            copyFile({
               sourceMainPath,
               targetMainPath,
-              filepath: 'src/components/PageLoading/',
+              filepath: 'src/commonAssist/Action/actionGeneral.js',
               callback: () => {
                 copyFolder({
                   sourceMainPath,
                   targetMainPath,
-                  filepath: 'src/customConfig/general/',
+                  filepath: 'src/components/PageLoading/',
                   callback: () => {
                     copyFolder({
                       sourceMainPath,
                       targetMainPath,
-                      filepath:
-                        'src/customSpecialComponents/BaseUpdateRoleModal/',
+                      filepath: 'src/customConfig/general/',
                       callback: () => {
-                        copyFile({
+                        copyFolder({
                           sourceMainPath,
                           targetMainPath,
                           filepath:
-                            'src/customSpecialComponents/CustomAssembly/menuHeader.js',
+                            'src/customSpecialComponents/BaseUpdateRoleModal/',
                           callback: () => {
-                            copyFolder({
+                            copyFile({
                               sourceMainPath,
                               targetMainPath,
                               filepath:
-                                'src/customSpecialComponents/UpdateModuleModalBase/',
+                                'src/customSpecialComponents/CustomAssembly/menuHeader.js',
                               callback: () => {
                                 copyFolder({
                                   sourceMainPath,
                                   targetMainPath,
-                                  filepath: 'src/pages/',
+                                  filepath:
+                                    'src/customSpecialComponents/UpdateModuleModalBase/',
                                   callback: () => {
-                                    copyFile({
+                                    copyFolder({
                                       sourceMainPath,
                                       targetMainPath,
-                                      filepath: 'src/utils/init.js',
+                                      filepath: 'src/pages/',
                                       callback: () => {
                                         copyFile({
                                           sourceMainPath,
                                           targetMainPath,
-                                          filepath: 'src/utils/tools.js',
+                                          filepath: 'src/utils/init.js',
                                           callback: () => {
                                             copyFile({
                                               sourceMainPath,
                                               targetMainPath,
-                                              filepath: 'src/access.js',
+                                              filepath: 'src/utils/tools.js',
                                               callback: () => {
                                                 copyFile({
                                                   sourceMainPath,
                                                   targetMainPath,
-                                                  filepath: 'src/app.core.jsx',
+                                                  filepath: 'src/access.js',
                                                   callback: () => {
                                                     copyFile({
                                                       sourceMainPath,
                                                       targetMainPath,
                                                       filepath:
-                                                        'src/global.less',
+                                                        'src/app.core.jsx',
                                                       callback: () => {
                                                         copyFile({
                                                           sourceMainPath,
                                                           targetMainPath,
                                                           filepath:
-                                                            'src/overrides.less',
+                                                            'src/global.less',
                                                           callback: () => {
                                                             copyFile({
                                                               sourceMainPath,
                                                               targetMainPath,
                                                               filepath:
-                                                                'plugin.ts',
+                                                                'src/overrides.less',
                                                               callback: () => {
                                                                 copyFile({
                                                                   sourceMainPath,
                                                                   targetMainPath,
                                                                   filepath:
-                                                                    'tsconfig.json',
+                                                                    'plugin.ts',
                                                                   callback:
                                                                     () => {
-                                                                      clearResource();
+                                                                      copyFile({
+                                                                        sourceMainPath,
+                                                                        targetMainPath,
+                                                                        filepath:
+                                                                          'tsconfig.json',
+                                                                        callback:
+                                                                          () => {
+                                                                            clearResource();
+                                                                          },
+                                                                      });
                                                                     },
                                                                 });
                                                               },
