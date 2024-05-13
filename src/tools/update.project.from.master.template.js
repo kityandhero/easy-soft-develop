@@ -170,8 +170,7 @@ function handlePackage(projectPath, zipPath) {
                                                     copyFile({
                                                       sourceMainPath,
                                                       targetMainPath,
-                                                      filepath:
-                                                        'src/app.core.jsx',
+                                                      filepath: 'src/app.jsx',
                                                       callback: () => {
                                                         copyFile({
                                                           sourceMainPath,
