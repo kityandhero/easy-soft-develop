@@ -2,6 +2,7 @@
  * loop all package
  */
 export function loopPackage(
+  paths?: any[],
   callback?: ({
     name,
     path,

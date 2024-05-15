@@ -13,6 +13,10 @@ const {
   promptEmptyLine,
 } = require('../tools/meta');
 
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
+
 function publishToNpm(packages, o, useOtp, otp) {
   if (checkStringIsEmpty(packages)) {
     exit();
@@ -22,7 +26,12 @@ function publishToNpm(packages, o, useOtp, otp) {
 
   promptInfo('publish public packages to npm');
 
-  loopPackage(({ name, absolutePath }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, absolutePath }) => {
     if (checkInCollection(packageList, name)) {
       cd(absolutePath);
 

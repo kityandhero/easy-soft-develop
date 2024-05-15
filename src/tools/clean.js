@@ -7,6 +7,10 @@ const {
 } = require('./meta');
 const { loopPackage } = require('./package.tools');
 
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
+
 /**
  * try clean
  * @param {*} cmd cmd
@@ -42,7 +46,12 @@ function adjustMainPackageJson(command) {
 }
 
 function adjustChildrenPackageJson(command) {
-  loopPackage(({ name, relativePath }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, relativePath }) => {
     const cmd = `cd ${relativePath} && ${command}`;
 
     promptInfo(`clean package ${name}: ${cmd}`);

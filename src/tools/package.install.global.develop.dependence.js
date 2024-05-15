@@ -12,6 +12,9 @@ const { getGlobalDevelopPackages } = require('./package.dependence');
 const { loopPackage } = require('./package.tools');
 const { updateSpecialPackageVersion } = require('./package.update');
 const { prettierAllPackageJson } = require('./prettier.package.json');
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
 
 function buildPackageObject(packageList) {
   if (!isArray(packageList) || packageList.length <= 0) {
@@ -61,7 +64,12 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
 
   const o = buildPackageObject(packageList);
 
-  loopPackage(({ name, relativePath }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, relativePath }) => {
     const packageJson = readJsonFileSync(`${relativePath}/package.json`);
 
     let specials = {};

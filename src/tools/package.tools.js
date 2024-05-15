@@ -1,24 +1,15 @@
 const fs = require('fs');
 
 const { resolvePath, existDirectorySync, isArray } = require('./meta');
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
 
 /**
  * loop all package
  */
 function loopPackage(
+  paths = [],
   // eslint-disable-next-line no-unused-vars
   callback = ({ name, path, absolutePath, relativePath }) => {},
 ) {
-  const developSubPathVersionNcuConfig = getDevelopSubPathVersionNcuConfig();
-
-  const { paths = [] } = {
-    paths: [],
-    ...developSubPathVersionNcuConfig,
-  };
-
   if (!isArray(paths)) {
     return;
   }

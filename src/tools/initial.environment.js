@@ -16,6 +16,10 @@ const { globalScript } = require('./package.script');
 const { loopPackage } = require('./package.tools');
 const { prettierAllPackageJson } = require('./prettier.package.json');
 
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
+
 function createMainFile(fileWithContentCollection) {
   if (!Array.isArray(fileWithContentCollection)) {
     return;
@@ -39,7 +43,12 @@ function createMainFile(fileWithContentCollection) {
 }
 
 function createPackageFile(fileWithContentCollection) {
-  loopPackage(({ absolutePath }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ absolutePath }) => {
     const itemPath = absolutePath;
 
     if (!Array.isArray(fileWithContentCollection)) {
@@ -103,7 +112,12 @@ function adjustMainPackageJsonScript({ scripts }) {
   const testScript = {};
   const testAllProjects = [];
 
-  loopPackage(({ name, path }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, path }) => {
     publishPackageNameList.push(name);
 
     autoAdjustFileScript[`z:auto:adjust:file:${name}`] =
@@ -146,7 +160,12 @@ function adjustMainPackageJsonScript({ scripts }) {
 }
 
 function adjustChildrenPackageJsonScript({ scripts }) {
-  loopPackage(({ name, absolutePath }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, absolutePath }) => {
     const itemPath = absolutePath;
 
     const childPackageJsonPath = `${itemPath}/package.json`;

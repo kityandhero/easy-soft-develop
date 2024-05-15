@@ -1,5 +1,8 @@
 const { promptInfo, promptSuccess, exec, promptEmptyLine } = require('./meta');
 const { loopPackage } = require('./package.tools');
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
 
 function adjustMainPackageJsonByCommand(cmd) {
   promptInfo(`update main command: ${cmd}`);
@@ -8,7 +11,12 @@ function adjustMainPackageJsonByCommand(cmd) {
 }
 
 function adjustChildrenPackageJsonByCommand(cmd) {
-  loopPackage(({ name, path }) => {
+  const { paths = [] } = {
+    paths: [],
+    ...getDevelopSubPathVersionNcuConfig(),
+  };
+
+  loopPackage(paths, ({ name, path }) => {
     const commandString = `cd ./${path}/${name} && ${cmd}`;
 
     promptInfo(`update child command: ${commandString}`);
