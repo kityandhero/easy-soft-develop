@@ -72,13 +72,13 @@ function copyFolder({
 }
 
 function clearResource() {
-  const removeSourceFolderCmd = `npx rimraf ${resolvePath(`./temp/source/`)}`;
+  const removeSourceFolderCmd = `rimraf ${resolvePath(`./temp/source/`)}`;
 
   promptInfo(`remove folder: "./temp/source/"`);
 
   exec(removeSourceFolderCmd);
 
-  const removeZipFolderCmd = `npx rimraf ${resolvePath(`./temp/zip/`)}`;
+  const removeZipFolderCmd = `rimraf ${resolvePath(`./temp/zip/`)}`;
 
   promptInfo(`remove folder: "./temp/zip/"`);
 

@@ -130,15 +130,29 @@ function promptError(error) {
   promptEmptyLine();
 }
 
-function existFileSync(path) {
+function existPathSync(path) {
+  if (!path || typeof path !== 'string') {
+    throw new TypeError('file path not allow empty');
+  }
+
   try {
     fs.accessSync(path, fs.F_OK);
   } catch (error) {
     return false;
   }
 
+  return true;
+}
+
+function existFileSync(path) {
   if (!path || typeof path !== 'string') {
     throw new TypeError('file path not allow empty');
+  }
+
+  try {
+    fs.accessSync(path, fs.F_OK);
+  } catch (error) {
+    return false;
   }
 
   const p = resolvePath(path);
@@ -256,11 +270,36 @@ function readJsonFileSync(path) {
   return fsExtra.readJsonSync(path);
 }
 
+function rimraf(path) {
+  if (checkStringIsEmpty(path)) {
+    promptWarn(`path is empty`);
+
+    return;
+  }
+
+  if (!existPathSync(path)) {
+    promptWarn(`path not exist: "${path}"`);
+
+    return;
+  }
+
+  const cmd = `rimraf ${resolvePath(path)}`;
+
+  promptInfo(
+    `remove target by use rimraf package, make sure rimraf installed with global mode.`,
+  );
+
+  exec(cmd);
+
+  promptSuccess(`remove path success, path: "${path}"`);
+}
+
 module.exports = {
   exec,
   cd,
   getArgCollection,
   checkInCollection,
+  existPathSync,
   existFileSync,
   existDirectorySync,
   writeFileSync,
@@ -281,4 +320,5 @@ module.exports = {
   writeFileWithOptionsSync,
   resolvePath,
   exit,
+  rimraf,
 };

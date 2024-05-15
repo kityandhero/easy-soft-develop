@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.105",
+  "version": "2.1.106",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -34,6 +34,7 @@
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
     "test:bin:create-repository-project": "node ./bin/cli.js create-repository-project",
     "test:bin:publish": "node ./bin/cli.js publish --packages ss --otp true",
+    "test:bin:rimraf": "node ./bin/cli.js rimraf --path ./testRemoveThisPath",
     "test:bin:sleep": "node ./bin/cli.js sleep --second 2 --showInfo true",
     "test:bin:update-all-package-version": "node ./bin/cli.js update-all-package-version",
     "test:bin:update-project-with-master-template": "node ./bin/cli.js update-project-with-master-template --projectPath E:\\temp\\2\\test",
@@ -44,6 +45,8 @@
     "test:createPackageUpdateAllVersionScriptFile": "node ./test/createPackageUpdateAllVersionScriptFile.test.js",
     "test:createSleepScriptFile": "node ./test/createSleepScriptFile.test.js",
     "test:inner:assignObject": "node ./test/assignObject.test.js",
+    "test:inner:existPath": "node ./test/existPath.test.js",
+    "test:inner:rimraf": "node ./test/rimraf.test.js",
     "z:change:npm:registry:local": "nrm use local",
     "z:change:npm:registry:npm": "nrm use npm",
     "z:check:all-package-version": "npx ncu",

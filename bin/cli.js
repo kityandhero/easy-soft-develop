@@ -17,6 +17,7 @@ const createProjectWithMasterTemplate = require('../src/cliCollection/create-pro
 const updateProjectWithMasterTemplate = require('../src/cliCollection/update-project-with-master-template');
 const prompt = require('../src/cliCollection/prompt');
 const code = require('../src/cliCollection/createCode');
+const rimraf = require('../src/cliCollection/rimraf');
 
 const program = new Command();
 
@@ -164,6 +165,14 @@ program
   .option('--dataPath <string>', 'data json source file path')
   .action((a, o) => {
     code.run(a, o);
+  });
+
+program
+  .command('rimraf')
+  .description('remove target path by use rimraf')
+  .option('--path <string>', 'target path will remove')
+  .action((a, o) => {
+    rimraf.run(a, o);
   });
 
 program.parse(getArgCollection());

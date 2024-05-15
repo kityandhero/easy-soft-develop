@@ -3,12 +3,15 @@ const { fileGlobalHeader } = require('./template.config');
 const folderPath = '.';
 
 const contentFileContent = `${fileGlobalHeader}
-module.exports = function (api) {
+function buildConfig(api) {
   api.cache(true);
+
   return {
     babelrcRoots: ['.', 'packages/*'],
   };
-};
+}
+
+module.exports = buildConfig;
 `;
 
 const contentFile = {
