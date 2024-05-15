@@ -42,6 +42,8 @@ function getDevelopSubPathVersionNcuConfig(createFileWhenNoExist = false) {
   if (!developSubPathVersionNcuConfigFileExist) {
     if (createFileWhenNoExist) {
       createDevelopSubPathVersionNcuConfigFile([]);
+    } else {
+      return developSubPathVersionNcu;
     }
   }
 
