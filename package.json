@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.110",
+  "version": "2.1.111",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -49,7 +49,7 @@
     "test:inner:rimraf": "node ./test/rimraf.test.js",
     "z:change:npm:registry:local": "nrm use local",
     "z:change:npm:registry:npm": "nrm use npm",
-    "z:check:all-package-version": "npx ncu",
+    "z:check:all-package-version": "npx npm-check-updates",
     "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
     "z:cz": "git-cz",
     "postz:cz": "git push",
@@ -69,8 +69,8 @@
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local && npm publish",
     "z:reinstall": "rimraf ./node_modules && npm run z:install",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
-    "z:update:all-package-version": "npx ncu -u",
-    "z:update:package-from-package": "npx ncu -u"
+    "z:update:all-package-version": "npx npm-check-updates -u",
+    "z:update:package-from-package": "npx npm-check-updates -u"
   },
   "dependencies": {
     "commander": "^12.0.0",

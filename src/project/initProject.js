@@ -215,7 +215,7 @@ function initialEnvironment() {
 
   promptInfo('add global dev packages');
 
-  exec('npx ncu -u --packageFile ./**/package.json');
+  exec('npx npm-check-updates -u --packageFile ./**/package.json');
 
   promptInfo('install dependence packages');
 

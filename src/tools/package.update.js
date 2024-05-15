@@ -20,7 +20,7 @@ function adjustChildrenPackageJsonByCommand(cmd) {
 function checkEasySoftDevelopVersion() {
   promptInfo('check easy-soft-develop version');
 
-  exec('ncu -g easy-soft-develop');
+  exec('npm-check-updates -g easy-soft-develop');
 }
 
 /**
@@ -32,7 +32,7 @@ function updateSpecialPackageVersion(packageList) {
 
   const packages = packageList.join(' ');
 
-  const ncuCommand = `npx ncu -u ${packages} --packageFile package.json`;
+  const ncuCommand = `npx npm-check-updates -u ${packages} --packageFile package.json`;
 
   promptInfo(`${packageList.join()} will check update`);
 
@@ -48,7 +48,7 @@ function updateSpecialPackageVersion(packageList) {
 function updateAllPackageVersion() {
   exec('npm run z:initial:environment');
 
-  const ncuCommand = `npx ncu -u --packageFile package.json`;
+  const ncuCommand = `npx npm-check-updates -u --packageFile package.json`;
 
   promptInfo(`all packages version will update`);
 
@@ -64,7 +64,7 @@ function updateAllPackageVersion() {
 }
 
 function checkAllPackageVersion() {
-  const ncuCommand = `npx ncu --packageFile package.json`;
+  const ncuCommand = `npx npm-check-updates --packageFile package.json`;
 
   promptEmptyLine();
 
