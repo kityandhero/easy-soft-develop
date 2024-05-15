@@ -103,15 +103,15 @@ function adjustMainPackageJsonScript({ scripts }) {
   const testScript = {};
   const testAllProjects = [];
 
-  loopPackage(({ name }) => {
+  loopPackage(({ name, path }) => {
     publishPackageNameList.push(name);
 
     autoAdjustFileScript[`z:auto:adjust:file:${name}`] =
-      `cd packages/${name} && npm run z:auto:adjust:file`;
+      `cd ${path}/${name} && npm run z:auto:adjust:file`;
 
     autoAdjustFileAllProjects.push(`npm run z:auto:adjust:file:${name}`);
 
-    testScript[`test:${name}`] = `cd packages/${name} && npm run z:test`;
+    testScript[`test:${name}`] = `cd ${path}/${name} && npm run z:test`;
 
     testAllProjects.push(`npm run test:${name}`);
   });

@@ -8,8 +8,10 @@ const {
 /**
  * loop all package
  */
-// eslint-disable-next-line no-unused-vars
-function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
+function loopPackage(
+  // eslint-disable-next-line no-unused-vars
+  callback = ({ name, path, absolutePath, relativePath }) => {},
+) {
   const developSubPathVersionNcuConfig = getDevelopSubPathVersionNcuConfig();
 
   const { paths = [] } = {
