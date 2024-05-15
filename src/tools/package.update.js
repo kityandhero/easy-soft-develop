@@ -17,11 +17,11 @@ function adjustChildrenPackageJsonByCommand(cmd) {
   });
 }
 
-function checkEasySoftDevelopVersion() {
-  promptInfo('check easy-soft-develop version');
+// function checkEasySoftDevelopVersion() {
+//   promptInfo('check easy-soft-develop global version');
 
-  exec('npm-check-updates -g easy-soft-develop');
-}
+//   exec('npm-check-updates -g easy-soft-develop');
+// }
 
 /**
  * update special package version
@@ -40,7 +40,7 @@ function updateSpecialPackageVersion(packageList) {
 
   adjustChildrenPackageJsonByCommand(ncuCommand);
 
-  checkEasySoftDevelopVersion();
+  // checkEasySoftDevelopVersion();
 
   promptSuccess('check success');
 }
@@ -60,7 +60,7 @@ function updateAllPackageVersion() {
 
   exec('npm run z:install');
 
-  checkEasySoftDevelopVersion();
+  // checkEasySoftDevelopVersion();
 }
 
 function checkAllPackageVersion() {
@@ -78,7 +78,7 @@ function checkAllPackageVersion() {
 
   exec('npm run z:install');
 
-  checkEasySoftDevelopVersion();
+  // checkEasySoftDevelopVersion();
 }
 
 module.exports = {
