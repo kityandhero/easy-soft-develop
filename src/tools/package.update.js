@@ -8,12 +8,12 @@ function adjustMainPackageJsonByCommand(cmd) {
 }
 
 function adjustChildrenPackageJsonByCommand(cmd) {
-  loopPackage(({ name }) => {
-    const commandString = `cd ./packages/${name} && ${cmd}`;
+  loopPackage(({ name, path }) => {
+    const commandString = `cd ./${path}/${name} && ${cmd}`;
 
     promptInfo(`update child command: ${commandString}`);
 
-    exec(`cd ./packages/${name} && ${cmd}`);
+    exec(`cd ./${path}/${name} && ${cmd}`);
   });
 }
 

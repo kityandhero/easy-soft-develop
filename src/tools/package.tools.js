@@ -42,6 +42,7 @@ function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
       if (file && fs.lstatSync(itemPath).isDirectory()) {
         callback({
           name: file,
+          path: pathItem,
           absolutePath: itemPath,
           relativePath: `./${pathItem}/${file}`,
         });

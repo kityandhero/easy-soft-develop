@@ -1,4 +1,8 @@
+const {
+  getDevelopSubPathVersionNcuConfig,
+} = require('../config/develop.subPath.version.ncu');
 const { fileGlobalHeader } = require('./template.config');
+const { isArray } = require('../tools/meta');
 
 const folderPath = './develop/config/eslint';
 
@@ -270,6 +274,13 @@ const ruleFile = {
   fileContent: ruleFileContent,
 };
 
+const developSubPathVersionNcuConfig = getDevelopSubPathVersionNcuConfig();
+
+const { paths = [] } = {
+  paths: [],
+  ...developSubPathVersionNcuConfig,
+};
+
 const settingEmbedFileContent = `${fileGlobalHeader}
 const items = {
   'import/parsers': {
@@ -285,7 +296,17 @@ const items = {
       alwaysTryTypes: true,
 
       // use an array of glob patterns
-      directory: ['./tsconfig.json', './packages/*/tsconfig.json'],
+      directory: ['./tsconfig.json'${
+        !isArray(paths)
+          ? ''
+          : paths.length === 0
+            ? ''
+            : `, ${paths
+                .map((o) => {
+                  return `./${o}/*/tsconfig.json`;
+                })
+                .join(',')}`
+      }],
     },
   },
 };
