@@ -28,6 +28,9 @@ const {
 const {
   createDevelopInitialEnvironmentConfigFile,
 } = require('../config/develop.initial.environment');
+const {
+  createDevelopSubPathVersionNcuConfigFile,
+} = require('../config/develop.subPath.version.ncu');
 
 function createRepositoryProjectFolder(name) {
   mkdirSync(`./${name}`);
@@ -199,6 +202,8 @@ function initialEnvironment() {
   mkdirSync(`./develop/config`);
 
   createDevelopInitialEnvironmentConfigFile();
+
+  createDevelopSubPathVersionNcuConfigFile();
 
   promptSuccess(`step *: config environment`);
 
