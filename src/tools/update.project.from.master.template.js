@@ -160,7 +160,7 @@ function handlePackage(projectPath, zipPath) {
                                             copyFile({
                                               sourceMainPath,
                                               targetMainPath,
-                                              filepath: 'src/utils/tools.js',
+                                              filepath: 'src/utils/tools.jsx',
                                               callback: () => {
                                                 copyFile({
                                                   sourceMainPath,
