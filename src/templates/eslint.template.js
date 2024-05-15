@@ -303,7 +303,7 @@ const items = {
             ? ''
             : `, ${paths
                 .map((o) => {
-                  return `./${o}/*/tsconfig.json`;
+                  return `'./${o}/*/tsconfig.json'`;
                 })
                 .join(',')}`
       }],

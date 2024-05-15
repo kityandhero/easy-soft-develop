@@ -25,7 +25,7 @@ function buildConfig(api) {
           ? ''
           : `, ${paths
               .map((o) => {
-                return `${o}/*`;
+                return `'${o}/*'`;
               })
               .join(',')}`
     }],
