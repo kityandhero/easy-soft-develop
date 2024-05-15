@@ -34,13 +34,15 @@ function createDevelopSubPathVersionNcuConfigFile(paths = []) {
   );
 }
 
-function getDevelopSubPathVersionNcuConfig() {
+function getDevelopSubPathVersionNcuConfig(createFileWhenNoExist = false) {
   const developSubPathVersionNcuConfigFileExist = existFileSync(
     developSubPathVersionNcuConfigFilePath,
   );
 
   if (!developSubPathVersionNcuConfigFileExist) {
-    createDevelopSubPathVersionNcuConfigFile([]);
+    if (createFileWhenNoExist) {
+      createDevelopSubPathVersionNcuConfigFile([]);
+    }
   }
 
   return {

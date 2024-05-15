@@ -114,7 +114,7 @@ function adjustMainPackageJsonScript({ scripts }) {
 
   const { paths = [] } = {
     paths: [],
-    ...getDevelopSubPathVersionNcuConfig(),
+    ...getDevelopSubPathVersionNcuConfig(true),
   };
 
   loopPackage(paths, ({ name, path }) => {
