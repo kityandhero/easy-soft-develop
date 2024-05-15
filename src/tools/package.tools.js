@@ -43,7 +43,7 @@ function loopPackage(callback = ({ name, absolutePath, relativePath }) => {}) {
         callback({
           name: file,
           absolutePath: itemPath,
-          relativePath: `./packages/${file}`,
+          relativePath: `./${paths}/${file}`,
         });
       }
     });

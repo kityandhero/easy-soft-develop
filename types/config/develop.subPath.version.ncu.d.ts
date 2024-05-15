@@ -1,2 +1,2 @@
-export function createDevelopSubPathVersionNcuConfigFile(): void;
+export function createDevelopSubPathVersionNcuConfigFile(paths?: any[]): void;
 export function getDevelopSubPathVersionNcuConfig(): any;

@@ -203,7 +203,7 @@ function initialEnvironment() {
 
   createDevelopInitialEnvironmentConfigFile();
 
-  createDevelopSubPathVersionNcuConfigFile();
+  createDevelopSubPathVersionNcuConfigFile(['packages']);
 
   promptSuccess(`step *: config environment`);
 
