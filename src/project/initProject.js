@@ -139,7 +139,7 @@ function createHusky() {
 . "$(dirname "$0")/_/husky.sh"
 
 echo ---------------------
-echo exec husky commit-msg
+echo exec husky commit-msg by use \\"npx commitlint -e \\$HUSKY_GIT_PARAMS -V\\"
 
 npx commitlint -E $HUSKY_GIT_PARAMS -V
 `;
@@ -150,7 +150,7 @@ npx commitlint -E $HUSKY_GIT_PARAMS -V
   . "$(dirname "$0")/_/husky.sh"
 
 echo ---------------------
-echo exec husky pre-commit
+echo exec husky pre-commit by use \\"npm run z:lint:staged\\"
   `;
 
   writeFileSync(`./.husky/pre-commit`, precommit, { coverFile: true });

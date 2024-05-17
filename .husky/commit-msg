@@ -2,6 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 echo ---------------------
-echo exec husky commit-msg
+echo exec husky commit-msg by use \"npx commitlint -e \$HUSKY_GIT_PARAMS -V\"
 
 npx commitlint -e $HUSKY_GIT_PARAMS -V
