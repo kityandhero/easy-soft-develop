@@ -135,7 +135,15 @@ function adjustMainPackageJsonScript({ scripts }) {
   const publishWithOtp =
     developInitialEnvironmentConfig.publishWithOtp || false;
 
+  const publishItemCollection = {};
+
+  publishPackageNameList.map((o) => {
+    publishItemCollection[`z:publish:npm-${o}`] =
+      `npx easy-soft-develop publish --packages ${o}${publishWithOtp ? ' --otp true' : ''}`;
+  });
+
   packageJson.scripts = assignObject(
+    ...publishItemCollection,
     {
       'z:build:all': 'echo please supplement build all packages commend',
       'z:publish:npm-all': `npx easy-soft-develop publish --packages ${publishPackageNameList.join(
