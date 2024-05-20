@@ -9,7 +9,7 @@ module.exports = {};
 const configFile = {
   folderPath: `${folderPath}/config`,
   fileName: 'index.js',
-  coverFile: true,
+  coverFile: false,
   fileContent: configFileContent,
 };
 
