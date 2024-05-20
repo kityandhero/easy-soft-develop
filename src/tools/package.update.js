@@ -40,7 +40,7 @@ function updateSpecialPackageVersion(packageList) {
 
   const packages = packageList.join(' ');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js ${packages} --packageFile package.json -u`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json -u ${packages}`;
 
   promptInfo(`${packageList.join()} will check update`);
 
