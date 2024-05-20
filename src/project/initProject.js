@@ -215,7 +215,9 @@ function initialEnvironment() {
 
   promptInfo('add global dev packages');
 
-  exec('npx npm-check-updates -u --packageFile ./**/package.json');
+  exec(
+    'npx npm-check-updates --configFilePath ./.ncurc.js --packageFile ./**/package.json -u',
+  );
 
   promptInfo('install dependence packages');
 
