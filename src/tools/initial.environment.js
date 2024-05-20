@@ -147,14 +147,16 @@ function adjustMainPackageJsonScript({ scripts }) {
   });
 
   packageJson.scripts = assignObject(
-    publishItemCollection,
     {
       'z:build:all': 'echo please supplement build all packages commend',
-      'z:publish:npm-all': publishItemScript.join(' && '),
     },
     globalScript,
     originalScript || {},
     scripts,
+    publishItemCollection,
+    {
+      'z:publish:npm-all': publishItemScript.join(' && '),
+    },
     testScript,
     autoAdjustFileScript,
     {
