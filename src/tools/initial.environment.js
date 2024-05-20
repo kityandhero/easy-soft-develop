@@ -136,12 +136,12 @@ function adjustMainPackageJsonScript({ scripts }) {
     developInitialEnvironmentConfig.publishWithOtp || false;
 
   const publishItemCollection = {};
-  const publishItemScript = [];
+  let publishItemScript = [];
 
   publishPackageNameList.map((o) => {
     const scriptItem = `npx easy-soft-develop publish --packages ${o}${publishWithOtp ? ' --otp true' : ''}`;
 
-    publishItemScript.push(scriptItem);
+    publishItemScript = [...publishItemScript, scriptItem];
 
     publishItemCollection[`z:publish:npm-${o}`] = scriptItem;
   });
