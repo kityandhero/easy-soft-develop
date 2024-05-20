@@ -274,7 +274,7 @@ function createRepositoryProject(name) {
   createCommitlintConfigFile(`step *: create commitlint.config.js success`);
   createCzConfigFile(`step *: create .czrc success`);
   createBabelConfigFile(`step *: create babel.config.js success`);
-  createNcuConfigFile(`step *: create .ncurc.json success`);
+  createNcuConfigFile(`step *: create .ncurc.js success`);
   createNpmConfigFile(`step *: create .npmrc success`);
   createDevelopFiles('', `step *: create develop folder success`);
   createHusky();

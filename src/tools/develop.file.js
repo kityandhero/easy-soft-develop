@@ -7,7 +7,6 @@ const {
   promptEmptyLine,
   writeFileWithOptionsSync,
   checkStringIsEmpty,
-  writeJsonFileSync,
 } = require('./meta');
 const { fileGlobalHeader } = require('../templates/template.config');
 const {
@@ -60,6 +59,10 @@ const {
   contentFile: prettierContentFile,
   configFile: prettierConfigFile,
 } = require('../templates/prettier.template');
+const {
+  contentFile: ncuContentFile,
+  configFile: ncuConfigFile,
+} = require('../templates/ncu.template');
 const {
   ignoreFile: stylelintIgnoreFile,
   contentFile: stylelintContentFile,
@@ -210,7 +213,7 @@ function createBabelConfigFile(successMessage = '') {
 }
 
 function createNcuConfigFile(successMessage = '') {
-  let result = writeJsonFileSync(`./.ncurc.json`, {}, { coverFile: false });
+  let result = writeFileWithOptionsSync(ncuContentFile);
 
   if (result) {
     if (!checkStringIsEmpty(successMessage)) {
@@ -381,6 +384,7 @@ function createInitialEnvironmentScriptFiles() {
 const { initialEnvironment } = require('easy-soft-develop');
 
 const eslintFile = require('../config/eslint/template/content');
+const ncuFile = require('../config/ncu/template/content');
 const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
 const prettierFile = require('../config/prettier/template/content');
 const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
@@ -399,6 +403,9 @@ const childrenCustomPackageFile = require('../config/package/custom/children.con
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;
+
+const mainNcuFileContent = ncuFile.mainContent;
+const packageNcuFileContent = ncuFile.packageContent;
 
 const eslintIgnoreContent = eslintIgnoreFile.content;
 
@@ -426,6 +433,11 @@ const mainFileContentList = [
   {
     name: '.eslintrc.js',
     content: mainEslintFileContent,
+    coverFile: true,
+  },
+  {
+    name: '.ncurc.js',
+    content: mainNcuFileContent,
     coverFile: true,
   },
   {
@@ -479,6 +491,11 @@ const packageFileContentList = [
   {
     name: '.eslintrc.js',
     content: packageEslintFileContent,
+    coverFile: true,
+  },
+  {
+    name: '.ncurc.js',
+    content: packageNcuFileContent,
     coverFile: true,
   },
   {
@@ -652,6 +669,14 @@ function createDevelopFiles(
   writeFileWithOptionsSync(prettierContentFile);
 
   writeFileWithOptionsSync(prettierConfigFile);
+
+  //#endregion
+
+  //#region ncu
+
+  writeFileWithOptionsSync(ncuContentFile);
+
+  writeFileWithOptionsSync(ncuConfigFile);
 
   //#endregion
 

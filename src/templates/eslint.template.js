@@ -27,6 +27,7 @@ const content = \`#
 rollup.config-*.cjs
 
 .eslintrc.js
+.ncurc.js
 .prettierrc.js
 .stylelintrc.js
 .lintstagedrc
