@@ -23,10 +23,11 @@ export function checkStringIsEmpty(v: any): boolean;
  */
 export function promptLine(): void;
 export function promptEmptyLine(): void;
-export function promptSuccess(message: any): void;
-export function promptInfo(message: any): void;
-export function promptWarn(message: any): void;
-export function promptError(error: any): void;
+export function promptSuccess(message: any, emptyLine?: boolean): void;
+export function promptInfo(message: any, emptyLine?: boolean): void;
+export function promptWarn(message: any, emptyLine?: boolean): void;
+export function promptError(error: any, emptyLine?: boolean): void;
+export function promptTip(title: any, message: any, emptyLine?: boolean): void;
 export function isObject(value: any): boolean;
 export function isArray(value: any): boolean;
 export function assignObject(source: any, ...mergeData: any[]): any;
@@ -62,3 +63,14 @@ export function writeFileWithOptionsSync({
 export function resolvePath(path: any): any;
 export function exit(): any;
 export function rimraf(path: any): void;
+export function promptBlack(message: any, emptyLine?: boolean): void;
+export function promptBackgroundBlack(message: any, emptyLine?: boolean): void;
+export function promptRed(message: any, emptyLine?: boolean): void;
+export function promptBackgroundRed(message: any, emptyLine?: boolean): void;
+export function promptGreen(message: any, emptyLine?: boolean): void;
+export function promptBackgroundGreen(message: any, emptyLine?: boolean): void;
+export function promptMessage(
+  message: any,
+  config: any,
+  emptyLine?: boolean,
+): void;

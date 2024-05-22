@@ -109,25 +109,141 @@ function promptEmptyLine() {
   console.log('');
 }
 
-function promptSuccess(message) {
+function promptSuccess(message, emptyLine = true) {
   term.green(`${message}\r\n`);
-  promptEmptyLine();
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
 }
 
-function promptWarn(message) {
+function promptTip(title, message, emptyLine = true) {
+  term.red(`${title}: `).white(message);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptWarn(message, emptyLine = true) {
   term.magenta(`${message}\r\n`);
-  promptEmptyLine();
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
 }
 
-function promptInfo(message) {
+function promptInfo(message, emptyLine = true) {
   term.white(`${message}\r\n`);
-  promptEmptyLine();
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
 }
 
-function promptError(error) {
+function promptError(error, emptyLine = true) {
   console.error(error);
 
-  promptEmptyLine();
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptMessage(message, config, emptyLine = true) {
+  let o = term;
+
+  const { bold, dim, italic, underline, blink, inverse, strike } = {
+    bold: false,
+    dim: false,
+    italic: false,
+    underline: false,
+    blink: false,
+    inverse: false,
+    strike: false,
+    ...config,
+  };
+
+  if (bold) {
+    o = o.bold;
+  }
+
+  if (dim) {
+    o = o.dim;
+  }
+
+  if (italic) {
+    o = o.italic;
+  }
+
+  if (underline) {
+    o = o.underline;
+  }
+
+  if (blink) {
+    o = o.blink;
+  }
+
+  if (inverse) {
+    o = o.inverse;
+  }
+
+  if (strike) {
+    o = o.strike;
+  }
+
+  o(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptBlack(message, emptyLine = true) {
+  term.black(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptBackgroundBlack(message, emptyLine = true) {
+  term.bgBlack(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptRed(message, emptyLine = true) {
+  term.red(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptBackgroundRed(message, emptyLine = true) {
+  term.bgRed(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptGreen(message, emptyLine = true) {
+  term.green(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
+}
+
+function promptBackgroundGreen(message, emptyLine = true) {
+  term.bgGreen(`${message}\r\n`);
+
+  if (emptyLine) {
+    promptEmptyLine();
+  }
 }
 
 function existPathSync(path) {
@@ -310,6 +426,7 @@ module.exports = {
   promptInfo,
   promptWarn,
   promptError,
+  promptTip,
   isObject,
   isArray,
   assignObject,
@@ -321,4 +438,11 @@ module.exports = {
   resolvePath,
   exit,
   rimraf,
+  promptBlack,
+  promptBackgroundBlack,
+  promptRed,
+  promptBackgroundRed,
+  promptGreen,
+  promptBackgroundGreen,
+  promptMessage,
 };

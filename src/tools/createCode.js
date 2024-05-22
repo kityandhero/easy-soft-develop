@@ -12,6 +12,7 @@ const {
 
 function getCodeContent(code) {
   const v = `${code}`.replaceAll('`', '\\`').replaceAll('$', '\\$');
+
   return `export const code = \`${v}\`;
 `;
 }
