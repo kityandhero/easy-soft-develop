@@ -112,7 +112,7 @@ function handlePackage(projectPath, zipPath) {
         copyFile({
           sourceMainPath,
           targetMainPath,
-          filepath: 'generatorConfig/function.data.extra.json',
+          filepath: 'generatorConfig/general/',
           callback: () => {
             copyFile({
               sourceMainPath,
