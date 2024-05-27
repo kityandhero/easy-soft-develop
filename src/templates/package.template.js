@@ -8,9 +8,10 @@ const commitScript = {
 };
 
 const documentationScript = {
-  'prez:documentation:generate': 'npx easy-soft-develop rimraf --path ./docs && npm run z:documentation:lint',
+  'prez:documentation:generate': 'npm run z:documentation:clear && npm run z:documentation:lint',
   'z:documentation:generate': 'npx documentation build src/** -f html --github -o docs',
   'z:documentation:lint': 'npx documentation lint src/**',
+  'z:documentation:clear': 'npx easy-soft-develop rimraf --path ./docs',
 };
 
 const lintScript = {
