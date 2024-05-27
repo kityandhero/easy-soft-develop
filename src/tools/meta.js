@@ -388,7 +388,7 @@ function readJsonFileSync(path) {
 
 function rimraf(path) {
   if (checkStringIsEmpty(path)) {
-    promptWarn(`path is empty`);
+    promptWarn(`path is empty: ${path}`);
 
     return;
   }
