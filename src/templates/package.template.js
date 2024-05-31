@@ -9,7 +9,7 @@ const commitScript = {
 
 const jsdocScript = {
   'prez:jsdoc:generate': 'npm run z:jsdoc:clear',
-  'z:jsdoc:generate': 'npx jsdoc -c .jsdoc.json',
+  'z:jsdoc:generate': 'npx jsdoc -c .jsdoc.js',
   'z:jsdoc:clear': 'npx easy-soft-develop rimraf --path ./docs',
 };
 
