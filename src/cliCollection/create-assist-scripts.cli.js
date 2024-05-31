@@ -4,6 +4,7 @@ const {
   createCommitlintConfigFile,
   createBabelConfigFile,
   createNcuConfigFile,
+  createJsdocConfigFile,
   createNpmConfigFile,
 } = require('../tools/develop.file');
 
@@ -18,5 +19,6 @@ exports.run = function () {
   createCommitlintConfigFile();
   createBabelConfigFile();
   createNcuConfigFile();
+  createJsdocConfigFile();
   createNpmConfigFile();
 };

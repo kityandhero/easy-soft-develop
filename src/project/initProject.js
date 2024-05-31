@@ -16,6 +16,7 @@ const {
   createCommitlintConfigFile,
   createBabelConfigFile,
   createNcuConfigFile,
+  createJsdocConfigFile,
   createNpmConfigFile,
   createCzConfigFile,
 } = require('../tools/develop.file');
@@ -277,6 +278,7 @@ function createRepositoryProject(name) {
   createCzConfigFile(`step *: create .czrc success`);
   createBabelConfigFile(`step *: create babel.config.js success`);
   createNcuConfigFile(`step *: create .ncurc.js success`);
+  createJsdocConfigFile(`step *: create .jsdoc.js success`);
   createNpmConfigFile(`step *: create .npmrc success`);
   createDevelopFiles('', `step *: create develop folder success`);
   createHusky();

@@ -42,7 +42,7 @@ function getGlobalDevelopPackages() {
     'eslint-plugin-unicorn',
   ]);
 
-  packages = packages.concat(['documentation']);
+  packages = packages.concat(['jsdoc', 'docdash']);
 
   packages = packages.concat([
     'prettier',
