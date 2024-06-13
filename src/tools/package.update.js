@@ -40,7 +40,7 @@ function updateSpecialPackageVersion(packageList) {
 
   const packages = packageList.join(' ');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json -u ${packages}`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u ${packages}`;
 
   promptInfo(`${packageList.join()} will check update`);
 
@@ -56,7 +56,7 @@ function updateSpecialPackageVersion(packageList) {
 function updateAllPackageVersion() {
   exec('npm run z:initial:environment');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json -u`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u`;
 
   promptInfo(`all packages version will update`);
 
@@ -72,7 +72,7 @@ function updateAllPackageVersion() {
 }
 
 function checkAllPackageVersion() {
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org`;
 
   promptEmptyLine();
 

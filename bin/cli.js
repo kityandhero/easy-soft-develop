@@ -18,6 +18,7 @@ const updateProjectWithMasterTemplate = require('../src/cliCollection/update-pro
 const prompt = require('../src/cliCollection/prompt');
 const code = require('../src/cliCollection/createCode');
 const rimraf = require('../src/cliCollection/rimraf');
+const exit = require('../src/cliCollection/exit');
 
 const program = new Command();
 
@@ -54,6 +55,13 @@ program
   .option('--showInfo <bool>', 'show wait second info')
   .action((a, o) => {
     sleep.run(a, o);
+  });
+
+program
+  .command('exit')
+  .description('exit process')
+  .action((a, o) => {
+    exit.run(a, o);
   });
 
 program

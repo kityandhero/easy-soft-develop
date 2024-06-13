@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.181",
+  "version": "2.1.182",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -33,6 +33,7 @@
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
     "test:bin:create-repository-project": "node ./bin/cli.js create-repository-project",
+    "test:bin:exit": "node ./bin/cli.js exit",
     "test:bin:publish": "node ./bin/cli.js publish --packages ss --otp true",
     "test:bin:rimraf": "node ./bin/cli.js rimraf --path ./testRemoveThisPath",
     "test:bin:sleep": "node ./bin/cli.js sleep --second 2 --showInfo true",
@@ -49,7 +50,7 @@
     "test:inner:rimraf": "node ./test/rimraf.test.js",
     "z:change:npm:registry:local": "nrm use local",
     "z:change:npm:registry:npm": "nrm use npm",
-    "z:check:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js",
+    "z:check:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js --registry https://registry.npmjs.org",
     "prez:cz": "node ./bin/cli.js commit-refresh && npm run z:prettier:format:change && npm run z:tsc:build && git stage -A",
     "z:cz": "git-cz",
     "postz:cz": "git push",
@@ -69,8 +70,7 @@
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local && npm publish",
     "z:reinstall": "rimraf ./node_modules && npm run z:install",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
-    "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js -u",
-    "z:update:package-from-package": "npx npm-check-updates --configFilePath ./.ncurc.js -u"
+    "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js -u --registry https://registry.npmjs.org"
   },
   "dependencies": {
     "commander": "^12.1.0",
@@ -85,13 +85,13 @@
     "terminal-kit": "^3.1.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.3",
+    "@changesets/cli": "^2.27.5",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/config-pnpm-scopes": "^19.1.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "cz-git": "^1.9.2",
+    "cz-git": "^1.9.3",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-formatter-pretty": "^6.0.1",
@@ -101,9 +101,9 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.2.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.5",
+    "lint-staged": "^15.2.7",
     "npm-check-updates": "^16.14.20",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.2",
     "prettier-plugin-packagejson": "^2.5.0"
   }
 }
