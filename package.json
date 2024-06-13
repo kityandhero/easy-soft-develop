@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.188",
+  "version": "2.1.189",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -15,7 +15,7 @@
   "main": "src/index.js",
   "types": "types/index.d.ts",
   "bin": {
-    "easy-soft-develop": "./bin/cli.js"
+    "easy-soft-develop": "bin/cli.js"
   },
   "directories": {
     "src": "src",
