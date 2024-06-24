@@ -21,6 +21,7 @@ function getGlobalDevelopPackages() {
     'commitizen',
     'conventional-changelog-conventionalcommits',
     'cz-git',
+    'react-refresh',
   ]);
 
   packages = packages.concat([
