@@ -25,12 +25,6 @@ function adjustChildrenPackageJsonByCommand(cmd) {
   });
 }
 
-// function checkEasySoftDevelopVersion() {
-//   promptInfo('check easy-soft-develop global version');
-
-//   exec('npm-check-updates -g easy-soft-develop');
-// }
-
 /**
  * update special package version
  * @param {Array} packageList
@@ -48,17 +42,29 @@ function updateSpecialPackageVersion(packageList) {
 
   adjustChildrenPackageJsonByCommand(ncuCommand);
 
-  // checkEasySoftDevelopVersion();
-
   promptSuccess('check success');
 }
 
 function updateAllPackageVersion() {
   exec('npm run z:initial:environment');
 
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org --workspaces --root -u`;
+
+  promptInfo(`all packages version will update with command: ${ncuCommand}`);
+
+  adjustMainPackageJsonByCommand(ncuCommand);
+
+  promptSuccess('update success, exec install with z:install');
+
+  exec('npm run z:install');
+}
+
+function updateEveryPackageVersion() {
+  exec('npm run z:initial:environment');
+
   const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u`;
 
-  promptInfo(`all packages version will update`);
+  promptInfo(`all packages version will update with command: ${ncuCommand}`);
 
   adjustMainPackageJsonByCommand(ncuCommand);
 
@@ -67,16 +73,32 @@ function updateAllPackageVersion() {
   promptSuccess('update success, exec install with z:install');
 
   exec('npm run z:install');
-
-  // checkEasySoftDevelopVersion();
 }
 
 function checkAllPackageVersion() {
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org --workspaces --root`;
+
+  promptEmptyLine();
+
+  promptInfo(
+    `all packages version will check update with command: ${ncuCommand}`,
+  );
+
+  adjustMainPackageJsonByCommand(ncuCommand);
+
+  promptSuccess('update success, exec install with z:install');
+
+  exec('npm run z:install');
+}
+
+function checkEveryPackageVersion() {
   const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org`;
 
   promptEmptyLine();
 
-  promptInfo(`all packages version will check update`);
+  promptInfo(
+    `all packages version will check update with command: ${ncuCommand}`,
+  );
 
   adjustMainPackageJsonByCommand(ncuCommand);
 
@@ -85,12 +107,12 @@ function checkAllPackageVersion() {
   promptSuccess('update success, exec install with z:install');
 
   exec('npm run z:install');
-
-  // checkEasySoftDevelopVersion();
 }
 
 module.exports = {
   checkAllPackageVersion,
-  updateSpecialPackageVersion,
+  checkEveryPackageVersion,
   updateAllPackageVersion,
+  updateEveryPackageVersion,
+  updateSpecialPackageVersion,
 };

@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.196",
+  "version": "2.1.198",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -70,7 +70,7 @@
     "postz:publish:patch:npm": "npm run z:change:npm:registry:local && npm publish",
     "z:reinstall": "rimraf ./node_modules && npm run z:install",
     "z:tsc:build": "echo show tsc version and create declaration file && tsc -v && tsc -p ./tsconfig.types.json && echo declaration file generate complete",
-    "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js -u --registry https://registry.npmjs.org"
+    "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js --registry https://registry.npmjs.org -u"
   },
   "dependencies": {
     "commander": "^12.1.0",
