@@ -5,6 +5,10 @@ import { checkInCollection } from './tools/meta';
 import { checkStringIsEmpty } from './tools/meta';
 import { clean } from './tools/clean';
 import { commitRefresh } from './tools/commit.refresh';
+import { copyFile } from './tools/meta';
+import { copyFileSync } from './tools/meta';
+import { copyFolder } from './tools/meta';
+import { copyFolderSync } from './tools/meta';
 import { createCleanScriptFile } from './tools/develop.file';
 import { createDevelopFiles } from './tools/develop.file';
 import { createInstallGlobalDevelopDependenceScriptFile } from './tools/develop.file';
@@ -56,6 +60,10 @@ export {
   checkStringIsEmpty,
   clean,
   commitRefresh,
+  copyFile,
+  copyFileSync,
+  copyFolder,
+  copyFolderSync,
   createCleanScriptFile,
   createDevelopFiles,
   createInstallGlobalDevelopDependenceScriptFile,

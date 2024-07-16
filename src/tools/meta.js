@@ -410,11 +410,95 @@ function rimraf(path) {
   promptSuccess(`remove path success, path: "${path}"`);
 }
 
+function copyFile({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+  callback = null,
+}) {
+  promptInfo(`copy file: "${filepath}".`);
+
+  fs.cp(
+    resolvePath(`${sourceMainPath}${filepath}`),
+    resolvePath(`${targetMainPath}${filepath}`),
+    {
+      force: true,
+      recursive: true,
+    },
+    (error) => {
+      if (error) {
+        promptError(error);
+      } else {
+        if (callback != null) {
+          callback();
+        }
+      }
+    },
+  );
+}
+
+function copyFileSync({ sourceMainPath, targetMainPath, filepath }) {
+  promptInfo(`copy file: "${filepath}".`);
+
+  fs.cpSync(
+    resolvePath(`${sourceMainPath}${filepath}`),
+    resolvePath(`${targetMainPath}${filepath}`),
+    {
+      force: true,
+      recursive: true,
+    },
+  );
+}
+
+function copyFolder({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+  callback = null,
+}) {
+  promptInfo(`copy folder: "${filepath}".`);
+
+  fs.cp(
+    resolvePath(`${sourceMainPath}${filepath}`),
+    resolvePath(`${targetMainPath}${filepath}`),
+    {
+      force: true,
+      recursive: true,
+    },
+    (error) => {
+      if (error) {
+        promptError(error);
+      } else {
+        if (callback != null) {
+          callback();
+        }
+      }
+    },
+  );
+}
+
+function copyFolderSync({ sourceMainPath, targetMainPath, filepath }) {
+  promptInfo(`copy folder: "${filepath}".`);
+
+  fs.cpSync(
+    resolvePath(`${sourceMainPath}${filepath}`),
+    resolvePath(`${targetMainPath}${filepath}`),
+    {
+      force: true,
+      recursive: true,
+    },
+  );
+}
+
 module.exports = {
   assignObject,
   cd,
   checkInCollection,
   checkStringIsEmpty,
+  copyFile,
+  copyFileSync,
+  copyFolder,
+  copyFolderSync,
   exec,
   existDirectorySync,
   existFileSync,

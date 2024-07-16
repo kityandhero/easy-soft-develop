@@ -7,6 +7,46 @@ export function cd(path: any): void;
  */
 export function checkInCollection(collection: any[], target: any): boolean;
 export function checkStringIsEmpty(v: any): boolean;
+export function copyFile({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+  callback,
+}: {
+  sourceMainPath: any;
+  targetMainPath: any;
+  filepath: any;
+  callback?: null | undefined;
+}): void;
+export function copyFileSync({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+}: {
+  sourceMainPath: any;
+  targetMainPath: any;
+  filepath: any;
+}): void;
+export function copyFolder({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+  callback,
+}: {
+  sourceMainPath: any;
+  targetMainPath: any;
+  filepath: any;
+  callback?: null | undefined;
+}): void;
+export function copyFolderSync({
+  sourceMainPath,
+  targetMainPath,
+  filepath,
+}: {
+  sourceMainPath: any;
+  targetMainPath: any;
+  filepath: any;
+}): void;
 export function exec(cmd: any): void;
 export function existDirectorySync(path: any): any;
 export function existFileSync(path: any): any;
