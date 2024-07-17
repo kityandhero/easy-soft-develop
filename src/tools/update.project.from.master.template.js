@@ -105,6 +105,18 @@ function handlePackage(projectPath, zipPath) {
       filepath: 'src/customSpecialComponents/UpdateModuleModalBase/',
     });
 
+    copyFileSync({
+      sourceMainPath,
+      targetMainPath,
+      filepath: 'src/localeConfig/general/zh-CN/menu.js',
+    });
+
+    copyFileSync({
+      sourceMainPath,
+      targetMainPath,
+      filepath: 'src/locales/zh-CN/menu.js',
+    });
+
     copyFolderSync({
       sourceMainPath,
       targetMainPath,
