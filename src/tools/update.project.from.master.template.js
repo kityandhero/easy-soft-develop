@@ -120,6 +120,12 @@ function handlePackage(projectPath, zipPath) {
     copyFolderSync({
       sourceMainPath,
       targetMainPath,
+      filepath: 'src/pageBases/',
+    });
+
+    copyFolderSync({
+      sourceMainPath,
+      targetMainPath,
       filepath: 'src/pages/',
     });
 
