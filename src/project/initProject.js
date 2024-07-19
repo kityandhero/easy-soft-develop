@@ -136,10 +136,7 @@ function createPackageJsonFile(name) {
 function createHusky() {
   mkdirSync(`./.husky`);
 
-  const commitMsg = `#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-echo ---------------------
+  const commitMsg = `echo ---------------------
 echo exec husky commit-msg by use \\"npx commitlint -e \\$HUSKY_GIT_PARAMS -V\\"
 
 npx commitlint -E $HUSKY_GIT_PARAMS -V
@@ -147,10 +144,7 @@ npx commitlint -E $HUSKY_GIT_PARAMS -V
 
   writeFileSync(`./.husky/commit-msg`, commitMsg, { coverFile: true });
 
-  const precommit = `#!/bin/sh
-  . "$(dirname "$0")/_/husky.sh"
-
-echo ---------------------
+  const precommit = `echo ---------------------
 echo exec husky pre-commit by use \\"npm run z:lint:staged\\"
   `;
 
