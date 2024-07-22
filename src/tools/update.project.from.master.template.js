@@ -63,6 +63,12 @@ function handlePackage(projectPath, zipPath) {
       filepath: 'generatorConfig/general/',
     });
 
+    copyFolderSync({
+      sourceMainPath,
+      targetMainPath,
+      filepath: 'generatorTemplate/',
+    });
+
     copyFileSync({
       sourceMainPath,
       targetMainPath,
