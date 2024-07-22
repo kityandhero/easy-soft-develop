@@ -53,15 +53,17 @@ program
 program
   .command('update-all-package-version')
   .description('update all package version for your project')
-  .action(() => {
-    updateAllPackageVersion.run();
+  .option('--autoInstall <bool>', 'show wait second info')
+  .action((a, o) => {
+    updateAllPackageVersion.run(a, o);
   });
 
 program
   .command('update-every-package-version')
   .description('update all package version for your project')
-  .action(() => {
-    updateEveryPackageVersion.run();
+  .option('--autoInstall <bool>', 'show wait second info')
+  .action((a, o) => {
+    updateEveryPackageVersion.run(a, o);
   });
 
 program

@@ -45,7 +45,7 @@ function updateSpecialPackageVersion(packageList) {
   promptSuccess('check success');
 }
 
-function updateAllPackageVersion() {
+function updateAllPackageVersion({ autoInstall = true }) {
   exec('npm run z:initial:environment');
 
   const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org --workspaces --root -u`;
@@ -56,10 +56,12 @@ function updateAllPackageVersion() {
 
   promptSuccess('update success, exec install with z:install');
 
-  exec('npm run z:install');
+  if (autoInstall) {
+    exec('npm run z:install');
+  }
 }
 
-function updateEveryPackageVersion() {
+function updateEveryPackageVersion({ autoInstall = true }) {
   exec('npm run z:initial:environment');
 
   const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u`;
@@ -72,7 +74,9 @@ function updateEveryPackageVersion() {
 
   promptSuccess('update success, exec install with z:install');
 
-  exec('npm run z:install');
+  if (autoInstall) {
+    exec('npm run z:install');
+  }
 }
 
 function checkAllPackageVersion() {
@@ -87,8 +91,6 @@ function checkAllPackageVersion() {
   adjustMainPackageJsonByCommand(ncuCommand);
 
   promptSuccess('update success, exec install with z:install');
-
-  exec('npm run z:install');
 }
 
 function checkEveryPackageVersion() {
@@ -105,8 +107,6 @@ function checkEveryPackageVersion() {
   adjustChildrenPackageJsonByCommand(ncuCommand);
 
   promptSuccess('update success, exec install with z:install');
-
-  exec('npm run z:install');
 }
 
 module.exports = {
