@@ -39,7 +39,7 @@ function getDevelopUpdateProjectFromRepositoryConfig(
 
   if (!developUpdateProjectFromRepositoryConfigFileExist) {
     if (createFileWhenNoExist) {
-      createDevelopUpdateProjectFromRepositoryConfigFile([]);
+      createDevelopUpdateProjectFromRepositoryConfigFile();
     } else {
       return developUpdateProjectFromRepository;
     }

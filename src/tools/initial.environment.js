@@ -19,6 +19,9 @@ const { prettierAllPackageJson } = require('./prettier.package.json');
 const {
   getDevelopSubPathVersionNcuConfig,
 } = require('../config/develop.subPath.version.ncu');
+const {
+  getDevelopUpdateProjectFromRepositoryConfig,
+} = require('../config/develop.update.project.from.repository');
 
 function createMainFile(fileWithContentCollection) {
   if (!Array.isArray(fileWithContentCollection)) {
@@ -116,6 +119,8 @@ function adjustMainPackageJsonScript({ scripts }) {
     paths: [],
     ...getDevelopSubPathVersionNcuConfig(true),
   };
+
+  getDevelopUpdateProjectFromRepositoryConfig(true);
 
   loopPackage(paths, ({ name, path }) => {
     publishPackageNameList.push(name);
