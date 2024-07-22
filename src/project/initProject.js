@@ -32,6 +32,9 @@ const {
 const {
   createDevelopSubPathVersionNcuConfigFile,
 } = require('../config/develop.subPath.version.ncu');
+const {
+  createDevelopUpdateProjectFromRepositoryConfigFile,
+} = require('../config/develop.update.project.from.repository');
 
 function createRepositoryProjectFolder(name) {
   mkdirSync(`./${name}`);
@@ -199,6 +202,8 @@ function initialEnvironment() {
   createDevelopInitialEnvironmentConfigFile();
 
   createDevelopSubPathVersionNcuConfigFile(['packages']);
+
+  createDevelopUpdateProjectFromRepositoryConfigFile();
 
   promptSuccess(`step *: config environment`);
 

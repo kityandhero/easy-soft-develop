@@ -1,0 +1,31 @@
+{
+  "repository": "https://codeload.github.com/kityandhero/mono-antd-management-fast-master-template/zip/refs/heads/main",
+  "sourcePath": "mono-antd-management-fast-master-template-main/packages/master-management/",
+  "targetPath": "packages/master-management/",
+  "folders": [
+    "generatorConfig/general/",
+    "generatorTemplate/",
+    "src/components/PageLoading/",
+    "src/customConfig/general/",
+    "src/customSpecialComponents/BaseUpdateRoleModal/",
+    "src/customSpecialComponents/UpdateModuleModalBase/",
+    "src/pageBases/",
+    "src/pages/"
+  ],
+  "files": [
+    "config/router.master.template.config.js",
+    "src/commonAssist/Action/actionGeneral.js",
+    "src/customSpecialComponents/CustomAssembly/menuHeader.js",
+    "src/customSpecialComponents/CustomAssembly/timeAndOperator.js",
+    "src/localeConfig/general/zh-CN/menu.js",
+    "src/locales/zh-CN/menu.js",
+    "src/utils/init.js",
+    "src/utils/tools.jsx",
+    "src/access.js",
+    "src/app.jsx",
+    "src/global.less",
+    "src/overrides.less",
+    "plugin.ts",
+    "tsconfig.json"
+  ]
+}
