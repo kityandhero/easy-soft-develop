@@ -15,6 +15,8 @@ const {
   copyFileSync,
   copyFolderSync,
   promptTip,
+  existFileSync,
+  promptEmptyLine,
 } = require('./meta');
 
 const {
@@ -44,8 +46,9 @@ function handlePackage({
   zipPath,
   sourcePath,
   targetPath,
-  folders,
-  files,
+  syncFolders,
+  syncFiles,
+  ignoreSyncWhenExistFiles,
 }) {
   const unzipPath = resolvePath(`./temp/source/`);
 
@@ -63,7 +66,16 @@ function handlePackage({
 
     promptLine();
 
-    for (const itemFolder of folders) {
+    promptTip('*', 'sync folders.');
+    promptEmptyLine();
+
+    if (syncFolders.length === 0) {
+      promptWarn(
+        'none folders will sync, if need, please set "syncFolders" in "develop.update.project.from.repository.json".',
+      );
+    }
+
+    for (const itemFolder of syncFolders) {
       copyFolderSync({
         sourceMainPath,
         targetMainPath,
@@ -71,13 +83,46 @@ function handlePackage({
       });
     }
 
-    for (const itemFile of files) {
+    promptTip('*', 'sync files.');
+    promptEmptyLine();
+
+    if (syncFiles.length === 0) {
+      promptWarn(
+        'none file will force sync, if need, please set "syncFiles" in "develop.update.project.from.repository.json".',
+      );
+    }
+
+    for (const itemFile of syncFiles) {
       copyFileSync({
         sourceMainPath,
         targetMainPath,
         filepath: itemFile,
       });
     }
+
+    promptTip('*', 'sync files when not exist.');
+    promptEmptyLine();
+
+    if (ignoreSyncWhenExistFiles.length === 0) {
+      promptWarn(
+        'none file will sync when it not exist, if need, please set "ignoreSyncWhenExistFiles" in "develop.update.project.from.repository.json".',
+      );
+    }
+
+    for (const itemFile of ignoreSyncWhenExistFiles) {
+      if (existFileSync(`./${targetMainPath}/${itemFile}`)) {
+        continue;
+      }
+
+      copyFileSync({
+        sourceMainPath,
+        targetMainPath,
+        filepath: itemFile,
+      });
+    }
+
+    promptTip('*', 'clear resource.');
+    promptEmptyLine();
 
     clearResource();
   });
@@ -138,14 +183,16 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     repository = '',
     sourcePath = '',
     targetPath = '',
-    folders = [],
-    files = [],
+    syncFolders = [],
+    syncFiles = [],
+    ignoreSyncWhenExistFiles = [],
   } = {
     repository: '',
     sourcePath: '',
     targetPath: '',
-    folders: [],
-    files: [],
+    syncFolders: [],
+    syncFiles: [],
+    ignoreSyncWhenExistFiles: [],
     ...getDevelopUpdateProjectFromRepositoryConfig(),
   };
 
@@ -188,8 +235,9 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     zipPath,
     sourcePath,
     targetPath,
-    folders,
-    files,
+    syncFolders,
+    syncFiles,
+    ignoreSyncWhenExistFiles,
   });
 }
 
