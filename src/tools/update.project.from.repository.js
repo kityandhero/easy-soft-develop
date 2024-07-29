@@ -111,6 +111,8 @@ function handlePackage({
 
     for (const itemFile of ignoreSyncWhenExistFiles) {
       if (existFileSync(`./${targetMainPath}/${itemFile}`)) {
+        promptInfo(`ignore copy file: "${itemFile}".`);
+
         continue;
       }
 
