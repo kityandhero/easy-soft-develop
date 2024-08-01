@@ -18,6 +18,7 @@
     "postlint",
     "postncu",
     "postpublish",
+    "posttest",
     "postz",
     "precommit",
     "precz",

@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.229",
+  "version": "2.1.230",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -31,6 +31,8 @@
     "prepare": "echo do other prepare work with here before install package",
     "test:bin:check-all-package-version": "node ./bin/cli.js check-all-package-version",
     "test:bin:code": "node ./bin/cli.js code --dataPath ./develop/generatorCodeSource/code.json",
+    "test:bin:copy-content": "node ./bin/cli.js copy-content --source ./develop/flags/commit.flag.json --target ./temp/testCopyContent/testCopyContent.json",
+    "posttest:bin:copy-content": "node ./bin/cli.js rimraf --path ./temp/testCopyContent",
     "test:bin:create-assist-scripts": "node ./bin/cli.js create-assist-scripts",
     "test:bin:create-project-from-repository": "node ./bin/cli.js create-project-from-repository --repository kityandhero/mono-antd-management-fast-master-template --folder ./temp/create-project-from-repository-demo",
     "test:bin:create-repository-project": "node ./bin/cli.js create-repository-project",
@@ -100,10 +102,10 @@
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-promise": "^6.6.0",
-    "husky": "^9.1.1",
+    "eslint-plugin-promise": "^7.0.0",
+    "husky": "^9.1.4",
     "lint-staged": "^15.2.7",
-    "npm-check-updates": "^16.14.20",
+    "npm-check-updates": "^17.0.0",
     "prettier": "^3.3.3",
     "prettier-plugin-packagejson": "^2.5.1"
   }

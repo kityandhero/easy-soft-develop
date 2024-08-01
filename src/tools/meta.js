@@ -490,11 +490,67 @@ function copyFolderSync({ sourceMainPath, targetMainPath, filepath }) {
   );
 }
 
+function touchSync({ path }) {
+  if (checkStringIsEmpty(path)) {
+    promptError('touchSync params error: path not allow empty');
+
+    return;
+  }
+
+  const pathAdjust = resolvePath(path);
+
+  if (!existPathSync(pathAdjust)) {
+    promptInfo(`touch file: "${pathAdjust}" not exist, will create it.`);
+  }
+
+  fsExtra.ensureFileSync(pathAdjust);
+
+  // try {
+  //   const time = new Date();
+
+  //   fs.utimesSync(pathAdjust, time, time);
+  // } catch (e) {
+  //   promptInfo(`"${pathAdjust}" not exist, will create it.`);
+
+  //   let fd = fs.openSync(pathAdjust, 'a');
+
+  //   fs.closeSync(fd);
+  // }
+}
+
+function copyContentSync({ sourcePath, targetPath }) {
+  if (checkStringIsEmpty(sourcePath)) {
+    promptError('copyContentSync params error: sourcePath not allow empty');
+
+    return;
+  }
+
+  if (checkStringIsEmpty(targetPath)) {
+    promptError('copyContentSync params error: targetMainPath not allow empty');
+
+    return;
+  }
+
+  const sourcePathAdjust = resolvePath(sourcePath);
+  const targetPathAdjust = resolvePath(targetPath);
+
+  touchSync({ path: targetPath });
+
+  promptTip('copy content', `"${sourcePath}" -> "${targetPath}".`);
+  promptTip('source absolute path', sourcePathAdjust);
+  promptTip('target absolute path', targetPathAdjust);
+
+  const content = fs.readFileSync(sourcePathAdjust);
+
+  writeFileSync(targetPathAdjust, content, { coverFile: true });
+}
+
 module.exports = {
   assignObject,
   cd,
   checkInCollection,
   checkStringIsEmpty,
+  copyContentSync,
   copyFile,
   copyFileSync,
   copyFolder,
@@ -525,6 +581,7 @@ module.exports = {
   readJsonFileSync,
   resolvePath,
   rimraf,
+  touchSync,
   writeFileSync,
   writeFileWithFolderAndNameSync,
   writeFileWithOptionsSync,

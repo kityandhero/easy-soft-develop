@@ -35,6 +35,8 @@ const {
   writeFileWithFolderAndNameSync,
   writeFileWithOptionsSync,
   writeJsonFileSync,
+  copyContentSync,
+  touchSync,
 } = require('./tools/meta');
 const { sleep } = require('./tools/sleep');
 const { clean } = require('./tools/clean');
@@ -75,6 +77,7 @@ module.exports = {
   checkStringIsEmpty,
   clean,
   commitRefresh,
+  copyContentSync,
   copyFile,
   copyFileSync,
   copyFolder,
@@ -115,6 +118,7 @@ module.exports = {
   readJsonFileSync,
   resolvePath,
   sleep,
+  touchSync,
   updateAllPackageVersion,
   updatePackageFromPackage,
   updateSpecialPackageVersion,

@@ -5,6 +5,7 @@ import { checkInCollection } from './tools/meta';
 import { checkStringIsEmpty } from './tools/meta';
 import { clean } from './tools/clean';
 import { commitRefresh } from './tools/commit.refresh';
+import { copyContentSync } from './tools/meta';
 import { copyFile } from './tools/meta';
 import { copyFileSync } from './tools/meta';
 import { copyFolder } from './tools/meta';
@@ -45,6 +46,7 @@ import { promptWarn } from './tools/meta';
 import { readJsonFileSync } from './tools/meta';
 import { resolvePath } from './tools/meta';
 import { sleep } from './tools/sleep';
+import { touchSync } from './tools/meta';
 import { updateAllPackageVersion } from './tools/package.update';
 import { updatePackageFromPackage } from './tools/update.package.from.package';
 import { updateSpecialPackageVersion } from './tools/package.update';
@@ -60,6 +62,7 @@ export {
   checkStringIsEmpty,
   clean,
   commitRefresh,
+  copyContentSync,
   copyFile,
   copyFileSync,
   copyFolder,
@@ -100,6 +103,7 @@ export {
   readJsonFileSync,
   resolvePath,
   sleep,
+  touchSync,
   updateAllPackageVersion,
   updatePackageFromPackage,
   updateSpecialPackageVersion,

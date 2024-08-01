@@ -7,6 +7,13 @@ export function cd(path: any): void;
  */
 export function checkInCollection(collection: any[], target: any): boolean;
 export function checkStringIsEmpty(v: any): boolean;
+export function copyContentSync({
+  sourcePath,
+  targetPath,
+}: {
+  sourcePath: any;
+  targetPath: any;
+}): void;
 export function copyFile({
   sourceMainPath,
   targetMainPath,
@@ -80,6 +87,7 @@ export function promptWarn(message: any, emptyLine?: boolean): void;
 export function readJsonFileSync(path: any): any;
 export function resolvePath(path: any): any;
 export function rimraf(path: any): void;
+export function touchSync({ path }: { path: any }): void;
 export function writeFileSync(
   path: any,
   content: any,

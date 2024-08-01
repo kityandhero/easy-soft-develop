@@ -4,6 +4,7 @@ const { Command } = require('commander');
 
 const { getArgCollection } = require('../src/tools/meta');
 const createAssistScripts = require('../src/cliCollection/create-assist-scripts.cli');
+const copyContent = require('../src/cliCollection/copy-content');
 const checkAllPackageVersion = require('../src/cliCollection/check-all-package-version');
 const checkEveryPackageVersion = require('../src/cliCollection/check-every-package-version');
 const updateAllPackageVersion = require('../src/cliCollection/update-all-package-version');
@@ -73,6 +74,15 @@ program
   .option('--showInfo <bool>', 'show wait second info')
   .action((a, o) => {
     sleep.run(a, o);
+  });
+
+program
+  .command('copy-content')
+  .description('copy content from source file content to target file content')
+  .option('--source <string>', 'source file path')
+  .option('--target <string>', 'target file path will write')
+  .action((a, o) => {
+    copyContent.run(a, o);
   });
 
 program
