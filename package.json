@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.235",
+  "version": "2.1.236",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -88,9 +88,9 @@
     "terminal-kit": "^3.1.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
-    "@commitlint/cli": "^19.4.0",
-    "@commitlint/config-conventional": "^19.2.2",
+    "@changesets/cli": "^2.27.8",
+    "@commitlint/cli": "^19.4.1",
+    "@commitlint/config-conventional": "^19.4.1",
     "@commitlint/config-pnpm-scopes": "^19.1.0",
     "commitizen": "^4.3.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",
@@ -98,15 +98,15 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-formatter-pretty": "^6.0.1",
-    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.1.0",
     "husky": "^9.1.5",
-    "lint-staged": "^15.2.9",
-    "npm-check-updates": "^17.1.0",
+    "lint-staged": "^15.2.10",
+    "npm-check-updates": "^17.1.1",
     "prettier": "^3.3.3",
-    "prettier-plugin-packagejson": "^2.5.1"
+    "prettier-plugin-packagejson": "^2.5.2"
   }
 }
