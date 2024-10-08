@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.243",
+  "version": "2.1.244",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -88,19 +88,19 @@
     "terminal-kit": "^3.1.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.8",
+    "@changesets/cli": "^2.27.9",
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
     "@commitlint/config-pnpm-scopes": "^19.5.0",
-    "commitizen": "^4.3.0",
+    "commitizen": "^4.3.1",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "cz-git": "^1.9.4",
+    "cz-git": "^1.10.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-formatter-pretty": "^6.0.1",
     "eslint-import-resolver-typescript": "^3.6.3",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-promise": "^7.1.0",
     "husky": "^9.1.6",
