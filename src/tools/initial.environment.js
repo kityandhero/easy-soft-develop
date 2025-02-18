@@ -20,6 +20,9 @@ const {
   getDevelopSubPathVersionNcuConfig,
 } = require('../config/develop.subPath.version.ncu');
 const {
+  getDevelopSubPathPublishConfig,
+} = require('../config/develop.subPath.publish');
+const {
   getDevelopUpdateProjectFromRepositoryConfig,
 } = require('../config/develop.update.project.from.repository');
 
@@ -120,11 +123,14 @@ function adjustMainPackageJsonScript({ scripts }) {
     ...getDevelopSubPathVersionNcuConfig(true),
   };
 
+  const { paths: publishPackagePaths = [] } = {
+    paths: [],
+    ...getDevelopSubPathPublishConfig(true),
+  };
+
   getDevelopUpdateProjectFromRepositoryConfig(true);
 
   loopPackage(paths, ({ name, path }) => {
-    publishPackageNameList.push(name);
-
     autoAdjustFileScript[`z:auto:adjust:file:${name}`] =
       `cd ${path}/${name} && npm run z:auto:adjust:file`;
 
@@ -133,6 +139,10 @@ function adjustMainPackageJsonScript({ scripts }) {
     testScript[`test:${name}`] = `cd ${path}/${name} && npm run z:test`;
 
     testAllProjects.push(`npm run test:${name}`);
+  });
+
+  loopPackage(publishPackagePaths, ({ name }) => {
+    publishPackageNameList.push(name);
   });
 
   const developInitialEnvironmentConfig = getDevelopInitialEnvironmentConfig();

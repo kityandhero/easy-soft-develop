@@ -14,8 +14,8 @@ const {
 } = require('../tools/meta');
 
 const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
+  getDevelopSubPathPublishConfig,
+} = require('../config/develop.subPath.publish');
 
 function publishToNpm(packages, o, useOtp, otp) {
   if (checkStringIsEmpty(packages)) {
@@ -28,7 +28,7 @@ function publishToNpm(packages, o, useOtp, otp) {
 
   const { paths = [] } = {
     paths: [],
-    ...getDevelopSubPathVersionNcuConfig(),
+    ...getDevelopSubPathPublishConfig(),
   };
 
   loopPackage(paths, ({ name, absolutePath }) => {
