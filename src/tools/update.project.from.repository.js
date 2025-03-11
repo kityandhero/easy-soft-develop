@@ -66,23 +66,6 @@ function handlePackage({
 
     promptLine();
 
-    promptTip('*', 'sync folders.');
-    promptEmptyLine();
-
-    if (syncFolders.length === 0) {
-      promptWarn(
-        'none folders will sync, if need, please set "syncFolders" in "develop.update.project.from.repository.json".',
-      );
-    }
-
-    for (const itemFolder of syncFolders) {
-      copyFolderSync({
-        sourceMainPath,
-        targetMainPath,
-        filepath: itemFolder,
-      });
-    }
-
     promptTip('*', 'sync files.');
     promptEmptyLine();
 
@@ -120,6 +103,23 @@ function handlePackage({
         sourceMainPath,
         targetMainPath,
         filepath: itemFile,
+      });
+    }
+
+    promptTip('*', 'sync folders.');
+    promptEmptyLine();
+
+    if (syncFolders.length === 0) {
+      promptWarn(
+        'none folders will sync, if need, please set "syncFolders" in "develop.update.project.from.repository.json".',
+      );
+    }
+
+    for (const itemFolder of syncFolders) {
+      copyFolderSync({
+        sourceMainPath,
+        targetMainPath,
+        filepath: itemFolder,
       });
     }
 
