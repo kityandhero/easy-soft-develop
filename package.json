@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.268",
+  "version": "2.1.269",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -98,14 +98,14 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-formatter-pretty": "^6.0.1",
-    "eslint-import-resolver-typescript": "^4.1.1",
+    "eslint-import-resolver-typescript": "^4.2.2",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-prettier": "^5.2.4",
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
-    "npm-check-updates": "^17.1.15",
+    "npm-check-updates": "^17.1.16",
     "prettier": "^3.5.3",
     "prettier-plugin-packagejson": "^2.5.10"
   }
