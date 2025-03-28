@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.270",
+  "version": "2.1.271",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -98,10 +98,10 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-formatter-pretty": "^6.0.1",
-    "eslint-import-resolver-typescript": "^4.2.2",
+    "eslint-import-resolver-typescript": "^4.2.5",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.4",
+    "eslint-plugin-prettier": "^5.2.5",
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
