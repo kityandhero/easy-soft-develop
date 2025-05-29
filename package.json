@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.281",
+  "version": "2.1.282",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -76,7 +76,7 @@
     "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js --registry https://registry.npmjs.org -u"
   },
   "dependencies": {
-    "commander": "^13.1.0",
+    "commander": "^14.0.0",
     "cross-zip": "^4.0.1",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
@@ -84,29 +84,29 @@
     "fs-extra": "^11.3.0",
     "hpagent": "^1.2.0",
     "ping": "^0.4.4",
-    "shelljs": "^0.9.2",
+    "shelljs": "^0.10.0",
     "terminal-kit": "^3.1.2"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
-    "@commitlint/config-pnpm-scopes": "^19.8.0",
+    "@changesets/cli": "^2.29.4",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@commitlint/config-pnpm-scopes": "^19.8.1",
     "commitizen": "^4.3.1",
-    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "conventional-changelog-conventionalcommits": "^9.0.0",
     "cz-git": "^1.11.1",
     "eslint": "^8.57.0",
-    "eslint-config-prettier": "^10.1.2",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-formatter-pretty": "^6.0.1",
-    "eslint-import-resolver-typescript": "^4.3.2",
+    "eslint-import-resolver-typescript": "^4.4.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.1",
-    "npm-check-updates": "^17.1.18",
+    "lint-staged": "^16.1.0",
+    "npm-check-updates": "^18.0.1",
     "prettier": "^3.5.3",
-    "prettier-plugin-packagejson": "^2.5.10"
+    "prettier-plugin-packagejson": "^2.5.14"
   }
 }
