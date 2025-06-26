@@ -1,5 +1,11 @@
 # easy-soft-develop
 
+## 2.1.288
+
+### Patch Changes
+
+- update
+
 ## 2.1.286
 
 ### Patch Changes
