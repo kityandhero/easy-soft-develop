@@ -1,5 +1,11 @@
 # easy-soft-develop
 
+## 2.1.307
+
+### Patch Changes
+
+- i[date
+
 ## 2.1.305
 
 ### Patch Changes
