@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.1.304",
+  "version": "2.1.305",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -76,7 +76,7 @@
     "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js --registry https://registry.npmjs.org -u"
   },
   "dependencies": {
-    "commander": "^14.0.1",
+    "commander": "^14.0.2",
     "cross-zip": "^4.0.1",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
@@ -104,8 +104,8 @@
     "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.5",
-    "npm-check-updates": "^19.1.1",
+    "lint-staged": "^16.2.6",
+    "npm-check-updates": "^19.1.2",
     "prettier": "^3.6.2",
     "prettier-plugin-packagejson": "^2.5.19"
   }
