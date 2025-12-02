@@ -9,6 +9,7 @@ const developUpdateProjectFromRepository = {
   repository: '',
   sourcePath: '',
   targetPath: '',
+  syncConfigs: [],
   syncFolders: [],
   syncFiles: [],
   ignoreSyncWhenExistFiles: [],

@@ -46,6 +46,7 @@ function handlePackage({
   zipPath,
   sourcePath,
   targetPath,
+  syncConfigs,
   syncFolders,
   syncFiles,
   ignoreSyncWhenExistFiles,
@@ -66,6 +67,29 @@ function handlePackage({
 
     promptLine();
 
+    //#region sync configs
+
+    promptTip('*', 'sync configs.');
+    promptEmptyLine();
+
+    if (syncConfigs.length === 0) {
+      promptWarn(
+        'none file will force sync, if need, please set "syncConfigs" in "develop.update.project.from.repository.json".',
+      );
+    }
+
+    for (const itemFile of syncConfigs) {
+      copyFileSync({
+        sourceMainPath,
+        targetMainPath,
+        filepath: itemFile,
+      });
+    }
+
+    //#endregion
+
+    //#region sync files
+
     promptTip('*', 'sync files.');
     promptEmptyLine();
 
@@ -82,6 +106,10 @@ function handlePackage({
         filepath: itemFile,
       });
     }
+
+    //#endregion
+
+    //#region sync files when not exist
 
     promptTip('*', 'sync files when not exist.');
     promptEmptyLine();
@@ -106,6 +134,10 @@ function handlePackage({
       });
     }
 
+    //#endregion
+
+    //#region sync folders
+
     promptTip('*', 'sync folders.');
     promptEmptyLine();
 
@@ -122,6 +154,8 @@ function handlePackage({
         filepath: itemFolder,
       });
     }
+
+    //#endregion
 
     promptTip('*', 'clear resource.');
     promptEmptyLine();
@@ -185,6 +219,7 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     repository = '',
     sourcePath = '',
     targetPath = '',
+    syncConfigs = [],
     syncFolders = [],
     syncFiles = [],
     ignoreSyncWhenExistFiles = [],
@@ -192,6 +227,7 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     repository: '',
     sourcePath: '',
     targetPath: '',
+    syncConfigs: [],
     syncFolders: [],
     syncFiles: [],
     ignoreSyncWhenExistFiles: [],
@@ -237,6 +273,7 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     zipPath,
     sourcePath,
     targetPath,
+    syncConfigs,
     syncFolders,
     syncFiles,
     ignoreSyncWhenExistFiles,

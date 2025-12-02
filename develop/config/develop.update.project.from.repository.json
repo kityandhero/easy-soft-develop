@@ -2,6 +2,7 @@
   "repository": "https://codeload.github.com/kityandhero/mono-antd-management-fast-master-template/zip/refs/heads/main",
   "sourcePath": "mono-antd-management-fast-master-template-main/packages/master-management/",
   "targetPath": "packages/master-management/",
+  "syncConfigs": [],
   "syncFolders": [
     "generatorConfig/general/",
     "generatorTemplate/",
