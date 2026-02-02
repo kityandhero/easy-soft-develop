@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "2.2.13",
+  "version": "2.2.14",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -76,7 +76,7 @@
     "z:update:all-package-version": "npx npm-check-updates --configFilePath ./.ncurc.js --registry https://registry.npmjs.org -u"
   },
   "dependencies": {
-    "commander": "^14.0.2",
+    "commander": "^14.0.3",
     "cross-zip": "^4.0.1",
     "download": "^8.0.0",
     "download-git-repo": "^3.0.2",
@@ -89,9 +89,9 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
-    "@commitlint/cli": "^20.3.1",
-    "@commitlint/config-conventional": "^20.3.1",
-    "@commitlint/config-pnpm-scopes": "^20.1.0",
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
+    "@commitlint/config-pnpm-scopes": "^20.4.0",
     "commitizen": "^4.3.1",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "cz-git": "^1.12.0",
@@ -105,8 +105,8 @@
     "eslint-plugin-promise": "^7.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "npm-check-updates": "^19.3.1",
-    "prettier": "^3.8.0",
+    "npm-check-updates": "^19.3.2",
+    "prettier": "^3.8.1",
     "prettier-plugin-packagejson": "^3.0.0"
   }
 }
