@@ -61,6 +61,7 @@ function handlePackage({
     const projectPathAdjust = resolvePath(projectPath);
 
     promptInfo(`target project path: "${projectPathAdjust}".`);
+    promptInfo(`target path: "${targetPath}".`);
 
     const sourceMainPath = `./temp/source/${sourcePath}`;
     const targetMainPath = `${projectPath}/${targetPath}`;
