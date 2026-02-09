@@ -175,9 +175,7 @@ async function handleTempPackagePath({ agent, packageUrl, repo }) {
     agentInfo = `download with agent "${agent}"`;
   }
 
-  promptInfo(
-    `try master management template ${repo} repository, ${agentInfo}.`,
-  );
+  promptInfo(`try source template ${repo} repository, ${agentInfo}.`);
 
   if (agent) {
     promptSuccess(`agent: ${agent}`);
@@ -207,18 +205,21 @@ async function handleTempPackagePath({ agent, packageUrl, repo }) {
 
   zipPath = resolvePath(`./temp/zip/${zipFileName}.zip`);
 
-  promptInfo(`master template zip file Path: "${zipPath}".`);
+  promptInfo(`source template zip file Path: "${zipPath}".`);
 
   return zipPath;
 }
 
-async function updateProjectFromRepository({ projectPath = '.', agent }) {
+async function updateProjectFromRepository({
+  projectPath = '.',
+  targetPath = '',
+  agent,
+}) {
   clearResource();
 
   const {
     repository = '',
     sourcePath = '',
-    targetPath = '',
     syncConfigs = [],
     syncFolders = [],
     syncFiles = [],
@@ -226,7 +227,6 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
   } = {
     repository: '',
     sourcePath: '',
-    targetPath: '',
     syncConfigs: [],
     syncFolders: [],
     syncFiles: [],
@@ -242,9 +242,15 @@ async function updateProjectFromRepository({ projectPath = '.', agent }) {
     exit();
   }
 
+  if (checkStringIsEmpty(targetPath)) {
+    promptError('please input parameter targetPath');
+
+    exit();
+  }
+
   let zipPath = '';
 
-  promptSuccess(`prepare to update from master template: `);
+  promptSuccess(`prepare to update from source template: `);
 
   promptLine();
 

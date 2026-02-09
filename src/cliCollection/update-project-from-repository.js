@@ -4,8 +4,8 @@ const {
 
 exports.run = async function (s, o) {
   const {
-    _optionValues: { projectPath = '.', agent },
+    _optionValues: { projectPath = '.', targetPath = '', agent },
   } = o;
 
-  await updateProjectFromRepository({ projectPath, agent });
+  await updateProjectFromRepository({ projectPath, targetPath, agent });
 };
