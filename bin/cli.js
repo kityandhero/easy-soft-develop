@@ -187,6 +187,7 @@ program
   .command('update-project-from-repository')
   .description('update from master template repository')
   .option('--projectPath <string>', 'target project path that will be updated')
+  .option('--targetPath <string>', 'target path that will be updated')
   .option(
     '--agent <string>',
     'web agent for remote , if it has value, will use the agent to access remote url',
