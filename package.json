@@ -95,7 +95,7 @@
     "commitizen": "^4.3.2",
     "conventional-changelog-conventionalcommits": "^10.2.1",
     "cz-git": "^1.13.1",
-    "eslint": "^8.57.0",
+    "eslint": "^10.6.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-formatter-pretty": "^7.1.0",
     "eslint-import-resolver-typescript": "^4.4.5",

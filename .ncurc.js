@@ -4,5 +4,5 @@
 /* eslint-disable no-useless-escape */
 
 module.exports = {
-  reject: ['eslint', 'eslint-plugin-unicorn'],
+  reject: [],
 };
