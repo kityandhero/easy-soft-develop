@@ -53,12 +53,10 @@ function adjustMainPackageJson(packageList) {
 }
 
 function adjustChildrenPackageJson(packageList, specialPackageList) {
-  if (
-    !(
-      (isArray(packageList) && packageList.length > 0) ||
-      (isArray(specialPackageList) && specialPackageList.length > 0)
-    )
-  ) {
+  if (!(
+    (isArray(packageList) && packageList.length > 0) ||
+    (isArray(specialPackageList) && specialPackageList.length > 0)
+  )) {
     return;
   }
 
