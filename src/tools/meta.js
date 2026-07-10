@@ -285,7 +285,7 @@ function existDirectorySync(path) {
   }
 
   try {
-    fs.accessSync(path, fs.F_OK);
+    fs.accessSync(path, fs.constants.F_OK);
   } catch (error) {
     promptError(error);
 
