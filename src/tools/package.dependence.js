@@ -25,6 +25,8 @@ function getGlobalDevelopPackages() {
   ]);
 
   packages = packages.concat([
+    '@eslint/eslintrc',
+    '@eslint/js',
     'eslint',
     'eslint-config-airbnb',
     'eslint-config-airbnb-typescript',
@@ -41,6 +43,7 @@ function getGlobalDevelopPackages() {
     'eslint-plugin-react-hooks',
     'eslint-plugin-simple-import-sort',
     'eslint-plugin-unicorn',
+    'globals',
   ]);
 
   packages = packages.concat(['jsdoc', 'docdash']);

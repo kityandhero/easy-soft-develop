@@ -1,5 +1,11 @@
 # easy-soft-develop
 
+## 3.0.0
+
+### Major Changes
+
+- update eslint 8 to eslint 10
+
 ## 2.2.37
 
 ### Patch Changes

@@ -23,6 +23,8 @@ const {
 } = require('../templates/editor.template');
 const {
   contentFile: eslintContentFile,
+  ignoreCustomFile: eslintIgnoreCustomFile,
+  ignoreEmbedFile: eslintIgnoreEmbedFile,
   ignoreFile: eslintIgnoreFile,
   configFile: eslintConfigFile,
   ruleCustomFile: eslintCustomRuleFile,
@@ -621,6 +623,10 @@ function createDevelopFiles(
   //#region eslint
 
   writeFileWithOptionsSync(eslintContentFile);
+
+  writeFileWithOptionsSync(eslintIgnoreCustomFile);
+
+  writeFileWithOptionsSync(eslintIgnoreEmbedFile);
 
   writeFileWithOptionsSync(eslintIgnoreFile);
 

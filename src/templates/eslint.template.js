@@ -6,45 +6,6 @@ const { isArray } = require('../tools/meta');
 
 const folderPath = './develop/config/eslint';
 
-const ignoreFileContent = `${fileGlobalHeader}
-const content = \`#
-**/public
-**/lib
-**/es
-**/docs
-**/coverage
-**/.history
-**/.vs
-**/.swc
-**/docs
-
-*.d.ts
-*.log
-*.zip
-*.txt
-*.7z
-*.min.js
-rollup.config-*.cjs
-
-.eslintrc.js
-.ncurc.js
-.prettierrc.js
-.stylelintrc.js
-.lintstagedrc
-\`;
-
-module.exports = {
-  content,
-};
-`;
-
-const ignoreFile = {
-  folderPath: `${folderPath}/template`,
-  fileName: 'ignore.content.js',
-  coverFile: false,
-  fileContent: ignoreFileContent,
-};
-
 const contentFileContent = `${fileGlobalHeader}
 const mainContent = \`${fileGlobalHeader}
 const { generalConfig } = require('./develop/config/eslint/config');
@@ -71,40 +32,64 @@ const contentFile = {
 };
 
 const configFileContent = `${fileGlobalHeader}
-const { rules } = require('./items/rules');
-const { parserJsOptions, parserTsOptions } = require('./items/parser');
-const { pluginCollection } = require('./items/plugins');
-const { extendCollection } = require('./items/extends');
-const { settings } = require('./items/settings');
+import babelParser from '@babel/eslint-parser';
+import typescriptParser from '@typescript-eslint/parser';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 
-module.exports = {
-  generalConfig: {
-    extends: [
-      ...extendCollection,
-    ],
-    env: {
-      es6: true,
-      browser: true,
-      commonjs: true,
-      jest: true,
-      worker: true,
-      shelljs: true,
-      node: true,
-    },
-    plugins: [...pluginCollection],
-    parser: '@babel/eslint-parser',
-    parserOptions: parserJsOptions,
-    overrides: [
-      {
-        files: ['*.ts', '*.tsx'],
-        parser: '@typescript-eslint/parser',
-        parserOptions: parserTsOptions,
+import { rules } from './items/rules';
+import { parserJsOptions, parserTsOptions } from './items/parser';
+import { pluginCollection } from './items/plugins';
+import { extendCollection } from './items/extends';
+import { settings } from './items/settings';
+import { ignoreCollection } from './items/ignores';
+
+export const configCollection = [
+  {
+    files: ['**/*.js', '**/*.jsx'],
+    extends: [...extendCollection],
+    languageOptions: {
+      globals: {
+        ...globals.es2015,
+        ...globals.browser,
+        ...globals.commonjs,
+        ...globals.jest,
+        ...globals.worker,
+        ...globals.node,
       },
-    ],
-    rules: rules,
-    settings: settings,
+      parser: babelParser,
+      parserOptions: parserJsOptions,
+      plugins: {
+        ...extendCollection,
+      },
+      rules: rules,
+      settings: settings,
+      ignores: [...ignoreCollection],
+    },
   },
-};
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    extends: [...extendCollection],
+    languageOptions: {
+      globals: {
+        ...globals.es2015,
+        ...globals.browser,
+        ...globals.commonjs,
+        ...globals.jest,
+        ...globals.worker,
+        ...globals.node,
+      },
+      parser: typescriptParser,
+      parserOptions: parserTsOptions,
+      plugins: {
+        ...extendCollection,
+      },
+      rules: rules,
+      settings: settings,
+      ignores: [...ignoreCollection],
+    },
+  },
+];
 `;
 
 const configFile = {
@@ -545,8 +530,74 @@ const parserFile = {
   fileContent: parserFileContent,
 };
 
+const ignoreEmbedFileContent = `${fileGlobalHeader}
+const content = [
+'**/public',
+'**/lib',
+'**/es',
+'**/docs',
+'**/coverage',
+'**/.history',
+'**/.vs',
+'**/.swc',
+'**/docs',
+'**/*.d.ts',
+'**/*.log',
+'**/*.zip',
+'**/*.txt',
+'**/*.7z',
+'**/*.min.js',
+'**/rollup.config-*.cjs',
+'**/.ncurc.js',
+'**/.prettierrc.js',
+'**/.stylelintrc.js',
+'**/.lintstagedrc',
+];
+
 module.exports = {
-  ignoreFile,
+  ignoreCollection: [...ignoreCollection],
+};
+`;
+
+const ignoreEmbedFile = {
+  folderPath: `${folderPath}/config/items/ignores`,
+  fileName: 'embed.js',
+  coverFile: true,
+  fileContent: ignoreEmbedFileContent,
+};
+
+const ignoreCustomFileContent = `${fileGlobalHeader}
+const ignoreCollection = [];
+
+module.exports = {
+  ignoreCollection: [...ignoreCollection],
+};
+`;
+
+const ignoreCustomFile = {
+  folderPath: `${folderPath}/config/items/ignores`,
+  fileName: 'custom.js',
+  coverFile: false,
+  fileContent: ignoreCustomFileContent,
+};
+
+const ignoreFileContent = `${fileGlobalHeader}
+const { ignoreCollection: ignoreEmbedPlugins } = require('./embed');
+const { ignoreCollection: ignoreCustomPlugins } = require('./custom');
+
+module.exports = {
+  ignoreCollection: [...ignoreEmbedPlugins, ...ignoreCustomPlugins],
+};
+`;
+
+const ignoreFile = {
+  folderPath: `${folderPath}/config/items/ignores`,
+  fileName: 'index.js',
+  coverFile: true,
+  fileContent: ignoreFileContent,
+};
+
+module.exports = {
   contentFile,
   ruleEmbedFile,
   ruleCustomFile,
@@ -564,4 +615,7 @@ module.exports = {
   settingEmbedFile,
   settingCustomFile,
   settingFile,
+  ignoreFile,
+  ignoreEmbedFile,
+  ignoreCustomFile,
 };

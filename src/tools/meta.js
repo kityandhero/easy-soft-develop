@@ -10,7 +10,6 @@ function exec(cmd) {
 }
 
 function cd(path) {
-  // eslint-disable-next-line no-undef
   process.chdir(path);
 }
 
@@ -27,12 +26,10 @@ function isArray(value) {
 }
 
 function exit() {
-  // eslint-disable-next-line no-undef
   return process.exit();
 }
 
 function getArgCollection() {
-  // eslint-disable-next-line no-undef
   return process.argv;
 }
 
@@ -252,8 +249,10 @@ function existPathSync(path) {
   }
 
   try {
-    fs.accessSync(path, fs.F_OK);
+    fs.accessSync(path, fs.constants.F_OK);
   } catch (error) {
+    promptError(error);
+
     return false;
   }
 
@@ -266,8 +265,10 @@ function existFileSync(path) {
   }
 
   try {
-    fs.accessSync(path, fs.F_OK);
+    fs.accessSync(path, fs.constants.F_OK);
   } catch (error) {
+    promptError(error);
+
     return false;
   }
 
@@ -286,6 +287,8 @@ function existDirectorySync(path) {
   try {
     fs.accessSync(path, fs.F_OK);
   } catch (error) {
+    promptError(error);
+
     return false;
   }
 
