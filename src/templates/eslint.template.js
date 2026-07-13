@@ -8,15 +8,19 @@ const folderPath = './develop/config/eslint';
 
 const contentFileContent = `${fileGlobalHeader}
 const mainContent = \`${fileGlobalHeader}
-const { generalConfig } = require('./develop/config/eslint/config');
+import { defineConfig } from 'eslint/config';
 
-module.exports = generalConfig;
+const { configCollection } = require('./develop/config/eslint/config');
+
+export default defineConfig(configCollection);
 \`;
 
 const packageContent = \`${fileGlobalHeader}
-const { generalConfig } = require('../../develop/config/eslint/config');
+import { defineConfig } from 'eslint/config';
 
-module.exports = generalConfig;
+const { configCollection } = require('../../develop/config/eslint/config');
+
+export default defineConfig(configCollection);
 \`;
 
 module.exports = {

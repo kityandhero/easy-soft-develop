@@ -8,9 +8,9 @@ const mainContent = `/* eslint-disable no-undef */
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-import configCollection from './develop/config/eslint/config';
+const { generalConfig } = require('./develop/config/eslint/config');
 
-export default defineConfig(configCollection);
+module.exports = generalConfig;
 `;
 
 const packageContent = `/* eslint-disable no-undef */
@@ -18,9 +18,9 @@ const packageContent = `/* eslint-disable no-undef */
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-import configCollection from '../../develop/config/eslint/config';
+const { generalConfig } = require('../../develop/config/eslint/config');
 
-export default defineConfig(configCollection);
+module.exports = generalConfig;
 `;
 
 module.exports = {

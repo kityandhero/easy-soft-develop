@@ -450,7 +450,7 @@ const jestSimpleTestContent = jestSimpleTestFile.content;
 
 const mainFileContentList = [
   {
-    name: '.eslintrc.js',
+    name: 'eslint.config.js',
     content: mainEslintFileContent,
     coverFile: true,
   },
