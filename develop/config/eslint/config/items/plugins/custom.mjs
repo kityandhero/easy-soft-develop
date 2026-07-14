@@ -3,10 +3,4 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const items = {};
-
-module.exports = {
-  settings: {
-    ...items,
-  },
-};
+export const pluginCollection = {};

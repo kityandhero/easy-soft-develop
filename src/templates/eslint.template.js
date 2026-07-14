@@ -38,67 +38,83 @@ const contentFile = {
 const configFileContent = `${fileGlobalHeader}
 import babelParser from '@babel/eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';
-import { defineConfig } from 'eslint/config';
 import globals from 'globals';
+import js from '@eslint/js';
+import { globalIgnores } from 'eslint/config';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import reactPlugin from 'eslint-plugin-react';
+import unicorn from 'eslint-plugin-unicorn';
+import pluginPromise from 'eslint-plugin-promise';
 
-import { rules } from './items/rules';
-import { parserJsOptions, parserTsOptions } from './items/parser';
-import { pluginCollection } from './items/plugins';
-import { extendCollection } from './items/extends';
-import { settings } from './items/settings';
-import { ignoreCollection } from './items/ignores';
+import { rules } from './items/rules/index.mjs';
+import { parserJsOptions, parserTsOptions } from './items/parser/index.mjs';
+import { pluginCollection } from './items/plugins/index.mjs';
+import { extendCollection } from './items/extends/index.mjs';
+import { settings } from './items/settings/index.mjs';
+import { ignoreCollection } from './items/ignores/index.mjs';
+
+const configJs = {
+  files: ['**/*.js', '**/*.jsx'],
+  extends: [...extendCollection],
+  languageOptions: {
+    globals: {
+      ...globals.es2015,
+      ...globals.browser,
+      ...globals.commonjs,
+      ...globals.jest,
+      ...globals.worker,
+      ...globals.node,
+    },
+    parser: babelParser,
+    parserOptions: parserJsOptions,
+  },
+  plugins: {
+    ...pluginCollection,
+  },
+  rules: rules,
+  settings: settings,
+  ignores: [...ignoreCollection],
+};
+
+const configTs = {
+  files: ['**/*.ts', '**/*.tsx'],
+  extends: [...extendCollection],
+  languageOptions: {
+    globals: {
+      ...globals.es2015,
+      ...globals.browser,
+      ...globals.commonjs,
+      ...globals.jest,
+      ...globals.worker,
+      ...globals.node,
+    },
+    parser: typescriptParser,
+    parserOptions: parserTsOptions,
+  },
+  plugins: {
+    ...pluginCollection,
+  },
+  rules: rules,
+  settings: settings,
+  ignores: [...ignoreCollection],
+};
 
 export const configCollection = [
-  {
-    files: ['**/*.js', '**/*.jsx'],
-    extends: [...extendCollection],
-    languageOptions: {
-      globals: {
-        ...globals.es2015,
-        ...globals.browser,
-        ...globals.commonjs,
-        ...globals.jest,
-        ...globals.worker,
-        ...globals.node,
-      },
-      parser: babelParser,
-      parserOptions: parserJsOptions,
-      plugins: {
-        ...extendCollection,
-      },
-      rules: rules,
-      settings: settings,
-      ignores: [...ignoreCollection],
-    },
-  },
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    extends: [...extendCollection],
-    languageOptions: {
-      globals: {
-        ...globals.es2015,
-        ...globals.browser,
-        ...globals.commonjs,
-        ...globals.jest,
-        ...globals.worker,
-        ...globals.node,
-      },
-      parser: typescriptParser,
-      parserOptions: parserTsOptions,
-      plugins: {
-        ...extendCollection,
-      },
-      rules: rules,
-      settings: settings,
-      ignores: [...ignoreCollection],
-    },
-  },
+  globalIgnores(ignoreCollection),
+  js.configs.recommended,
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat['jsx-runtime'],
+  unicorn.configs.recommended,
+  pluginPromise.configs['flat/recommended'],
+  configJs,
+  configTs,
+  eslintPluginPrettierRecommended,
 ];
 `;
 
 const configFile = {
   folderPath: `${folderPath}/config`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: configFileContent,
 };
@@ -197,33 +213,39 @@ const simpleImportSortRules = {
         ['^(?!@/)(?!taro-fast-)(?!.)'],
         ['^taro-fast-'],
         ['^((@/).*|$)'],
-        ['^\\\\u0000'],
-        ['^\\\\.\\\\.(?!/?$)', '^\\\\.\\\\./?$'],
-        ['^\\\\./(?=.*/)(?!/?$)', '^\\\\.(?!/?$)', '^\\\\./?$'],
-        ['^.+\\\\.s?less$', '^.+\\\\.s?scss$', '^.+\\\\.s?css$'],
+        [String.raw\`^\u0000\`],
+        [String.raw\`^\\.\\.(?!/?$)\`, String.raw\`^\\.\\./?$\`],
+        [
+          String.raw\`^\\./(?=.*/)(?!/?$)\`,
+          String.raw\`^\\.(?!/?$)\`,
+          String.raw\`^\\./?$\`,
+        ],
+        [
+          String.raw\`^.+\\.s?less$\`,
+          String.raw\`^.+\\.s?scss$\`,
+          String.raw\`^.+\\.s?css$\`,
+        ],
       ],
     },
   ],
   'simple-import-sort/exports': 'error',
 };
 
-module.exports = {
-  rules: {
-    ...coreRules,
-    ...reactRules,
-    ...jsxRules,
-    ...typescriptRules,
-    ...unicornRules,
-    ...compatRules,
-    ...importRules,
-    ...simpleImportSortRules,
-  },
+export const rules = {
+  ...coreRules,
+  ...reactRules,
+  ...jsxRules,
+  ...typescriptRules,
+  ...unicornRules,
+  ...compatRules,
+  ...importRules,
+  ...simpleImportSortRules,
 };
 `;
 
 const ruleEmbedFile = {
   folderPath: `${folderPath}/config/items/rules`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: ruleEmbedFileContent,
 };
@@ -231,35 +253,31 @@ const ruleEmbedFile = {
 const ruleCustomFileContent = `${fileGlobalHeader}
 const customRules = {};
 
-module.exports = {
-  rules: {
-    ...customRules,
-  },
+export const rules = {
+  ...customRules,
 };
 `;
 
 const ruleCustomFile = {
   folderPath: `${folderPath}/config/items/rules`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: ruleCustomFileContent,
 };
 
 const ruleFileContent = `${fileGlobalHeader}
-const { rules: embedRules } = require('./embed');
-const { rules: customRules } = require('./custom');
+import { rules as embedRules } from './embed.mjs';
+import { rules as customRules } from './custom.mjs';
 
-module.exports = {
-  rules: {
-    ...embedRules,
-    ...customRules,
-  },
+export const rules = {
+  ...embedRules,
+  ...customRules,
 };
 `;
 
 const ruleFile = {
   folderPath: `${folderPath}/config/items/rules`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: ruleFileContent,
 };
@@ -301,16 +319,14 @@ const items = {
   },
 };
 
-module.exports = {
-  settings: {
-    ...items,
-  },
+export const settings = {
+  ...items,
 };
 `;
 
 const settingEmbedFile = {
   folderPath: `${folderPath}/config/items/settings`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: settingEmbedFileContent,
 };
@@ -318,144 +334,122 @@ const settingEmbedFile = {
 const settingCustomFileContent = `${fileGlobalHeader}
 const items = {};
 
-module.exports = {
-  settings: {
-    ...items,
-  },
+export const settings = {
+  ...items,
 };
 `;
 
 const settingCustomFile = {
   folderPath: `${folderPath}/config/items/settings`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: settingCustomFileContent,
 };
 
 const settingFileContent = `${fileGlobalHeader}
-const { settings: embedSettings } = require('./embed');
-const { settings: customSettings } = require('./custom');
+import { settings as embedSettings } from './embed.mjs';
+import { settings as customSettings } from './custom.mjs';
 
-module.exports = {
-  settings: {
-    ...embedSettings,
-    ...customSettings,
-  },
+export const settings = {
+  ...embedSettings,
+  ...customSettings,
 };
 `;
 
 const settingFile = {
   folderPath: `${folderPath}/config/items/settings`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: settingFileContent,
 };
 
 const extendEmbedFileContent = `${fileGlobalHeader}
-const extendCollection = [
-  'eslint:recommended',
-  'plugin:react/recommended',
-  'plugin:unicorn/recommended',
-  'plugin:promise/recommended',
-  'prettier',
-];
-
-module.exports = {
-  extendCollection: [...extendCollection],
-};
+export const extendCollection = [];
 `;
 
 const extendEmbedFile = {
   folderPath: `${folderPath}/config/items/extends`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: extendEmbedFileContent,
 };
 
 const extendCustomFileContent = `${fileGlobalHeader}
-const extendCollection = [];
-
-module.exports = {
-  extendCollection: [...extendCollection],
-};
+export const extendCollection = [];
 `;
 
 const extendCustomFile = {
   folderPath: `${folderPath}/config/items/extends`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: extendCustomFileContent,
 };
 
 const extendFileContent = `${fileGlobalHeader}
-const { extendCollection: extendEmbedPlugins } = require('./embed');
-const { extendCollection: extendCustomPlugins } = require('./custom');
+import { extendCollection as extendEmbedPlugins } from './embed.mjs';
+import { extendCollection as extendCustomPlugins } from './custom.mjs';
 
-module.exports = {
-  extendCollection: [...extendEmbedPlugins, ...extendCustomPlugins],
-};
+export const extendCollection = [...extendEmbedPlugins, ...extendCustomPlugins];
 `;
 
 const extendFile = {
   folderPath: `${folderPath}/config/items/extends`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: extendFileContent,
 };
 
 const pluginEmbedFileContent = `${fileGlobalHeader}
-const plugins = [
-  'unicorn',
-  'simple-import-sort',
-  'import',
-  'prettier',
-];
+import { fixupPluginRules } from '@eslint/compat';
+import reactPlugin from 'eslint-plugin-react';
+import unicorn from 'eslint-plugin-unicorn';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import eslintPluginImport from 'eslint-plugin-import';
+import prettier from 'eslint-plugin-prettier';
 
-module.exports = {
-  pluginCollection: [...plugins],
+export const pluginCollection = {
+  react: fixupPluginRules(reactPlugin),
+  unicorn,
+  'simple-import-sort': simpleImportSort,
+  import: eslintPluginImport,
+  prettier,
 };
 `;
 
 const pluginEmbedFile = {
   folderPath: `${folderPath}/config/items/plugins`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: pluginEmbedFileContent,
 };
 
 const pluginCustomFileContent = `${fileGlobalHeader}
-const plugins = [];
-
-module.exports = {
-  pluginCollection: [...plugins],
-};
+export const pluginCollection = {};
 `;
 
 const pluginCustomFile = {
   folderPath: `${folderPath}/config/items/plugins`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: pluginCustomFileContent,
 };
 
 const pluginFileContent = `${fileGlobalHeader}
-const { pluginCollection: embedPlugins } = require('./embed');
-const { pluginCollection: customPlugins } = require('./custom');
+import { pluginCollection as embedPlugins } from './embed.mjs';
+import { pluginCollection as customPlugins } from './custom.mjs';
 
-module.exports = {
-  pluginCollection: [...embedPlugins, ...customPlugins],
-};
+export const pluginCollection = { ...embedPlugins, ...customPlugins };
 `;
 
 const pluginFile = {
   folderPath: `${folderPath}/config/items/plugins`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: pluginFileContent,
 };
 
 const parserEmbedFileContent = `${fileGlobalHeader}
-const parserJsOptions = {
+export const parserJsOptions = {
   requireConfigFile: false,
   babelOptions: {
     presets: [
@@ -468,135 +462,120 @@ const parserJsOptions = {
       '@babel/preset-env',
     ],
     plugins: [
-      ['@babel/plugin-proposal-decorators', { legacy: true }],
+      ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
       ['@babel/plugin-transform-class-properties', { loose: true }],
     ],
   },
 };
 
-const parserTsOptions = {
+export const parserTsOptions = {
   ecmaFeatures: {
     jsx: true,
   },
-};
-
-module.exports = {
-  parserJsOptions: { ...parserJsOptions },
-  parserTsOptions: { ...parserTsOptions },
 };
 `;
 
 const parserEmbedFile = {
   folderPath: `${folderPath}/config/items/parser`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: parserEmbedFileContent,
 };
 
 const parserCustomFileContent = `${fileGlobalHeader}
-const parserJsOptions = {};
+export const parserJsOptions = {};
 
-const parserTsOptions = {};
-
-module.exports = {
-  parserJsOptions: { ...parserJsOptions },
-  parserTsOptions: { ...parserTsOptions },
-};
+export const parserTsOptions = {};
 `;
 
 const parserCustomFile = {
   folderPath: `${folderPath}/config/items/parser`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: parserCustomFileContent,
 };
 
 const parserFileContent = `${fileGlobalHeader}
-const {
-  parserJsOptions: embedParserJsOptions,
-  parserTsOptions: embedParserTsOptions,
-} = require('./embed');
-const {
-  parserJsOptions: customParserJsOptions,
-  parserTsOptions: customParserTsOptions,
-} = require('./custom');
+import {
+  parserJsOptions as embedParserJsOptions,
+  parserTsOptions as embedParserTsOptions,
+} from './embed.mjs';
+import {
+  parserJsOptions as customParserJsOptions,
+  parserTsOptions as customParserTsOptions,
+} from './custom.mjs';
 
-module.exports = {
-  parserJsOptions: { ...embedParserJsOptions, ...customParserJsOptions },
-  parserTsOptions: { ...embedParserTsOptions, ...customParserTsOptions },
+export const parserJsOptions = {
+  ...embedParserJsOptions,
+  ...customParserJsOptions,
+};
+
+export const parserTsOptions = {
+  ...embedParserTsOptions,
+  ...customParserTsOptions,
 };
 `;
 
 const parserFile = {
   folderPath: `${folderPath}/config/items/parser`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: parserFileContent,
 };
 
 const ignoreEmbedFileContent = `${fileGlobalHeader}
-const content = [
-'**/public',
-'**/lib',
-'**/es',
-'**/docs',
-'**/coverage',
-'**/.history',
-'**/.vs',
-'**/.swc',
-'**/docs',
-'**/*.d.ts',
-'**/*.log',
-'**/*.zip',
-'**/*.txt',
-'**/*.7z',
-'**/*.min.js',
-'**/rollup.config-*.cjs',
-'**/.ncurc.js',
-'**/.prettierrc.js',
-'**/.stylelintrc.js',
-'**/.lintstagedrc',
+export const ignoreCollection = [
+  '**/public',
+  '**/lib',
+  '**/es',
+  '**/docs',
+  '**/coverage',
+  '**/.history',
+  '**/.vs',
+  '**/.swc',
+  '**/docs',
+  '**/*.d.ts',
+  '**/*.log',
+  '**/*.zip',
+  '**/*.txt',
+  '**/*.7z',
+  '**/*.min.js',
+  '**/rollup.config-*.cjs',
+  '**/.ncurc.js',
+  '**/.prettierrc.js',
+  '**/.stylelintrc.js',
+  '**/.lintstagedrc',
 ];
-
-module.exports = {
-  ignoreCollection: [...ignoreCollection],
-};
 `;
 
 const ignoreEmbedFile = {
   folderPath: `${folderPath}/config/items/ignores`,
-  fileName: 'embed.js',
+  fileName: 'embed.mjs',
   coverFile: true,
   fileContent: ignoreEmbedFileContent,
 };
 
 const ignoreCustomFileContent = `${fileGlobalHeader}
-const ignoreCollection = [];
-
-module.exports = {
-  ignoreCollection: [...ignoreCollection],
-};
+export const ignoreCollection = [];
 `;
 
 const ignoreCustomFile = {
   folderPath: `${folderPath}/config/items/ignores`,
-  fileName: 'custom.js',
+  fileName: 'custom.mjs',
   coverFile: false,
   fileContent: ignoreCustomFileContent,
 };
 
 const ignoreFileContent = `${fileGlobalHeader}
-const { ignoreCollection: ignoreEmbedPlugins } = require('./embed');
-const { ignoreCollection: ignoreCustomPlugins } = require('./custom');
+import { ignoreCollection as ignoreEmbedPlugins } from './embed.mjs';
+import { ignoreCollection as ignoreCustomPlugins } from './custom.mjs';
 
-module.exports = {
-  ignoreCollection: [...ignoreEmbedPlugins, ...ignoreCustomPlugins],
-};
+export const ignoreCollection = [...ignoreEmbedPlugins, ...ignoreCustomPlugins];
 `;
 
 const ignoreFile = {
   folderPath: `${folderPath}/config/items/ignores`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: ignoreFileContent,
 };

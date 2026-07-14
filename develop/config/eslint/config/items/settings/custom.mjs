@@ -3,10 +3,8 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const customRules = {};
+const items = {};
 
-module.exports = {
-  rules: {
-    ...customRules,
-  },
+export const settings = {
+  ...items,
 };

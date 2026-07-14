@@ -3,7 +3,7 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const content = [
+export const ignoreCollection = [
   '**/public',
   '**/lib',
   '**/es',
@@ -25,7 +25,3 @@ const content = [
   '**/.stylelintrc.js',
   '**/.lintstagedrc',
 ];
-
-module.exports = {
-  ignoreCollection: [...ignoreCollection],
-};

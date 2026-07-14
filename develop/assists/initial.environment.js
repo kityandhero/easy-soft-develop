@@ -8,7 +8,6 @@ const { initialEnvironment } = require('easy-soft-develop');
 const eslintFile = require('../config/eslint/template/content');
 const ncuFile = require('../config/ncu/template/content');
 const jsdocFile = require('../config/jsdoc/template/content');
-const eslintIgnoreFile = require('../config/eslint/template/ignore.content');
 const prettierFile = require('../config/prettier/template/content');
 const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
 const stylelintFile = require('../config/stylelint/template/content');
@@ -31,8 +30,6 @@ const mainNcuFileContent = ncuFile.mainContent;
 const packageNcuFileContent = ncuFile.packageContent;
 
 const packageJsdocFileContent = jsdocFile.packageContent;
-
-const eslintIgnoreContent = eslintIgnoreFile.content;
 
 const mainPrettierContent = prettierFile.mainContent;
 const packagePrettierContent = prettierFile.packageContent;
@@ -91,11 +88,6 @@ const mainFileContentList = [
     coverFile: true,
   },
   {
-    name: '.eslintignore',
-    content: eslintIgnoreContent,
-    coverFile: false,
-  },
-  {
     name: '.gitattributes',
     content: gitAttributesContent,
     coverFile: true,
@@ -114,7 +106,7 @@ const mainFileContentList = [
 
 const packageFileContentList = [
   {
-    name: '.eslintrc.js',
+    name: 'eslint.config.js',
     content: packageEslintFileContent,
     coverFile: true,
   },
@@ -152,11 +144,6 @@ const packageFileContentList = [
     name: '.editorconfig',
     content: editorConfigContent,
     coverFile: true,
-  },
-  {
-    name: '.eslintignore',
-    content: eslintIgnoreContent,
-    coverFile: false,
   },
   {
     name: '.gitattributes',

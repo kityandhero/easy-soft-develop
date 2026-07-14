@@ -3,8 +3,8 @@
 /* eslint-disable unicorn/prefer-module */
 /* eslint-disable no-useless-escape */
 
-const ignoreCollection = [];
+const customRules = {};
 
-module.exports = {
-  ignoreCollection: [...ignoreCollection],
+export const rules = {
+  ...customRules,
 };
