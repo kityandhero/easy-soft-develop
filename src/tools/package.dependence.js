@@ -25,6 +25,7 @@ function getGlobalDevelopPackages() {
   ]);
 
   packages = packages.concat([
+    '@eslint/compat',
     '@eslint/eslintrc',
     '@eslint/js',
     'eslint',

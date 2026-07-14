@@ -250,8 +250,9 @@ function existPathSync(path) {
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
-    promptError(error);
+    // promptError(error);
 
     return false;
   }
@@ -266,8 +267,9 @@ function existFileSync(path) {
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
-    promptError(error);
+    // promptError(error);
 
     return false;
   }
@@ -286,8 +288,9 @@ function existDirectorySync(path) {
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
-    promptError(error);
+    // promptError(error);
 
     return false;
   }
