@@ -1,13 +1,14 @@
 const {
   getDevelopSubPathVersionNcuConfig,
 } = require('../config/develop.subPath.version.ncu');
-const { fileGlobalHeader } = require('./template.config');
+const { fileGlobalHeader, fileBuilderHeader } = require('./template.config');
 const { isArray } = require('../tools/meta');
 
 const folderPath = './develop/config/eslint';
 
-const contentFileContent = `${fileGlobalHeader}
-const mainContent = \`${fileGlobalHeader}
+const contentFileContent = `${fileBuilderHeader}
+${fileGlobalHeader}
+const mainContent = \`${fileBuilderHeader}
 import { defineConfig } from 'eslint/config';
 
 import { configCollection } from './develop/config/eslint/config/index.mjs';
@@ -15,7 +16,7 @@ import { configCollection } from './develop/config/eslint/config/index.mjs';
 export default defineConfig(configCollection);
 \`;
 
-const packageContent = \`${fileGlobalHeader}
+const packageContent = \`${fileBuilderHeader}
 import { defineConfig } from 'eslint/config';
 
 import { configCollection } from '../../develop/config/eslint/config/index.mjs';
@@ -35,7 +36,7 @@ const contentFile = {
   fileContent: contentFileContent,
 };
 
-const configFileContent = `${fileGlobalHeader}
+const configFileContent = `${fileBuilderHeader}
 import babelParser from '@babel/eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';
 import globals from 'globals';
@@ -119,7 +120,7 @@ const configFile = {
   fileContent: configFileContent,
 };
 
-const ruleEmbedFileContent = `${fileGlobalHeader}
+const ruleEmbedFileContent = `${fileBuilderHeader}
 const coreRules = {
   camelias: 0,
   'no-bitwise': 0,
@@ -250,7 +251,7 @@ const ruleEmbedFile = {
   fileContent: ruleEmbedFileContent,
 };
 
-const ruleCustomFileContent = `${fileGlobalHeader}
+const ruleCustomFileContent = `${fileBuilderHeader}
 const customRules = {};
 
 export const rules = {
@@ -265,7 +266,7 @@ const ruleCustomFile = {
   fileContent: ruleCustomFileContent,
 };
 
-const ruleFileContent = `${fileGlobalHeader}
+const ruleFileContent = `${fileBuilderHeader}
 import { rules as embedRules } from './embed.mjs';
 import { rules as customRules } from './custom.mjs';
 
@@ -289,7 +290,7 @@ const { paths = [] } = {
   ...developSubPathVersionNcuConfig,
 };
 
-const settingEmbedFileContent = `${fileGlobalHeader}
+const settingEmbedFileContent = `${fileBuilderHeader}
 const items = {
   'import/parsers': {
     '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -331,7 +332,7 @@ const settingEmbedFile = {
   fileContent: settingEmbedFileContent,
 };
 
-const settingCustomFileContent = `${fileGlobalHeader}
+const settingCustomFileContent = `${fileBuilderHeader}
 const items = {};
 
 export const settings = {
@@ -346,7 +347,7 @@ const settingCustomFile = {
   fileContent: settingCustomFileContent,
 };
 
-const settingFileContent = `${fileGlobalHeader}
+const settingFileContent = `${fileBuilderHeader}
 import { settings as embedSettings } from './embed.mjs';
 import { settings as customSettings } from './custom.mjs';
 
@@ -363,7 +364,7 @@ const settingFile = {
   fileContent: settingFileContent,
 };
 
-const extendEmbedFileContent = `${fileGlobalHeader}
+const extendEmbedFileContent = `${fileBuilderHeader}
 export const extendCollection = [];
 `;
 
@@ -374,7 +375,7 @@ const extendEmbedFile = {
   fileContent: extendEmbedFileContent,
 };
 
-const extendCustomFileContent = `${fileGlobalHeader}
+const extendCustomFileContent = `${fileBuilderHeader}
 export const extendCollection = [];
 `;
 
@@ -385,7 +386,7 @@ const extendCustomFile = {
   fileContent: extendCustomFileContent,
 };
 
-const extendFileContent = `${fileGlobalHeader}
+const extendFileContent = `${fileBuilderHeader}
 import { extendCollection as extendEmbedPlugins } from './embed.mjs';
 import { extendCollection as extendCustomPlugins } from './custom.mjs';
 
@@ -399,7 +400,7 @@ const extendFile = {
   fileContent: extendFileContent,
 };
 
-const pluginEmbedFileContent = `${fileGlobalHeader}
+const pluginEmbedFileContent = `${fileBuilderHeader}
 import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';
 import unicorn from 'eslint-plugin-unicorn';
@@ -423,7 +424,7 @@ const pluginEmbedFile = {
   fileContent: pluginEmbedFileContent,
 };
 
-const pluginCustomFileContent = `${fileGlobalHeader}
+const pluginCustomFileContent = `${fileBuilderHeader}
 export const pluginCollection = {};
 `;
 
@@ -434,7 +435,7 @@ const pluginCustomFile = {
   fileContent: pluginCustomFileContent,
 };
 
-const pluginFileContent = `${fileGlobalHeader}
+const pluginFileContent = `${fileBuilderHeader}
 import { pluginCollection as embedPlugins } from './embed.mjs';
 import { pluginCollection as customPlugins } from './custom.mjs';
 
@@ -448,7 +449,7 @@ const pluginFile = {
   fileContent: pluginFileContent,
 };
 
-const parserEmbedFileContent = `${fileGlobalHeader}
+const parserEmbedFileContent = `${fileBuilderHeader}
 export const parserJsOptions = {
   requireConfigFile: false,
   babelOptions: {
@@ -482,7 +483,7 @@ const parserEmbedFile = {
   fileContent: parserEmbedFileContent,
 };
 
-const parserCustomFileContent = `${fileGlobalHeader}
+const parserCustomFileContent = `${fileBuilderHeader}
 export const parserJsOptions = {};
 
 export const parserTsOptions = {};
@@ -495,7 +496,7 @@ const parserCustomFile = {
   fileContent: parserCustomFileContent,
 };
 
-const parserFileContent = `${fileGlobalHeader}
+const parserFileContent = `${fileBuilderHeader}
 import {
   parserJsOptions as embedParserJsOptions,
   parserTsOptions as embedParserTsOptions,
@@ -523,7 +524,7 @@ const parserFile = {
   fileContent: parserFileContent,
 };
 
-const ignoreEmbedFileContent = `${fileGlobalHeader}
+const ignoreEmbedFileContent = `${fileBuilderHeader}
 export const ignoreCollection = [
   '**/public',
   '**/lib',
@@ -555,7 +556,7 @@ const ignoreEmbedFile = {
   fileContent: ignoreEmbedFileContent,
 };
 
-const ignoreCustomFileContent = `${fileGlobalHeader}
+const ignoreCustomFileContent = `${fileBuilderHeader}
 export const ignoreCollection = [];
 `;
 
@@ -566,7 +567,7 @@ const ignoreCustomFile = {
   fileContent: ignoreCustomFileContent,
 };
 
-const ignoreFileContent = `${fileGlobalHeader}
+const ignoreFileContent = `${fileBuilderHeader}
 import { ignoreCollection as ignoreEmbedPlugins } from './embed.mjs';
 import { ignoreCollection as ignoreCustomPlugins } from './custom.mjs';
 

@@ -4,6 +4,10 @@ const fileGlobalHeader = `/* eslint-disable no-undef */
 /* eslint-disable no-useless-escape */
 `;
 
+const fileBuilderHeader = `/** generate by easy-soft-develop */
+`;
+
 module.exports = {
   fileGlobalHeader,
+  fileBuilderHeader,
 };
