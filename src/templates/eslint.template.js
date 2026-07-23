@@ -10,7 +10,7 @@ const contentFileContent = `${fileGlobalHeader}
 const mainContent = \`${fileGlobalHeader}
 import { defineConfig } from 'eslint/config';
 
-const { configCollection } = require('./develop/config/eslint/config');
+import { configCollection } from './develop/config/eslint/config/index.mjs';
 
 export default defineConfig(configCollection);
 \`;
@@ -18,7 +18,7 @@ export default defineConfig(configCollection);
 const packageContent = \`${fileGlobalHeader}
 import { defineConfig } from 'eslint/config';
 
-const { configCollection } = require('../../develop/config/eslint/config');
+import { configCollection } from '../../develop/config/eslint/config/index.mjs';
 
 export default defineConfig(configCollection);
 \`;
