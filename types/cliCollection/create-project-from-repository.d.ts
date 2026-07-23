@@ -1,1 +1,1 @@
-export function run(s: any, o: any): void;
+export declare var run: (s: any, o: any) => void;

@@ -1,16 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "./dist",
     "module": "esnext",
     "target": "esnext",
     "lib": ["esnext", "dom"],
     "sourceMap": true,
-    "baseUrl": ".",
     "jsx": "react",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,

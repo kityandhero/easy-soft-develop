@@ -1,1 +1,1 @@
-export function run(): void;
+export declare var run: () => void;

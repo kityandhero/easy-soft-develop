@@ -1,8 +1,9 @@
-export namespace contentFile {
-  export let folderPath: string;
-  export let fileName: string;
-  export let coverFile: boolean;
-  export { contentFileContent as fileContent };
-}
-declare const contentFileContent: "/* eslint-disable no-undef */\n/* eslint-disable import/no-commonjs */\n/* eslint-disable unicorn/prefer-module */\n/* eslint-disable no-useless-escape */\n\nmodule.exports = {\n  extends: [\n    '@commitlint/config-conventional',\n    '@commitlint/config-pnpm-scopes',\n  ],\n  parserPreset: 'conventional-changelog-conventionalcommits',\n  prompt: {\n    useEmoji: true,\n    customScopesAlias: '以上都不是？我要自定义',\n    emptyScopesAlias: '跳过',\n    emptyIssuePrefixAlias: '跳过',\n    customIssuePrefixAlias: '自定义前缀',\n    messages: {\n      type: '择要提交的更改类型:',\n      scope: '此更改的范围是什么(例如:组件或文件名):',\n      customScope: '此更改的范围是什么(例如:组件或文件名):',\n      subject: '用简短的祈使语句描述变化:',\n      body: '对变更提供更详细的描述, \"|\" 为多行间隔符 (可空):',\n      breaking: '有什么破坏性的变化吗, \"|\" 为多行间隔符 (可空):',\n      footerPrefixesSelect: '通过下列选择变更列表的ISSUES类型 (可空):',\n      customFooterPrefix: '输入 ISSUES 前缀:',\n      footer: '列出此更改引起的任何 ISSUES. 例如: #31, #34:',\n      generatingByAI: '通过AI生成你提交主题...',\n      generatedSelectByAI: '通过AI生成合适的主题:',\n      confirmCommit: '是否提交或修改commit ?',\n    },\n    types: [\n      { value: 'feat', name: 'feat:     ✨  含有新功能', emoji: ':sparkles:' },\n      { value: 'fix', name: 'fix:      🐛  Bug修复', emoji: ':bug:' },\n      {\n        value: 'docs',\n        name: 'docs:     📝  仅文档更改',\n        emoji: ':memo:',\n      },\n      {\n        value: 'style',\n        name: 'style:    💄  不影响代码含义的更改',\n        emoji: ':lipstick:',\n      },\n      {\n        value: 'refactor',\n        name: 'refactor: ♻️  既不修复错误也不增加功能的代码更改',\n        emoji: ':recycle:',\n      },\n      {\n        value: 'perf',\n        name: 'perf:     ⚡️ 改进性能的代码更改',\n        emoji: ':zap:',\n      },\n      {\n        value: 'test',\n        name: 'test:     ✅  添加缺失的测试或更正现有的测试',\n        emoji: ':white_check_mark:',\n      },\n      {\n        value: 'build',\n        name: 'build:    📦️ 影响构建系统或外部依赖的更改',\n        emoji: ':package:',\n      },\n      {\n        value: 'ci',\n        name: 'ci:       🎡  对CI配置文件和脚本的更改',\n        emoji: ':ferris_wheel:',\n      },\n      {\n        value: 'chore',\n        name: 'chore:    🔨  其他不修改src或测试文件的更改',\n        emoji: ':hammer:',\n      },\n      {\n        value: 'revert',\n        name: 'revert:   ⏪️ 恢复之前的提交',\n        emoji: ':rewind:',\n      },\n    ],\n    issuePrefixes: [\n      { value: 'link', name: 'link:     链接 ISSUES 进行中' },\n      { value: 'closed', name: 'closed:   标记 ISSUES 已完成' },\n    ],\n  },\n};\n";
-export {};
+declare const _exports: {
+  contentFile: {
+    folderPath: string;
+    fileName: string;
+    coverFile: boolean;
+    fileContent: string;
+  };
+};
+export = _exports;
