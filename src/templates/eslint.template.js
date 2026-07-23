@@ -47,15 +47,15 @@ import reactPlugin from 'eslint-plugin-react';
 import unicorn from 'eslint-plugin-unicorn';
 import pluginPromise from 'eslint-plugin-promise';
 
-import { rules } from './items/rules/index.mjs';
+import { rules, rulesX } from './items/rules/index.mjs';
 import { parserJsOptions, parserTsOptions } from './items/parser/index.mjs';
-import { pluginCollection } from './items/plugins/index.mjs';
+import { pluginCollection, pluginXCollection } from './items/plugins/index.mjs';
 import { extendCollection } from './items/extends/index.mjs';
 import { settings } from './items/settings/index.mjs';
 import { ignoreCollection } from './items/ignores/index.mjs';
 
 const configJs = {
-  files: ['**/*.js', '**/*.jsx'],
+  files: ['**/*.js'],
   extends: [...extendCollection],
   languageOptions: {
     globals: {
@@ -73,6 +73,29 @@ const configJs = {
     ...pluginCollection,
   },
   rules: rules,
+  settings: settings,
+  ignores: [...ignoreCollection],
+};
+
+const configJsx = {
+  files: ['**/*.jsx'],
+  extends: [...extendCollection],
+  languageOptions: {
+    globals: {
+      ...globals.es2015,
+      ...globals.browser,
+      ...globals.commonjs,
+      ...globals.jest,
+      ...globals.worker,
+      ...globals.node,
+    },
+    parser: babelParser,
+    parserOptions: parserJsOptions,
+  },
+  plugins: {
+    ...pluginXCollection,
+  },
+  rules: rulesX,
   settings: settings,
   ignores: [...ignoreCollection],
 };
@@ -103,11 +126,15 @@ const configTs = {
 export const configCollection = [
   globalIgnores(ignoreCollection),
   js.configs.recommended,
-  reactPlugin.configs.flat.recommended,
+  {
+    files: ['**/*.{jsx,tsx}'],
+    ...reactPlugin.configs.flat.recommended,
+  },
   reactPlugin.configs.flat['jsx-runtime'],
   unicorn.configs.recommended,
   pluginPromise.configs['flat/recommended'],
   configJs,
+  configJsx,
   configTs,
   eslintPluginPrettierRecommended,
 ];
@@ -134,6 +161,9 @@ const coreRules = {
   'no-this-before-super': 0,
   'no-var': 1,
   'sort-imports': 0,
+};
+
+const jsxRules = {
   'jsx-quotes': ['error', 'prefer-double'],
 };
 
@@ -149,7 +179,7 @@ const reactRules = {
   'react/jsx-props-no-spreading': 0,
 };
 
-const jsxRules = {
+const jsxA11yRules = {
   'jsx-a11y/no-noninteractive-element-interactions': 0,
   'jsx-a11y/click-events-have-key-events': 0,
   'jsx-a11y/no-static-element-interactions': 0,
@@ -234,8 +264,18 @@ const simpleImportSortRules = {
 
 export const rules = {
   ...coreRules,
-  ...reactRules,
+  ...typescriptRules,
+  ...unicornRules,
+  ...compatRules,
+  ...importRules,
+  ...simpleImportSortRules,
+};
+
+export const rulesX = {
+  ...coreRules,
   ...jsxRules,
+  ...reactRules,
+  ...jsxA11yRules,
   ...typescriptRules,
   ...unicornRules,
   ...compatRules,
@@ -252,11 +292,9 @@ const ruleEmbedFile = {
 };
 
 const ruleCustomFileContent = `${fileBuilderHeader}
-const customRules = {};
+export const rules = {};
 
-export const rules = {
-  ...customRules,
-};
+export const rulesX = {};
 `;
 
 const ruleCustomFile = {
@@ -267,12 +305,17 @@ const ruleCustomFile = {
 };
 
 const ruleFileContent = `${fileBuilderHeader}
-import { rules as embedRules } from './embed.mjs';
-import { rules as customRules } from './custom.mjs';
+import { rules as embedRules, rulesX as embedRulesX } from './embed.mjs';
+import { rules as customRules, rulesX as customRulesX } from './custom.mjs';
 
 export const rules = {
   ...embedRules,
   ...customRules,
+};
+
+export const rulesX = {
+  ...embedRulesX,
+  ...customRulesX,
 };
 `;
 
@@ -401,7 +444,7 @@ const extendFile = {
 };
 
 const pluginEmbedFileContent = `${fileBuilderHeader}
-import { fixupPluginRules } from '@eslint/compat';
+// import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';
 import unicorn from 'eslint-plugin-unicorn';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -409,7 +452,15 @@ import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 
 export const pluginCollection = {
-  react: fixupPluginRules(reactPlugin),
+  unicorn,
+  'simple-import-sort': simpleImportSort,
+  import: eslintPluginImport,
+  prettier,
+};
+
+export const pluginXCollection = {
+  // react: fixupPluginRules(reactPlugin),
+  react: reactPlugin,
   unicorn,
   'simple-import-sort': simpleImportSort,
   import: eslintPluginImport,
@@ -426,6 +477,8 @@ const pluginEmbedFile = {
 
 const pluginCustomFileContent = `${fileBuilderHeader}
 export const pluginCollection = {};
+
+export const pluginXCollection = {};
 `;
 
 const pluginCustomFile = {
@@ -436,10 +489,24 @@ const pluginCustomFile = {
 };
 
 const pluginFileContent = `${fileBuilderHeader}
-import { pluginCollection as embedPlugins } from './embed.mjs';
-import { pluginCollection as customPlugins } from './custom.mjs';
+import {
+  pluginCollection as embedPlugins,
+  pluginXCollection as embedPluginsX,
+} from './embed.mjs';
+import {
+  pluginCollection as customPlugins,
+  pluginXCollection as customPluginsX,
+} from './custom.mjs';
 
-export const pluginCollection = { ...embedPlugins, ...customPlugins };
+export const pluginCollection = {
+  ...embedPlugins,
+  ...customPlugins,
+};
+
+export const pluginXCollection = {
+  ...embedPluginsX,
+  ...customPluginsX,
+};
 `;
 
 const pluginFile = {

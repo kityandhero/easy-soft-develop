@@ -1,9 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-import { fixupPluginRules } from '@eslint/compat';
+// import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';
 import unicorn from 'eslint-plugin-unicorn';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -11,7 +8,15 @@ import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 
 export const pluginCollection = {
-  react: fixupPluginRules(reactPlugin),
+  unicorn,
+  'simple-import-sort': simpleImportSort,
+  import: eslintPluginImport,
+  prettier,
+};
+
+export const pluginXCollection = {
+  // react: fixupPluginRules(reactPlugin),
+  react: reactPlugin,
   unicorn,
   'simple-import-sort': simpleImportSort,
   import: eslintPluginImport,
