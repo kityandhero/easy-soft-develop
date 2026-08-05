@@ -161,6 +161,7 @@ const coreRules = {
   'no-this-before-super': 0,
   'no-var': 1,
   'sort-imports': 0,
+  'no-useless-assignment': 0,
 };
 
 const jsxRules = {
@@ -206,6 +207,13 @@ const unicornRules = {
   ],
   'unicorn/no-null': 0,
   'unicorn/no-this-assignment': 0,
+  'unicorn/consistent-boolean-name': 0,
+  'unicorn/consistent-compound-words': 0,
+  'unicorn/no-useless-template-literals': 0,
+  'unicorn/name-replacements': 0,
+  'unicorn/prefer-continue.md': 0,
+  'unicorn/no-unnecessary-global-this': 0,
+  'unicorn/no-declarations-before-early-exit': 0,
 };
 
 const compatRules = {
