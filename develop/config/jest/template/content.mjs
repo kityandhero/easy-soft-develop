@@ -2,7 +2,7 @@
 
 export const content = `/** generate by easy-soft-develop */
 
-module.exports = {
+export default {
   collectCoverage: true,
   verbose: true,
 };

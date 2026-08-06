@@ -158,7 +158,7 @@ const packageFileContentList = [
     coverFile: false,
   },
   {
-    name: 'jest.config.js',
+    name: 'jest.config.mjs',
     content: jestContent,
     coverFile: false,
   },
