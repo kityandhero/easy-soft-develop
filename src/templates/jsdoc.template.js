@@ -36,11 +36,13 @@ export const configFile = {
 };
 
 const contentFileContent = `${fileBuilderHeader}
-export const packageContent = \`${fileBuilderHeader}
+const packageContent = \`${fileBuilderHeader}
 import { generalConfig } from "../../develop/config/jsdoc/config";
 
 export default generalConfig;
 \`;
+
+export default { packageContent }
 `;
 
 export const contentFile = {
