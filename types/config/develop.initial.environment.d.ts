@@ -1,2 +1,2 @@
-export declare function createDevelopInitialEnvironmentConfigFile(): void;
-export declare function getDevelopInitialEnvironmentConfig(): any;
+export function createDevelopInitialEnvironmentConfigFile(): void;
+export function getDevelopInitialEnvironmentConfig(): any;

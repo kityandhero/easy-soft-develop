@@ -1,13 +1,13 @@
-export declare function updatePackageFromPackage({
+export function updatePackageFromPackage({
   path,
   primaryRemoteUrl,
   spareRemoteUrl,
   agent,
   localFile,
 }: {
-  agent: any;
-  localFile: any;
   path: any;
   primaryRemoteUrl: any;
   spareRemoteUrl: any;
+  agent: any;
+  localFile: any;
 }): Promise<void>;

@@ -1,6 +1,4 @@
-export declare function createDevelopSubPathPublishConfigFile(
-  paths?: any[],
-): void;
-export declare function getDevelopSubPathPublishConfig(
+export function createDevelopSubPathPublishConfigFile(paths?: any[]): void;
+export function getDevelopSubPathPublishConfig(
   createFileWhenNoExist?: boolean,
 ): any;

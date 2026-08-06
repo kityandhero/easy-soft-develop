@@ -2,16 +2,16 @@
  * update special package version
  * @param {Array} packageList
  */
-export declare function updateSpecialPackageVersion(packageList: any[]): void;
-export declare function updateAllPackageVersion({
+export function updateSpecialPackageVersion(packageList: any[]): void;
+export function updateAllPackageVersion({
   autoInstall,
 }: {
   autoInstall?: boolean | undefined;
 }): void;
-export declare function updateEveryPackageVersion({
+export function updateEveryPackageVersion({
   autoInstall,
 }: {
   autoInstall?: boolean | undefined;
 }): void;
-export declare function checkAllPackageVersion(): void;
-export declare function checkEveryPackageVersion(): void;
+export function checkAllPackageVersion(): void;
+export function checkEveryPackageVersion(): void;

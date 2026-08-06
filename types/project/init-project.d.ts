@@ -1,1 +1,1 @@
-export declare function createRepositoryProject(name: any): void;
+export function createRepositoryProject(name: any): void;

@@ -1,7 +1,7 @@
 /**
  * loop all package
  */
-export declare function loopPackage(
+export function loopPackage(
   paths?: any[],
   callback?: ({
     name,
@@ -9,9 +9,9 @@ export declare function loopPackage(
     absolutePath,
     relativePath,
   }: {
-    absolutePath: any;
     name: any;
     path: any;
+    absolutePath: any;
     relativePath: any;
   }) => void,
 ): void;

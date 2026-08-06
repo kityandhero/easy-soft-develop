@@ -1,4 +1,1 @@
-export declare function commitRefresh(
-  fileName?: string,
-  relativeFolder?: string,
-): void;
+export function commitRefresh(fileName?: string, relativeFolder?: string): void;

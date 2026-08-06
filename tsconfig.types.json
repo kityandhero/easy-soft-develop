@@ -4,7 +4,7 @@
     "rootDir": "src",
     "outDir": "./dist",
     "target": "ES2022",
-    "module": "ESNext",
+    "module": "NodeNext",
     "lib": ["ES2022"],
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "strict": true,
     "declaration": true,
+    "moduleResolution": "NodeNext",
     "declarationDir": "types",
     "emitDeclarationOnly": true
   },

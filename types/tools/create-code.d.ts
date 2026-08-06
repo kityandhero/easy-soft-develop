@@ -1,1 +1,1 @@
-export declare function generateCode(dataSource: any): void;
+export function generateCode(dataSource: any): void;

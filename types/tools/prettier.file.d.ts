@@ -1,2 +1,2 @@
-export declare function prettierAllFile(): void;
-export declare function prettierChangeFile(): void;
+export function prettierAllFile(): void;
+export function prettierChangeFile(): void;

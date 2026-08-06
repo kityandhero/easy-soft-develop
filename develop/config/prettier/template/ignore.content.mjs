@@ -1,6 +1,6 @@
 /** generate by easy-soft-develop */
 
-export const content = `# ignore dir
+const content = `# ignore dir
 **/node_modules/**
 **/templates/**
 **/lib/**
@@ -52,3 +52,5 @@ pnpm-lock.yaml
 CNAME
 LICENSE
 `;
+
+export default { content };

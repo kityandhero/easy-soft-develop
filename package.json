@@ -1,6 +1,6 @@
 {
   "name": "easy-soft-develop",
-  "version": "3.0.45",
+  "version": "3.0.48",
   "description": "",
   "homepage": "https://github.com/kityandhero/easy-soft-develop#readme",
   "bugs": {
@@ -109,7 +109,7 @@
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-promise": "^7.3.0",
     "eslint-plugin-simple-import-sort": "^14.0.0",
-    "eslint-plugin-unicorn": "^71.1.0",
+    "eslint-plugin-unicorn": "^73.0.0",
     "globals": "^17.9.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.3.0",

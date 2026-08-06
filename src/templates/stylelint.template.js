@@ -57,14 +57,18 @@ export const contentFile = {
   fileContent: contentFileContent,
 };
 
+const ignoreFileContent = `${fileBuilderHeader}
+const content = \`# ignore dir
+**/coverage/**
+**/docs/**
+\`;
+
+export default { content };
+`;
+
 export const ignoreFile = {
   folderPath: `${folderPath}/template`,
   fileName: 'ignore.content.mjs',
   coverFile: false,
-  fileContent: `${fileBuilderHeader}
-  export const content = \`# ignore dir
-**/coverage/**
-**/docs/**
-\`;
-  `,
+  fileContent: ignoreFileContent,
 };

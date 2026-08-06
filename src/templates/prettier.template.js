@@ -54,7 +54,7 @@ export const contentFile = {
 };
 
 const ignoreFileContent = `${fileBuilderHeader}
-export const content = \`# ignore dir
+const content = \`# ignore dir
 **/node_modules/**
 **/templates/**
 **/lib/**
@@ -106,6 +106,8 @@ pnpm-lock.yaml
 CNAME
 LICENSE
 \`;
+
+export default { content };
 `;
 
 export const ignoreFile = {
