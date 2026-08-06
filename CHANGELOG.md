@@ -1,5 +1,11 @@
 # easy-soft-develop
 
+## 3.0.38
+
+### Patch Changes
+
+- update
+
 ## 3.0.36
 
 ### Patch Changes

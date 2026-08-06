@@ -3,7 +3,7 @@ import { fileBuilderHeader } from './template.config.js';
 const folderPath = './develop/config/editor';
 
 const contentFileContent = `${fileBuilderHeader}
-export const content = \`# https://editorconfig.org
+const content = \`# https://editorconfig.org
 root = true
 
 [*]
@@ -20,6 +20,8 @@ trim_trailing_whitespace = false
 [Makefile]
 indent_style = tab
 \`;
+
+export default { content };
 `;
 
 export const contentFile = {

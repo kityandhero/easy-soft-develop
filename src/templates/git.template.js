@@ -10,6 +10,8 @@ export const content = \`*.js eol=lf
 *.less eol=lf
 *.scss eol=lf
 \`;
+
+export default { content };
 `;
 
 export const attributeFile = {
@@ -20,7 +22,7 @@ export const attributeFile = {
 };
 
 const ignoreFileContent = `${fileBuilderHeader}
-export const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # ignore dependencies dir
 **/node_modules
@@ -55,6 +57,8 @@ pnpm-lock.yaml
 .firebase
 .eslintcache
 \`;
+
+export default { content };
 `;
 
 export const ignoreFile = {
