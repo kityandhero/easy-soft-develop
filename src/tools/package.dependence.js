@@ -1,7 +1,8 @@
-function getGlobalDevelopPackages() {
+export function getGlobalDevelopPackages() {
   let packages = [];
 
-  packages = packages.concat([
+  packages = [
+    ...packages,
     '@babel/core',
     '@babel/eslint-parser',
     '@babel/plugin-external-helpers',
@@ -11,9 +12,10 @@ function getGlobalDevelopPackages() {
     '@babel/preset-env',
     '@babel/preset-react',
     '@babel/runtime',
-  ]);
+  ];
 
-  packages = packages.concat([
+  packages = [
+    ...packages,
     '@commitlint/cli',
     '@commitlint/config-conventional',
     '@commitlint/config-pnpm-scopes',
@@ -22,9 +24,10 @@ function getGlobalDevelopPackages() {
     'conventional-changelog-conventionalcommits',
     'cz-git',
     'react-refresh',
-  ]);
+  ];
 
-  packages = packages.concat([
+  packages = [
+    ...packages,
     '@eslint/compat',
     '@eslint/eslintrc',
     '@eslint/js',
@@ -45,27 +48,30 @@ function getGlobalDevelopPackages() {
     'eslint-plugin-simple-import-sort',
     'eslint-plugin-unicorn',
     'globals',
-  ]);
+    'semver',
+  ];
 
-  packages = packages.concat(['jsdoc', 'docdash']);
+  packages = [...packages, 'jsdoc', 'docdash'];
 
-  packages = packages.concat([
+  packages = [
+    ...packages,
     'prettier',
     'prettier-plugin-organize-imports',
     'prettier-plugin-packagejson',
-  ]);
+  ];
 
-  packages = packages.concat([
+  packages = [
+    ...packages,
     'stylelint',
     'stylelint-config-css-modules',
     'stylelint-config-standard',
     'stylelint-declaration-block-no-ignored-properties',
     'stylelint-order',
-  ]);
+  ];
 
-  packages = packages.concat(['@typescript-eslint/parser']);
+  packages = [...packages, '@typescript-eslint/parser'];
 
-  packages = packages.concat(['@types/node']);
+  packages = [...packages, '@types/node'];
 
   packages = packages.concat('cross-env', '@types/jest', 'jest', 'babel-jest');
 
@@ -83,24 +89,18 @@ function getGlobalDevelopPackages() {
   return packages;
 }
 
-function getProjectDevelopPackages() {
+export function getProjectDevelopPackages() {
   let packages = [];
 
-  packages = packages.concat([]);
+  packages = [...packages];
 
   return packages;
 }
 
-function getMainDevelopPackages() {
+export function getMainDevelopPackages() {
   let packages = [];
 
-  packages = packages.concat(['@types/jest']);
+  packages = [...packages, '@types/jest'];
 
   return packages;
 }
-
-module.exports = {
-  getGlobalDevelopPackages,
-  getMainDevelopPackages,
-  getProjectDevelopPackages,
-};

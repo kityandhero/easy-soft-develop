@@ -1,7 +1,4 @@
-declare const _exports: {
-  globalScript: {
-    'z:initial:environment': string;
-  };
-  packageScript: {};
+export declare const globalScript: {
+  'z:initial:environment': string;
 };
-export = _exports;
+export declare const packageScript: {};

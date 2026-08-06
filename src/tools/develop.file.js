@@ -1,4 +1,4 @@
-const {
+import {
   promptSuccess,
   promptInfo,
   promptError,
@@ -7,169 +7,114 @@ const {
   promptEmptyLine,
   writeFileWithOptionsSync,
   checkStringIsEmpty,
-} = require('./meta');
-const { fileGlobalHeader } = require('../templates/template.config');
-const {
-  contentFile: commitlintConfigContentFile,
-} = require('../templates/commitlint.config.template');
-const {
-  contentFile: czConfigContentFile,
-} = require('../templates/cz.config.template');
-const {
-  contentFile: babelConfigContentFile,
-} = require('../templates/babel.config.template');
-const {
-  contentFile: editorContentFile,
-} = require('../templates/editor.template');
-const {
-  contentFile: eslintContentFile,
-  ignoreCustomFile: eslintIgnoreCustomFile,
-  ignoreEmbedFile: eslintIgnoreEmbedFile,
-  ignoreFile: eslintIgnoreFile,
-  configFile: eslintConfigFile,
-  ruleCustomFile: eslintCustomRuleFile,
-  ruleEmbedFile: eslintEmbedRuleFile,
-  ruleFile: eslintRuleFile,
-  extendEmbedFile: eslintExtendCustomFile,
-  extendCustomFile: eslintExtendEmbedFile,
-  extendFile: eslintExtendFile,
-  parserCustomFile: eslintParserCustomFile,
-  parserEmbedFile: eslintParserEmbedFile,
-  parserFile: eslintParserFile,
-  pluginEmbedFile: eslintPluginEmbedFile,
-  pluginCustomFile: eslintPluginCustomFile,
-  pluginFile: eslintPluginFile,
-  settingCustomFile: eslintSettingCustomFile,
-  settingEmbedFile: eslintSettingEmbedFile,
-  settingFile: eslintSettingFile,
-} = require('../templates/eslint.template');
-const {
-  attributeFile: gitAttributeFile,
-  ignoreFile: gitIgnoreFile,
-} = require('../templates/git.template');
-const {
-  contentFile: lintStagedContentFile,
-} = require('../templates/lint-staged.template');
-const {
+} from './meta.js';
+
+import { fileBuilderHeader } from '../templates/template.config.js';
+import { contentFile as commitlintConfigContentFile } from '../templates/commitlint.config.template.js';
+import { contentFile as czConfigContentFile } from '../templates/cz.config.template.js';
+import { contentFile as babelConfigContentFile } from '../templates/babel.config.template.js';
+import { contentFile as editorContentFile } from '../templates/editor.template.js';
+import {
+  contentFile as eslintContentFile,
+  ignoreCustomFile as eslintIgnoreCustomFile,
+  ignoreEmbedFile as eslintIgnoreEmbedFile,
+  ignoreFile as eslintIgnoreFile,
+  configFile as eslintConfigFile,
+  ruleCustomFile as eslintCustomRuleFile,
+  ruleEmbedFile as eslintEmbedRuleFile,
+  ruleFile as eslintRuleFile,
+  extendEmbedFile as eslintExtendCustomFile,
+  extendCustomFile as eslintExtendEmbedFile,
+  extendFile as eslintExtendFile,
+  parserCustomFile as eslintParserCustomFile,
+  parserEmbedFile as eslintParserEmbedFile,
+  parserFile as eslintParserFile,
+  pluginEmbedFile as eslintPluginEmbedFile,
+  pluginCustomFile as eslintPluginCustomFile,
+  pluginFile as eslintPluginFile,
+  settingCustomFile as eslintSettingCustomFile,
+  settingEmbedFile as eslintSettingEmbedFile,
+  settingFile as eslintSettingFile,
+} from '../templates/eslint.template.js';
+import {
+  attributeFile as gitAttributeFile,
+  ignoreFile as gitIgnoreFile,
+} from '../templates/git.template.js';
+import { contentFile as lintStagedContentFile } from '../templates/lint-staged.template.js';
+import {
   globalChildPackageFile,
   globalMainPackageFile,
   customChildPackageFile,
   customMainPackageFile,
-} = require('../templates/package.template');
-const {
-  ignoreFile: prettierIgnoreFile,
-  contentFile: prettierContentFile,
-  configFile: prettierConfigFile,
-} = require('../templates/prettier.template');
-const {
-  contentFile: ncuContentFile,
-  configFile: ncuConfigFile,
-} = require('../templates/ncu.template');
-const {
-  contentFile: jsdocContentFile,
-  configFile: jsdocConfigFile,
-} = require('../templates/jsdoc.template');
-const {
-  ignoreFile: stylelintIgnoreFile,
-  contentFile: stylelintContentFile,
-  configFile: stylelintConfigFile,
-} = require('../templates/stylelint.template');
-const {
-  configFile: jestConfigFile,
-  simpleTestFile: jestSimpleTestFile,
-} = require('../templates/jest.template');
+} from '../templates/package.template.js';
+import {
+  ignoreFile as prettierIgnoreFile,
+  contentFile as prettierContentFile,
+  configFile as prettierConfigFile,
+} from '../templates/prettier.template.js';
+import {
+  contentFile as ncuContentFile,
+  configFile as ncuConfigFile,
+  configEmbedFile as ncuConfigEmbedFile,
+  configCustomFile as ncuConfigCustomFile,
+} from '../templates/ncu.template.js';
+import {
+  contentFile as jsdocContentFile,
+  configFile as jsdocConfigFile,
+} from '../templates/jsdoc.template.js';
+import {
+  ignoreFile as stylelintIgnoreFile,
+  contentFile as stylelintContentFile,
+  configFile as stylelintConfigFile,
+} from '../templates/stylelint.template.js';
+import {
+  configFile as jestConfigFile,
+  simpleTestFile as jestSimpleTestFile,
+} from '../templates/jest.template.js';
 
-const childrenDevelopPackageConfigContent = `${fileGlobalHeader}
-const childrenDevelopPackageList = [];
-
-module.exports = {
-  childrenDevelopPackageList,
-};
+const childrenDevelopPackageConfigContent = `${fileBuilderHeader}
+export const childrenDevelopPackageList = [];
 `;
 
-const childrenSpecialDevelopPackageConfigContent = `${fileGlobalHeader}
-const childrenSpecialDevelopPackageList = {};
-
-module.exports = {
-  childrenSpecialDevelopPackageList,
-};
+const childrenSpecialDevelopPackageConfigContent = `${fileBuilderHeader}
+export const childrenSpecialDevelopPackageList = {};
 `;
 
-const cleanConfigContent = `${fileGlobalHeader}
-const cleanCommand = '';
+const cleanConfigContent = `${fileBuilderHeader}
+export const cleanCommand = '';
 
-const cleanCollection = [];
-
-module.exports = {
-  cleanCommand,
-  cleanCollection,
-};
+export const cleanCollection = [];
 `;
 
-const globalDevelopPackageConfigContent = `${fileGlobalHeader}
-const globalDevelopPackageList = [];
-
-module.exports = {
-  globalDevelopPackageList,
-};
+const globalDevelopPackageConfigContent = `${fileBuilderHeader}
+export const globalDevelopPackageList = [];
 `;
 
-const mainDevelopPackageConfigContent = `${fileGlobalHeader}
-const mainDevelopPackageList = [];
-
-module.exports = {
-  mainDevelopPackageList,
-};
+const mainDevelopPackageConfigContent = `${fileBuilderHeader}
+export const mainDevelopPackageList = [];
 `;
 
-const updatePackageFromPackageConfigContent = `${fileGlobalHeader}
-const updatePackageFromPackageOptions = {
+const updatePackageFromPackageConfigContent = `${fileBuilderHeader}
+export const updatePackageFromPackageOptions = {
   agent: '',
   localFile: '',
   packageUrl: '',
   repo: '',
 };
-
-module.exports = {
-  updatePackageFromPackageOptions,
-};
 `;
 
-const updateSpecialPackageConfigContent = `${fileGlobalHeader}
-const updateSpecialPackageCollection = [];
-
-module.exports = {
-  updateSpecialPackageCollection,
-};
+const updateSpecialPackageConfigContent = `${fileBuilderHeader}
+export const updateSpecialPackageCollection = [];
 `;
 
-const assistConfigIndexContent = `${fileGlobalHeader}
-const {
-  childrenDevelopPackageList,
-} = require('./childrenDevelopPackage.config');
-const {
-  childrenSpecialDevelopPackageList,
-} = require('./childrenSpecialDevelopPackage.config');
-const { cleanCollection, cleanCommand } = require('./clean.config');
-const { globalDevelopPackageList } = require('./globalDevelopPackage.config');
-const { mainDevelopPackageList } = require('./mainDevelopPackage.config');
-const {
-  updatePackageFromPackageOptions,
-} = require('./updatePackageFromPackage.config');
-const {
-  updateSpecialPackageCollection,
-} = require('./updateSpecialPackage.config');
-
-module.exports = {
-  childrenDevelopPackageList,
-  childrenSpecialDevelopPackageList,
-  cleanCollection,
-  cleanCommand,
-  globalDevelopPackageList,
-  mainDevelopPackageList,
-  updatePackageFromPackageOptions,
-  updateSpecialPackageCollection,
-};
+const assistConfigIndexContent = `${fileBuilderHeader}
+export { childrenDevelopPackageList } from './childrenDevelopPackage.config.mjs';
+export { childrenSpecialDevelopPackageList } from './childrenSpecialDevelopPackage.config.mjs';
+export { cleanCollection, cleanCommand } from './clean.config.mjs';
+export { globalDevelopPackageList } from './globalDevelopPackage.config.mjs';
+export { mainDevelopPackageList } from './mainDevelopPackage.config.mjs';
+export { updatePackageFromPackageOptions } from './updatePackageFromPackage.config.mjs';
+export { updateSpecialPackageCollection } from './updateSpecialPackage.config.mjs';
 `;
 
 function createScriptFile(folderPath, fileName, content, coverFile = false) {
@@ -188,57 +133,47 @@ function createScriptFile(folderPath, fileName, content, coverFile = false) {
   return result;
 }
 
-function createCzConfigFile(successMessage = '') {
+export function createCzConfigFile(successMessage = '') {
   let result = writeFileWithOptionsSync(czConfigContentFile);
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
-function createCommitlintConfigFile(successMessage = '') {
+export function createCommitlintConfigFile(successMessage = '') {
   let result = writeFileWithOptionsSync(commitlintConfigContentFile);
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
-function createBabelConfigFile(successMessage = '') {
+export function createBabelConfigFile(successMessage = '') {
   let result = writeFileWithOptionsSync(babelConfigContentFile);
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
-function createNcuConfigFile(successMessage = '') {
+export function createNcuConfigFile(successMessage = '') {
   let result = writeFileWithOptionsSync(ncuContentFile);
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
-function createJsdocConfigFile(successMessage = '') {
+export function createJsdocConfigFile(successMessage = '') {
   let result = writeFileWithOptionsSync(jsdocContentFile);
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
-function createNpmConfigFile(successMessage = '') {
+export function createNpmConfigFile(successMessage = '') {
   let result = writeFileSync(
     `./.npmrc`,
     `# npm config
@@ -246,76 +181,74 @@ auto-install-peers=true`,
     { coverFile: false },
   );
 
-  if (result) {
-    if (!checkStringIsEmpty(successMessage)) {
-      promptSuccess(successMessage);
-    }
+  if (result && !checkStringIsEmpty(successMessage)) {
+    promptSuccess(successMessage);
   }
 }
 
 function createAssistConfigScriptFile() {
   createScriptFile(
     `./develop/assists/config`,
-    'childrenDevelopPackage.config.js',
+    'childrenDevelopPackage.config.mjs',
     childrenDevelopPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'childrenSpecialDevelopPackage.config.js',
+    'childrenSpecialDevelopPackage.config.mjs',
     childrenSpecialDevelopPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'clean.config.js',
+    'clean.config.mjs',
     cleanConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'globalDevelopPackage.config.js',
+    'globalDevelopPackage.config.mjs',
     globalDevelopPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'mainDevelopPackage.config.js',
+    'mainDevelopPackage.config.mjs',
     mainDevelopPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'updatePackageFromPackage.config.js',
+    'updatePackageFromPackage.config.mjs',
     updatePackageFromPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'updateSpecialPackage.config.js',
+    'updateSpecialPackage.config.mjs',
     updateSpecialPackageConfigContent,
     false,
   );
 
   createScriptFile(
     `./develop/assists/config`,
-    'index.js',
+    'index.mjs',
     assistConfigIndexContent,
     true,
   );
 }
 
-function createCleanScriptFile() {
-  const content = `${fileGlobalHeader}
-const { clean } = require('easy-soft-develop');
+export function createCleanScriptFile() {
+  const content = `${fileBuilderHeader}
+import { clean } from 'easy-soft-develop';
 
-const { cleanCommand, cleanCollection } = require('./config');
+import { cleanCommand, cleanCollection } from './config/index.mjs';
 
 clean(cleanCommand, ...cleanCollection);
 `;
@@ -323,11 +256,11 @@ clean(cleanCommand, ...cleanCollection);
   return createScriptFile('./develop/assists', 'clean.js', content, true);
 }
 
-function createUpdatePackageFromPackageScriptFile() {
-  const content = `${fileGlobalHeader}
-const { updatePackageFromPackage } = require('easy-soft-develop');
+export function createUpdatePackageFromPackageScriptFile() {
+  const content = `${fileBuilderHeader}
+import { updatePackageFromPackage } from 'easy-soft-develop';
 
-const { updatePackageFromPackageOptions } = require('./config');
+import { updatePackageFromPackageOptions } from './config/index.mjs';
 
 updatePackageFromPackage(updatePackageFromPackageOptions);
 `;
@@ -340,11 +273,11 @@ updatePackageFromPackage(updatePackageFromPackageOptions);
   );
 }
 
-function createPackageCheckSpecialVersionScriptFile() {
-  const content = `${fileGlobalHeader}
-const { updateSpecialPackageVersion } = require('easy-soft-develop');
+export function createPackageCheckSpecialVersionScriptFile() {
+  const content = `${fileBuilderHeader}
+import { updateSpecialPackageVersion } from 'easy-soft-develop';
 
-const { updateSpecialPackageCollection } = require('./config');
+import { updateSpecialPackageCollection } from './config/index.mjs';
 
 updateSpecialPackageVersion(updateSpecialPackageCollection);
 `;
@@ -361,16 +294,16 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
   }
 }
 
-function createInstallGlobalDevelopDependenceScriptFile() {
-  const content = `${fileGlobalHeader}
-const { installDevelopDependencePackages } = require('easy-soft-develop');
+export function createInstallGlobalDevelopDependenceScriptFile() {
+  const content = `${fileBuilderHeader}
+import { installDevelopDependencePackages } from 'easy-soft-develop';
 
-const {
+import {
   globalDevelopPackageList,
   mainDevelopPackageList,
   childrenDevelopPackageList,
   childrenSpecialDevelopPackageList,
-} = require('./config');
+} from './config/index.mjs';
 
 installDevelopDependencePackages({
   globalDevelopPackageList,
@@ -395,27 +328,27 @@ installDevelopDependencePackages({
 /**
  * Create initial environment script files
  */
-function createInitialEnvironmentScriptFiles() {
-  const content = `${fileGlobalHeader}
-const { initialEnvironment } = require('easy-soft-develop');
+export function createInitialEnvironmentScriptFiles() {
+  const content = `${fileBuilderHeader}
+import { initialEnvironment } from 'easy-soft-develop';
 
-const eslintFile = require('../config/eslint/template/content');
-const ncuFile = require('../config/ncu/template/content');
-const jsdocFile = require('../config/jsdoc/template/content');
-const prettierFile = require('../config/prettier/template/content');
-const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
-const stylelintFile = require('../config/stylelint/template/content');
-const stylelintIgnoreFile = require('../config/stylelint/template/ignore.content');
-const editorFile = require('../config/editor/template/content');
-const editorAttributesFile = require('../config/git/template/attributes.content');
-const editorIgnoreFile = require('../config/git/template/ignore.content');
-const lintStagedFile = require('../config/lint-staged/template/content');
-const jestFile = require('../config/jest/template/content');
-const jestSimpleTestFile = require('../config/jest/template/simple.test.content');
-const mainNecessaryPackageFile = require('../config/package/template/main.content');
-const childrenNecessaryPackageFile = require('../config/package/template/children.content');
-const mainCustomPackageFile = require('../config/package/custom/main.content');
-const childrenCustomPackageFile = require('../config/package/custom/children.content');
+import eslintFile from '../config/eslint/template/content.mjs';
+import ncuFile from '../config/ncu/template/content.mjs';
+import jsdocFile from '../config/jsdoc/template/content.mjs';
+import prettierFile from '../config/prettier/template/content.mjs';
+import prettierIgnoreFile from '../config/prettier/template/ignore.content.mjs';
+import stylelintFile from '../config/stylelint/template/content.mjs';
+import stylelintIgnoreFile from '../config/stylelint/template/ignore.content.mjs';
+import editorFile from '../config/editor/template/content.mjs';
+import editorAttributesFile from '../config/git/template/attributes.content.mjs';
+import editorIgnoreFile from '../config/git/template/ignore.content.mjs';
+import lintStagedFile from '../config/lint-staged/template/content.mjs';
+import jestFile from '../config/jest/template/content.mjs';
+import jestSimpleTestFile from '../config/jest/template/simple.test.content.mjs';
+import mainNecessaryPackageFile from '../config/package/template/main.content.mjs';
+import childrenNecessaryPackageFile from '../config/package/template/children.content.mjs';
+import mainCustomPackageFile from '../config/package/custom/main.content.mjs';
+import childrenCustomPackageFile from '../config/package/custom/children.content.mjs';
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;
@@ -452,12 +385,12 @@ const mainFileContentList = [
     coverFile: true,
   },
   {
-    name: '.ncurc.js',
+    name: '.ncurc.mjs',
     content: mainNcuFileContent,
     coverFile: true,
   },
   {
-    name: '.prettierrc.js',
+    name: '.prettierrc.mjs',
     content: mainPrettierContent,
     coverFile: true,
   },
@@ -467,7 +400,7 @@ const mainFileContentList = [
     coverFile: false,
   },
   {
-    name: '.stylelintrc.js',
+    name: '.stylelintrc.mjs',
     content: mainStylelintContent,
     coverFile: true,
   },
@@ -505,7 +438,7 @@ const packageFileContentList = [
     coverFile: true,
   },
   {
-    name: '.ncurc.js',
+    name: '.ncurc.mjs',
     content: packageNcuFileContent,
     coverFile: true,
   },
@@ -515,7 +448,7 @@ const packageFileContentList = [
     coverFile: true,
   },
   {
-    name: '.prettierrc.js',
+    name: '.prettierrc.mjs',
     content: packagePrettierContent,
     coverFile: true,
   },
@@ -525,7 +458,7 @@ const packageFileContentList = [
     coverFile: false,
   },
   {
-    name: '.stylelintrc.js',
+    name: '.stylelintrc.mjs',
     content: packageStylelintContent,
     coverFile: true,
   },
@@ -560,7 +493,7 @@ const packageFileContentList = [
     coverFile: false,
   },
   {
-    name: 'simple.test.js',
+    name: 'simple.test.mjs',
     relativePath: 'test',
     content: jestSimpleTestContent,
     coverFile: true,
@@ -593,7 +526,7 @@ initialEnvironment({
   }
 }
 
-function createDevelopFiles(
+export function createDevelopFiles(
   waitMessage = 'will create develop assist file, please wait a moment',
   successMessage = '',
 ) {
@@ -691,6 +624,8 @@ function createDevelopFiles(
 
   writeFileWithOptionsSync(ncuContentFile);
 
+  writeFileWithOptionsSync(ncuConfigEmbedFile);
+  writeFileWithOptionsSync(ncuConfigCustomFile);
   writeFileWithOptionsSync(ncuConfigFile);
 
   //#endregion
@@ -741,18 +676,3 @@ function createDevelopFiles(
     promptSuccess(successMessage);
   }
 }
-
-module.exports = {
-  createCzConfigFile,
-  createCommitlintConfigFile,
-  createBabelConfigFile,
-  createNcuConfigFile,
-  createJsdocConfigFile,
-  createNpmConfigFile,
-  createCleanScriptFile,
-  createPackageCheckSpecialVersionScriptFile,
-  createInstallGlobalDevelopDependenceScriptFile,
-  createInitialEnvironmentScriptFiles,
-  createDevelopFiles,
-  createUpdatePackageFromPackageScriptFile,
-};

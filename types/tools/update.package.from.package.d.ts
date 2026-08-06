@@ -1,8 +1,4 @@
-declare const _exports: {
-  updatePackageFromPackage: typeof updatePackageFromPackage;
-};
-export = _exports;
-declare function updatePackageFromPackage({
+export declare function updatePackageFromPackage({
   path,
   primaryRemoteUrl,
   spareRemoteUrl,

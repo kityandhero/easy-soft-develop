@@ -1,8 +1,4 @@
-declare const _exports: {
-  installDevelopDependencePackages: typeof installDevelopDependencePackages;
-};
-export = _exports;
-declare function installDevelopDependencePackages({
+export declare function installDevelopDependencePackages({
   globalDevelopPackageList,
   mainDevelopPackageList,
   childrenDevelopPackageList,

@@ -1,0 +1,10 @@
+const config = {
+  printWidth: 80,
+  singleQuote: true,
+  trailingComma: 'all',
+  proseWrap: 'never',
+  semi: true,
+  plugins: ['prettier-plugin-packagejson'],
+};
+
+export default config;

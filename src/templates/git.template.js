@@ -1,30 +1,26 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/git';
 
-const attributeFileContent = `${fileGlobalHeader}
-const content = \`*.js eol=lf
+const attributeFileContent = `${fileBuilderHeader}
+export const content = \`*.js eol=lf
 *.jsx eol=lf
 *.json eol=lf
 *.css eol=lf
 *.less eol=lf
 *.scss eol=lf
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const attributeFile = {
+export const attributeFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'attributes.content.js',
+  fileName: 'attributes.content.mjs',
   coverFile: true,
   fileContent: attributeFileContent,
 };
 
-const ignoreFileContent = `${fileGlobalHeader}
-const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+const ignoreFileContent = `${fileBuilderHeader}
+export const content = \`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # ignore dependencies dir
 **/node_modules
@@ -59,17 +55,11 @@ pnpm-lock.yaml
 .firebase
 .eslintcache
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const ignoreFile = {
+export const ignoreFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'ignore.content.js',
+  fileName: 'ignore.content.mjs',
   coverFile: false,
   fileContent: ignoreFileContent,
 };
-
-module.exports = { attributeFile, ignoreFile };

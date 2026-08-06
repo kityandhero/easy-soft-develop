@@ -1,3 +1,3 @@
-const { rimraf } = require('../src/tools/meta');
+import { rimraf } from '../src/tools/meta.js';
 
 rimraf('./testRemoveThisPath');

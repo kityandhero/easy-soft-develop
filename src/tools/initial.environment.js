@@ -1,8 +1,7 @@
-const {
-  getDevelopInitialEnvironmentConfig,
-} = require('../config/develop.initial.environment');
-const { checkInCollection, checkStringIsEmpty, mkdirSync } = require('./meta');
-const {
+import { getDevelopInitialEnvironmentConfig } from '../config/develop.initial.environment.js';
+
+import { checkInCollection, checkStringIsEmpty, mkdirSync } from './meta.js';
+import {
   promptSuccess,
   writeFileSync,
   assignObject,
@@ -10,39 +9,33 @@ const {
   writeJsonFileSync,
   resolvePath,
   promptEmptyLine,
-} = require('./meta');
-const { globalScript } = require('./package.script');
+} from './meta.js';
+import { globalScript } from './package.script.js';
 
-const { loopPackage } = require('./package.tools');
-const { prettierAllPackageJson } = require('./prettier.package.json');
+import { loopPackage } from './package.tools.js';
+import { prettierAllPackageJson } from './prettier.package.json.js';
 
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
-const {
-  getDevelopSubPathPublishConfig,
-} = require('../config/develop.subPath.publish');
-const {
-  getDevelopUpdateProjectFromRepositoryConfig,
-} = require('../config/develop.update.project.from.repository');
+import { getDevelopSubPathVersionNcuConfig } from '../config/develop.subPath.version.ncu.js';
+import { getDevelopSubPathPublishConfig } from '../config/develop.subPath.publish.js';
+import { getDevelopUpdateProjectFromRepositoryConfig } from '../config/develop.update.project.from.repository.js';
 
 function createMainFile(fileWithContentCollection) {
   if (!Array.isArray(fileWithContentCollection)) {
     return;
   }
 
-  fileWithContentCollection.forEach((o) => {
+  for (const o of fileWithContentCollection) {
     const { name, content, coverFile } = o;
 
     writeFileSync(name, content, { coverFile });
-  });
+  }
 
   const log = `main files [${fileWithContentCollection
     .map((o) => {
       const { name } = o;
       return name;
     })
-    .join()}] refresh success`;
+    .join(',')}] refresh success`;
 
   promptSuccess(log);
   promptEmptyLine();
@@ -61,7 +54,7 @@ function createPackageFile(fileWithContentCollection) {
       return;
     }
 
-    fileWithContentCollection.forEach((o) => {
+    for (const o of fileWithContentCollection) {
       const { name, relativePath = '', content, coverFile } = o;
 
       if (!checkStringIsEmpty(relativePath)) {
@@ -77,7 +70,7 @@ function createPackageFile(fileWithContentCollection) {
           coverFile,
         },
       );
-    });
+    }
   });
 
   const log = `package files [${fileWithContentCollection
@@ -85,7 +78,7 @@ function createPackageFile(fileWithContentCollection) {
       const { name } = o;
       return name;
     })
-    .join()}] refresh success`;
+    .join(',')}] refresh success`;
 
   promptSuccess(log);
   promptEmptyLine();
@@ -100,15 +93,15 @@ function adjustMainPackageJsonScript({ scripts }) {
 
   const ignoreDeleteScript = ['z:build:all', 'z:publish:npm-all'];
 
-  Object.keys(originalScript).forEach((o) => {
+  for (const o of Object.keys(originalScript)) {
     if (checkInCollection(ignoreDeleteScript, o)) {
-      return;
+      continue;
     }
 
     if (o.startsWith('z:') || o.startsWith('prez:') || o.startsWith('postz:')) {
       delete originalScript[o];
     }
-  });
+  }
 
   const publishPackageNameList = [];
 
@@ -153,13 +146,13 @@ function adjustMainPackageJsonScript({ scripts }) {
   const publishItemCollection = {};
   let publishItemScript = [];
 
-  publishPackageNameList.map((o) => {
+  for (const o of publishPackageNameList) {
     const scriptItem = `npx easy-soft-develop publish --packages ${o}${publishWithOtp ? ' --otp true' : ''}`;
 
-    publishItemScript = [...publishItemScript, scriptItem];
+    publishItemScript.push(scriptItem);
 
     publishItemCollection[`z:publish:npm-${o}`] = scriptItem;
-  });
+  }
 
   packageJson.scripts = assignObject(
     {
@@ -203,9 +196,9 @@ function adjustChildrenPackageJsonScript({ scripts }) {
 
     const ignoreDeleteScript = ['z:auto:adjust:file'];
 
-    Object.keys(originalScript).forEach((o) => {
+    for (const o of Object.keys(originalScript)) {
       if (checkInCollection(ignoreDeleteScript, o)) {
-        return;
+        continue;
       }
 
       if (
@@ -215,7 +208,7 @@ function adjustChildrenPackageJsonScript({ scripts }) {
       ) {
         delete originalScript[o];
       }
-    });
+    }
 
     packageJson.scripts = assignObject(
       {
@@ -233,7 +226,7 @@ function adjustChildrenPackageJsonScript({ scripts }) {
   });
 }
 
-function initialEnvironment({
+export function initialEnvironment({
   mainFileContentList = [],
   packageFileContentList = [],
   mainScripts = {},
@@ -249,5 +242,3 @@ function initialEnvironment({
 
   prettierAllPackageJson();
 }
-
-module.exports = { initialEnvironment };

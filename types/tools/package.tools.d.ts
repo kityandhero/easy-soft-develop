@@ -1,11 +1,7 @@
-declare const _exports: {
-  loopPackage: typeof loopPackage;
-};
-export = _exports;
 /**
  * loop all package
  */
-declare function loopPackage(
+export declare function loopPackage(
   paths?: any[],
   callback?: ({
     name,

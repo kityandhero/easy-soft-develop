@@ -1,8 +1,9 @@
-const {
+export {
   assignObject,
   cd,
   checkInCollection,
   checkStringIsEmpty,
+  copyContentSync,
   copyFile,
   copyFileSync,
   copyFolder,
@@ -11,7 +12,7 @@ const {
   existDirectorySync,
   existFileSync,
   exit,
-  getArgCollection,
+  getArgumentCollection,
   isArray,
   isObject,
   mkdirSync,
@@ -35,95 +36,29 @@ const {
   writeFileWithFolderAndNameSync,
   writeFileWithOptionsSync,
   writeJsonFileSync,
-  copyContentSync,
   touchSync,
-} = require('./tools/meta');
-const { sleep } = require('./tools/sleep');
-const { clean } = require('./tools/clean');
-const { commitRefresh } = require('./tools/commit.refresh');
-const {
-  createCleanScriptFile,
-  createPackageCheckSpecialVersionScriptFile,
-  createInstallGlobalDevelopDependenceScriptFile,
-  createDevelopFiles,
-} = require('./tools/develop.file');
-const { initialEnvironment } = require('./tools/initial.environment');
-const {
-  prettierAllPackageJson,
-  prettierCurrentPackageJson,
-} = require('./tools/prettier.package.json');
-const {
-  prettierAllFile,
-  prettierChangeFile,
-} = require('./tools/prettier.file');
-const {
-  installDevelopDependencePackages,
-} = require('./tools/package.install.global.develop.dependence');
-const { loopPackage } = require('./tools/package.tools');
-const {
-  checkAllPackageVersion,
-  updateSpecialPackageVersion,
-  updateAllPackageVersion,
-} = require('./tools/package.update');
-const {
-  updatePackageFromPackage,
-} = require('./tools/update.package.from.package');
+} from './tools/meta.js';
 
-module.exports = {
-  assignObject,
-  cd,
-  checkAllPackageVersion,
-  checkInCollection,
-  checkStringIsEmpty,
-  clean,
-  commitRefresh,
-  copyContentSync,
-  copyFile,
-  copyFileSync,
-  copyFolder,
-  copyFolderSync,
+export { sleep } from './tools/sleep.js';
+export { clean } from './tools/clean.js';
+export { commitRefresh } from './tools/commit.refresh.js';
+export {
   createCleanScriptFile,
-  createDevelopFiles,
-  createInstallGlobalDevelopDependenceScriptFile,
   createPackageCheckSpecialVersionScriptFile,
-  exec,
-  existDirectorySync,
-  existFileSync,
-  exit,
-  getArgCollection,
-  initialEnvironment,
-  installDevelopDependencePackages,
-  isArray,
-  isObject,
-  loopPackage,
-  mkdirSync,
-  prettierAllFile,
+  createInstallGlobalDevelopDependenceScriptFile,
+  createDevelopFiles,
+} from './tools/develop.file.js';
+export { initialEnvironment } from './tools/initial.environment.js';
+export {
   prettierAllPackageJson,
-  prettierChangeFile,
   prettierCurrentPackageJson,
-  promptBackgroundBlack,
-  promptBackgroundGreen,
-  promptBackgroundRed,
-  promptBlack,
-  promptEmptyLine,
-  promptError,
-  promptGreen,
-  promptInfo,
-  promptLine,
-  promptMessage,
-  promptRed,
-  promptSuccess,
-  promptTip,
-  promptWarn,
-  readJsonFileSync,
-  resolvePath,
-  sleep,
-  touchSync,
-  updateAllPackageVersion,
-  updatePackageFromPackage,
+} from './tools/prettier.package.json.js';
+export { prettierAllFile, prettierChangeFile } from './tools/prettier.file.js';
+export { installDevelopDependencePackages } from './tools/package.install.global.develop.dependence.js';
+export { loopPackage } from './tools/package.tools.js';
+export {
+  checkAllPackageVersion,
   updateSpecialPackageVersion,
-  writeFileSync,
-  writeFileWithFolderAndNameSync,
-  writeFileWithOptionsSync,
-  writeJsonFileSync,
-};
+  updateAllPackageVersion,
+} from './tools/package.update.js';
+export { updatePackageFromPackage } from './tools/update.package.from.package.js';

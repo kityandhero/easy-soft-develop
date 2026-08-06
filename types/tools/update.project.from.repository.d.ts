@@ -1,8 +1,4 @@
-declare const _exports: {
-  updateProjectFromRepository: typeof updateProjectFromRepository;
-};
-export = _exports;
-declare function updateProjectFromRepository({
+export declare function updateProjectFromRepository({
   projectPath,
   targetPath,
   agent,

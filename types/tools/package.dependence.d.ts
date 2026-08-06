@@ -1,9 +1,3 @@
-declare const _exports: {
-  getGlobalDevelopPackages: typeof getGlobalDevelopPackages;
-  getMainDevelopPackages: typeof getMainDevelopPackages;
-  getProjectDevelopPackages: typeof getProjectDevelopPackages;
-};
-export = _exports;
-declare function getGlobalDevelopPackages(): any[];
-declare function getProjectDevelopPackages(): any[];
-declare function getMainDevelopPackages(): any[];
+export declare function getGlobalDevelopPackages(): any[];
+export declare function getProjectDevelopPackages(): any[];
+export declare function getMainDevelopPackages(): any[];

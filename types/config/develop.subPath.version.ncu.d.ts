@@ -1,9 +1,6 @@
-declare const _exports: {
-  createDevelopSubPathVersionNcuConfigFile: typeof createDevelopSubPathVersionNcuConfigFile;
-  getDevelopSubPathVersionNcuConfig: typeof getDevelopSubPathVersionNcuConfig;
-};
-export = _exports;
-declare function createDevelopSubPathVersionNcuConfigFile(paths?: any[]): void;
-declare function getDevelopSubPathVersionNcuConfig(
+export declare function createDevelopSubPathVersionNcuConfigFile(
+  paths?: any[],
+): void;
+export declare function getDevelopSubPathVersionNcuConfig(
   createFileWhenNoExist?: boolean,
 ): any;

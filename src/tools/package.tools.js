@@ -1,11 +1,11 @@
-const fs = require('fs');
+import fs from 'node:fs';
 
-const { resolvePath, existDirectorySync, isArray } = require('./meta');
+import { resolvePath, existDirectorySync, isArray } from './meta.js';
 
 /**
  * loop all package
  */
-function loopPackage(
+export function loopPackage(
   paths = [],
   // eslint-disable-next-line no-unused-vars
   callback = ({ name, path, absolutePath, relativePath }) => {},
@@ -18,9 +18,7 @@ function loopPackage(
     return;
   }
 
-  for (let index = 0; index < paths.length; index++) {
-    const pathItem = paths[index];
-
+  for (const pathItem of paths) {
     if (!existDirectorySync(resolvePath(pathItem))) {
       continue;
     }
@@ -29,7 +27,7 @@ function loopPackage(
 
     const files = fs.readdirSync(pathItem);
 
-    files.forEach((file) => {
+    for (const file of files) {
       const itemPath = `${pathItemAdjust}/${file}`;
 
       if (file && fs.lstatSync(itemPath).isDirectory()) {
@@ -40,8 +38,6 @@ function loopPackage(
           relativePath: `./${pathItem}/${file}`,
         });
       }
-    });
+    }
   }
 }
-
-module.exports = { loopPackage };

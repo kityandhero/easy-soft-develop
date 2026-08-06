@@ -1,8 +1,8 @@
-const download = require('download');
-const agent = require('hpagent');
-const zip = require('cross-zip');
+import download from 'download';
+import agent from 'hpagent';
+import zip from 'cross-zip';
 
-const {
+import {
   promptSuccess,
   promptLine,
   promptError,
@@ -17,11 +17,9 @@ const {
   promptTip,
   existFileSync,
   promptEmptyLine,
-} = require('./meta');
+} from './meta.js';
 
-const {
-  getDevelopUpdateProjectFromRepositoryConfig,
-} = require('../config/develop.update.project.from.repository');
+import { getDevelopUpdateProjectFromRepositoryConfig } from '../config/develop.update.project.from.repository.js';
 
 const { HttpsProxyAgent } = agent;
 
@@ -166,15 +164,9 @@ function handlePackage({
 }
 
 async function handleTempPackagePath({ agent, packageUrl, repo }) {
-  let zipPath = '';
-
-  let agentInfo = '';
-
-  if (checkStringIsEmpty(agent)) {
-    agentInfo = `download with none agent`;
-  } else {
-    agentInfo = `download with agent "${agent}"`;
-  }
+  const agentInfo = checkStringIsEmpty(agent)
+    ? `download with none agent`
+    : `download with agent "${agent}"`;
 
   promptInfo(`try source template ${repo} repository, ${agentInfo}.`);
 
@@ -185,33 +177,31 @@ async function handleTempPackagePath({ agent, packageUrl, repo }) {
   promptInfo(`${repo} repository: "${packageUrl}".`);
 
   await download(packageUrl, resolvePath(`./temp/zip`), {
-    ...(agent
-      ? {
-          agent: {
-            https: new HttpsProxyAgent({
-              keepAlive: true,
-              keepAliveMsecs: 1000,
-              maxSockets: 256,
-              maxFreeSockets: 256,
-              scheduling: 'lifo',
-              proxy: agent,
-            }),
-          },
-        }
-      : {}),
+    ...(agent && {
+      agent: {
+        https: new HttpsProxyAgent({
+          keepAlive: true,
+          keepAliveMsecs: 1000,
+          maxSockets: 256,
+          maxFreeSockets: 256,
+          scheduling: 'lifo',
+          proxy: agent,
+        }),
+      },
+    }),
     filename: `${zipFileName}.zip`,
   });
 
   promptSuccess(`download zip from ${repo} repository success!`);
 
-  zipPath = resolvePath(`./temp/zip/${zipFileName}.zip`);
+  const zipPath = resolvePath(`./temp/zip/${zipFileName}.zip`);
 
   promptInfo(`source template zip file Path: "${zipPath}".`);
 
   return zipPath;
 }
 
-async function updateProjectFromRepository({
+export async function updateProjectFromRepository({
   projectPath = '.',
   targetPath = '',
   agent,
@@ -261,7 +251,7 @@ async function updateProjectFromRepository({
       packageUrl: repositoryRemoteUrl,
       repo: 'github',
     });
-  } catch (error) {
+  } catch {
     if (checkStringIsEmpty(repositoryRemoteUrl)) {
       promptError('please input repository remote url');
 
@@ -286,5 +276,3 @@ async function updateProjectFromRepository({
     ignoreSyncWhenExistFiles,
   });
 }
-
-module.exports = { updateProjectFromRepository };

@@ -1,10 +1,10 @@
-const {
+import {
   writeJsonFileSync,
   readJsonFileSync,
   existFileSync,
   mkdirSync,
   isArray,
-} = require('../tools/meta');
+} from '../tools/meta.js';
 
 const developSubPathVersionNcu = {
   paths: [],
@@ -13,7 +13,7 @@ const developSubPathVersionNcu = {
 const developSubPathVersionNcuConfigFilePath =
   './develop/config/develop.subPath.version.ncu.json';
 
-function createDevelopSubPathVersionNcuConfigFile(paths = []) {
+export function createDevelopSubPathVersionNcuConfigFile(paths = []) {
   mkdirSync(`./develop`);
 
   mkdirSync(`./develop/config`);
@@ -34,7 +34,9 @@ function createDevelopSubPathVersionNcuConfigFile(paths = []) {
   );
 }
 
-function getDevelopSubPathVersionNcuConfig(createFileWhenNoExist = false) {
+export function getDevelopSubPathVersionNcuConfig(
+  createFileWhenNoExist = false,
+) {
   const developSubPathVersionNcuConfigFileExist = existFileSync(
     developSubPathVersionNcuConfigFilePath,
   );
@@ -52,8 +54,3 @@ function getDevelopSubPathVersionNcuConfig(createFileWhenNoExist = false) {
     ...readJsonFileSync(developSubPathVersionNcuConfigFilePath),
   };
 }
-
-module.exports = {
-  createDevelopSubPathVersionNcuConfigFile,
-  getDevelopSubPathVersionNcuConfig,
-};

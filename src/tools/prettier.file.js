@@ -1,11 +1,9 @@
-const { exec } = require('./meta');
+import { exec } from './meta.js';
 
-function prettierAllFile() {
+export function prettierAllFile() {
   exec('npx prettier --cache --write .');
 }
 
-function prettierChangeFile() {
+export function prettierChangeFile() {
   exec('npx prettier --cache --write ./package.json');
 }
-
-module.exports = { prettierAllFile, prettierChangeFile };

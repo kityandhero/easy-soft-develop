@@ -1,50 +1,35 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/jest';
 
-const configFileContent = `${fileGlobalHeader}
-const content = \`${fileGlobalHeader}
+export const configFileContent = `${fileBuilderHeader}
+export const content = \`${fileBuilderHeader}
 module.exports = {
   collectCoverage: true,
   verbose: true,
 };
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const configFile = {
+export const configFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: configFileContent,
 };
 
-const simpleTestFileContent = `${fileGlobalHeader}
-const content = \`describe('group test description', () => {
+export const simpleTestFileContent = `${fileBuilderHeader}
+export const content = \`describe('group test description', () => {
   test('simple test will be true', () => {
     expect(true).toBe(true);
   });
 });
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const simpleTestFile = {
+export const simpleTestFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'simple.test.content.js',
+  fileName: 'simple.test.content.mjs',
   coverFile: true,
   fileContent: simpleTestFileContent,
-};
-
-module.exports = {
-  configFileContent,
-  configFile,
-  simpleTestFileContent,
-  simpleTestFile,
 };

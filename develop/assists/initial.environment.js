@@ -1,27 +1,24 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-const { initialEnvironment } = require('easy-soft-develop');
+import { initialEnvironment } from 'easy-soft-develop';
 
-const eslintFile = require('../config/eslint/template/content');
-const ncuFile = require('../config/ncu/template/content');
-const jsdocFile = require('../config/jsdoc/template/content');
-const prettierFile = require('../config/prettier/template/content');
-const prettierIgnoreFile = require('../config/prettier/template/ignore.content');
-const stylelintFile = require('../config/stylelint/template/content');
-const stylelintIgnoreFile = require('../config/stylelint/template/ignore.content');
-const editorFile = require('../config/editor/template/content');
-const editorAttributesFile = require('../config/git/template/attributes.content');
-const editorIgnoreFile = require('../config/git/template/ignore.content');
-const lintStagedFile = require('../config/lint-staged/template/content');
-const jestFile = require('../config/jest/template/content');
-const jestSimpleTestFile = require('../config/jest/template/simple.test.content');
-const mainNecessaryPackageFile = require('../config/package/template/main.content');
-const childrenNecessaryPackageFile = require('../config/package/template/children.content');
-const mainCustomPackageFile = require('../config/package/custom/main.content');
-const childrenCustomPackageFile = require('../config/package/custom/children.content');
+import eslintFile from '../config/eslint/template/content.mjs';
+import ncuFile from '../config/ncu/template/content.mjs';
+import jsdocFile from '../config/jsdoc/template/content.mjs';
+import prettierFile from '../config/prettier/template/content.mjs';
+import prettierIgnoreFile from '../config/prettier/template/ignore.content.mjs';
+import stylelintFile from '../config/stylelint/template/content.mjs';
+import stylelintIgnoreFile from '../config/stylelint/template/ignore.content.mjs';
+import editorFile from '../config/editor/template/content.mjs';
+import editorAttributesFile from '../config/git/template/attributes.content.mjs';
+import editorIgnoreFile from '../config/git/template/ignore.content.mjs';
+import lintStagedFile from '../config/lint-staged/template/content.mjs';
+import jestFile from '../config/jest/template/content.mjs';
+import jestSimpleTestFile from '../config/jest/template/simple.test.content.mjs';
+import mainNecessaryPackageFile from '../config/package/template/main.content.mjs';
+import childrenNecessaryPackageFile from '../config/package/template/children.content.mjs';
+import mainCustomPackageFile from '../config/package/custom/main.content.mjs';
+import childrenCustomPackageFile from '../config/package/custom/children.content.mjs';
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;
@@ -58,12 +55,12 @@ const mainFileContentList = [
     coverFile: true,
   },
   {
-    name: '.ncurc.js',
+    name: '.ncurc.mjs',
     content: mainNcuFileContent,
     coverFile: true,
   },
   {
-    name: '.prettierrc.js',
+    name: '.prettierrc.mjs',
     content: mainPrettierContent,
     coverFile: true,
   },
@@ -73,7 +70,7 @@ const mainFileContentList = [
     coverFile: false,
   },
   {
-    name: '.stylelintrc.js',
+    name: '.stylelintrc.mjs',
     content: mainStylelintContent,
     coverFile: true,
   },
@@ -111,7 +108,7 @@ const packageFileContentList = [
     coverFile: true,
   },
   {
-    name: '.ncurc.js',
+    name: '.ncurc.mjs',
     content: packageNcuFileContent,
     coverFile: true,
   },
@@ -121,7 +118,7 @@ const packageFileContentList = [
     coverFile: true,
   },
   {
-    name: '.prettierrc.js',
+    name: '.prettierrc.mjs',
     content: packagePrettierContent,
     coverFile: true,
   },
@@ -131,7 +128,7 @@ const packageFileContentList = [
     coverFile: false,
   },
   {
-    name: '.stylelintrc.js',
+    name: '.stylelintrc.mjs',
     content: packageStylelintContent,
     coverFile: true,
   },
@@ -166,7 +163,7 @@ const packageFileContentList = [
     coverFile: false,
   },
   {
-    name: 'simple.test.js',
+    name: 'simple.test.mjs',
     relativePath: 'test',
     content: jestSimpleTestContent,
     coverFile: true,

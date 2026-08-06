@@ -1,9 +1,9 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/lint-staged';
 
-const contentFileContent = `${fileGlobalHeader}
-const content = \`{
+const contentFileContent = `${fileBuilderHeader}
+export const content = \`{
   "*.{md,json}": ["npx prettier --cache --write"],
   "*.{js,jsx}": ["npx eslint --ext .js,.jsx", "npx prettier --cache --write"],
   "*.{ts,tsx}": [
@@ -16,17 +16,11 @@ const content = \`{
   ]
 }
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: false,
   fileContent: contentFileContent,
 };
-
-module.exports = { contentFile };

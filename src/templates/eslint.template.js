@@ -1,13 +1,10 @@
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
-const { fileGlobalHeader, fileBuilderHeader } = require('./template.config');
-const { isArray } = require('../tools/meta');
+import { getDevelopSubPathVersionNcuConfig } from '../config/develop.subPath.version.ncu.js';
+import { fileBuilderHeader } from './template.config.js';
+import { isArray } from '../tools/meta.js';
 
 const folderPath = './develop/config/eslint';
 
 const contentFileContent = `${fileBuilderHeader}
-${fileGlobalHeader}
 const mainContent = \`${fileBuilderHeader}
 import { defineConfig } from 'eslint/config';
 
@@ -24,14 +21,15 @@ import { configCollection } from '../../develop/config/eslint/config/index.mjs';
 export default defineConfig(configCollection);
 \`;
 
-module.exports = {
+export default {
   mainContent,
   packageContent,
-};`;
+};
+`;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: contentFileContent,
 };
@@ -140,7 +138,7 @@ export const configCollection = [
 ];
 `;
 
-const configFile = {
+export const configFile = {
   folderPath: `${folderPath}/config`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -252,7 +250,7 @@ const simpleImportSortRules = {
         ['^(?!@/)(?!taro-fast-)(?!.)'],
         ['^taro-fast-'],
         ['^((@/).*|$)'],
-        [String.raw\`^\u0000\`],
+        [String.raw\`^\u{0}\`],
         [String.raw\`^\\.\\.(?!/?$)\`, String.raw\`^\\.\\./?$\`],
         [
           String.raw\`^\\./(?=.*/)(?!/?$)\`,
@@ -292,7 +290,7 @@ export const rulesX = {
 };
 `;
 
-const ruleEmbedFile = {
+export const ruleEmbedFile = {
   folderPath: `${folderPath}/config/items/rules`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -305,7 +303,7 @@ export const rules = {};
 export const rulesX = {};
 `;
 
-const ruleCustomFile = {
+export const ruleCustomFile = {
   folderPath: `${folderPath}/config/items/rules`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -327,7 +325,7 @@ export const rulesX = {
 };
 `;
 
-const ruleFile = {
+export const ruleFile = {
   folderPath: `${folderPath}/config/items/rules`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -357,15 +355,15 @@ const items = {
 
       // use an array of glob patterns
       directory: ['./tsconfig.json'${
-        !isArray(paths)
-          ? ''
-          : paths.length === 0
+        isArray(paths)
+          ? paths.length === 0
             ? ''
             : `, ${paths
                 .map((o) => {
                   return `'./${o}/*/tsconfig.json'`;
                 })
                 .join(',')}`
+          : ''
       }],
     },
   },
@@ -376,7 +374,7 @@ export const settings = {
 };
 `;
 
-const settingEmbedFile = {
+export const settingEmbedFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -391,7 +389,7 @@ export const settings = {
 };
 `;
 
-const settingCustomFile = {
+export const settingCustomFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -408,7 +406,7 @@ export const settings = {
 };
 `;
 
-const settingFile = {
+export const settingFile = {
   folderPath: `${folderPath}/config/items/settings`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -419,7 +417,7 @@ const extendEmbedFileContent = `${fileBuilderHeader}
 export const extendCollection = [];
 `;
 
-const extendEmbedFile = {
+export const extendEmbedFile = {
   folderPath: `${folderPath}/config/items/extends`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -430,7 +428,7 @@ const extendCustomFileContent = `${fileBuilderHeader}
 export const extendCollection = [];
 `;
 
-const extendCustomFile = {
+export const extendCustomFile = {
   folderPath: `${folderPath}/config/items/extends`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -444,7 +442,7 @@ import { extendCollection as extendCustomPlugins } from './custom.mjs';
 export const extendCollection = [...extendEmbedPlugins, ...extendCustomPlugins];
 `;
 
-const extendFile = {
+export const extendFile = {
   folderPath: `${folderPath}/config/items/extends`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -476,7 +474,7 @@ export const pluginXCollection = {
 };
 `;
 
-const pluginEmbedFile = {
+export const pluginEmbedFile = {
   folderPath: `${folderPath}/config/items/plugins`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -489,7 +487,7 @@ export const pluginCollection = {};
 export const pluginXCollection = {};
 `;
 
-const pluginCustomFile = {
+export const pluginCustomFile = {
   folderPath: `${folderPath}/config/items/plugins`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -517,7 +515,7 @@ export const pluginXCollection = {
 };
 `;
 
-const pluginFile = {
+export const pluginFile = {
   folderPath: `${folderPath}/config/items/plugins`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -551,7 +549,7 @@ export const parserTsOptions = {
 };
 `;
 
-const parserEmbedFile = {
+export const parserEmbedFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -564,7 +562,7 @@ export const parserJsOptions = {};
 export const parserTsOptions = {};
 `;
 
-const parserCustomFile = {
+export const parserCustomFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -592,7 +590,7 @@ export const parserTsOptions = {
 };
 `;
 
-const parserFile = {
+export const parserFile = {
   folderPath: `${folderPath}/config/items/parser`,
   fileName: 'index.mjs',
   coverFile: true,
@@ -618,13 +616,15 @@ export const ignoreCollection = [
   '**/*.min.js',
   '**/rollup.config-*.cjs',
   '**/.ncurc.js',
+  '**/.ncurc.mjs',
   '**/.prettierrc.js',
   '**/.stylelintrc.js',
+  '**/.stylelintrc.mjs',
   '**/.lintstagedrc',
 ];
 `;
 
-const ignoreEmbedFile = {
+export const ignoreEmbedFile = {
   folderPath: `${folderPath}/config/items/ignores`,
   fileName: 'embed.mjs',
   coverFile: true,
@@ -635,7 +635,7 @@ const ignoreCustomFileContent = `${fileBuilderHeader}
 export const ignoreCollection = [];
 `;
 
-const ignoreCustomFile = {
+export const ignoreCustomFile = {
   folderPath: `${folderPath}/config/items/ignores`,
   fileName: 'custom.mjs',
   coverFile: false,
@@ -649,32 +649,9 @@ import { ignoreCollection as ignoreCustomPlugins } from './custom.mjs';
 export const ignoreCollection = [...ignoreEmbedPlugins, ...ignoreCustomPlugins];
 `;
 
-const ignoreFile = {
+export const ignoreFile = {
   folderPath: `${folderPath}/config/items/ignores`,
   fileName: 'index.mjs',
   coverFile: true,
   fileContent: ignoreFileContent,
-};
-
-module.exports = {
-  contentFile,
-  ruleEmbedFile,
-  ruleCustomFile,
-  ruleFile,
-  configFile,
-  extendEmbedFile,
-  extendCustomFile,
-  extendFile,
-  pluginEmbedFile,
-  pluginCustomFile,
-  pluginFile,
-  parserEmbedFile,
-  parserCustomFile,
-  parserFile,
-  settingEmbedFile,
-  settingCustomFile,
-  settingFile,
-  ignoreFile,
-  ignoreEmbedFile,
-  ignoreCustomFile,
 };

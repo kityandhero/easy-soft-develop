@@ -1,7 +1,7 @@
-const download = require('download');
-const agent = require('hpagent');
+import download from 'download';
+import agent from 'hpagent';
 
-const {
+import {
   promptSuccess,
   promptLine,
   promptError,
@@ -11,7 +11,7 @@ const {
   resolvePath,
   writeJsonFileSync,
   checkStringIsEmpty,
-} = require('../tools/meta');
+} from './meta.js';
 
 const { HttpsProxyAgent } = agent;
 
@@ -40,6 +40,7 @@ function handlePackage({ packageFilePath, packageTempPath }) {
 }
 
 async function handleTempPackagePath({ agent, localFile, packageUrl, repo }) {
+  // eslint-disable-next-line no-useless-assignment
   let packageTempPath = '';
 
   if (localFile) {
@@ -60,20 +61,18 @@ async function handleTempPackagePath({ agent, localFile, packageUrl, repo }) {
     promptSuccess(`${repo} repo: ${packageUrl}`);
 
     await download(packageUrl, resolvePath(`./temp`), {
-      ...(agent
-        ? {
-            agent: {
-              https: new HttpsProxyAgent({
-                keepAlive: true,
-                keepAliveMsecs: 1000,
-                maxSockets: 256,
-                maxFreeSockets: 256,
-                scheduling: 'lifo',
-                proxy: agent,
-              }),
-            },
-          }
-        : {}),
+      ...(agent && {
+        agent: {
+          https: new HttpsProxyAgent({
+            keepAlive: true,
+            keepAliveMsecs: 1000,
+            maxSockets: 256,
+            maxFreeSockets: 256,
+            scheduling: 'lifo',
+            proxy: agent,
+          }),
+        },
+      }),
     });
 
     promptSuccess(`use ${repo} repo success!`);
@@ -86,7 +85,7 @@ async function handleTempPackagePath({ agent, localFile, packageUrl, repo }) {
   return packageTempPath;
 }
 
-async function updatePackageFromPackage({
+export async function updatePackageFromPackage({
   path,
   primaryRemoteUrl,
   spareRemoteUrl,
@@ -112,7 +111,7 @@ async function updatePackageFromPackage({
       packageUrl: primaryRemoteUrl,
       repo: 'github',
     });
-  } catch (error) {
+  } catch {
     if (checkStringIsEmpty(primaryRemoteUrl)) {
       promptError('please input spare remote package.json url');
 
@@ -147,7 +146,5 @@ async function updatePackageFromPackage({
     }
   }
 
-  handlePackage(path, packageTempPath);
+  handlePackage({ packageFilePath: path, packageTempPath });
 }
-
-module.exports = { updatePackageFromPackage };

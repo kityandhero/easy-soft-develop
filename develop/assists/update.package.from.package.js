@@ -1,10 +1,7 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-const { updatePackageFromPackage } = require('easy-soft-develop');
+import { updatePackageFromPackage } from 'easy-soft-develop';
 
-const { updatePackageFromPackageOptions } = require('./config');
+import { updatePackageFromPackageOptions } from './config/index.mjs';
 
 updatePackageFromPackage(updatePackageFromPackageOptions);

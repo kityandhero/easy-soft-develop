@@ -1,10 +1,10 @@
-const {
+import {
   writeJsonFileSync,
   readJsonFileSync,
   existFileSync,
   mkdirSync,
   isArray,
-} = require('../tools/meta');
+} from '../tools/meta.js';
 
 const developSubPathPublish = {
   paths: [],
@@ -13,7 +13,7 @@ const developSubPathPublish = {
 const developSubPathPublishConfigFilePath =
   './develop/config/develop.subPath.publish.json';
 
-function createDevelopSubPathPublishConfigFile(paths = []) {
+export function createDevelopSubPathPublishConfigFile(paths = []) {
   mkdirSync(`./develop`);
 
   mkdirSync(`./develop/config`);
@@ -34,7 +34,7 @@ function createDevelopSubPathPublishConfigFile(paths = []) {
   );
 }
 
-function getDevelopSubPathPublishConfig(createFileWhenNoExist = false) {
+export function getDevelopSubPathPublishConfig(createFileWhenNoExist = false) {
   const developSubPathPublishConfigFileExist = existFileSync(
     developSubPathPublishConfigFilePath,
   );
@@ -52,8 +52,3 @@ function getDevelopSubPathPublishConfig(createFileWhenNoExist = false) {
     ...readJsonFileSync(developSubPathPublishConfigFilePath),
   };
 }
-
-module.exports = {
-  createDevelopSubPathPublishConfigFile,
-  getDevelopSubPathPublishConfig,
-};

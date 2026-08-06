@@ -1,8 +1,4 @@
-declare const _exports: {
-  commitRefresh: typeof commitRefresh;
-};
-export = _exports;
-declare function commitRefresh(
+export declare function commitRefresh(
   fileName?: string,
   relativeFolder?: string,
 ): void;

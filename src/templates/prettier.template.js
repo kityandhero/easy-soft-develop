@@ -1,66 +1,60 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/prettier';
 
-const configFileContent = `${fileGlobalHeader}
-module.exports = {
-  generalConfig: {
-    printWidth: 80,
-    singleQuote: true,
-    trailingComma: 'all',
-    proseWrap: 'never',
-    semi: true,
-    overrides: [
-      {
-        files: '.prettierrc',
-        options: {
-          parser: 'json',
-        },
+const configFileContent = `${fileBuilderHeader}
+export const generalConfig = {
+  printWidth: 80,
+  singleQuote: true,
+  trailingComma: 'all',
+  proseWrap: 'never',
+  semi: true,
+  overrides: [
+    {
+      files: '.prettierrc',
+      options: {
+        parser: 'json',
       },
-    ],
-    plugins: [
-      // 'prettier-plugin-organize-imports',
-      'prettier-plugin-packagejson',
-    ],
-  },
+    },
+  ],
+  plugins: [
+    // 'prettier-plugin-organize-imports',
+    'prettier-plugin-packagejson',
+  ],
 };
 `;
 
-const configFile = {
+export const configFile = {
   folderPath: `${folderPath}/config`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: configFileContent,
 };
 
-const contentFileContent = `${fileGlobalHeader}
-const mainContent = \`${fileGlobalHeader}
-const { generalConfig } = require('./develop/config/prettier/config');
-
-module.exports = generalConfig;
+const contentFileContent = `${fileBuilderHeader}
+const mainContent = \`${fileBuilderHeader}
+export { generalConfig as default } from './develop/config/prettier/config/index.mjs';
 \`;
 
-const packageContent = \`${fileGlobalHeader}
-const { generalConfig } = require("../../develop/config/prettier/config");
-
-module.exports = generalConfig;
+const packageContent = \`${fileBuilderHeader}
+export { generalConfig as default } from '../../develop/config/prettier/config/index.mjs';
 \`;
 
-module.exports = {
+export default {
   mainContent,
   packageContent,
 };
 `;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: contentFileContent,
 };
 
-const ignoreFileContent = `${fileGlobalHeader}
-const content = \`# ignore dir
+const ignoreFileContent = `${fileBuilderHeader}
+export const content = \`# ignore dir
 **/node_modules/**
 **/templates/**
 **/lib/**
@@ -112,21 +106,11 @@ pnpm-lock.yaml
 CNAME
 LICENSE
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const ignoreFile = {
+export const ignoreFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'ignore.content.js',
+  fileName: 'ignore.content.mjs',
   coverFile: false,
   fileContent: ignoreFileContent,
-};
-
-module.exports = {
-  ignoreFile,
-  contentFile,
-  configFile,
 };

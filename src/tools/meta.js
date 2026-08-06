@@ -1,35 +1,42 @@
-const fs = require('fs');
-const console = require('console');
-const fsExtra = require('fs-extra');
-const term = require('terminal-kit').terminal;
-const { resolve } = require('path');
-const shell = require('shelljs');
+import fs from 'node:fs';
+import console from 'node:console';
+import fsExtra from 'fs-extra';
+import terminalKit from 'terminal-kit';
+import pathAssist from 'node:path';
+import shell from 'shelljs';
+import { fileURLToPath } from 'node:url';
 
-function exec(cmd) {
-  shell.exec(cmd);
+const { terminal: term } = terminalKit;
+
+export const fileName = fileURLToPath(import.meta.url);
+export const folderName = pathAssist.dirname(fileName);
+
+export function exec(command) {
+  shell.exec(command);
 }
 
-function cd(path) {
+export function cd(path) {
   process.chdir(path);
 }
 
-function resolvePath(path) {
-  return resolve(path);
+export function resolvePath(path) {
+  return pathAssist.resolve(path);
 }
 
-function isObject(value) {
+export function isObject(value) {
   return value !== null && typeof value === 'object';
 }
 
-function isArray(value) {
+export function isArray(value) {
   return Array.isArray(value);
 }
 
-function exit() {
+export function exit() {
+  // eslint-disable-next-line unicorn/no-process-exit
   return process.exit();
 }
 
-function getArgCollection() {
+export function getArgumentCollection() {
   return process.argv;
 }
 
@@ -38,16 +45,16 @@ function getArgCollection() {
  * @param {Array} collection value collection
  * @param {*} target the target value will be checked
  */
-function checkInCollection(collection, target) {
-  let result = false;
+export function checkInCollection(collection, target) {
+  let isResult = false;
 
   if (!isArray(collection)) {
-    return result;
+    return isResult;
   }
 
   collection.some((o) => {
     if (o === target) {
-      result = true;
+      isResult = true;
 
       return true;
     }
@@ -55,25 +62,23 @@ function checkInCollection(collection, target) {
     return false;
   });
 
-  return result;
+  return isResult;
 }
 
-function checkStringIsEmpty(v) {
-  v = ((v || null) == null ? '' : toString(v))
+export function checkStringIsEmpty(v) {
+  v = ((v || undefined) == undefined ? '' : toString(v))
     .trim()
-    .replace(/\t/g, ' ')
-    .replace(/\r/g, ' ')
-    .replace(/\n/g, ' ')
-    .replace(/\s*/g, '');
+    .replaceAll(/[\t\r\n]/g, ' ')
+    .replaceAll(/\s*/g, '');
 
-  while (v.indexOf('  ') >= 0) {
-    v = v.replace(/ {2}/g, ' ');
+  while (v.includes('  ')) {
+    v = v.replaceAll(/ {2}/g, ' ');
   }
 
   return !v;
 }
 
-function assignObject(source, ...mergeData) {
+export function assignObject(source, ...mergeData) {
   let result = source;
 
   if (!Array.isArray(mergeData)) {
@@ -84,13 +89,13 @@ function assignObject(source, ...mergeData) {
     return Object.assign(source, mergeData);
   }
 
-  mergeData.forEach((o) => {
+  for (const o of mergeData) {
     if (!isObject(o)) {
-      return;
+      continue;
     }
 
     result = Object.assign(result, o);
-  });
+  }
 
   return result;
 }
@@ -98,15 +103,15 @@ function assignObject(source, ...mergeData) {
 /**
  * Prompt line
  */
-function promptLine() {
+export function promptLine() {
   term.gray('----------------------------------------\r\n');
 }
 
-function promptEmptyLine() {
+export function promptEmptyLine() {
   console.log('');
 }
 
-function promptSuccess(message, emptyLine = true) {
+export function promptSuccess(message, emptyLine = true) {
   term.green(`${message}\r\n`);
 
   if (emptyLine) {
@@ -114,7 +119,7 @@ function promptSuccess(message, emptyLine = true) {
   }
 }
 
-function promptTip(title, message, emptyLine = true) {
+export function promptTip(title, message, emptyLine = true) {
   term.red(`${title}: `).white(message);
 
   if (emptyLine) {
@@ -122,7 +127,7 @@ function promptTip(title, message, emptyLine = true) {
   }
 }
 
-function promptWarn(message, emptyLine = true) {
+export function promptWarn(message, emptyLine = true) {
   term.magenta(`${message}\r\n`);
 
   if (emptyLine) {
@@ -130,7 +135,7 @@ function promptWarn(message, emptyLine = true) {
   }
 }
 
-function promptInfo(message, emptyLine = true) {
+export function promptInfo(message, emptyLine = true) {
   term.white(`${message}\r\n`);
 
   if (emptyLine) {
@@ -138,7 +143,7 @@ function promptInfo(message, emptyLine = true) {
   }
 }
 
-function promptError(error, emptyLine = true) {
+export function promptError(error, emptyLine = true) {
   console.error(error);
 
   if (emptyLine) {
@@ -146,19 +151,18 @@ function promptError(error, emptyLine = true) {
   }
 }
 
-function promptMessage(message, config, emptyLine = true) {
+export function promptMessage(message, config, emptyLine = true) {
   let o = term;
 
-  const { bold, dim, italic, underline, blink, inverse, strike } = {
-    bold: false,
-    dim: false,
-    italic: false,
-    underline: false,
-    blink: false,
-    inverse: false,
-    strike: false,
-    ...config,
-  };
+  const {
+    bold = false,
+    dim = false,
+    italic = false,
+    underline = false,
+    blink = false,
+    inverse = false,
+    strike = false,
+  } = { ...config };
 
   if (bold) {
     o = o.bold;
@@ -195,7 +199,7 @@ function promptMessage(message, config, emptyLine = true) {
   }
 }
 
-function promptBlack(message, emptyLine = true) {
+export function promptBlack(message, emptyLine = true) {
   term.black(`${message}\r\n`);
 
   if (emptyLine) {
@@ -203,7 +207,7 @@ function promptBlack(message, emptyLine = true) {
   }
 }
 
-function promptBackgroundBlack(message, emptyLine = true) {
+export function promptBackgroundBlack(message, emptyLine = true) {
   term.bgBlack(`${message}\r\n`);
 
   if (emptyLine) {
@@ -211,7 +215,7 @@ function promptBackgroundBlack(message, emptyLine = true) {
   }
 }
 
-function promptRed(message, emptyLine = true) {
+export function promptRed(message, emptyLine = true) {
   term.red(`${message}\r\n`);
 
   if (emptyLine) {
@@ -219,7 +223,7 @@ function promptRed(message, emptyLine = true) {
   }
 }
 
-function promptBackgroundRed(message, emptyLine = true) {
+export function promptBackgroundRed(message, emptyLine = true) {
   term.bgRed(`${message}\r\n`);
 
   if (emptyLine) {
@@ -227,7 +231,7 @@ function promptBackgroundRed(message, emptyLine = true) {
   }
 }
 
-function promptGreen(message, emptyLine = true) {
+export function promptGreen(message, emptyLine = true) {
   term.green(`${message}\r\n`);
 
   if (emptyLine) {
@@ -235,7 +239,7 @@ function promptGreen(message, emptyLine = true) {
   }
 }
 
-function promptBackgroundGreen(message, emptyLine = true) {
+export function promptBackgroundGreen(message, emptyLine = true) {
   term.bgGreen(`${message}\r\n`);
 
   if (emptyLine) {
@@ -243,15 +247,14 @@ function promptBackgroundGreen(message, emptyLine = true) {
   }
 }
 
-function existPathSync(path) {
+export function existPathSync(path) {
   if (!path || typeof path !== 'string') {
     throw new TypeError('file path not allow empty');
   }
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
-    // eslint-disable-next-line no-unused-vars
-  } catch (error) {
+  } catch {
     // promptError(error);
 
     return false;
@@ -260,15 +263,14 @@ function existPathSync(path) {
   return true;
 }
 
-function existFileSync(path) {
+export function existFileSync(path) {
   if (!path || typeof path !== 'string') {
     throw new TypeError('file path not allow empty');
   }
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
-    // eslint-disable-next-line no-unused-vars
-  } catch (error) {
+  } catch {
     // promptError(error);
 
     return false;
@@ -281,15 +283,14 @@ function existFileSync(path) {
   return state.isFile();
 }
 
-function existDirectorySync(path) {
+export function existDirectorySync(path) {
   if (!path || typeof path !== 'string') {
     throw new TypeError('directory path not allow empty');
   }
 
   try {
     fs.accessSync(path, fs.constants.F_OK);
-    // eslint-disable-next-line no-unused-vars
-  } catch (error) {
+  } catch {
     // promptError(error);
 
     return false;
@@ -302,7 +303,7 @@ function existDirectorySync(path) {
   return state.isDirectory();
 }
 
-function mkdirSync(path) {
+export function mkdirSync(path) {
   if (checkStringIsEmpty(path)) {
     promptError('path disallow empty');
 
@@ -312,10 +313,10 @@ function mkdirSync(path) {
   fs.mkdirSync(path, { recursive: true });
 }
 
-function writeFileSync(path, content, options = { coverFile: false }) {
-  const { coverFile } = options;
-
-  if (!coverFile) {
+export function writeFileSync(path, content, { coverFile = false }) {
+  if (coverFile) {
+    fs.writeFileSync(path, content, { flag: 'w' });
+  } else {
     if (existFileSync(path)) {
       promptInfo(`${path} already exist, ignore create`);
 
@@ -323,14 +324,12 @@ function writeFileSync(path, content, options = { coverFile: false }) {
     }
 
     fs.writeFileSync(path, content, { flag: 'wx' });
-  } else {
-    fs.writeFileSync(path, content, { flag: 'w' });
   }
 
   return true;
 }
 
-function writeFileWithFolderAndNameSync(
+export function writeFileWithFolderAndNameSync(
   folderPath,
   relativePath,
   fileName,
@@ -354,7 +353,7 @@ function writeFileWithFolderAndNameSync(
   );
 }
 
-function writeFileWithOptionsSync({
+export function writeFileWithOptionsSync({
   folderPath,
   relativePath = '',
   fileName,
@@ -370,10 +369,10 @@ function writeFileWithOptionsSync({
   );
 }
 
-function writeJsonFileSync(path, json, options = { coverFile: false }) {
-  const { coverFile } = options;
-
-  if (!coverFile) {
+export function writeJsonFileSync(path, json, { coverFile = false }) {
+  if (coverFile) {
+    fsExtra.writeJsonSync(path, json, { flag: 'w' });
+  } else {
     if (existFileSync(path)) {
       promptInfo(`${path} exist, ignore create`);
 
@@ -381,18 +380,16 @@ function writeJsonFileSync(path, json, options = { coverFile: false }) {
     }
 
     fsExtra.writeJsonSync(path, json, { flag: 'wx' });
-  } else {
-    fsExtra.writeJsonSync(path, json, { flag: 'w' });
   }
 
   return true;
 }
 
-function readJsonFileSync(path) {
+export function readJsonFileSync(path) {
   return fsExtra.readJsonSync(path);
 }
 
-function rimraf(path) {
+export function rimraf(path) {
   if (checkStringIsEmpty(path)) {
     promptWarn(`path is empty: ${path}`);
 
@@ -405,22 +402,22 @@ function rimraf(path) {
     return;
   }
 
-  const cmd = `rimraf ${resolvePath(path)}`;
+  const command = `rimraf ${resolvePath(path)}`;
 
   promptInfo(
     `remove target by use rimraf package, make sure rimraf installed with global mode.`,
   );
 
-  exec(cmd);
+  exec(command);
 
   promptSuccess(`remove path success, path: "${path}"`);
 }
 
-function copyFile({
+export function copyFile({
   sourceMainPath,
   targetMainPath,
   filepath,
-  callback = null,
+  callback,
 }) {
   promptInfo(`copy file: "${filepath}".`);
 
@@ -435,7 +432,7 @@ function copyFile({
       if (error) {
         promptError(error);
       } else {
-        if (callback != null) {
+        if (callback != undefined) {
           callback();
         }
       }
@@ -443,7 +440,7 @@ function copyFile({
   );
 }
 
-function copyFileSync({ sourceMainPath, targetMainPath, filepath }) {
+export function copyFileSync({ sourceMainPath, targetMainPath, filepath }) {
   promptInfo(`copy file: "${filepath}".`);
 
   fs.cpSync(
@@ -456,11 +453,11 @@ function copyFileSync({ sourceMainPath, targetMainPath, filepath }) {
   );
 }
 
-function copyFolder({
+export function copyFolder({
   sourceMainPath,
   targetMainPath,
   filepath,
-  callback = null,
+  callback,
 }) {
   promptInfo(`copy folder: "${filepath}".`);
 
@@ -475,7 +472,7 @@ function copyFolder({
       if (error) {
         promptError(error);
       } else {
-        if (callback != null) {
+        if (callback != undefined) {
           callback();
         }
       }
@@ -483,7 +480,7 @@ function copyFolder({
   );
 }
 
-function copyFolderSync({ sourceMainPath, targetMainPath, filepath }) {
+export function copyFolderSync({ sourceMainPath, targetMainPath, filepath }) {
   promptInfo(`copy folder: "${filepath}".`);
 
   fs.cpSync(
@@ -496,7 +493,7 @@ function copyFolderSync({ sourceMainPath, targetMainPath, filepath }) {
   );
 }
 
-function touchSync({ path }) {
+export function touchSync({ path }) {
   if (checkStringIsEmpty(path)) {
     promptError('touchSync params error: path not allow empty');
 
@@ -524,7 +521,7 @@ function touchSync({ path }) {
   // }
 }
 
-function copyContentSync({ sourcePath, targetPath }) {
+export function copyContentSync({ sourcePath, targetPath }) {
   if (checkStringIsEmpty(sourcePath)) {
     promptError('copyContentSync params error: sourcePath not allow empty');
 
@@ -550,46 +547,3 @@ function copyContentSync({ sourcePath, targetPath }) {
 
   writeFileSync(targetPathAdjust, content, { coverFile: true });
 }
-
-module.exports = {
-  assignObject,
-  cd,
-  checkInCollection,
-  checkStringIsEmpty,
-  copyContentSync,
-  copyFile,
-  copyFileSync,
-  copyFolder,
-  copyFolderSync,
-  exec,
-  existDirectorySync,
-  existFileSync,
-  existPathSync,
-  exit,
-  getArgCollection,
-  isArray,
-  isObject,
-  mkdirSync,
-  promptBackgroundBlack,
-  promptBackgroundGreen,
-  promptBackgroundRed,
-  promptBlack,
-  promptEmptyLine,
-  promptError,
-  promptGreen,
-  promptInfo,
-  promptLine,
-  promptMessage,
-  promptRed,
-  promptSuccess,
-  promptTip,
-  promptWarn,
-  readJsonFileSync,
-  resolvePath,
-  rimraf,
-  touchSync,
-  writeFileSync,
-  writeFileWithFolderAndNameSync,
-  writeFileWithOptionsSync,
-  writeJsonFileSync,
-};

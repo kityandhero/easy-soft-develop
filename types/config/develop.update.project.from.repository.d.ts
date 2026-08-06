@@ -1,9 +1,4 @@
-declare const _exports: {
-  createDevelopUpdateProjectFromRepositoryConfigFile: typeof createDevelopUpdateProjectFromRepositoryConfigFile;
-  getDevelopUpdateProjectFromRepositoryConfig: typeof getDevelopUpdateProjectFromRepositoryConfig;
-};
-export = _exports;
-declare function createDevelopUpdateProjectFromRepositoryConfigFile(): void;
-declare function getDevelopUpdateProjectFromRepositoryConfig(
+export declare function createDevelopUpdateProjectFromRepositoryConfigFile(): void;
+export declare function getDevelopUpdateProjectFromRepositoryConfig(
   createFileWhenNoExist?: boolean,
 ): any;

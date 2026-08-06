@@ -1,9 +1,9 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/jsdoc';
 
-const configFileContent = `${fileGlobalHeader}
-module.exports = {
+const configFileContent = `${fileBuilderHeader}
+export default {
   generalConfig: {
     tags: {
       allowUnknownTags: false,
@@ -28,33 +28,24 @@ module.exports = {
 };
 `;
 
-const configFile = {
+export const configFile = {
   folderPath: `${folderPath}/config`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: false,
   fileContent: configFileContent,
 };
 
-const contentFileContent = `${fileGlobalHeader}
-const packageContent = \`${fileGlobalHeader}
-const { generalConfig } = require("../../develop/config/jsdoc/config");
+const contentFileContent = `${fileBuilderHeader}
+export const packageContent = \`${fileBuilderHeader}
+import { generalConfig } from "../../develop/config/jsdoc/config";
 
-module.exports = generalConfig;
+export default generalConfig;
 \`;
-
-module.exports = {
-  packageContent,
-};
 `;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: contentFileContent,
-};
-
-module.exports = {
-  configFile,
-  contentFile,
 };

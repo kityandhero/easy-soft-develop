@@ -1,8 +1,8 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/package';
 
-const globalChildPackageFileContent = `${fileGlobalHeader}
+const globalChildPackageFileContent = `${fileBuilderHeader}
 const commitScript = {
   precommit: 'npm run z:lint:staged:quiet',
 };
@@ -48,7 +48,7 @@ const jestScript = {
   'z:test': 'cross-env NODE_ENV=test jest',
 };
 
-module.exports = {
+export default {
   ...commitScript,
   ...jsdocScript,
   ...lintScript,
@@ -58,15 +58,15 @@ module.exports = {
 };
 `;
 
-const globalChildPackageFile = {
+export const globalChildPackageFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'children.content.js',
+  fileName: 'children.content.mjs',
   coverFile: true,
   fileContent: globalChildPackageFileContent,
 };
 
 function getGlobalMainPackageFileContent() {
-  return `${fileGlobalHeader}
+  return String.raw`${fileBuilderHeader}
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',
   'z:lint:staged:quiet': 'npx lint-staged --quiet',
@@ -134,7 +134,7 @@ const commitScript = {
 
 const prettierScript = {
   "z:prettier:format:all": "npx prettier --write .",
-  "z:prettier:format:change": "npx prettier --cache --write . && npx easy-soft-develop prompt --message \\"format changed files complete\\" --type success --blankLine",
+  "z:prettier:format:change": "npx prettier --cache --write . && npx easy-soft-develop prompt --message \"format changed files complete\" --type success --blankLine",
   "z:prettier:package.json:all": "npx prettier --write ./**/package.json",
   "z:prettier:package.json:current": "npx prettier --write ./package.json",
 };
@@ -152,7 +152,7 @@ const ncuScript = {
   'postz:update:special-package-version': 'npm run z:reinstall',
 };
 
-module.exports = {
+export default {
   ...lintScript,
   ...prettierScript,
   ...prepareScript,
@@ -169,46 +169,39 @@ module.exports = {
 `;
 }
 
-const globalMainPackageFile = {
+export const globalMainPackageFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'main.content.js',
+  fileName: 'main.content.mjs',
   coverFile: true,
   fileContent: getGlobalMainPackageFileContent(),
 };
 
-const customMainPackageFileContent = `${fileGlobalHeader}
+const customMainPackageFileContent = `${fileBuilderHeader}
 const scripts = {};
 
-module.exports = {
+export default {
   ...scripts,
 };
 `;
 
-const customMainPackageFile = {
+export const customMainPackageFile = {
   folderPath: `${folderPath}/custom`,
-  fileName: 'main.content.js',
+  fileName: 'main.content.mjs',
   coverFile: false,
   fileContent: customMainPackageFileContent,
 };
 
-const customChildPackageFileContent = `${fileGlobalHeader}
+const customChildPackageFileContent = `${fileBuilderHeader}
 const scripts = {};
 
-module.exports = {
+export default {
   ...scripts,
 };
 `;
 
-const customChildPackageFile = {
+export const customChildPackageFile = {
   folderPath: `${folderPath}/custom`,
-  fileName: 'children.content.js',
+  fileName: 'children.content.mjs',
   coverFile: false,
   fileContent: customChildPackageFileContent,
-};
-
-module.exports = {
-  globalChildPackageFile,
-  globalMainPackageFile,
-  customMainPackageFile,
-  customChildPackageFile,
 };

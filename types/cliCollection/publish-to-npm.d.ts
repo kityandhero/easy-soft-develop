@@ -1,1 +1,1 @@
-export declare var run: (s: any, o: any) => Promise<void>;
+export default function run(s: any, o: any): Promise<void>;

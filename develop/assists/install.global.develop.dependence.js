@@ -1,16 +1,13 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable unicorn/prefer-module */
-/* eslint-disable no-useless-escape */
+/** generate by easy-soft-develop */
 
-const { installDevelopDependencePackages } = require('easy-soft-develop');
+import { installDevelopDependencePackages } from 'easy-soft-develop';
 
-const {
+import {
   globalDevelopPackageList,
   mainDevelopPackageList,
   childrenDevelopPackageList,
   childrenSpecialDevelopPackageList,
-} = require('./config');
+} from './config/index.mjs';
 
 installDevelopDependencePackages({
   globalDevelopPackageList,

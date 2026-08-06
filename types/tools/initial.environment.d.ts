@@ -1,8 +1,4 @@
-declare const _exports: {
-  initialEnvironment: typeof initialEnvironment;
-};
-export = _exports;
-declare function initialEnvironment({
+export declare function initialEnvironment({
   mainFileContentList,
   packageFileContentList,
   mainScripts,

@@ -1,15 +1,13 @@
-const {
+import {
   promptEmptyLine,
   promptInfo,
   promptSuccess,
   promptError,
   exec,
-} = require('./meta');
-const { loopPackage } = require('./package.tools');
+} from './meta.js';
 
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
+import { loopPackage } from './package.tools.js';
+import { getDevelopSubPathVersionNcuConfig } from '../config/develop.subPath.version.ncu.js';
 
 /**
  * try clean
@@ -30,8 +28,8 @@ function tryClean(cmd, tryTimes) {
 
   try {
     exec(cmd);
-  } catch (error) {
-    tryTimes = tryTimes + 1;
+  } catch {
+    tryTimes += 1;
 
     tryClean(cmd, tryTimes);
   }
@@ -62,15 +60,13 @@ function adjustChildrenPackageJson(command) {
   });
 }
 
-function clean(preCmd, ...targets) {
+export function clean(preCmd, ...targets) {
   promptInfo(
     'clean use rimraf, ensure rimraf is installed, install it use "npm install -g rimraf"',
   );
 
   try {
-    const list = [...targets];
-
-    list.push('node_modules');
+    const list = [...targets, 'node_modules'];
 
     const command = list
       .map((o) => {
@@ -101,5 +97,3 @@ function clean(preCmd, ...targets) {
     promptError(error);
   }
 }
-
-module.exports = { clean };

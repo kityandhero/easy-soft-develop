@@ -5,11 +5,9 @@ const contentFileContent = `{
 }
 `;
 
-const contentFile = {
-  folderPath: `${folderPath}`,
+export const contentFile = {
+  folderPath: folderPath,
   fileName: '.czrc',
   coverFile: true,
   fileContent: contentFileContent,
 };
-
-module.exports = { contentFile };

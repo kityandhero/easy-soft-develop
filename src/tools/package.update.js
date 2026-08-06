@@ -1,8 +1,6 @@
-const { promptInfo, promptSuccess, exec, promptEmptyLine } = require('./meta');
-const { loopPackage } = require('./package.tools');
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
+import { promptInfo, promptSuccess, exec, promptEmptyLine } from './meta.js';
+import { loopPackage } from './package.tools.js';
+import { getDevelopSubPathVersionNcuConfig } from '../config/develop.subPath.version.ncu.js';
 
 function adjustMainPackageJsonByCommand(cmd) {
   promptInfo(`update main command: ${cmd}`);
@@ -29,14 +27,14 @@ function adjustChildrenPackageJsonByCommand(cmd) {
  * update special package version
  * @param {Array} packageList
  */
-function updateSpecialPackageVersion(packageList) {
+export function updateSpecialPackageVersion(packageList) {
   exec('npm run z:initial:environment');
 
   const packages = packageList.join(' ');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u ${packages}`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.mjs --packageFile package.json --registry https://registry.npmjs.org -u ${packages}`;
 
-  promptInfo(`${packageList.join()} will check update`);
+  promptInfo(`${packageList.join(',')} will check update`);
 
   adjustMainPackageJsonByCommand(ncuCommand);
 
@@ -45,10 +43,10 @@ function updateSpecialPackageVersion(packageList) {
   promptSuccess('check success');
 }
 
-function updateAllPackageVersion({ autoInstall = true }) {
+export function updateAllPackageVersion({ autoInstall = true }) {
   exec('npm run z:initial:environment');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org --workspaces --root -u`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.mjs --packageFile package.json --registry https://registry.npmjs.org --workspaces --root -u`;
 
   promptInfo(`all packages version will update with command: ${ncuCommand}`);
 
@@ -61,10 +59,10 @@ function updateAllPackageVersion({ autoInstall = true }) {
   }
 }
 
-function updateEveryPackageVersion({ autoInstall = true }) {
+export function updateEveryPackageVersion({ autoInstall = true }) {
   exec('npm run z:initial:environment');
 
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org -u`;
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.mjs --packageFile package.json --registry https://registry.npmjs.org -u`;
 
   promptInfo(`all packages version will update with command: ${ncuCommand}`);
 
@@ -79,8 +77,8 @@ function updateEveryPackageVersion({ autoInstall = true }) {
   }
 }
 
-function checkAllPackageVersion() {
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org --workspaces --root`;
+export function checkAllPackageVersion() {
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.mjs --packageFile package.json --registry https://registry.npmjs.org --workspaces --root`;
 
   promptEmptyLine();
 
@@ -93,8 +91,8 @@ function checkAllPackageVersion() {
   promptSuccess('update success, exec install with z:install');
 }
 
-function checkEveryPackageVersion() {
-  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.js --packageFile package.json --registry https://registry.npmjs.org`;
+export function checkEveryPackageVersion() {
+  const ncuCommand = `npx npm-check-updates --configFilePath ./.ncurc.mjs --packageFile package.json --registry https://registry.npmjs.org`;
 
   promptEmptyLine();
 
@@ -108,11 +106,3 @@ function checkEveryPackageVersion() {
 
   promptSuccess('update success, exec install with z:install');
 }
-
-module.exports = {
-  checkAllPackageVersion,
-  checkEveryPackageVersion,
-  updateAllPackageVersion,
-  updateEveryPackageVersion,
-  updateSpecialPackageVersion,
-};

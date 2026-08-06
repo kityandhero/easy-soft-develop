@@ -1,9 +1,9 @@
-const {
+import {
   writeJsonFileSync,
   readJsonFileSync,
   existFileSync,
   mkdirSync,
-} = require('../tools/meta');
+} from '../tools/meta.js';
 
 const developUpdateProjectFromRepository = {
   repository: '',
@@ -18,7 +18,7 @@ const developUpdateProjectFromRepository = {
 const developUpdateProjectFromRepositoryConfigFilePath =
   './develop/config/develop.update.project.from.repository.json';
 
-function createDevelopUpdateProjectFromRepositoryConfigFile() {
+export function createDevelopUpdateProjectFromRepositoryConfigFile() {
   mkdirSync(`./develop`);
 
   mkdirSync(`./develop/config`);
@@ -32,7 +32,7 @@ function createDevelopUpdateProjectFromRepositoryConfigFile() {
   );
 }
 
-function getDevelopUpdateProjectFromRepositoryConfig(
+export function getDevelopUpdateProjectFromRepositoryConfig(
   createFileWhenNoExist = false,
 ) {
   const developUpdateProjectFromRepositoryConfigFileExist = existFileSync(
@@ -52,8 +52,3 @@ function getDevelopUpdateProjectFromRepositoryConfig(
     ...readJsonFileSync(developUpdateProjectFromRepositoryConfigFilePath),
   };
 }
-
-module.exports = {
-  createDevelopUpdateProjectFromRepositoryConfigFile,
-  getDevelopUpdateProjectFromRepositoryConfig,
-};

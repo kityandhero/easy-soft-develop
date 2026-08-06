@@ -1,9 +1,9 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/editor';
 
-const contentFileContent = `${fileGlobalHeader}
-const content = \`# http://editorconfig.org
+const contentFileContent = `${fileBuilderHeader}
+export const content = \`# https://editorconfig.org
 root = true
 
 [*]
@@ -20,17 +20,11 @@ trim_trailing_whitespace = false
 [Makefile]
 indent_style = tab
 \`;
-
-module.exports = {
-  content,
-};
 `;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: contentFileContent,
 };
-
-module.exports = { contentFile };

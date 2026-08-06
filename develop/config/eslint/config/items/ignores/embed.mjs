@@ -18,7 +18,9 @@ export const ignoreCollection = [
   '**/*.min.js',
   '**/rollup.config-*.cjs',
   '**/.ncurc.js',
+  '**/.ncurc.mjs',
   '**/.prettierrc.js',
   '**/.stylelintrc.js',
+  '**/.stylelintrc.mjs',
   '**/.lintstagedrc',
 ];

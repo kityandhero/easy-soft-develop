@@ -1,12 +1,12 @@
-const {
+import {
   checkStringIsEmpty,
   resolvePath,
   writeFileSync,
   mkdirSync,
   promptSuccess,
-} = require('./meta');
+} from './meta.js';
 
-function commitRefresh(fileName = '', relativeFolder = '') {
+export function commitRefresh(fileName = '', relativeFolder = '') {
   const fileNameAdjust = checkStringIsEmpty(fileName)
     ? 'commit.flag.json'
     : fileName;
@@ -36,5 +36,3 @@ function commitRefresh(fileName = '', relativeFolder = '') {
 
   promptSuccess(log);
 }
-
-module.exports = { commitRefresh };

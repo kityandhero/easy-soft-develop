@@ -1,9 +1,9 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = '.';
 
-const contentFileContent = `${fileGlobalHeader}
-module.exports = {
+const contentFileContent = `${fileBuilderHeader}
+export default {
   extends: [
     '@commitlint/config-conventional',
     '@commitlint/config-pnpm-scopes',
@@ -86,11 +86,9 @@ module.exports = {
 };
 `;
 
-const contentFile = {
-  folderPath: `${folderPath}`,
-  fileName: 'commitlint.config.js',
+export const contentFile = {
+  folderPath: folderPath,
+  fileName: 'commitlint.config.mjs',
   coverFile: true,
   fileContent: contentFileContent,
 };
-
-module.exports = { contentFile };

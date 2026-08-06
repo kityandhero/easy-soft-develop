@@ -1,4 +1,4 @@
-const {
+import {
   promptSuccess,
   promptInfo,
   readJsonFileSync,
@@ -7,35 +7,33 @@ const {
   checkStringIsEmpty,
   writeJsonFileSync,
   exec,
-} = require('./meta');
-const { getGlobalDevelopPackages } = require('./package.dependence');
-const { loopPackage } = require('./package.tools');
-const { updateSpecialPackageVersion } = require('./package.update');
-const { prettierAllPackageJson } = require('./prettier.package.json');
-const {
-  getDevelopSubPathVersionNcuConfig,
-} = require('../config/develop.subPath.version.ncu');
+} from './meta.js';
+import { getGlobalDevelopPackages } from './package.dependence.js';
+import { loopPackage } from './package.tools.js';
+import { updateSpecialPackageVersion } from './package.update.js';
+import { prettierAllPackageJson } from './prettier.package.json.js';
+import { getDevelopSubPathVersionNcuConfig } from '../config/develop.subPath.version.ncu.js';
 
 function buildPackageObject(packageList) {
-  if (!isArray(packageList) || packageList.length <= 0) {
+  if (!isArray(packageList) || packageList.length === 0) {
     return {};
   }
 
   const o = {};
 
-  packageList.forEach((one) => {
+  for (const one of packageList) {
     if (checkStringIsEmpty(one)) {
-      return;
+      continue;
     }
 
     o[one] = '^0.0.1';
-  });
+  }
 
   return o;
 }
 
 function adjustMainPackageJson(packageList) {
-  if (!isArray(packageList) || packageList.length <= 0) {
+  if (!isArray(packageList) || packageList.length === 0) {
     return;
   }
 
@@ -72,14 +70,14 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
 
     let specials = {};
 
-    specialPackageList.forEach((o) => {
-      if (o.name === name) {
+    for (const one of specialPackageList) {
+      if (one.name === name) {
         specials = {
           ...specials,
-          ...buildPackageObject(o.packages),
+          ...buildPackageObject(one.packages),
         };
       }
-    });
+    }
 
     packageJson.devDependencies = assignObject(
       {},
@@ -94,16 +92,16 @@ function adjustChildrenPackageJson(packageList, specialPackageList) {
   });
 }
 
-function installDevelopDependencePackages({
+export function installDevelopDependencePackages({
   globalDevelopPackageList,
   mainDevelopPackageList = [],
   childrenDevelopPackageList = [],
   childrenSpecialDevelopPackageList = [],
   execInstall = true,
 }) {
-  const packages = getGlobalDevelopPackages().concat(globalDevelopPackageList);
+  const packages = [...getGlobalDevelopPackages(), ...globalDevelopPackageList];
 
-  promptInfo(`${packages.join()} will install`);
+  promptInfo(`${packages.join(',')} will install`);
 
   const adjustMainDevelopPackageList = isArray(mainDevelopPackageList)
     ? mainDevelopPackageList
@@ -120,11 +118,11 @@ function installDevelopDependencePackages({
     : [];
 
   adjustChildrenPackageJson(
-    packages.concat(adjustChildrenDevelopPackageList),
+    [...packages, ...adjustChildrenDevelopPackageList],
     adjustChildrenSpecialDevelopPackageList,
   );
 
-  adjustMainPackageJson(packages.concat(adjustMainDevelopPackageList));
+  adjustMainPackageJson([...packages, ...adjustMainDevelopPackageList]);
 
   prettierAllPackageJson();
 
@@ -134,11 +132,11 @@ function installDevelopDependencePackages({
     ...adjustChildrenDevelopPackageList,
   ];
 
-  adjustChildrenSpecialDevelopPackageList.forEach((o) => {
+  for (const o of adjustChildrenSpecialDevelopPackageList) {
     if (isArray(o.packages)) {
       packageListAll = [...packageListAll, ...o.packages];
     }
-  });
+  }
 
   packageListAll = [...new Set(packageListAll)];
 
@@ -152,7 +150,3 @@ function installDevelopDependencePackages({
     promptSuccess('install success');
   }
 }
-
-module.exports = {
-  installDevelopDependencePackages,
-};

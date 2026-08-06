@@ -1,9 +1,9 @@
-const {
+import {
   writeJsonFileSync,
   readJsonFileSync,
   existFileSync,
   mkdirSync,
-} = require('../tools/meta');
+} from '../tools/meta.js';
 
 const developInitialEnvironment = {
   publishWithOtp: false,
@@ -12,7 +12,7 @@ const developInitialEnvironment = {
 const developInitialEnvironmentConfigFilePath =
   './develop/config/develop.initial.environment.json';
 
-function createDevelopInitialEnvironmentConfigFile() {
+export function createDevelopInitialEnvironmentConfigFile() {
   mkdirSync(`./develop`);
 
   mkdirSync(`./develop/config`);
@@ -26,7 +26,7 @@ function createDevelopInitialEnvironmentConfigFile() {
   );
 }
 
-function getDevelopInitialEnvironmentConfig() {
+export function getDevelopInitialEnvironmentConfig() {
   const developInitialEnvironmentConfigFileExist = existFileSync(
     developInitialEnvironmentConfigFilePath,
   );
@@ -40,8 +40,3 @@ function getDevelopInitialEnvironmentConfig() {
     ...readJsonFileSync(developInitialEnvironmentConfigFilePath),
   };
 }
-
-module.exports = {
-  createDevelopInitialEnvironmentConfigFile,
-  getDevelopInitialEnvironmentConfig,
-};

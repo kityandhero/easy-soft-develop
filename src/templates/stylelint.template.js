@@ -1,9 +1,9 @@
-const { fileGlobalHeader } = require('./template.config');
+import { fileBuilderHeader } from './template.config.js';
 
 const folderPath = './develop/config/stylelint';
 
-const configFileContent = `${fileGlobalHeader}
-module.exports = {
+const configFileContent = `${fileBuilderHeader}
+export default {
   generalConfig: {
     extends: [
       'stylelint-config-standard',
@@ -29,53 +29,42 @@ module.exports = {
 };
 `;
 
-const configFile = {
+export const configFile = {
   folderPath: `${folderPath}/config`,
-  fileName: 'index.js',
+  fileName: 'index.mjs',
   coverFile: true,
   fileContent: configFileContent,
 };
 
-const contentFileContent = `${fileGlobalHeader}
-const mainContent = \`${fileGlobalHeader}
-const { generalConfig } = require('./develop/config/stylelint/config');
+const contentFileContent = `${fileBuilderHeader}
+export const mainContent = \`${fileBuilderHeader}
+import { generalConfig } from './develop/config/stylelint/config';
 
-module.exports = generalConfig;
+export default generalConfig;
 \`;
 
-const packageContent = \`${fileGlobalHeader}
-const { generalConfig } = require('../../develop/config/stylelint/config');
+export const packageContent = \`${fileBuilderHeader}
+import { generalConfig } from '../../develop/config/stylelint/config';
 
-module.exports = generalConfig;
+export default generalConfig;
 \`;
-
-module.exports = {
-  mainContent,
-  packageContent,
-};
 `;
 
-const contentFile = {
+export const contentFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'content.js',
+  fileName: 'content.mjs',
   coverFile: true,
   fileContent: contentFileContent,
 };
 
-const ignoreFile = {
+export const ignoreFile = {
   folderPath: `${folderPath}/template`,
-  fileName: 'ignore.content.js',
+  fileName: 'ignore.content.mjs',
   coverFile: false,
-  fileContent: `${fileGlobalHeader}
-  const content = \`# ignore dir
+  fileContent: `${fileBuilderHeader}
+  export const content = \`# ignore dir
 **/coverage/**
 **/docs/**
 \`;
-
-  module.exports = {
-    content,
-  };
   `,
 };
-
-module.exports = { ignoreFile, contentFile, configFile };

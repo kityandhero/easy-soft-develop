@@ -2,15 +2,15 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "compilerOptions": {
     "outDir": "es",
-    "rootDir": "src",
-    "target": "ES2017",
+    "rootDir": ".",
+    "target": "ES2022",
     "module": "ESNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
     "sourceMap": true,
     "ignoreDeprecations": "6.0",
-    "jsx": "react-jsx",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -21,6 +21,14 @@
     "declaration": true,
     "emitDeclarationOnly": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.js", "**/*.mjs"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "es",
+    "dist",
+    "scripts",
+    "webpack",
+    "jest"
+  ]
 }
