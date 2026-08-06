@@ -2,23 +2,23 @@
 
 import { initialEnvironment } from 'easy-soft-develop';
 
+import editorFile from '../config/editor/template/content.mjs';
 import eslintFile from '../config/eslint/template/content.mjs';
-import ncuFile from '../config/ncu/template/content.mjs';
+import editorAttributesFile from '../config/git/template/attributes.content.mjs';
+import editorIgnoreFile from '../config/git/template/ignore.content.mjs';
+import jestFile from '../config/jest/template/content.mjs';
+import jestSimpleTestFile from '../config/jest/template/simple.test.content.mjs';
 import jsdocFile from '../config/jsdoc/template/content.mjs';
+import lintStagedFile from '../config/lint-staged/template/content.mjs';
+import ncuFile from '../config/ncu/template/content.mjs';
+import childrenCustomPackageFile from '../config/package/custom/children.content.mjs';
+import mainCustomPackageFile from '../config/package/custom/main.content.mjs';
+import childrenNecessaryPackageFile from '../config/package/template/children.content.mjs';
+import mainNecessaryPackageFile from '../config/package/template/main.content.mjs';
 import prettierFile from '../config/prettier/template/content.mjs';
 import prettierIgnoreFile from '../config/prettier/template/ignore.content.mjs';
 import stylelintFile from '../config/stylelint/template/content.mjs';
 import stylelintIgnoreFile from '../config/stylelint/template/ignore.content.mjs';
-import editorFile from '../config/editor/template/content.mjs';
-import editorAttributesFile from '../config/git/template/attributes.content.mjs';
-import editorIgnoreFile from '../config/git/template/ignore.content.mjs';
-import lintStagedFile from '../config/lint-staged/template/content.mjs';
-import jestFile from '../config/jest/template/content.mjs';
-import jestSimpleTestFile from '../config/jest/template/simple.test.content.mjs';
-import mainNecessaryPackageFile from '../config/package/template/main.content.mjs';
-import childrenNecessaryPackageFile from '../config/package/template/children.content.mjs';
-import mainCustomPackageFile from '../config/package/custom/main.content.mjs';
-import childrenCustomPackageFile from '../config/package/custom/children.content.mjs';
 
 const mainEslintFileContent = eslintFile.mainContent;
 const packageEslintFileContent = eslintFile.packageContent;

@@ -1,5 +1,7 @@
 /** generate by easy-soft-develop */
 
+import semver from 'semver';
+
 import { config as configEmbed } from './embed.mjs';
 import { config as configCustom } from './custom.mjs';
 

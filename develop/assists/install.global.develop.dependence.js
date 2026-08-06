@@ -3,10 +3,10 @@
 import { installDevelopDependencePackages } from 'easy-soft-develop';
 
 import {
-  globalDevelopPackageList,
-  mainDevelopPackageList,
   childrenDevelopPackageList,
   childrenSpecialDevelopPackageList,
+  globalDevelopPackageList,
+  mainDevelopPackageList,
 } from './config/index.mjs';
 
 installDevelopDependencePackages({

@@ -2,6 +2,6 @@
 
 import { clean } from 'easy-soft-develop';
 
-import { cleanCommand, cleanCollection } from './config/index.mjs';
+import { cleanCollection, cleanCommand } from './config/index.mjs';
 
 clean(cleanCommand, ...cleanCollection);

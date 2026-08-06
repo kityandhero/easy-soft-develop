@@ -7,3 +7,5 @@ export const content = `*.js eol=lf
 *.less eol=lf
 *.scss eol=lf
 `;
+
+export default { content };

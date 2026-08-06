@@ -3,7 +3,7 @@ import { fileBuilderHeader } from './template.config.js';
 const folderPath = './develop/config/lint-staged';
 
 const contentFileContent = `${fileBuilderHeader}
-export const content = \`{
+const content = \`{
   "*.{md,json}": ["npx prettier --cache --write"],
   "*.{js,jsx}": ["npx eslint --ext .js,.jsx", "npx prettier --cache --write"],
   "*.{ts,tsx}": [
@@ -16,6 +16,8 @@ export const content = \`{
   ]
 }
 \`;
+
+export default { content };
 `;
 
 export const contentFile = {

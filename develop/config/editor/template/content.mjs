@@ -1,6 +1,6 @@
 /** generate by easy-soft-develop */
 
-export const content = `# https://editorconfig.org
+const content = `# https://editorconfig.org
 root = true
 
 [*]
@@ -17,3 +17,5 @@ trim_trailing_whitespace = false
 [Makefile]
 indent_style = tab
 `;
+
+export default { content };

@@ -1,6 +1,6 @@
 /** generate by easy-soft-develop */
 
-export const content = `{
+const content = `{
   "*.{md,json}": ["npx prettier --cache --write"],
   "*.{js,jsx}": ["npx eslint --ext .js,.jsx", "npx prettier --cache --write"],
   "*.{ts,tsx}": [
@@ -13,3 +13,5 @@ export const content = `{
   ]
 }
 `;
+
+export default { content };
