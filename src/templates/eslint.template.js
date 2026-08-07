@@ -53,7 +53,7 @@ import { settings } from './items/settings/index.mjs';
 import { ignoreCollection } from './items/ignores/index.mjs';
 
 const configJs = {
-  files: ['**/*.js'],
+  files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
   extends: [...extendCollection],
   languageOptions: {
     globals: {
@@ -204,13 +204,12 @@ const unicornRules = {
     },
   ],
   'unicorn/no-null': 0,
-  'unicorn/filename-case': 0,
   'unicorn/no-this-assignment': 0,
   'unicorn/consistent-boolean-name': 0,
   'unicorn/consistent-compound-words': 0,
   'unicorn/no-useless-template-literals': 0,
   'unicorn/name-replacements': 0,
-  'unicorn/prefer-continue.md': 0,
+  'unicorn/prefer-continue': 0,
   'unicorn/no-unnecessary-global-this': 0,
   'unicorn/no-declarations-before-early-exit': 0,
 };
