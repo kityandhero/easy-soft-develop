@@ -6,9 +6,9 @@ const packageContent = `/**
 generate by easy-soft-develop
 */
 
-import { generalConfig } from "../../develop/config/jsdoc/config";
+const { generalConfig } = require('../../develop/config/jsdoc/config');
 
-export default generalConfig;
+module.exports = generalConfig;
 `;
 
 export default { packageContent };

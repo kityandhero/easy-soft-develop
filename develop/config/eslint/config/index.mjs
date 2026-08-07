@@ -20,7 +20,7 @@ import { settings } from './items/settings/index.mjs';
 import { ignoreCollection } from './items/ignores/index.mjs';
 
 const configJs = {
-  files: ['**/*.js'],
+  files: ['**/*.js', '**/*.cjs', '**/*.mjs'],
   extends: [...extendCollection],
   languageOptions: {
     globals: {

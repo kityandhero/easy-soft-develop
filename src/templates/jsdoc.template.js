@@ -3,7 +3,7 @@ import { fileBuilderHeader } from './template.config.js';
 const folderPath = './develop/config/jsdoc';
 
 const configFileContent = `${fileBuilderHeader}
-export default {
+module.exports = {
   generalConfig: {
     tags: {
       allowUnknownTags: false,
@@ -30,16 +30,16 @@ export default {
 
 export const configFile = {
   folderPath: `${folderPath}/config`,
-  fileName: 'index.mjs',
+  fileName: 'index.js',
   coverFile: false,
   fileContent: configFileContent,
 };
 
 const contentFileContent = `${fileBuilderHeader}
 const packageContent = \`${fileBuilderHeader}
-import { generalConfig } from "../../develop/config/jsdoc/config";
+const { generalConfig } = require('../../develop/config/jsdoc/config');
 
-export default generalConfig;
+module.exports = generalConfig;
 \`;
 
 export default { packageContent };

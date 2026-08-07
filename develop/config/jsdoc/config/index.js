@@ -1,6 +1,8 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
-export default {
+module.exports = {
   generalConfig: {
     tags: {
       allowUnknownTags: false,
