@@ -204,6 +204,7 @@ const unicornRules = {
     },
   ],
   'unicorn/no-null': 0,
+  'unicorn/filename-case': 0,
   'unicorn/no-this-assignment': 0,
   'unicorn/consistent-boolean-name': 0,
   'unicorn/consistent-compound-words': 0,
