@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 import babelParser from '@babel/eslint-parser';
 import typescriptParser from '@typescript-eslint/parser';

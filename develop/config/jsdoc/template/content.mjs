@@ -1,6 +1,10 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
-const packageContent = `/** generate by easy-soft-develop */
+const packageContent = `/**
+generate by easy-soft-develop
+*/
 
 import { generalConfig } from "../../develop/config/jsdoc/config";
 

@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 import { installDevelopDependencePackages } from 'easy-soft-develop';
 

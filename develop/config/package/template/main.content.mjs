@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 const lintScript = {
   'z:lint:staged': 'npx lint-staged',

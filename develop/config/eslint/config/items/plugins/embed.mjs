@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 // import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';

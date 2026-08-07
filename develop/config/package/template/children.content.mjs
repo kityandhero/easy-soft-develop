@@ -1,4 +1,6 @@
-/** generate by easy-soft-develop */
+/**
+generate by easy-soft-develop
+*/
 
 const commitScript = {
   precommit: 'npm run z:lint:staged:quiet',
