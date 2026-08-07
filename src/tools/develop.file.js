@@ -253,7 +253,7 @@ import { cleanCollection, cleanCommand } from './config/index.mjs';
 clean(cleanCommand, ...cleanCollection);
 `;
 
-  return createScriptFile('./develop/assists', 'clean.js', content, true);
+  return createScriptFile('./develop/assists', 'clean.mjs', content, true);
 }
 
 export function createUpdatePackageFromPackageScriptFile() {

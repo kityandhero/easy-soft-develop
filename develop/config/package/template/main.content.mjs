@@ -28,7 +28,7 @@ const publishScript = {
 };
 
 const cleanScript = {
-  'z:clean': 'node ./develop/assists/clean.js',
+  'z:clean': 'node ./develop/assists/clean.mjs',
 };
 
 const environmentScript = {
