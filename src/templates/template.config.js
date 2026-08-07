@@ -4,5 +4,7 @@ export const fileGlobalHeader = `/* eslint-disable no-undef */
 /* eslint-disable no-useless-escape */
 `;
 
-export const fileBuilderHeader = `/** generate by easy-soft-develop */
+export const fileBuilderHeader = `/**
+generate by easy-soft-develop
+*/
 `;
