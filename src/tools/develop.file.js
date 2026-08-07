@@ -316,7 +316,7 @@ installDevelopDependencePackages({
   try {
     createScriptFile(
       './develop/assists',
-      'install.global.develop.dependence.js',
+      'install.global.develop.dependence.mjs',
       content,
       true,
     );

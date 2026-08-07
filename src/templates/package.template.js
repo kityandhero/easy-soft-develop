@@ -81,7 +81,7 @@ const toolsScript = {
     'echo node version && node --version && echo npm version && npm --version',
   "z:sleep": "npx easy-soft-develop sleep --second 2 --showInfo false",
   "z:create:assist-scripts": "npx easy-soft-develop create-assist-scripts",
-  "z:update:package-from-package": "node ./develop/assists/update-package-from-package.js",
+  "z:update:package-from-package": "node ./develop/assists/update-package-from-package.mjs",
 };
 
 const publishScript = {
@@ -98,7 +98,7 @@ const cleanScript = {
 
 const environmentScript = {
   "prez:initial:environment": "npm run z:create:assist-scripts",
-  "z:initial:environment": "node ./develop/assists/initial.environment.js",
+  "z:initial:environment": "node ./develop/assists/initial.environment.mjs",
 };
 
 const repositoryScript = {
@@ -109,7 +109,7 @@ const repositoryScript = {
 const installScript = {
   "z:reinstall": 'npm run z:bootstrap',
   "prez:install.global.develop.dependence": "npm run z:change:npm:registry:local",
-  "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence",
+  "z:install.global.develop.dependence": "node ./develop/assists/install.global.develop.dependence.mjs",
   "postz:install.global.develop.dependence": "npm run z:install",
   "prez:install": "npm run z:change:npm:registry:local",
   "z:install": "pnpm install",
@@ -142,13 +142,13 @@ const prettierScript = {
 const ncuScript = {
   'z:check:all-package-version': 'npx easy-soft-develop check-all-package-version',
   'z:check:every-package-version': 'npx easy-soft-develop check-every-package-version',
-  'prez:update:all-package-version': 'node ./develop/assists/install.global.develop.dependence',
+  'prez:update:all-package-version': 'node ./develop/assists/install.global.develop.dependence.mjs',
   'z:update:all-package-version': 'npx easy-soft-develop update-all-package-version --autoInstall false',
   'postz:update:all-package-version': 'npm run z:reinstall',
-  'prez:update:every-package-version': 'node ./develop/assists/install.global.develop.dependence',
+  'prez:update:every-package-version': 'node ./develop/assists/install.global.develop.dependence.mjs',
   'z:update:every-package-version': 'npx easy-soft-develop update-every-package-version',
   'postz:update:every-package-version': 'npm run z:reinstall',
-  'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.js',
+  'z:update:special-package-version': 'node ./develop/assists/package.update.special.version.mjs',
   'postz:update:special-package-version': 'npm run z:reinstall',
 };
 
