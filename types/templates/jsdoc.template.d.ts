@@ -14,5 +14,5 @@ export namespace contentFile {
   export { contentFileContent as fileContent };
 }
 declare const configFileContent: "/** generate by easy-soft-develop */\n\nexport default {\n  generalConfig: {\n    tags: {\n      allowUnknownTags: false,\n      dictionaries: ['jsdoc', 'closure'],\n    },\n    source: {\n      include: './src',\n    },\n    plugins: ['plugins/markdown'],\n    opts: {\n      template: 'node_modules/docdash',\n      encoding: 'utf8',\n      destination: 'docs/',\n      recurse: true,\n      verbose: true,\n    },\n    templates: {\n      cleverLinks: false,\n      monospaceLinks: false,\n    },\n  },\n};\n";
-declare const contentFileContent: '/** generate by easy-soft-develop */\n\nconst packageContent = `/** generate by easy-soft-develop */\n\nimport { generalConfig } from "../../develop/config/jsdoc/config";\n\nexport default generalConfig;\n`;\n\nexport default { packageContent }\n';
+declare const contentFileContent: '/** generate by easy-soft-develop */\n\nconst packageContent = `/** generate by easy-soft-develop */\n\nimport { generalConfig } from "../../develop/config/jsdoc/config";\n\nexport default generalConfig;\n`;\n\nexport default { packageContent };\n';
 export {};

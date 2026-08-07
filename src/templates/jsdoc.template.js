@@ -42,7 +42,7 @@ import { generalConfig } from "../../develop/config/jsdoc/config";
 export default generalConfig;
 \`;
 
-export default { packageContent }
+export default { packageContent };
 `;
 
 export const contentFile = {
