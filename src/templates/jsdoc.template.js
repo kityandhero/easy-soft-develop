@@ -37,6 +37,8 @@ export const configFile = {
 
 const contentFileContent = `${fileBuilderHeader}
 const packageContent = \`${fileBuilderHeader}
+/* eslint-disable unicorn/prefer-module */
+
 const { generalConfig } = require('../../develop/config/jsdoc/config');
 
 module.exports = generalConfig;
