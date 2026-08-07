@@ -13,3 +13,8 @@ import { generalConfig } from '../../develop/config/stylelint/config';
 
 export default generalConfig;
 `;
+
+export default {
+  mainContent,
+  packageContent,
+};

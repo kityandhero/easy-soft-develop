@@ -267,7 +267,7 @@ updatePackageFromPackage(updatePackageFromPackageOptions);
 
   return createScriptFile(
     './develop/assists',
-    'update.package.from.package.js',
+    'update.package.from.package.mjs',
     content,
     true,
   );
@@ -285,7 +285,7 @@ updateSpecialPackageVersion(updateSpecialPackageCollection);
   try {
     createScriptFile(
       './develop/assists',
-      'package.update.special.version.js',
+      'package.update.special.version.mjs',
       content,
       true,
     );
@@ -517,7 +517,7 @@ initialEnvironment({
   try {
     createScriptFile(
       './develop/assists',
-      'initial.environment.js',
+      'initial.environment.mjs',
       content,
       true,
     );
