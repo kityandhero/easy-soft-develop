@@ -203,7 +203,7 @@ const unicornRules = {
       },
     },
   ],
-  'unicorn/prefer-global-this': ['error', { checkTypeOf: false }],
+  'unicorn/prefer-global-this': 'off',
   'unicorn/no-null': 0,
   'unicorn/no-this-assignment': 0,
   'unicorn/consistent-boolean-name': 0,
