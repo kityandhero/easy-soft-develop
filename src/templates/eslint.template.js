@@ -203,6 +203,7 @@ const unicornRules = {
       },
     },
   ],
+  'unicorn/prefer-global-this': ['error', { checkTypeOf: false }],
   'unicorn/no-null': 0,
   'unicorn/no-this-assignment': 0,
   'unicorn/consistent-boolean-name': 0,
@@ -452,13 +453,13 @@ export const extendFile = {
 const pluginEmbedFileContent = `${fileBuilderHeader}
 // import { fixupPluginRules } from '@eslint/compat';
 import reactPlugin from 'eslint-plugin-react';
-import unicorn from 'eslint-plugin-unicorn';
+// import unicorn from 'eslint-plugin-unicorn';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 
 export const pluginCollection = {
-  unicorn,
+  // unicorn,
   'simple-import-sort': simpleImportSort,
   import: eslintPluginImport,
   prettier,
@@ -467,7 +468,7 @@ export const pluginCollection = {
 export const pluginXCollection = {
   // react: fixupPluginRules(reactPlugin),
   react: reactPlugin,
-  unicorn,
+  // unicorn,
   'simple-import-sort': simpleImportSort,
   import: eslintPluginImport,
   prettier,
