@@ -312,8 +312,8 @@ export const ruleCustomFile = {
 };
 
 const ruleFileContent = `${fileBuilderHeader}
-import { rules as embedRules, rulesX as embedRulesX } from './embed.mjs';
 import { rules as customRules, rulesX as customRulesX } from './custom.mjs';
+import { rules as embedRules, rulesX as embedRulesX } from './embed.mjs';
 
 export const rules = {
   ...embedRules,
@@ -398,8 +398,8 @@ export const settingCustomFile = {
 };
 
 const settingFileContent = `${fileBuilderHeader}
-import { settings as embedSettings } from './embed.mjs';
 import { settings as customSettings } from './custom.mjs';
+import { settings as embedSettings } from './embed.mjs';
 
 export const settings = {
   ...embedSettings,
@@ -437,8 +437,8 @@ export const extendCustomFile = {
 };
 
 const extendFileContent = `${fileBuilderHeader}
-import { extendCollection as extendEmbedPlugins } from './embed.mjs';
 import { extendCollection as extendCustomPlugins } from './custom.mjs';
+import { extendCollection as extendEmbedPlugins } from './embed.mjs';
 
 export const extendCollection = [...extendEmbedPlugins, ...extendCustomPlugins];
 `;
@@ -497,13 +497,13 @@ export const pluginCustomFile = {
 
 const pluginFileContent = `${fileBuilderHeader}
 import {
-  pluginCollection as embedPlugins,
-  pluginXCollection as embedPluginsX,
-} from './embed.mjs';
-import {
   pluginCollection as customPlugins,
   pluginXCollection as customPluginsX,
 } from './custom.mjs';
+import {
+  pluginCollection as embedPlugins,
+  pluginXCollection as embedPluginsX,
+} from './embed.mjs';
 
 export const pluginCollection = {
   ...embedPlugins,
@@ -572,13 +572,13 @@ export const parserCustomFile = {
 
 const parserFileContent = `${fileBuilderHeader}
 import {
-  parserJsOptions as embedParserJsOptions,
-  parserTsOptions as embedParserTsOptions,
-} from './embed.mjs';
-import {
   parserJsOptions as customParserJsOptions,
   parserTsOptions as customParserTsOptions,
 } from './custom.mjs';
+import {
+  parserJsOptions as embedParserJsOptions,
+  parserTsOptions as embedParserTsOptions,
+} from './embed.mjs';
 
 export const parserJsOptions = {
   ...embedParserJsOptions,
@@ -644,8 +644,8 @@ export const ignoreCustomFile = {
 };
 
 const ignoreFileContent = `${fileBuilderHeader}
-import { ignoreCollection as ignoreEmbedPlugins } from './embed.mjs';
 import { ignoreCollection as ignoreCustomPlugins } from './custom.mjs';
+import { ignoreCollection as ignoreEmbedPlugins } from './embed.mjs';
 
 export const ignoreCollection = [...ignoreEmbedPlugins, ...ignoreCustomPlugins];
 `;

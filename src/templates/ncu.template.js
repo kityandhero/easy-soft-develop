@@ -35,8 +35,8 @@ export const configCustomFile = {
 const configFileContent = `${fileBuilderHeader}
 import semver from 'semver';
 
-import { config as configEmbed } from './embed.mjs';
 import { config as configCustom } from './custom.mjs';
+import { config as configEmbed } from './embed.mjs';
 
 // 辅助函数：清理版本号，去除 ^ 或 ~ 等前缀
 function cleanVersion(version) {
