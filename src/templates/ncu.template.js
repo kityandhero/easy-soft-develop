@@ -47,7 +47,7 @@ function cleanVersion(version) {
 
 export const config = {
   // 自动更新 package.json 等价于 -u
-  upgrade: true,
+  upgrade: false,
 
   // 默认升级策略 latest, 允许 major 升级
   target: 'latest',
