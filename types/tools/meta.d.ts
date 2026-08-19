@@ -1,44 +1,62 @@
-export function exec(command: any): void;
-export function cd(path: any): void;
-export function resolvePath(path: any): string;
-export function isObject(value: any): boolean;
-export function isArray(value: any): boolean;
-export function exit(): never;
-export function getArgumentCollection(): string[];
+export declare const fileName: any;
+export declare const folderName: any;
+export declare function exec(command: any): void;
+export declare function cd(path: any): void;
+export declare function resolvePath(path: any): any;
+export declare function isObject(value: any): boolean;
+export declare function isArray(value: any): value is any[];
+export declare function exit(): any;
+export declare function getArgumentCollection(): any;
 /**
  * Check value in the collection.
  * @param {Array} collection value collection
  * @param {*} target the target value will be checked
  */
-export function checkInCollection(collection: any[], target: any): boolean;
-export function checkStringIsEmpty(v: any): boolean;
-export function assignObject(source: any, ...mergeData: any[]): any;
+export declare function checkInCollection(
+  collection: any[],
+  target: any,
+): boolean;
+export declare function checkStringIsEmpty(v: any): boolean;
+export declare function assignObject(source: any, ...mergeData: any[]): any;
 /**
  * Prompt line
  */
-export function promptLine(): void;
-export function promptEmptyLine(): void;
-export function promptSuccess(message: any, emptyLine?: boolean): void;
-export function promptTip(title: any, message: any, emptyLine?: boolean): void;
-export function promptWarn(message: any, emptyLine?: boolean): void;
-export function promptInfo(message: any, emptyLine?: boolean): void;
-export function promptError(error: any, emptyLine?: boolean): void;
-export function promptMessage(
+export declare function promptLine(): void;
+export declare function promptEmptyLine(): void;
+export declare function promptSuccess(message: any, emptyLine?: boolean): void;
+export declare function promptTip(
+  title: any,
+  message: any,
+  emptyLine?: boolean,
+): void;
+export declare function promptWarn(message: any, emptyLine?: boolean): void;
+export declare function promptInfo(message: any, emptyLine?: boolean): void;
+export declare function promptError(error: any, emptyLine?: boolean): void;
+export declare function promptMessage(
   message: any,
   config: any,
   emptyLine?: boolean,
 ): void;
-export function promptBlack(message: any, emptyLine?: boolean): void;
-export function promptBackgroundBlack(message: any, emptyLine?: boolean): void;
-export function promptRed(message: any, emptyLine?: boolean): void;
-export function promptBackgroundRed(message: any, emptyLine?: boolean): void;
-export function promptGreen(message: any, emptyLine?: boolean): void;
-export function promptBackgroundGreen(message: any, emptyLine?: boolean): void;
-export function existPathSync(path: any): boolean;
-export function existFileSync(path: any): boolean;
-export function existDirectorySync(path: any): boolean;
-export function mkdirSync(path: any): void;
-export function writeFileSync(
+export declare function promptBlack(message: any, emptyLine?: boolean): void;
+export declare function promptBackgroundBlack(
+  message: any,
+  emptyLine?: boolean,
+): void;
+export declare function promptRed(message: any, emptyLine?: boolean): void;
+export declare function promptBackgroundRed(
+  message: any,
+  emptyLine?: boolean,
+): void;
+export declare function promptGreen(message: any, emptyLine?: boolean): void;
+export declare function promptBackgroundGreen(
+  message: any,
+  emptyLine?: boolean,
+): void;
+export declare function existPathSync(path: any): boolean;
+export declare function existFileSync(path: any): any;
+export declare function existDirectorySync(path: any): any;
+export declare function mkdirSync(path: any): void;
+export declare function writeFileSync(
   path: any,
   content: any,
   {
@@ -47,27 +65,27 @@ export function writeFileSync(
     coverFile?: boolean | undefined;
   },
 ): boolean;
-export function writeFileWithFolderAndNameSync(
+export declare function writeFileWithFolderAndNameSync(
   folderPath: any,
   relativePath: any,
   fileName: any,
   fileContent: any,
   coverFile?: boolean,
 ): boolean;
-export function writeFileWithOptionsSync({
+export declare function writeFileWithOptionsSync({
   folderPath,
   relativePath,
   fileName,
   fileContent,
   coverFile,
 }: {
+  coverFile?: boolean | undefined;
+  fileContent: any;
+  fileName: any;
   folderPath: any;
   relativePath?: string | undefined;
-  fileName: any;
-  fileContent: any;
-  coverFile?: boolean | undefined;
 }): boolean;
-export function writeJsonFileSync(
+export declare function writeJsonFileSync(
   path: any,
   json: any,
   {
@@ -76,55 +94,53 @@ export function writeJsonFileSync(
     coverFile?: boolean | undefined;
   },
 ): boolean;
-export function readJsonFileSync(path: any): any;
-export function rimraf(path: any): void;
-export function copyFile({
+export declare function readJsonFileSync(path: any): any;
+export declare function rimraf(path: any): void;
+export declare function copyFile({
   sourceMainPath,
   targetMainPath,
   filepath,
   callback,
 }: {
+  callback: any;
+  filepath: any;
   sourceMainPath: any;
   targetMainPath: any;
-  filepath: any;
-  callback: any;
 }): void;
-export function copyFileSync({
+export declare function copyFileSync({
   sourceMainPath,
   targetMainPath,
   filepath,
 }: {
+  filepath: any;
   sourceMainPath: any;
   targetMainPath: any;
-  filepath: any;
 }): void;
-export function copyFolder({
+export declare function copyFolder({
   sourceMainPath,
   targetMainPath,
   filepath,
   callback,
 }: {
+  callback: any;
+  filepath: any;
   sourceMainPath: any;
   targetMainPath: any;
-  filepath: any;
-  callback: any;
 }): void;
-export function copyFolderSync({
+export declare function copyFolderSync({
   sourceMainPath,
   targetMainPath,
   filepath,
 }: {
+  filepath: any;
   sourceMainPath: any;
   targetMainPath: any;
-  filepath: any;
 }): void;
-export function touchSync({ path }: { path: any }): void;
-export function copyContentSync({
+export declare function touchSync({ path }: { path: any }): void;
+export declare function copyContentSync({
   sourcePath,
   targetPath,
 }: {
   sourcePath: any;
   targetPath: any;
 }): void;
-export const fileName: string;
-export const folderName: string;

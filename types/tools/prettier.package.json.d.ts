@@ -1,2 +1,2 @@
-export function prettierAllPackageJson(): void;
-export function prettierCurrentPackageJson(): void;
+export declare function prettierAllPackageJson(): void;
+export declare function prettierCurrentPackageJson(): void;

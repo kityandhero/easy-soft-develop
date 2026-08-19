@@ -1,13 +1,13 @@
-export function installDevelopDependencePackages({
+export declare function installDevelopDependencePackages({
   globalDevelopPackageList,
   mainDevelopPackageList,
   childrenDevelopPackageList,
   childrenSpecialDevelopPackageList,
   execInstall,
 }: {
-  globalDevelopPackageList: any;
-  mainDevelopPackageList?: any[] | undefined;
-  childrenDevelopPackageList?: any[] | undefined;
-  childrenSpecialDevelopPackageList?: any[] | undefined;
+  childrenDevelopPackageList?: never[] | undefined;
+  childrenSpecialDevelopPackageList?: never[] | undefined;
   execInstall?: boolean | undefined;
+  globalDevelopPackageList: any;
+  mainDevelopPackageList?: never[] | undefined;
 }): void;

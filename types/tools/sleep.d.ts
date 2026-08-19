@@ -1,1 +1,1 @@
-export function sleep(n: any, showLog?: boolean): void;
+export declare function sleep(n: any, showLog?: boolean): void;

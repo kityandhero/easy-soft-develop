@@ -1,1 +1,1 @@
-export function clean(preCmd: any, ...targets: any[]): void;
+export declare function clean(preCmd: any, ...targets: any[]): void;

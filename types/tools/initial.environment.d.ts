@@ -1,11 +1,11 @@
-export function initialEnvironment({
+export declare function initialEnvironment({
   mainFileContentList,
   packageFileContentList,
   mainScripts,
   childScripts,
 }: {
-  mainFileContentList?: any[] | undefined;
-  packageFileContentList?: any[] | undefined;
-  mainScripts?: {} | undefined;
   childScripts?: {} | undefined;
+  mainFileContentList?: never[] | undefined;
+  mainScripts?: {} | undefined;
+  packageFileContentList?: never[] | undefined;
 }): void;

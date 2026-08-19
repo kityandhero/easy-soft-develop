@@ -1,4 +1,4 @@
-export const globalScript: {
+export declare const globalScript: {
   'z:initial:environment': string;
 };
-export const packageScript: {};
+export declare const packageScript: {};
