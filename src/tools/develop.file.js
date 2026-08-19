@@ -77,7 +77,7 @@ export const childrenDevelopPackageList = [];
 `;
 
 const childrenSpecialDevelopPackageConfigContent = `${fileBuilderHeader}
-export const childrenSpecialDevelopPackageList = {};
+export const childrenSpecialDevelopPackageList = [];
 `;
 
 const cleanConfigContent = `${fileBuilderHeader}
